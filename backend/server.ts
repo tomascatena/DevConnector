@@ -1,12 +1,36 @@
 import express from 'express';
+import app from './app';
+import config from './config/config';
+import { connectDB } from './config/connectDB';
 
-const app = express();
+const server = app.listen(config.PORT, () => {
+  console.log(`Server listening in port ${config.PORT}`);
 
-app.get('/', (req, res) => {
-  res.send('API running');
+  connectDB();
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server listening in port ${PORT}`);
+const exitHandler = () => {
+  if (server) {
+    server.close(() => {
+      console.log('Server closed');
+      process.exit(1);
+    });
+  } else {
+    process.exit(1);
+  }
+};
+
+const unexpectedErrorHandler = (error: Error) => {
+  console.log(error);
+  exitHandler();
+};
+
+process.on('uncaughtException', unexpectedErrorHandler);
+process.on('unhandledRejection', unexpectedErrorHandler);
+
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received');
+  if (server) {
+    server.close();
+  }
 });
