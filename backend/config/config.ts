@@ -11,6 +11,9 @@ const env = cleanEnv(process.env, {
   }),
   PORT: port({ desc: 'API Port' }),
   MONGODB_URI: url({ desc: 'Mongo DB url' }),
+  MIN_PASSWORD_LENGTH: num({
+    desc: 'Minimum required password length',
+  }),
 });
 
 export default env;
