@@ -4,7 +4,6 @@ import User from '../../../models/user.model';
 import { RequestWithBody } from '../../../types/types';
 import { registerUserValidation } from './users.validation';
 import gravatar from 'gravatar';
-import bcryptjs from 'bcryptjs';
 
 const router = Router();
 
@@ -28,13 +27,7 @@ router.post(
         true
       );
 
-      const user = await new User({ name, email, password, avatar });
-
-      const salt = await bcryptjs.genSalt(12);
-
-      user.password = await bcryptjs.hash(password!, salt);
-
-      await user.save();
+      const user = await User.create({ name, email, password, avatar });
 
       return res.status(httpStatus.CREATED).json({
         message: 'New user successfully registered',

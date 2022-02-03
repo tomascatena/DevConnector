@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 import validator from 'validator';
 import config from '../config/config';
+import bcryptjs from 'bcryptjs';
 
 export interface IUser {
   _id: string;
@@ -49,6 +50,16 @@ const userSchema = new Schema<IUser>({
     type: Date,
     default: Date.now,
   },
+});
+
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    next();
+  }
+
+  const salt = await bcryptjs.genSalt(12);
+
+  this.password = await bcryptjs.hash(this.password, salt);
 });
 
 const User = mongoose.model<IUser>('User', userSchema);
