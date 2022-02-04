@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import httpStatus from 'http-status-codes';
-import config from '../config/config';
+import { env } from '../config/config';
 
 export const notFound = (req: Request, res: Response, next: NextFunction) => {
   const error = new Error(`Not found - ${req.originalUrl}`);
@@ -23,6 +23,6 @@ export const errorHandler = (
 
   return res.status(errorStatusCode).json({
     message: err.message,
-    stack: config.NODE_ENV === 'production' ? null : err.stack,
+    stack: env.NODE_ENV === 'production' ? null : err.stack,
   });
 };

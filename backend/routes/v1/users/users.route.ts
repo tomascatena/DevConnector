@@ -1,11 +1,11 @@
 import { Request, Response, Router } from 'express';
 import httpStatus from 'http-status-codes';
 import User from '../../../models/user.model';
-import { RequestWithBody } from '../../../types/types';
+import { JWTPayload, RequestWithBody } from '../../../types/types';
 import { registerUserValidation } from './users.validation';
 import gravatar from 'gravatar';
 import jwt from 'jsonwebtoken';
-import config from '../../../config/config';
+import { env } from '../../../config/config';
 
 const router = Router();
 
@@ -31,7 +31,7 @@ router.post(
 
       const user = await User.create({ name, email, password, avatar });
 
-      const payload = {
+      const payload: JWTPayload = {
         user: {
           id: user.id,
         },
@@ -39,11 +39,11 @@ router.post(
 
       jwt.sign(
         payload,
-        config.JWT_SECRET,
+        env.JWT_SECRET,
         {
-          expiresIn: config.JWT_EXPIRES_IN,
+          expiresIn: env.JWT_EXPIRES_IN,
         },
-        function (err, token) {
+        (err, token) => {
           if (err instanceof Error) {
             return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
               message: err.message,

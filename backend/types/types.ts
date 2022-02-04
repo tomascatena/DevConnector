@@ -10,4 +10,11 @@ export interface RequestWithBody extends Request {
     password?: string;
   };
   user?: Partial<IUser> | null;
+  userId?: string;
 }
+
+export type JWTPayload = {
+  user: {
+    id: string;
+  };
+};

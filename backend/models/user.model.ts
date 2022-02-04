@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import validator from 'validator';
-import config from '../config/config';
+import { env } from '../config/config';
 import bcryptjs from 'bcryptjs';
 
 export interface IUser {
@@ -34,7 +34,7 @@ const userSchema = new Schema<IUser>({
     type: String,
     required: true,
     trim: true,
-    minlength: config.MIN_PASSWORD_LENGTH,
+    minlength: env.MIN_PASSWORD_LENGTH,
     validate(value: string) {
       if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
         throw new Error(

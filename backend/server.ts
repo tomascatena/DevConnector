@@ -1,10 +1,10 @@
 import express from 'express';
 import app from './app';
-import config from './config/config';
+import { env } from './config/config';
 import { connectDB } from './config/connectDB';
 
-const server = app.listen(config.PORT, () => {
-  console.log(`Server listening in port ${config.PORT}`);
+const server = app.listen(env.PORT, () => {
+  console.log(`Server listening in port ${env.PORT}`);
 
   connectDB();
 });

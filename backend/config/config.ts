@@ -4,7 +4,7 @@ import path from 'path';
 
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
-const env = cleanEnv(process.env, {
+export const env = cleanEnv(process.env, {
   NODE_ENV: str({
     choices: ['development', 'test', 'production', 'staging'],
     desc: 'Node environment',
@@ -21,5 +21,3 @@ const env = cleanEnv(process.env, {
     desc: 'Json Web Token expires in option',
   }),
 });
-
-export default env;

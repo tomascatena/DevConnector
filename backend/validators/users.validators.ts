@@ -1,4 +1,4 @@
-import config from '../config/config';
+import { env } from '../config/config';
 import { check } from 'express-validator';
 import User from '../models/user.model';
 
@@ -37,9 +37,9 @@ export const passwordValidator = check('password', 'Password is required')
   .isString() //
   .trim()
   .notEmpty()
-  .isLength({ min: config.MIN_PASSWORD_LENGTH })
+  .isLength({ min: env.MIN_PASSWORD_LENGTH })
   .withMessage(
-    `Password must be at least ${config.MIN_PASSWORD_LENGTH} characters long`
+    `Password must be at least ${env.MIN_PASSWORD_LENGTH} characters long`
   )
   .matches(/\d/)
   .withMessage('Must contain a number')
@@ -54,9 +54,9 @@ export const confirmPasswordValidator = check(
   .isString() //
   .trim()
   .notEmpty()
-  .isLength({ min: config.MIN_PASSWORD_LENGTH })
+  .isLength({ min: env.MIN_PASSWORD_LENGTH })
   .withMessage(
-    `Confirm password must be at least ${config.MIN_PASSWORD_LENGTH} characters long`
+    `Confirm password must be at least ${env.MIN_PASSWORD_LENGTH} characters long`
   )
   .matches(/\d/)
   .withMessage('Must contain a number')
