@@ -14,6 +14,12 @@ const env = cleanEnv(process.env, {
   MIN_PASSWORD_LENGTH: num({
     desc: 'Minimum required password length',
   }),
+  JWT_SECRET: str({
+    desc: 'Json Web Token secret',
+  }),
+  JWT_EXPIRES_IN: str({
+    desc: 'Json Web Token expires in option',
+  }),
 });
 
 export default env;
