@@ -4,7 +4,7 @@ import { env } from '../config/config';
 import { JWTPayload, RequestWithBody } from '../types/types';
 import httpStatus from 'http-status-codes';
 
-export const auth = (
+export const requireAuth = (
   req: RequestWithBody,
   res: Response,
   next: NextFunction
