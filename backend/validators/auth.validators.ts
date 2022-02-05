@@ -1,6 +1,5 @@
-import { header, check, body } from 'express-validator';
+import { header, check } from 'express-validator';
 import validator from 'validator';
-import User from '../models/user.model';
 
 export const authorizationHeaderValidator = header(
   'authorization',

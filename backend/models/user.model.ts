@@ -9,48 +9,46 @@ export interface IUser {
   email: string;
   password: string;
   avatar: string;
-  date: Date;
 }
 
-const userSchema = new Schema<IUser>({
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-    lowercase: true,
-    validate(value: string) {
-      if (!validator.isEmail(value)) {
-        throw new Error('Invalid email');
-      }
+const userSchema = new Schema<IUser>(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      lowercase: true,
+      validate(value: string) {
+        if (!validator.isEmail(value)) {
+          throw new Error('Invalid email');
+        }
+      },
+    },
+    password: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: env.MIN_PASSWORD_LENGTH,
+      validate(value: string) {
+        if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
+          throw new Error(
+            'Password must contain at least one letter and one number'
+          );
+        }
+      },
+    },
+    avatar: {
+      type: String,
     },
   },
-  password: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: env.MIN_PASSWORD_LENGTH,
-    validate(value: string) {
-      if (!value.match(/\d/) || !value.match(/[a-zA-Z]/)) {
-        throw new Error(
-          'Password must contain at least one letter and one number'
-        );
-      }
-    },
-  },
-  avatar: {
-    type: String,
-  },
-  date: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  { timestamps: true }
+);
 
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
