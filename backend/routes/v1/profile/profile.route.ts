@@ -1,7 +1,13 @@
 import { Router } from 'express';
-import { getUserProfileController } from '../../../controllers/profile.controller';
+import {
+  getUserProfileController,
+  createUserProfileController,
+} from '../../../controllers/profile.controller';
 import { requireAuth } from '../../../middleware/requireAuth.middleware';
-import { getUserProfileValidation } from './profile.validation';
+import {
+  getUserProfileValidation,
+  userProfileValidation,
+} from './profile.validation';
 
 const router = Router();
 
@@ -13,6 +19,16 @@ router.get(
   getUserProfileValidation,
   requireAuth,
   getUserProfileController
+);
+
+// @route     GET api/v1/profile
+// @desc      Create or update a user profile
+// @access    Private
+router.post(
+  '/',
+  userProfileValidation,
+  requireAuth,
+  createUserProfileController
 );
 
 export default router;

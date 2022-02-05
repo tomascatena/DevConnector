@@ -3,8 +3,8 @@ import { check } from 'express-validator';
 import User from '../models/user.model';
 
 export const nameValidator = check('name', 'Name is required')
-  .isString()
   .trim()
+  .isString()
   .notEmpty()
   .isLength({ min: 2 })
   .withMessage(`Name must be at least 2 characters long`)
@@ -37,8 +37,8 @@ export const passwordForRegisterValidator = check(
   'password',
   'Password is required'
 )
-  .isString()
   .trim()
+  .isString()
   .notEmpty()
   .isLength({ min: env.MIN_PASSWORD_LENGTH })
   .withMessage(
@@ -54,8 +54,8 @@ export const confirmPasswordValidator = check(
   'confirmPassword',
   'Confirm password is required'
 )
-  .isString()
   .trim()
+  .isString()
   .notEmpty()
   .isLength({ min: env.MIN_PASSWORD_LENGTH })
   .withMessage(

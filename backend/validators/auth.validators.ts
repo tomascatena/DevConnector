@@ -5,9 +5,9 @@ export const authorizationHeaderValidator = header(
   'authorization',
   'Not authorized to access this endpoint'
 )
+  .trim()
   .notEmpty()
   .isString()
-  .trim()
   .custom((authorizationHeader) => {
     const jwt = authorizationHeader.split(' ')[1];
 
@@ -26,7 +26,7 @@ export const passwordForLoginValidator = check(
   'password',
   'Password is required'
 )
-  .isString()
   .trim()
   .notEmpty()
+  .isString()
   .escape();

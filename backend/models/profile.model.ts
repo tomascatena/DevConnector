@@ -50,7 +50,7 @@ const profileSchema = new Schema<IProfile>(
     },
     experience: [experienceSchema],
     education: [educationSchema],
-    social: { socialSchema },
+    social: socialSchema,
   },
   { timestamps: true }
 );
