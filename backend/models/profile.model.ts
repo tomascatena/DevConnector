@@ -1,7 +1,7 @@
 import mongoose, { ObjectId, Schema } from 'mongoose';
-import { educationSchema, IEducation } from './schemas/education';
-import { experienceSchema, IExperience } from './schemas/experience';
-import { ISocial, socialSchema } from './schemas/social';
+import { educationSchema, IEducation } from './schemas/education.schema';
+import { experienceSchema, IExperience } from './schemas/experience.schema';
+import { ISocial, socialSchema } from './schemas/social.schema';
 
 export interface IProfile {
   _id: string;
