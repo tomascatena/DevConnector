@@ -9,7 +9,10 @@ import { env } from '../config/config';
 // @route     POST api/v1/users
 // @desc      Register user
 // @access    Public
-export const registerUser = async (req: RequestWithBody, res: Response) => {
+export const registerUserController = async (
+  req: RequestWithBody,
+  res: Response
+) => {
   const { name, email, password } = req.body;
 
   try {

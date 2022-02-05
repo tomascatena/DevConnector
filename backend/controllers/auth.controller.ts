@@ -1,12 +1,15 @@
 import { RequestWithBody } from '../types/types';
 import User from '../models/user.model';
-import express, { Response, Router } from 'express';
+import { Response } from 'express';
 import httpStatus from 'http-status-codes';
 
 // @route     GET api/v1/auth
 // @desc      Get auth user
 // @access    Private
-export const getUser = async (req: RequestWithBody, res: Response) => {
+export const getUserController = async (
+  req: RequestWithBody,
+  res: Response
+) => {
   try {
     const user = await User.findById(req.userId).select('-password');
 
