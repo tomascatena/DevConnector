@@ -16,13 +16,13 @@ export const getUserController = async (
   try {
     const user = await User.findById(req.userId).select('-password');
 
-    res.status(httpStatus.OK).json({
+    return res.status(httpStatus.OK).json({
       message: 'Successfully authenticated user',
       user,
     });
   } catch (error) {
     if (error instanceof Error) {
-      res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
         message: error.message,
       });
     }
