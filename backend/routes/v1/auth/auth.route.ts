@@ -1,13 +1,15 @@
 import { Router } from 'express';
-import { getUserController } from '../../../controllers/auth.controller';
+import {
+  getUserController,
+  loginUserController,
+} from '../../../controllers/auth.controller';
 import { requireAuth } from '../../../middleware/requireAuth.middleware';
-import { loginValidation } from './auth.validation';
+import { getUserValidation, loginUserValidation } from './auth.validation';
 
 const router = Router();
 
-// @route     GET api/v1/auth
-// @desc      Get auth user
-// @access    Private
-router.get('/', loginValidation, requireAuth, getUserController);
+router.get('/', getUserValidation, requireAuth, getUserController);
+
+router.post('/', loginUserValidation, loginUserController);
 
 export default router;

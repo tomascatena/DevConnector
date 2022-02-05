@@ -3,15 +3,15 @@ import { check } from 'express-validator';
 import User from '../models/user.model';
 
 export const nameValidator = check('name', 'Name is required')
-  .isString() //
+  .isString()
   .trim()
   .notEmpty()
   .isLength({ min: 2 })
   .withMessage(`Name must be at least 2 characters long`)
   .escape();
 
-export const emailValidator = check('email', 'Email is required')
-  .isEmail() //
+export const emailForRegisterValidator = check('email', 'Email is required')
+  .isEmail()
   .notEmpty()
   .withMessage(`Must be a valid email`)
   .normalizeEmail()
@@ -33,8 +33,11 @@ export const emailValidator = check('email', 'Email is required')
     return true;
   });
 
-export const passwordValidator = check('password', 'Password is required')
-  .isString() //
+export const passwordForRegisterValidator = check(
+  'password',
+  'Password is required'
+)
+  .isString()
   .trim()
   .notEmpty()
   .isLength({ min: env.MIN_PASSWORD_LENGTH })
@@ -51,7 +54,7 @@ export const confirmPasswordValidator = check(
   'confirmPassword',
   'Confirm password is required'
 )
-  .isString() //
+  .isString()
   .trim()
   .notEmpty()
   .isLength({ min: env.MIN_PASSWORD_LENGTH })

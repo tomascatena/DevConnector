@@ -1,8 +1,8 @@
 import {
   confirmPasswordValidator,
-  emailValidator,
+  emailForRegisterValidator,
   nameValidator,
-  passwordValidator,
+  passwordForRegisterValidator,
 } from '../../../validators/users.validators';
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status-codes';
@@ -10,8 +10,8 @@ import { validationResult } from 'express-validator';
 
 export const registerUserValidation = [
   nameValidator,
-  emailValidator,
-  passwordValidator,
+  emailForRegisterValidator,
+  passwordForRegisterValidator,
   confirmPasswordValidator,
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
