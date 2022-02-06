@@ -64,3 +64,36 @@ export const registerUserController = async (
     });
   }
 };
+
+// @route     DELETE api/v1/users
+// @desc      Delete user
+// @access    Private
+export const deleteUserController = async (
+  req: RequestWithBody,
+  res: Response
+) => {
+  try {
+    console.log(req.userId);
+
+    const user = await User.findOneAndRemove({ _id: req.userId });
+
+    if (!user) {
+      return res.status(httpStatus.CREATED).json({
+        message: 'User does not exists',
+      });
+    } else {
+      return res.status(httpStatus.CREATED).json({
+        message: 'Successfully deleted user',
+        user,
+      });
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+      });
+    }
+  }
+};

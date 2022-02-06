@@ -4,9 +4,11 @@ import {
   createUserProfileController,
   getAllProfilesController,
   getProfileByUserIdController,
+  deleteProfileController,
 } from '../../../controllers/profile.controller';
 import { requireAuth } from '../../../middleware/requireAuth.middleware';
 import {
+  deleteProfileValidation,
   getUserProfileByIdValidation,
   getUserProfileValidation,
   userProfileValidation,
@@ -46,6 +48,16 @@ router.get(
   getUserProfileValidation,
   requireAuth,
   getUserProfileController
+);
+
+// @route     DELETE api/v1/profile
+// @desc      Delete profile, users & posts
+// @access    Private
+router.delete(
+  '/',
+  deleteProfileValidation,
+  requireAuth,
+  deleteProfileController
 );
 
 export default router;

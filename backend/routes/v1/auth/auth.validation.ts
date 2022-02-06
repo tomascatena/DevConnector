@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status-codes';
 import { validationResult } from 'express-validator';
+import { userIdParamValidator } from '../../../validators/profile.validators';
 import {
   authorizationHeaderValidator,
   emailForLoginValidator,

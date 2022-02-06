@@ -2,6 +2,7 @@ import httpStatus, { ReasonPhrases } from 'http-status-codes';
 import { RequestWithBody } from '../types/types';
 import { Response } from 'express';
 import Profile from '../models/profile.model';
+import User from '../models/user.model';
 
 // @route     GET api/v1/profile/me
 // @desc      Get current users profile
@@ -143,6 +144,38 @@ export const createUserProfileController = async (
 
       return res.status(httpStatus.CREATED).json({
         message: 'Successfully created user profile',
+        profile,
+      });
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+      });
+    }
+  }
+};
+
+// @route     DELETE api/v1/profile
+// @desc      Delete user
+// @access    Private
+export const deleteProfileController = async (
+  req: RequestWithBody,
+  res: Response
+) => {
+  try {
+    const profile = await Profile.findOneAndRemove({ user: req.userId });
+    await User.findOneAndRemove({ _id: req.userId });
+
+    if (!profile) {
+      return res.status(httpStatus.CREATED).json({
+        message: 'User profile does not exists',
+      });
+    } else {
+      return res.status(httpStatus.CREATED).json({
+        message: 'Successfully deleted user profile',
         profile,
       });
     }

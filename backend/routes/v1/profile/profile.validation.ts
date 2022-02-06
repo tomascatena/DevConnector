@@ -62,3 +62,19 @@ export const userProfileValidation = [
     next();
   },
 ];
+
+export const deleteProfileValidation = [
+  authorizationHeaderValidator,
+  (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        message: 'Invalid information to delete a user profile',
+        errors: errors.mapped(),
+      });
+    }
+
+    next();
+  },
+];
