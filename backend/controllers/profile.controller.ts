@@ -3,6 +3,8 @@ import { RequestWithBody } from '../types/types';
 import { Response } from 'express';
 import Profile from '../models/profile.model';
 import User from '../models/user.model';
+import request from 'request';
+import { env } from '../config/config';
 
 // @route     GET api/v1/profile/me
 // @desc      Get current users profile
@@ -335,6 +337,56 @@ export const deleteProfileEducationController = async (
         profile,
       });
     }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+      });
+    }
+  }
+};
+
+// @route     GET api/v1/profile/github/:githubUsername
+// @desc      Get user repos from Github
+// @access    Public
+export const getUserReposController = async (
+  req: RequestWithBody,
+  res: Response
+) => {
+  try {
+    const baseURL = `https://api.github.com/users/${req.params.githubUsername}/repos`;
+    const queryString = `per_page=5&sort=created:asc&client_id=${env.GITHUB_API_CLIENT_ID}&client_secret=${env.GITHUB_API_CLIENT_SECRET}`;
+
+    const options = {
+      uri: `${baseURL}?${queryString}`,
+      method: 'GET',
+      headers: {
+        'user-agent': 'node.js',
+      },
+    };
+
+    request(options, (error, response, body) => {
+      if (error) {
+        console.log(error);
+
+        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+          message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+        });
+      }
+
+      if (response.statusCode !== httpStatus.OK) {
+        return res.status(httpStatus.NOT_FOUND).json({
+          message: 'Github user not found',
+        });
+      }
+
+      return res.status(httpStatus.OK).json({
+        message: 'Successfully fetched user Github repos',
+        body: JSON.parse(body),
+      });
+    });
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);

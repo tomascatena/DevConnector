@@ -1,6 +1,7 @@
 import {
   educationIdParamValidator,
   experienceIdParamValidator,
+  githubUsernameParamValidator,
   profileEducationValidator,
   profileExperienceValidator,
   userIdValidator,
@@ -11,7 +12,6 @@ import {
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status-codes';
 import { validationResult } from 'express-validator';
-import { authorizationHeaderValidator } from '../../../validators/auth.validators';
 import { userIdParamValidator } from '../../../validators/profile.validators';
 
 export const getUserProfileByIdValidation = [
@@ -31,7 +31,6 @@ export const getUserProfileByIdValidation = [
 ];
 
 export const getUserProfileValidation = [
-  authorizationHeaderValidator,
   userIdValidator,
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
@@ -48,7 +47,6 @@ export const getUserProfileValidation = [
 ];
 
 export const userProfileValidation = [
-  authorizationHeaderValidator,
   userIdValidator,
   userStatusValidator,
   userSkillsValidator,
@@ -67,24 +65,7 @@ export const userProfileValidation = [
   },
 ];
 
-export const deleteProfileValidation = [
-  authorizationHeaderValidator,
-  (req: Request, res: Response, next: NextFunction) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.status(httpStatus.BAD_REQUEST).json({
-        message: 'Invalid information to delete a user profile',
-        errors: errors.mapped(),
-      });
-    }
-
-    next();
-  },
-];
-
 export const profileExperienceValidation = [
-  authorizationHeaderValidator,
   ...profileExperienceValidator,
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
@@ -102,7 +83,6 @@ export const profileExperienceValidation = [
 ];
 
 export const deleteProfileExperienceValidation = [
-  authorizationHeaderValidator,
   experienceIdParamValidator,
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
@@ -119,7 +99,6 @@ export const deleteProfileExperienceValidation = [
 ];
 
 export const profileEducationValidation = [
-  authorizationHeaderValidator,
   ...profileEducationValidator,
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
@@ -137,7 +116,6 @@ export const profileEducationValidation = [
 ];
 
 export const deleteProfileEducationValidation = [
-  authorizationHeaderValidator,
   educationIdParamValidator,
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
@@ -145,6 +123,22 @@ export const deleteProfileEducationValidation = [
     if (!errors.isEmpty()) {
       return res.status(httpStatus.BAD_REQUEST).json({
         message: 'Invalid information to delete a user profile education',
+        errors: errors.mapped(),
+      });
+    }
+
+    next();
+  },
+];
+
+export const getUserReposValidation = [
+  githubUsernameParamValidator,
+  (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        message: 'Invalid information to get user Github repos',
         errors: errors.mapped(),
       });
     }

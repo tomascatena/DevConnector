@@ -20,4 +20,10 @@ export const env = cleanEnv(process.env, {
   JWT_EXPIRES_IN: str({
     desc: 'Json Web Token expires in option',
   }),
+  GITHUB_API_CLIENT_ID: str({
+    desc: 'Github API clientId',
+  }),
+  GITHUB_API_CLIENT_SECRET: str({
+    desc: 'github API clientSecret',
+  }),
 });

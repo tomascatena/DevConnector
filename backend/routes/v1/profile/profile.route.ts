@@ -9,16 +9,17 @@ import {
   profileEducationController,
   deleteProfileEducationController,
   deleteProfileExperienceController,
+  getUserReposController,
 } from '../../../controllers/profile.controller';
 import {
   deleteProfileExperienceValidation,
-  deleteProfileValidation,
   getUserProfileByIdValidation,
   getUserProfileValidation,
   profileExperienceValidation,
   userProfileValidation,
   deleteProfileEducationValidation,
   profileEducationValidation,
+  getUserReposValidation,
 } from './profile.validation';
 import { requireAuth } from '../../../middleware/requireAuth.middleware';
 
@@ -61,12 +62,7 @@ router.get(
 // @route     DELETE api/v1/profile
 // @desc      Delete profile, users & posts
 // @access    Private
-router.delete(
-  '/',
-  deleteProfileValidation,
-  requireAuth,
-  deleteProfileController
-);
+router.delete('/', requireAuth, deleteProfileController);
 
 // @route     PUT api/v1/profile/experience
 // @desc      Add/Update profile experience
@@ -106,6 +102,16 @@ router.delete(
   deleteProfileEducationValidation,
   requireAuth,
   deleteProfileEducationController
+);
+
+// @route     GET api/v1/profile/github/:githubUsername
+// @desc      Get user repos from Github
+// @access    Public
+router.get(
+  '/github/:githubUsername',
+  getUserReposValidation,
+  requireAuth,
+  getUserReposController
 );
 
 export default router;

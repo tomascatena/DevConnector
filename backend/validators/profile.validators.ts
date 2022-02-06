@@ -30,6 +30,17 @@ export const educationIdParamValidator = param(
   .withMessage('Invalid educationId')
   .escape();
 
+export const githubUsernameParamValidator = param(
+  'githubUsername',
+  'githubUsername is required'
+)
+  .trim()
+  .notEmpty()
+  .isString()
+  .matches(/^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i)
+  .withMessage('Invalid githubUsername')
+  .escape();
+
 export const userIdValidator = check('userId', 'userId is required')
   .trim()
   .notEmpty()
