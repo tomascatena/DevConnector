@@ -3,15 +3,11 @@ import {
   emailForRegisterValidator,
   nameValidator,
   passwordForRegisterValidator,
-} from '../../../validators/users.validators';
+} from '@validators/users.validators';
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status-codes';
 import { validationResult } from 'express-validator';
-import {
-  userIdParamValidator,
-  userIdValidator,
-} from '../../../validators/profile.validators';
-import { authorizationHeaderValidator } from '../../../validators/auth.validators';
+import { authorizationHeaderValidator } from '@validators/auth.validators';
 
 export const registerUserValidation = [
   nameValidator,

@@ -1,10 +1,10 @@
 import { Response } from 'express';
 import httpStatus, { ReasonPhrases } from 'http-status-codes';
-import User from '../models/user.model';
+import User from '@models/user.model';
 import { JWTPayload, RequestWithBody } from '../types/types';
 import gravatar from 'gravatar';
 import jwt from 'jsonwebtoken';
-import { env } from '../config/config';
+import { env } from '@config/config';
 
 // @route     POST api/v1/users
 // @desc      Register user

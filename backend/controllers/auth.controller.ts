@@ -1,9 +1,9 @@
 import { JWTPayload, RequestWithBody } from '../types/types';
-import User from '../models/user.model';
+import User from '@models/user.model';
 import { Response } from 'express';
 import httpStatus, { ReasonPhrases } from 'http-status-codes';
 import jwt from 'jsonwebtoken';
-import { env } from '../config/config';
+import { env } from '@config/config';
 import bcryptjs from 'bcryptjs';
 
 // @route     GET api/v1/auth

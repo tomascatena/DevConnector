@@ -2,12 +2,12 @@ import { Router } from 'express';
 import {
   deleteUserController,
   registerUserController,
-} from '../../../controllers/users.controller';
-import { requireAuth } from '../../../middleware/requireAuth.middleware';
+} from '@controllers/users.controller';
+import { requireAuth } from '@middleware/requireAuth.middleware';
 import {
   deleteUserValidation,
   registerUserValidation,
-} from './users.validation';
+} from '@middleware/validation/users.validation.middleware';
 
 const router = Router();
 

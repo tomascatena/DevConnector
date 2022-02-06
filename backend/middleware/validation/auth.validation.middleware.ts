@@ -4,7 +4,7 @@ import { validationResult } from 'express-validator';
 import {
   emailForLoginValidator,
   passwordForLoginValidator,
-} from '../../../validators/auth.validators';
+} from '@validators/auth.validators';
 
 export const loginUserValidation = [
   emailForLoginValidator,

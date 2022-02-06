@@ -1,6 +1,6 @@
 import app from './app';
-import { env } from './config/config';
-import { connectDB } from './config/connectDB';
+import { env } from '@config/config';
+import { connectDB } from '@config/connectDB';
 
 const server = app.listen(env.PORT, () => {
   console.log(`Server listening in port ${env.PORT}`);

@@ -10,7 +10,7 @@ import {
   deleteProfileEducationController,
   deleteProfileExperienceController,
   getUserReposController,
-} from '../../../controllers/profile.controller';
+} from '@controllers/profile.controller';
 import {
   deleteProfileExperienceValidation,
   getUserProfileByIdValidation,
@@ -20,8 +20,8 @@ import {
   deleteProfileEducationValidation,
   profileEducationValidation,
   getUserReposValidation,
-} from './profile.validation';
-import { requireAuth } from '../../../middleware/requireAuth.middleware';
+} from '@middleware/validation/profile.validation.middleware';
+import { requireAuth } from '@middleware/requireAuth.middleware';
 
 const router = Router();
 

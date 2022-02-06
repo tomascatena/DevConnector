@@ -7,7 +7,7 @@
   "main": "index.ts",
   "scripts": {
     "start": "ts-node ./backend/server.ts",
-    "server": "nodemon ./backend/server.ts",
+    "dev-server": "npm run dev-server --prefix ./backend",
     "client": "nodemon ./frontend/index.ts"
   },
   "keywords": [],

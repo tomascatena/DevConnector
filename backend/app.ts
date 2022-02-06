@@ -1,5 +1,5 @@
 import express from 'express';
-import { notFound, errorHandler } from './middleware/error.middleware';
+import { notFound, errorHandler } from '@middleware/error.middleware';
 import routes from './routes/v1';
 import helmet from 'helmet';
 

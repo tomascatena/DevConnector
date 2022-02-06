@@ -1,9 +1,9 @@
 import { NextFunction, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { env } from '../config/config';
+import { env } from '@config/config';
 import { JWTPayload, RequestWithBody } from '../types/types';
 import httpStatus from 'http-status-codes';
-import { authorizationHeaderValidator } from '../validators/auth.validators';
+import { authorizationHeaderValidator } from '@validators/auth.validators';
 import { validationResult } from 'express-validator';
 
 export const requireAuth = [

@@ -8,11 +8,11 @@ import {
   userProfileOptionalFieldsValidator,
   userSkillsValidator,
   userStatusValidator,
-} from '../../../validators/profile.validators';
+  userIdParamValidator,
+} from '@validators/profile.validators';
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status-codes';
 import { validationResult } from 'express-validator';
-import { userIdParamValidator } from '../../../validators/profile.validators';
 
 export const getUserProfileByIdValidation = [
   userIdParamValidator,

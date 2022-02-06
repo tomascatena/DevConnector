@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import validator from 'validator';
-import { env } from '../config/config';
+import { env } from '@config/config';
 import bcryptjs from 'bcryptjs';
 
 export interface IUser {

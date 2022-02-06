@@ -1,10 +1,10 @@
 import httpStatus, { ReasonPhrases } from 'http-status-codes';
 import { RequestWithBody } from '../types/types';
 import { Response } from 'express';
-import Profile from '../models/profile.model';
-import User from '../models/user.model';
+import Profile from '@models/profile.model';
+import User from '@models/user.model';
 import request from 'request';
-import { env } from '../config/config';
+import { env } from '@config/config';
 
 // @route     GET api/v1/profile/me
 // @desc      Get current users profile

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import httpStatus from 'http-status-codes';
-import { env } from '../config/config';
+import { env } from '@config/config';
 
 export const notFound = (req: Request, res: Response, next: NextFunction) => {
   const error = new Error(`Not found - ${req.originalUrl}`);
