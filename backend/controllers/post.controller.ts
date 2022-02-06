@@ -3,15 +3,13 @@ import { RequestWithBody } from '../types/types';
 import { Response } from 'express';
 import User from '@models/user.model';
 import Post from '@models/post.model';
+import { catchAsync } from '@middleware/catchAsync.middleware';
 
 // @route     POST api/v1/posts
 // @desc      Create a post
 // @access    Private
-export const createPostController = async (
-  req: RequestWithBody,
-  res: Response
-) => {
-  try {
+export const createPostController = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
     const user = await User.findById(req.userId).select('-password');
 
     if (!user) {
@@ -37,25 +35,14 @@ export const createPostController = async (
     return res.status(httpStatus.BAD_REQUEST).json({
       message: 'Can not create post',
     });
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      });
-    }
   }
-};
+);
 
 // @route     GET api/v1/posts
 // @desc      Get all posts
 // @access    Private
-export const getAllPostsController = async (
-  req: RequestWithBody,
-  res: Response
-) => {
-  try {
+export const getAllPostsController = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
     const posts = await Post.find({ user: req.userId }).sort({
       date: -1,
     });
@@ -64,25 +51,14 @@ export const getAllPostsController = async (
       message: 'Successfully fetched all posts from user',
       posts,
     });
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      });
-    }
   }
-};
+);
 
 // @route     GET api/v1/posts/:postId
 // @desc      Get post by id
 // @access    Private
-export const getPostByIdController = async (
-  req: RequestWithBody,
-  res: Response
-) => {
-  try {
+export const getPostByIdController = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
     const post = await Post.findById(req.params.postId);
 
     if (post) {
@@ -95,25 +71,14 @@ export const getPostByIdController = async (
         message: 'Post not found',
       });
     }
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      });
-    }
   }
-};
+);
 
 // @route     DELETE api/v1/posts/:postId
 // @desc      Delete post by id
 // @access    Private
-export const deletePostByIdController = async (
-  req: RequestWithBody,
-  res: Response
-) => {
-  try {
+export const deletePostByIdController = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
     const post = await Post.findById(req.params.postId);
 
     if (!post) {
@@ -134,13 +99,5 @@ export const deletePostByIdController = async (
     return res.status(httpStatus.OK).json({
       message: 'Successfully deleted post',
     });
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      });
-    }
   }
-};
+);

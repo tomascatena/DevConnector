@@ -5,15 +5,13 @@ import Profile from '@models/profile.model';
 import User from '@models/user.model';
 import request from 'request';
 import { env } from '@config/config';
+import { catchAsync } from '@middleware/catchAsync.middleware';
 
 // @route     GET api/v1/profile/me
 // @desc      Get current users profile
 // @access    Private
-export const getUserProfileController = async (
-  req: RequestWithBody,
-  res: Response
-) => {
-  try {
+export const getUserProfileController = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
     const profile = await Profile.findOne({ user: req.userId }).populate(
       'user',
       ['name', 'avatar']
@@ -28,50 +26,28 @@ export const getUserProfileController = async (
       message: 'Successfully got user profile',
       profile,
     });
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      });
-    }
   }
-};
+);
 
 // @route     GET api/v1/profile
 // @desc      Get all profiles
 // @access    Public
-export const getAllProfilesController = async (
-  req: RequestWithBody,
-  res: Response
-) => {
-  try {
+export const getAllProfilesController = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
     const profiles = await Profile.find().populate('user', ['name', 'avatar']);
 
     return res.status(httpStatus.CREATED).json({
       message: 'Successfully got all user profiles',
       profiles,
     });
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      });
-    }
   }
-};
+);
 
 // @route     GET api/v1/profile/user/:userId
 // @desc      Get profile by userId
 // @access    Public
-export const getProfileByUserIdController = async (
-  req: RequestWithBody,
-  res: Response
-) => {
-  try {
+export const getProfileByUserIdController = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
     const profile = await Profile.findOne({
       user: req.params.userId,
     }).populate('user', ['name', 'avatar']);
@@ -86,48 +62,37 @@ export const getProfileByUserIdController = async (
         profile,
       });
     }
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      });
-    }
   }
-};
+);
 
 // @route     POST api/v1/profile
 // @desc      Create or update a user profile
 // @access    Private
-export const createUserProfileController = async (
-  req: RequestWithBody,
-  res: Response
-) => {
-  const {
-    company,
-    website,
-    location,
-    bio,
-    status,
-    githubUsername,
-    skills,
-    social,
-  } = req.body;
+export const createUserProfileController = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
+    const {
+      company,
+      website,
+      location,
+      bio,
+      status,
+      githubUsername,
+      skills,
+      social,
+    } = req.body;
 
-  const profileFields = {
-    user: req.userId,
-    status,
-    skills,
-    ...(company && { company }),
-    ...(website && { website }),
-    ...(location && { location }),
-    ...(bio && { bio }),
-    ...(githubUsername && { githubUsername }),
-    ...(social && { social }),
-  };
+    const profileFields = {
+      user: req.userId,
+      status,
+      skills,
+      ...(company && { company }),
+      ...(website && { website }),
+      ...(location && { location }),
+      ...(bio && { bio }),
+      ...(githubUsername && { githubUsername }),
+      ...(social && { social }),
+    };
 
-  try {
     let profile = await Profile.findOne({ user: req.userId });
 
     if (profile) {
@@ -149,25 +114,14 @@ export const createUserProfileController = async (
         profile,
       });
     }
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      });
-    }
   }
-};
+);
 
 // @route     DELETE api/v1/profile
 // @desc      Delete user
 // @access    Private
-export const deleteProfileController = async (
-  req: RequestWithBody,
-  res: Response
-) => {
-  try {
+export const deleteProfileController = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
     const profile = await Profile.findOneAndRemove({ user: req.userId });
     await User.findOneAndRemove({ _id: req.userId });
 
@@ -181,25 +135,14 @@ export const deleteProfileController = async (
         profile,
       });
     }
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      });
-    }
   }
-};
+);
 
 // @route     PUT api/v1/profile/experience
 // @desc      Add/Update profile experience
 // @access    Private
-export const profileExperienceController = async (
-  req: RequestWithBody,
-  res: Response
-) => {
-  try {
+export const profileExperienceController = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
     const profile = await Profile.findOneAndUpdate(
       { user: req.userId },
       {
@@ -220,25 +163,14 @@ export const profileExperienceController = async (
         profile,
       });
     }
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      });
-    }
   }
-};
+);
 
 // @route     DELETE api/v1/profile/experience/:experienceId
 // @desc      Delete experience from profile
 // @access    Private
-export const deleteProfileExperienceController = async (
-  req: RequestWithBody,
-  res: Response
-) => {
-  try {
+export const deleteProfileExperienceController = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
     const profile = await Profile.findOneAndUpdate(
       { user: req.userId },
       {
@@ -259,25 +191,14 @@ export const deleteProfileExperienceController = async (
         profile,
       });
     }
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      });
-    }
   }
-};
+);
 
 // @route     PUT api/v1/profile/education
 // @desc      Add/Update profile education
 // @access    Private
-export const profileEducationController = async (
-  req: RequestWithBody,
-  res: Response
-) => {
-  try {
+export const profileEducationController = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
     const profile = await Profile.findOneAndUpdate(
       { user: req.userId },
       {
@@ -298,25 +219,14 @@ export const profileEducationController = async (
         profile,
       });
     }
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      });
-    }
   }
-};
+);
 
 // @route     DELETE api/v1/profile/education/:educationId
 // @desc      Delete education from profile
 // @access    Private
-export const deleteProfileEducationController = async (
-  req: RequestWithBody,
-  res: Response
-) => {
-  try {
+export const deleteProfileEducationController = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
     const profile = await Profile.findOneAndUpdate(
       { user: req.userId },
       {
@@ -337,25 +247,14 @@ export const deleteProfileEducationController = async (
         profile,
       });
     }
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      });
-    }
   }
-};
+);
 
 // @route     GET api/v1/profile/github/:githubUsername
 // @desc      Get user repos from Github
 // @access    Public
-export const getUserReposController = async (
-  req: RequestWithBody,
-  res: Response
-) => {
-  try {
+export const getUserReposController = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
     const baseURL = `https://api.github.com/users/${req.params.githubUsername}/repos`;
     const queryString = `per_page=5&sort=created:asc&client_id=${env.GITHUB_API_CLIENT_ID}&client_secret=${env.GITHUB_API_CLIENT_SECRET}`;
 
@@ -387,13 +286,5 @@ export const getUserReposController = async (
         body: JSON.parse(body),
       });
     });
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      });
-    }
   }
-};
+);

@@ -5,42 +5,29 @@ import httpStatus, { ReasonPhrases } from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 import { env } from '@config/config';
 import bcryptjs from 'bcryptjs';
+import { catchAsync } from '@middleware/catchAsync.middleware';
 
 // @route     GET api/v1/auth
 // @desc      Get auth user
 // @access    Private
-export const getUserController = async (
-  req: RequestWithBody,
-  res: Response
-) => {
-  try {
+export const getUserController = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
     const user = await User.findById(req.userId).select('-password');
 
     return res.status(httpStatus.OK).json({
       message: 'Successfully authenticated user',
       user,
     });
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      });
-    }
   }
-};
+);
 
 // @route     POST api/v1/auth
 // @desc      Authenticate user & get token
 // @access    Private
-export const loginUserController = async (
-  req: RequestWithBody,
-  res: Response
-) => {
-  const { email, password } = req.body;
+export const loginUserController = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
+    const { email, password } = req.body;
 
-  try {
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -86,13 +73,5 @@ export const loginUserController = async (
         message: 'Internal Server Error',
       });
     }
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log(error.message);
-
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-      });
-    }
   }
-};
+);
