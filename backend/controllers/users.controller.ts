@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import httpStatus from 'http-status-codes';
+import httpStatus, { ReasonPhrases } from 'http-status-codes';
 import User from '../models/user.model';
 import { JWTPayload, RequestWithBody } from '../types/types';
 import gravatar from 'gravatar';
@@ -60,7 +60,7 @@ export const registerUserController = async (
     }
 
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-      message: 'Internal Server Error',
+      message: ReasonPhrases.INTERNAL_SERVER_ERROR,
     });
   }
 };

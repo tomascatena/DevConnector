@@ -8,6 +8,23 @@ import {
   userStatusValidator,
 } from '../../../validators/profile.validators';
 import { authorizationHeaderValidator } from '../../../validators/auth.validators';
+import { userIdParamValidator } from '../../../validators/profile.validators';
+
+export const getUserProfileByIdValidation = [
+  userIdParamValidator,
+  (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        message: 'Invalid information to get a user profile',
+        errors: errors.mapped(),
+      });
+    }
+
+    next();
+  },
+];
 
 export const getUserProfileValidation = [
   authorizationHeaderValidator,

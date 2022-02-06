@@ -1,4 +1,12 @@
-import { check } from 'express-validator';
+import { check, param } from 'express-validator';
+
+export const userIdParamValidator = param('userId', 'userId is required')
+  .trim()
+  .notEmpty()
+  .isString()
+  .isMongoId()
+  .withMessage('Invalid userId')
+  .escape();
 
 export const userIdValidator = check('userId', 'userId is required')
   .trim()

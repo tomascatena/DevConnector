@@ -1,7 +1,7 @@
 import { JWTPayload, RequestWithBody } from '../types/types';
 import User from '../models/user.model';
 import { Response } from 'express';
-import httpStatus from 'http-status-codes';
+import httpStatus, { ReasonPhrases } from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 import { env } from '../config/config';
 import bcryptjs from 'bcryptjs';
@@ -22,8 +22,10 @@ export const getUserController = async (
     });
   } catch (error) {
     if (error instanceof Error) {
+      console.log(error.message);
+
       return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: error.message,
+        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
       });
     }
   }
@@ -86,8 +88,10 @@ export const loginUserController = async (
     }
   } catch (error) {
     if (error instanceof Error) {
+      console.log(error.message);
+
       return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: error.message,
+        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
       });
     }
   }

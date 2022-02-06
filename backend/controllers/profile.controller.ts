@@ -1,4 +1,4 @@
-import httpStatus from 'http-status-codes';
+import httpStatus, { ReasonPhrases } from 'http-status-codes';
 import { RequestWithBody } from '../types/types';
 import { Response } from 'express';
 import Profile from '../models/profile.model';
@@ -27,8 +27,68 @@ export const getUserProfileController = async (
     });
   } catch (error) {
     if (error instanceof Error) {
+      console.log(error.message);
+
       return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: error.message,
+        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+      });
+    }
+  }
+};
+
+// @route     GET api/v1/profile
+// @desc      Get all profiles
+// @access    Public
+export const getAllProfilesController = async (
+  req: RequestWithBody,
+  res: Response
+) => {
+  try {
+    const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+
+    return res.status(httpStatus.CREATED).json({
+      message: 'Successfully got all user profiles',
+      profiles,
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+      });
+    }
+  }
+};
+
+// @route     GET api/v1/profile/user/:userId
+// @desc      Get profile by userId
+// @access    Public
+export const getProfileByUserIdController = async (
+  req: RequestWithBody,
+  res: Response
+) => {
+  try {
+    const profile = await Profile.findOne({
+      user: req.params.userId,
+    }).populate('user', ['name', 'avatar']);
+
+    if (!profile) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        message: 'Cannot find profile for given user',
+      });
+    } else {
+      return res.status(httpStatus.CREATED).json({
+        message: 'Successfully got the user profile',
+        profile,
+      });
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
       });
     }
   }
@@ -64,8 +124,6 @@ export const createUserProfileController = async (
     ...(social && { social }),
   };
 
-  console.log(req.userId);
-
   try {
     let profile = await Profile.findOne({ user: req.userId });
 
@@ -90,8 +148,10 @@ export const createUserProfileController = async (
     }
   } catch (error) {
     if (error instanceof Error) {
+      console.log(error.message);
+
       return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: error.message,
+        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
       });
     }
   }
