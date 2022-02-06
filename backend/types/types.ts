@@ -3,11 +3,14 @@ import { IEducation } from '../models/schemas/education.schema';
 import { IExperience } from '../models/schemas/experience.schema';
 import { ISocial } from '../models/schemas/social.schema';
 import { IUser } from '../models/user.model';
+import { IProfile } from '../models/profile.model';
 
 type GenericObject = { [key: string]: string | undefined };
 
 export interface RequestWithBody extends Request {
   body: {
+    user?: Partial<IUser>;
+    profile?: Partial<IProfile>;
     name?: string;
     email?: string;
     password?: string;
@@ -22,7 +25,7 @@ export interface RequestWithBody extends Request {
     experience?: Partial<IExperience>[];
     education?: Partial<IEducation>[];
   };
-  user?: Partial<IUser> | null;
+  user?: Partial<IUser>;
   userId?: string;
 }
 

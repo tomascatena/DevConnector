@@ -8,6 +8,17 @@ export const userIdParamValidator = param('userId', 'userId is required')
   .withMessage('Invalid userId')
   .escape();
 
+export const experienceIdParamValidator = param(
+  'experienceId',
+  'userId is required'
+)
+  .trim()
+  .notEmpty()
+  .isString()
+  .isMongoId()
+  .withMessage('Invalid experienceId')
+  .escape();
+
 export const userIdValidator = check('userId', 'userId is required')
   .trim()
   .notEmpty()
@@ -98,4 +109,41 @@ export const userProfileOptionalFieldsValidator = [
   userBioValidator,
   userGithubUsernameValidator,
   ...userSocialValidator,
+];
+
+export const profileExperienceValidator = [
+  check('experience', 'user profile experience is required')
+    .isArray()
+    .custom((experience) => experience.length)
+    .withMessage('Invalid user profile experience'),
+  check('experience.*.title', 'title is required')
+    .isString()
+    .isLength({ min: 3, max: 100 })
+    .withMessage('Invalid user profile experience: title'),
+  check('experience.*.company', 'company is required')
+    .isString()
+    .isLength({ min: 3, max: 100 })
+    .withMessage('Invalid user profile experience: company'),
+  check('experience.*.location')
+    .optional({ nullable: true })
+    .isString()
+    .isLength({ min: 3, max: 100 })
+    .withMessage('Invalid user profile experience: location'),
+  check('experience.*.from', 'from date is required')
+    .notEmpty()
+    .isDate()
+    .withMessage('Invalid user profile experience: from'),
+  check('experience.*.to')
+    .optional({ nullable: true })
+    .isDate()
+    .withMessage('Invalid user profile experience: to'),
+  check('experience.*.current')
+    .optional({ nullable: true })
+    .isBoolean()
+    .withMessage('Invalid user profile experience: current'),
+  check('experience.*.description')
+    .optional({ nullable: true })
+    .isString()
+    .isLength({ min: 3, max: 500 })
+    .withMessage('Invalid user profile experience: description'),
 ];

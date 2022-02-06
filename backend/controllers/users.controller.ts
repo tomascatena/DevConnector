@@ -78,7 +78,7 @@ export const deleteUserController = async (
     const user = await User.findOneAndRemove({ _id: req.userId });
 
     if (!user) {
-      return res.status(httpStatus.CREATED).json({
+      return res.status(httpStatus.BAD_REQUEST).json({
         message: 'User does not exists',
       });
     } else {

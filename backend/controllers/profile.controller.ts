@@ -3,6 +3,7 @@ import { RequestWithBody } from '../types/types';
 import { Response } from 'express';
 import Profile from '../models/profile.model';
 import User from '../models/user.model';
+import { IExperience } from '../models/schemas/experience.schema';
 
 // @route     GET api/v1/profile/me
 // @desc      Get current users profile
@@ -170,12 +171,90 @@ export const deleteProfileController = async (
     await User.findOneAndRemove({ _id: req.userId });
 
     if (!profile) {
-      return res.status(httpStatus.CREATED).json({
+      return res.status(httpStatus.BAD_REQUEST).json({
         message: 'User profile does not exists',
       });
     } else {
       return res.status(httpStatus.CREATED).json({
         message: 'Successfully deleted user profile',
+        profile,
+      });
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+      });
+    }
+  }
+};
+
+// @route     PUT api/v1/profile/experience
+// @desc      Add/Update profile experience
+// @access    Private
+export const profileExperienceController = async (
+  req: RequestWithBody,
+  res: Response
+) => {
+  try {
+    const profile = await Profile.findOneAndUpdate(
+      { user: req.userId },
+      {
+        $push: {
+          experience: { $each: [...req.body.experience!], $position: 0 },
+        },
+      },
+      { new: true }
+    );
+
+    if (!profile) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        message: 'Cannot find user profile',
+      });
+    } else {
+      return res.status(httpStatus.CREATED).json({
+        message: 'Successfully added/updated user profile experience',
+        profile,
+      });
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+      });
+    }
+  }
+};
+
+// @route     DELETE api/v1/profile/experience/:experienceId
+// @desc      Delete experience from profile
+// @access    Private
+export const deleteProfileExperienceController = async (
+  req: RequestWithBody,
+  res: Response
+) => {
+  try {
+    const profile = await Profile.findOneAndUpdate(
+      { user: req.userId },
+      {
+        $pull: {
+          experience: { _id: req.params.experienceId },
+        },
+      },
+      { new: true }
+    );
+
+    if (!profile) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        message: 'Cannot find user profile',
+      });
+    } else {
+      return res.status(httpStatus.CREATED).json({
+        message: 'Successfully added/updated user profile experience',
         profile,
       });
     }

@@ -5,12 +5,16 @@ import {
   getAllProfilesController,
   getProfileByUserIdController,
   deleteProfileController,
+  profileExperienceController,
 } from '../../../controllers/profile.controller';
 import { requireAuth } from '../../../middleware/requireAuth.middleware';
+import { deleteProfileExperienceController } from '../../../controllers/profile.controller';
 import {
+  deleteProfileExperienceValidation,
   deleteProfileValidation,
   getUserProfileByIdValidation,
   getUserProfileValidation,
+  profileExperienceValidation,
   userProfileValidation,
 } from './profile.validation';
 
@@ -58,6 +62,26 @@ router.delete(
   deleteProfileValidation,
   requireAuth,
   deleteProfileController
+);
+
+// @route     PUT api/v1/profile/experience
+// @desc      Add/Update profile experience
+// @access    Private
+router.put(
+  '/experience',
+  profileExperienceValidation,
+  requireAuth,
+  profileExperienceController
+);
+
+// @route     DELETE api/v1/profile/experience/:experienceId
+// @desc      Delete experience from profile
+// @access    Private
+router.delete(
+  '/experience/:experienceId',
+  deleteProfileExperienceValidation,
+  requireAuth,
+  deleteProfileExperienceController
 );
 
 export default router;
