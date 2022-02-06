@@ -19,6 +19,17 @@ export const experienceIdParamValidator = param(
   .withMessage('Invalid experienceId')
   .escape();
 
+export const educationIdParamValidator = param(
+  'educationId',
+  'userId is required'
+)
+  .trim()
+  .notEmpty()
+  .isString()
+  .isMongoId()
+  .withMessage('Invalid educationId')
+  .escape();
+
 export const userIdValidator = check('userId', 'userId is required')
   .trim()
   .notEmpty()
@@ -146,4 +157,44 @@ export const profileExperienceValidator = [
     .isString()
     .isLength({ min: 3, max: 500 })
     .withMessage('Invalid user profile experience: description'),
+];
+
+export const profileEducationValidator = [
+  check('education', 'user profile education is required')
+    .isArray()
+    .custom((education) => education.length)
+    .withMessage('Invalid user profile education'),
+  check('education.*.school', 'school is required')
+    .isString()
+    .trim()
+    .isLength({ min: 3, max: 100 })
+    .withMessage('Invalid user profile education: school'),
+  check('education.*.degree', 'degree is required')
+    .isString()
+    .trim()
+    .isLength({ min: 3, max: 100 })
+    .withMessage('Invalid user profile education: degree'),
+  check('education.*.fieldOfStudy')
+    .optional({ nullable: true })
+    .isString()
+    .trim()
+    .isLength({ min: 3, max: 200 })
+    .withMessage('Invalid user profile education: fieldOfStudy'),
+  check('education.*.from', 'from date is required')
+    .notEmpty()
+    .isDate()
+    .withMessage('Invalid user profile education: from'),
+  check('education.*.to')
+    .optional({ nullable: true })
+    .isDate()
+    .withMessage('Invalid user profile education: to'),
+  check('education.*.current')
+    .optional({ nullable: true })
+    .isBoolean()
+    .withMessage('Invalid user profile education: current'),
+  check('education.*.description')
+    .optional({ nullable: true })
+    .isString()
+    .isLength({ min: 3, max: 500 })
+    .withMessage('Invalid user profile education: description'),
 ];

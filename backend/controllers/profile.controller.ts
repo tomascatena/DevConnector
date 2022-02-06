@@ -3,7 +3,6 @@ import { RequestWithBody } from '../types/types';
 import { Response } from 'express';
 import Profile from '../models/profile.model';
 import User from '../models/user.model';
-import { IExperience } from '../models/schemas/experience.schema';
 
 // @route     GET api/v1/profile/me
 // @desc      Get current users profile
@@ -255,6 +254,84 @@ export const deleteProfileExperienceController = async (
     } else {
       return res.status(httpStatus.CREATED).json({
         message: 'Successfully added/updated user profile experience',
+        profile,
+      });
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+      });
+    }
+  }
+};
+
+// @route     PUT api/v1/profile/education
+// @desc      Add/Update profile education
+// @access    Private
+export const profileEducationController = async (
+  req: RequestWithBody,
+  res: Response
+) => {
+  try {
+    const profile = await Profile.findOneAndUpdate(
+      { user: req.userId },
+      {
+        $push: {
+          education: { $each: [...req.body.education!], $position: 0 },
+        },
+      },
+      { new: true }
+    );
+
+    if (!profile) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        message: 'Cannot find user profile',
+      });
+    } else {
+      return res.status(httpStatus.CREATED).json({
+        message: 'Successfully added/updated user profile education',
+        profile,
+      });
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+      });
+    }
+  }
+};
+
+// @route     DELETE api/v1/profile/education/:educationId
+// @desc      Delete education from profile
+// @access    Private
+export const deleteProfileEducationController = async (
+  req: RequestWithBody,
+  res: Response
+) => {
+  try {
+    const profile = await Profile.findOneAndUpdate(
+      { user: req.userId },
+      {
+        $pull: {
+          education: { _id: req.params.educationId },
+        },
+      },
+      { new: true }
+    );
+
+    if (!profile) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        message: 'Cannot find user profile',
+      });
+    } else {
+      return res.status(httpStatus.CREATED).json({
+        message: 'Successfully added/updated user profile education',
         profile,
       });
     }

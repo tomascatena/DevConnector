@@ -1,5 +1,7 @@
 import {
+  educationIdParamValidator,
   experienceIdParamValidator,
+  profileEducationValidator,
   profileExperienceValidator,
   userIdValidator,
   userProfileOptionalFieldsValidator,
@@ -108,6 +110,41 @@ export const deleteProfileExperienceValidation = [
     if (!errors.isEmpty()) {
       return res.status(httpStatus.BAD_REQUEST).json({
         message: 'Invalid information to delete a user profile experience',
+        errors: errors.mapped(),
+      });
+    }
+
+    next();
+  },
+];
+
+export const profileEducationValidation = [
+  authorizationHeaderValidator,
+  ...profileEducationValidator,
+  (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        message:
+          'Invalid information to create/update a user profile education',
+        errors: errors.mapped(),
+      });
+    }
+
+    next();
+  },
+];
+
+export const deleteProfileEducationValidation = [
+  authorizationHeaderValidator,
+  educationIdParamValidator,
+  (req: Request, res: Response, next: NextFunction) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        message: 'Invalid information to delete a user profile education',
         errors: errors.mapped(),
       });
     }

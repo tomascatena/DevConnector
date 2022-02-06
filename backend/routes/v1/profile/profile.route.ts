@@ -6,9 +6,10 @@ import {
   getProfileByUserIdController,
   deleteProfileController,
   profileExperienceController,
+  profileEducationController,
+  deleteProfileEducationController,
+  deleteProfileExperienceController,
 } from '../../../controllers/profile.controller';
-import { requireAuth } from '../../../middleware/requireAuth.middleware';
-import { deleteProfileExperienceController } from '../../../controllers/profile.controller';
 import {
   deleteProfileExperienceValidation,
   deleteProfileValidation,
@@ -16,7 +17,10 @@ import {
   getUserProfileValidation,
   profileExperienceValidation,
   userProfileValidation,
+  deleteProfileEducationValidation,
+  profileEducationValidation,
 } from './profile.validation';
+import { requireAuth } from '../../../middleware/requireAuth.middleware';
 
 const router = Router();
 
@@ -82,6 +86,26 @@ router.delete(
   deleteProfileExperienceValidation,
   requireAuth,
   deleteProfileExperienceController
+);
+
+// @route     PUT api/v1/profile/education
+// @desc      Add/Update profile education
+// @access    Private
+router.put(
+  '/education',
+  profileEducationValidation,
+  requireAuth,
+  profileEducationController
+);
+
+// @route     DELETE api/v1/profile/education/:educationId
+// @desc      Delete education from profile
+// @access    Private
+router.delete(
+  '/education/:educationId',
+  deleteProfileEducationValidation,
+  requireAuth,
+  deleteProfileEducationController
 );
 
 export default router;
