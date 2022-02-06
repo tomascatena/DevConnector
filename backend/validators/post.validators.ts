@@ -1,4 +1,12 @@
-import { check } from 'express-validator';
+import { check, param } from 'express-validator';
+
+export const postIdParamValidator = param('postId', 'postId is required')
+  .trim()
+  .notEmpty()
+  .isString()
+  .isMongoId()
+  .withMessage('Invalid postId')
+  .escape();
 
 export const postValidator = [
   check('post', 'post is required')
