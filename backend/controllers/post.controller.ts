@@ -1,4 +1,4 @@
-import httpStatus, { ReasonPhrases } from 'http-status-codes';
+import httpStatus from 'http-status-codes';
 import { RequestWithBody } from '../types/types';
 import { Response } from 'express';
 import User from '@models/user.model';

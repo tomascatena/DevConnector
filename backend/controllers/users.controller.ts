@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import httpStatus, { ReasonPhrases } from 'http-status-codes';
+import httpStatus from 'http-status-codes';
 import User from '@models/user.model';
 import { JWTPayload, RequestWithBody } from '../types/types';
 import gravatar from 'gravatar';
