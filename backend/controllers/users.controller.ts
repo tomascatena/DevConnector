@@ -1,16 +1,16 @@
 import { Response } from 'express';
+import { JWTPayload, RequestWithBody } from '../types/types';
+import { catchAsync } from '@middleware/catchAsync.middleware';
+import { env } from '@config/config';
 import httpStatus from 'http-status-codes';
 import User from '@models/user.model';
-import { JWTPayload, RequestWithBody } from '../types/types';
 import gravatar from 'gravatar';
 import jwt from 'jsonwebtoken';
-import { env } from '@config/config';
-import { catchAsync } from '@middleware/catchAsync.middleware';
 
 // @route     POST api/v1/users
 // @desc      Register user
 // @access    Public
-export const registerUserController = catchAsync(
+export const registerUser = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const { name, email, password } = req.body;
 
@@ -58,7 +58,7 @@ export const registerUserController = catchAsync(
 // @route     DELETE api/v1/users
 // @desc      Delete user
 // @access    Private
-export const deleteUserController = catchAsync(
+export const deleteUser = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     console.log(req.userId);
 

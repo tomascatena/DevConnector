@@ -1,16 +1,16 @@
 import { JWTPayload, RequestWithBody } from '../types/types';
-import User from '@models/user.model';
 import { Response } from 'express';
-import httpStatus from 'http-status-codes';
-import jwt from 'jsonwebtoken';
 import { env } from '@config/config';
-import bcryptjs from 'bcryptjs';
 import { catchAsync } from '@middleware/catchAsync.middleware';
+import httpStatus from 'http-status-codes';
+import bcryptjs from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import User from '@models/user.model';
 
 // @route     GET api/v1/auth
 // @desc      Get auth user
 // @access    Private
-export const getUserController = catchAsync(
+export const getUser = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const user = await User.findById(req.userId).select('-password');
 
@@ -24,7 +24,7 @@ export const getUserController = catchAsync(
 // @route     POST api/v1/auth
 // @desc      Authenticate user & get token
 // @access    Private
-export const loginUserController = catchAsync(
+export const loginUser = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const { email, password } = req.body;
 

@@ -2,15 +2,14 @@ import { env } from '../config/config';
 import { check } from 'express-validator';
 import User from '../models/user.model';
 
-export const nameValidator = check('name', 'Name is required')
+export const name = check('name', 'Name is required')
   .trim()
   .isString()
-  .notEmpty()
   .isLength({ min: 2 })
   .withMessage(`Name must be at least 2 characters long`)
   .escape();
 
-export const emailForRegisterValidator = check('email', 'Email is required')
+export const emailForRegister = check('email', 'Email is required')
   .isEmail()
   .notEmpty()
   .withMessage(`Must be a valid email`)
@@ -33,10 +32,7 @@ export const emailForRegisterValidator = check('email', 'Email is required')
     return true;
   });
 
-export const passwordForRegisterValidator = check(
-  'password',
-  'Password is required'
-)
+export const passwordForRegister = check('password', 'Password is required')
   .trim()
   .isString()
   .notEmpty()
@@ -50,7 +46,7 @@ export const passwordForRegisterValidator = check(
   .withMessage('Password and password confirm must be equal')
   .escape();
 
-export const confirmPasswordValidator = check(
+export const confirmPassword = check(
   'confirmPassword',
   'Confirm password is required'
 )

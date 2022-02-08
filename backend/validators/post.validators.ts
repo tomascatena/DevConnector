@@ -1,14 +1,11 @@
 import { check, param } from 'express-validator';
 
-export const postIdParamValidator = param('postId', 'postId is required')
-  .trim()
-  .notEmpty()
-  .isString()
+export const postIdParam = param('postId', 'postId is required')
   .isMongoId()
   .withMessage('Invalid postId')
   .escape();
 
-export const postValidator = [
+export const post = [
   check('post', 'post is required')
     .isObject()
     .custom((post) => Object.keys(post).length)
@@ -25,7 +22,7 @@ export const postValidator = [
     .withMessage('Invalid post field: date'),
 ];
 
-export const commentValidator = [
+export const comment = [
   check('comment', 'comment is required')
     .isArray()
     .custom((comment) => comment.length)

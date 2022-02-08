@@ -1,7 +1,7 @@
 import { header, check } from 'express-validator';
 import validator from 'validator';
 
-export const authorizationHeaderValidator = header(
+export const authorizationHeader = header(
   'authorization',
   'Not authorized to access this endpoint'
 )
@@ -16,16 +16,13 @@ export const authorizationHeaderValidator = header(
   .withMessage('Invalid JWT')
   .escape();
 
-export const emailForLoginValidator = check('email', 'Email is required')
+export const emailForLogin = check('email', 'Email is required')
   .notEmpty()
   .isEmail()
   .withMessage(`Must be a valid email`)
   .normalizeEmail();
 
-export const passwordForLoginValidator = check(
-  'password',
-  'Password is required'
-)
+export const passwordForLogin = check('password', 'Password is required')
   .trim()
   .notEmpty()
   .isString()

@@ -1,16 +1,16 @@
 import httpStatus, { ReasonPhrases } from 'http-status-codes';
 import { RequestWithBody } from '../types/types';
 import { Response } from 'express';
-import Profile from '@models/profile.model';
-import User from '@models/user.model';
-import request from 'request';
 import { env } from '@config/config';
 import { catchAsync } from '@middleware/catchAsync.middleware';
+import request from 'request';
+import Profile from '@models/profile.model';
+import User from '@models/user.model';
 
 // @route     GET api/v1/profile/me
 // @desc      Get current users profile
 // @access    Private
-export const getUserProfileController = catchAsync(
+export const getUserProfile = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const profile = await Profile.findOne({ user: req.userId }).populate(
       'user',
@@ -32,7 +32,7 @@ export const getUserProfileController = catchAsync(
 // @route     GET api/v1/profile
 // @desc      Get all profiles
 // @access    Public
-export const getAllProfilesController = catchAsync(
+export const getAllProfiles = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const profiles = await Profile.find().populate('user', ['name', 'avatar']);
 
@@ -46,7 +46,7 @@ export const getAllProfilesController = catchAsync(
 // @route     GET api/v1/profile/user/:userId
 // @desc      Get profile by userId
 // @access    Public
-export const getProfileByUserIdController = catchAsync(
+export const getProfileByUserId = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const profile = await Profile.findOne({
       user: req.params.userId,
@@ -68,7 +68,7 @@ export const getProfileByUserIdController = catchAsync(
 // @route     POST api/v1/profile
 // @desc      Create or update a user profile
 // @access    Private
-export const createUserProfileController = catchAsync(
+export const createUserProfile = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const {
       company,
@@ -120,7 +120,7 @@ export const createUserProfileController = catchAsync(
 // @route     DELETE api/v1/profile
 // @desc      Delete user
 // @access    Private
-export const deleteProfileController = catchAsync(
+export const deleteProfile = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const profile = await Profile.findOneAndRemove({ user: req.userId });
     await User.findOneAndRemove({ _id: req.userId });
@@ -141,7 +141,7 @@ export const deleteProfileController = catchAsync(
 // @route     PUT api/v1/profile/experience
 // @desc      Add/Update profile experience
 // @access    Private
-export const profileExperienceController = catchAsync(
+export const profileExperience = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const profile = await Profile.findOneAndUpdate(
       { user: req.userId },
@@ -169,7 +169,7 @@ export const profileExperienceController = catchAsync(
 // @route     DELETE api/v1/profile/experience/:experienceId
 // @desc      Delete experience from profile
 // @access    Private
-export const deleteProfileExperienceController = catchAsync(
+export const deleteProfileExperience = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const profile = await Profile.findOneAndUpdate(
       { user: req.userId },
@@ -197,7 +197,7 @@ export const deleteProfileExperienceController = catchAsync(
 // @route     PUT api/v1/profile/education
 // @desc      Add/Update profile education
 // @access    Private
-export const profileEducationController = catchAsync(
+export const profileEducation = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const profile = await Profile.findOneAndUpdate(
       { user: req.userId },
@@ -225,7 +225,7 @@ export const profileEducationController = catchAsync(
 // @route     DELETE api/v1/profile/education/:educationId
 // @desc      Delete education from profile
 // @access    Private
-export const deleteProfileEducationController = catchAsync(
+export const deleteProfileEducation = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const profile = await Profile.findOneAndUpdate(
       { user: req.userId },
@@ -253,7 +253,7 @@ export const deleteProfileEducationController = catchAsync(
 // @route     GET api/v1/profile/github/:githubUsername
 // @desc      Get user repos from Github
 // @access    Public
-export const getUserReposController = catchAsync(
+export const getUserRepos = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const baseURL = `https://api.github.com/users/${req.params.githubUsername}/repos`;
     const queryString = `per_page=5&sort=created:asc&client_id=${env.GITHUB_API_CLIENT_ID}&client_secret=${env.GITHUB_API_CLIENT_SECRET}`;

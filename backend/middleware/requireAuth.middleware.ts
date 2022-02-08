@@ -1,23 +1,15 @@
+import * as validators from '@validators/index';
 import { NextFunction, Response } from 'express';
-import jwt from 'jsonwebtoken';
-import { env } from '@config/config';
 import { JWTPayload, RequestWithBody } from '../types/types';
+import { env } from '@config/config';
+import { validationsResults } from './validations.middleware';
+import jwt from 'jsonwebtoken';
 import httpStatus from 'http-status-codes';
-import { authorizationHeaderValidator } from '@validators/auth.validators';
-import { validationResult } from 'express-validator';
 
 export const requireAuth = [
-  authorizationHeaderValidator,
+  validators.authorizationHeader,
+  validationsResults(),
   (req: RequestWithBody, res: Response, next: NextFunction) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.status(httpStatus.BAD_REQUEST).json({
-        message: 'No authorized to access this endpoint',
-        errors: errors.mapped(),
-      });
-    }
-
     const token = req.headers.authorization!.split(' ')[1];
 
     try {

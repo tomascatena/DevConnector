@@ -1,14 +1,14 @@
-import httpStatus from 'http-status-codes';
 import { RequestWithBody } from '../types/types';
 import { Response } from 'express';
+import { catchAsync } from '@middleware/catchAsync.middleware';
+import httpStatus from 'http-status-codes';
 import User from '@models/user.model';
 import Post from '@models/post.model';
-import { catchAsync } from '@middleware/catchAsync.middleware';
 
 // @route     POST api/v1/posts
 // @desc      Create a post
 // @access    Private
-export const createPostController = catchAsync(
+export const createPost = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const user = await User.findById(req.userId).select('-password');
 
@@ -41,7 +41,7 @@ export const createPostController = catchAsync(
 // @route     GET api/v1/posts
 // @desc      Get all posts
 // @access    Private
-export const getAllPostsController = catchAsync(
+export const getAllPosts = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const posts = await Post.find({ user: req.userId }).sort({
       date: -1,
@@ -57,7 +57,7 @@ export const getAllPostsController = catchAsync(
 // @route     GET api/v1/posts/:postId
 // @desc      Get post by id
 // @access    Private
-export const getPostByIdController = catchAsync(
+export const getPostById = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const post = await Post.findById(req.params.postId);
 
@@ -77,7 +77,7 @@ export const getPostByIdController = catchAsync(
 // @route     DELETE api/v1/posts/:postId
 // @desc      Delete post by id
 // @access    Private
-export const deletePostByIdController = catchAsync(
+export const deletePostById = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const post = await Post.findById(req.params.postId);
 

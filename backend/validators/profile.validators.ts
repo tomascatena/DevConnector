@@ -1,97 +1,76 @@
 import { check, param } from 'express-validator';
 
-export const userIdParamValidator = param('userId', 'userId is required')
-  .trim()
-  .notEmpty()
-  .isString()
+export const userIdParam = param('userId', 'userId is required')
   .isMongoId()
   .withMessage('Invalid userId')
   .escape();
 
-export const experienceIdParamValidator = param(
-  'experienceId',
-  'userId is required'
-)
-  .trim()
-  .notEmpty()
-  .isString()
+export const experienceIdParam = param('experienceId', 'userId is required')
   .isMongoId()
   .withMessage('Invalid experienceId')
   .escape();
 
-export const educationIdParamValidator = param(
-  'educationId',
-  'userId is required'
-)
-  .trim()
-  .notEmpty()
-  .isString()
+export const educationIdParam = param('educationId', 'userId is required')
   .isMongoId()
   .withMessage('Invalid educationId')
   .escape();
 
-export const githubUsernameParamValidator = param(
+export const githubUsernameParam = param(
   'githubUsername',
   'githubUsername is required'
 )
-  .trim()
-  .notEmpty()
-  .isString()
   .matches(/^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i)
   .withMessage('Invalid githubUsername')
   .escape();
 
-export const userIdValidator = check('userId', 'userId is required')
-  .trim()
-  .notEmpty()
-  .isString()
+export const userId = check('userId', 'userId is required')
   .isMongoId()
   .withMessage('Invalid userId')
   .escape();
 
-export const userStatusValidator = check('status', 'status is required')
+export const userStatus = check('status', 'status is required')
   .trim()
   .notEmpty()
   .isString()
   .withMessage('Invalid user status')
   .escape();
 
-export const userSkillsValidator = check('skills', 'skills are required')
+export const userSkills = check('skills', 'skills are required')
   .notEmpty()
   .isArray()
   .withMessage('Invalid user skills');
 
-export const userCompanyValidator = check('company')
+export const userCompany = check('company')
   .optional({ nullable: true })
   .isString()
   .isLength({ min: 3, max: 50 })
   .withMessage('Invalid user company');
 
-export const userWebsiteValidator = check('website')
+export const userWebsite = check('website')
   .optional({ nullable: true })
   .isString()
   .isLength({ min: 3, max: 50 })
   .withMessage('Invalid user website');
 
-export const userLocationValidator = check('location')
+export const userLocation = check('location')
   .optional({ nullable: true })
   .isString()
   .isLength({ min: 3, max: 100 })
   .withMessage('Invalid user location');
 
-export const userBioValidator = check('bio')
+export const userBio = check('bio')
   .optional({ nullable: true })
   .isString()
   .isLength({ min: 0, max: 500 })
   .withMessage('Invalid user bio');
 
-export const userGithubUsernameValidator = check('github username')
+export const userGithubUsername = check('github username')
   .optional({ nullable: true })
   .isString()
   .isLength({ min: 3, max: 50 })
   .withMessage('Invalid user github username');
 
-export const userSocialValidator = [
+export const userSocial = [
   check('social')
     .optional({ nullable: true })
     .isObject()
@@ -124,16 +103,16 @@ export const userSocialValidator = [
     .withMessage('Invalid user instagram'),
 ];
 
-export const userProfileOptionalFieldsValidator = [
-  userCompanyValidator,
-  userWebsiteValidator,
-  userLocationValidator,
-  userBioValidator,
-  userGithubUsernameValidator,
-  ...userSocialValidator,
+export const userProfileOptionalFields = [
+  userCompany,
+  userWebsite,
+  userLocation,
+  userBio,
+  userGithubUsername,
+  ...userSocial,
 ];
 
-export const profileExperienceValidator = [
+export const profileExperience = [
   check('experience', 'user profile experience is required')
     .isArray()
     .custom((experience) => experience.length)
@@ -170,7 +149,7 @@ export const profileExperienceValidator = [
     .withMessage('Invalid user profile experience: description'),
 ];
 
-export const profileEducationValidator = [
+export const profileEducation = [
   check('education', 'user profile education is required')
     .isArray()
     .custom((education) => education.length)
