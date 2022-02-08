@@ -1,11 +1,11 @@
 import httpStatus, { ReasonPhrases } from 'http-status-codes';
-import { RequestWithBody } from '../types/types';
 import { Response } from 'express';
 import { env } from '@config/config';
 import { catchAsync } from '@middleware/catchAsync.middleware';
 import request from 'request';
 import Profile from '@models/profile.model';
 import User from '@models/user.model';
+import { RequestWithBody } from '../types/types';
 
 // @route     GET api/v1/profile/me
 // @desc      Get current users profile
@@ -56,12 +56,12 @@ export const getProfileByUserId = catchAsync(
       return res.status(httpStatus.BAD_REQUEST).json({
         message: 'Cannot find profile for given user',
       });
-    } else {
-      return res.status(httpStatus.CREATED).json({
-        message: 'Successfully got the user profile',
-        profile,
-      });
     }
+
+    res.status(httpStatus.CREATED).json({
+      message: 'Successfully got the user profile',
+      profile,
+    });
   }
 );
 
@@ -106,14 +106,14 @@ export const createUserProfile = catchAsync(
         message: 'Successfully updated user profile',
         profile,
       });
-    } else {
-      profile = await Profile.create(profileFields);
-
-      return res.status(httpStatus.CREATED).json({
-        message: 'Successfully created user profile',
-        profile,
-      });
     }
+
+    profile = await Profile.create(profileFields);
+
+    return res.status(httpStatus.CREATED).json({
+      message: 'Successfully created user profile',
+      profile,
+    });
   }
 );
 
@@ -129,12 +129,12 @@ export const deleteProfile = catchAsync(
       return res.status(httpStatus.BAD_REQUEST).json({
         message: 'User profile does not exists',
       });
-    } else {
-      return res.status(httpStatus.CREATED).json({
-        message: 'Successfully deleted user profile',
-        profile,
-      });
     }
+
+    return res.status(httpStatus.CREATED).json({
+      message: 'Successfully deleted user profile',
+      profile,
+    });
   }
 );
 
@@ -157,12 +157,12 @@ export const profileExperience = catchAsync(
       return res.status(httpStatus.BAD_REQUEST).json({
         message: 'Cannot find user profile',
       });
-    } else {
-      return res.status(httpStatus.CREATED).json({
-        message: 'Successfully added/updated user profile experience',
-        profile,
-      });
     }
+
+    return res.status(httpStatus.CREATED).json({
+      message: 'Successfully added/updated user profile experience',
+      profile,
+    });
   }
 );
 
@@ -185,12 +185,11 @@ export const deleteProfileExperience = catchAsync(
       return res.status(httpStatus.BAD_REQUEST).json({
         message: 'Cannot find user profile',
       });
-    } else {
-      return res.status(httpStatus.CREATED).json({
-        message: 'Successfully added/updated user profile experience',
-        profile,
-      });
     }
+    return res.status(httpStatus.CREATED).json({
+      message: 'Successfully added/updated user profile experience',
+      profile,
+    });
   }
 );
 
@@ -213,12 +212,11 @@ export const profileEducation = catchAsync(
       return res.status(httpStatus.BAD_REQUEST).json({
         message: 'Cannot find user profile',
       });
-    } else {
-      return res.status(httpStatus.CREATED).json({
-        message: 'Successfully added/updated user profile education',
-        profile,
-      });
     }
+    return res.status(httpStatus.CREATED).json({
+      message: 'Successfully added/updated user profile education',
+      profile,
+    });
   }
 );
 
@@ -241,12 +239,11 @@ export const deleteProfileEducation = catchAsync(
       return res.status(httpStatus.BAD_REQUEST).json({
         message: 'Cannot find user profile',
       });
-    } else {
-      return res.status(httpStatus.CREATED).json({
-        message: 'Successfully added/updated user profile education',
-        profile,
-      });
     }
+    return res.status(httpStatus.CREATED).json({
+      message: 'Successfully added/updated user profile education',
+      profile,
+    });
   }
 );
 

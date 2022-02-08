@@ -8,7 +8,7 @@ export const postIdParam = param('postId', 'postId is required')
 export const post = [
   check('post', 'post is required')
     .isObject()
-    .custom((post) => Object.keys(post).length)
+    .custom((value) => Object.keys(value).length)
     .withMessage('Invalid post'),
   check('post.text', 'text is required')
     .isString()
@@ -25,7 +25,7 @@ export const post = [
 export const comment = [
   check('comment', 'comment is required')
     .isArray()
-    .custom((comment) => comment.length)
+    .custom((value) => value.length)
     .withMessage('Invalid comment'),
   check('comment.*.text', 'text is required')
     .isString()

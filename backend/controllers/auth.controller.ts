@@ -1,4 +1,3 @@
-import { JWTPayload, RequestWithBody } from '../types/types';
 import { Response } from 'express';
 import { env } from '@config/config';
 import { catchAsync } from '@middleware/catchAsync.middleware';
@@ -6,6 +5,7 @@ import httpStatus from 'http-status-codes';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '@models/user.model';
+import { JWTPayload, RequestWithBody } from '../types/types';
 
 // @route     GET api/v1/auth
 // @desc      Get auth user
@@ -34,7 +34,9 @@ export const loginUser = catchAsync(
       return res.status(httpStatus.UNAUTHORIZED).json({
         message: 'Invalid Credentials',
       });
-    } else if (email && password) {
+    }
+
+    if (email && password) {
       const payload: JWTPayload = {
         user: {
           id: user?.id,

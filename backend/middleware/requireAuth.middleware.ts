@@ -1,10 +1,10 @@
 import * as validators from '@validators/index';
 import { NextFunction, Response } from 'express';
-import { JWTPayload, RequestWithBody } from '../types/types';
 import { env } from '@config/config';
-import { validationsResults } from './validations.middleware';
-import jwt from 'jsonwebtoken';
 import httpStatus from 'http-status-codes';
+import jwt from 'jsonwebtoken';
+import { validationsResults } from './validations.middleware';
+import { JWTPayload, RequestWithBody } from '../types/types';
 
 export const requireAuth = [
   validators.authorizationHeader,

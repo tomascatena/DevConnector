@@ -10,12 +10,7 @@ export const notFound = (req: Request, res: Response, next: NextFunction) => {
   next(error);
 };
 
-export const errorHandler = (
-  err: Error,
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const errorHandler = (err: Error, req: Request, res: Response) => {
   if (res.statusCode === httpStatus.INTERNAL_SERVER_ERROR) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
       message:

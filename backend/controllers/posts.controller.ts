@@ -1,9 +1,9 @@
-import { RequestWithBody } from '../types/types';
 import { Response } from 'express';
 import { catchAsync } from '@middleware/catchAsync.middleware';
 import httpStatus from 'http-status-codes';
 import User from '@models/user.model';
 import Post from '@models/post.model';
+import { RequestWithBody } from '../types/types';
 
 // @route     POST api/v1/posts
 // @desc      Create a post
@@ -66,11 +66,10 @@ export const getPostById = catchAsync(
         message: 'Successfully fetched post',
         post,
       });
-    } else {
-      return res.status(httpStatus.BAD_REQUEST).json({
-        message: 'Post not found',
-      });
     }
+    return res.status(httpStatus.BAD_REQUEST).json({
+      message: 'Post not found',
+    });
   }
 );
 

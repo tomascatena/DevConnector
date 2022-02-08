@@ -7,8 +7,6 @@ import { IProfile } from '@models/profile.model';
 import { IComment } from '@models/schemas/comment.schema';
 import { IPost } from '@models/post.model';
 
-type GenericObject = { [key: string]: string | undefined };
-
 export interface RequestWithBody extends Request {
   body: {
     user?: Partial<IUser>;

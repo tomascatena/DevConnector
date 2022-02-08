@@ -1,11 +1,11 @@
 import { Response } from 'express';
-import { JWTPayload, RequestWithBody } from '../types/types';
 import { catchAsync } from '@middleware/catchAsync.middleware';
 import { env } from '@config/config';
 import httpStatus from 'http-status-codes';
 import User from '@models/user.model';
 import gravatar from 'gravatar';
 import jwt from 'jsonwebtoken';
+import { JWTPayload, RequestWithBody } from '../types/types';
 
 // @route     POST api/v1/users
 // @desc      Register user
@@ -68,11 +68,10 @@ export const deleteUser = catchAsync(
       return res.status(httpStatus.BAD_REQUEST).json({
         message: 'User does not exists',
       });
-    } else {
-      return res.status(httpStatus.CREATED).json({
-        message: 'Successfully deleted user',
-        user,
-      });
     }
+    return res.status(httpStatus.CREATED).json({
+      message: 'Successfully deleted user',
+      user,
+    });
   }
 );

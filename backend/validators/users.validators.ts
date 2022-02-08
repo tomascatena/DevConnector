@@ -1,5 +1,5 @@
-import { env } from '../config/config';
 import { check } from 'express-validator';
+import { env } from '../config/config';
 import User from '../models/user.model';
 
 export const name = check('name', 'Name is required')
@@ -18,7 +18,7 @@ export const emailForRegister = check('email', 'Email is required')
     try {
       const user = await User.findOne({ email });
 
-      if (Boolean(user)) {
+      if (user) {
         throw new Error('E-mail already in use');
       }
     } catch (error) {
@@ -59,6 +59,6 @@ export const confirmPassword = check(
   )
   .matches(/\d/)
   .withMessage('Must contain a number')
-  .custom((confirmPassword, { req }) => confirmPassword === req.body.password)
+  .custom((value, { req }) => value === req.body.password)
   .withMessage('Password confirm and password must be equal')
   .escape();

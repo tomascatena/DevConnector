@@ -1,7 +1,7 @@
 import express from 'express';
 import { notFound, errorHandler } from '@middleware/error.middleware';
-import routes from './routes/v1';
 import helmet from 'helmet';
+import routes from './routes/v1';
 
 const app = express();
 

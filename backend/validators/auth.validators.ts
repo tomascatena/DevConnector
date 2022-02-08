@@ -8,8 +8,8 @@ export const authorizationHeader = header(
   .trim()
   .notEmpty()
   .isString()
-  .custom((authorizationHeader) => {
-    const jwt = authorizationHeader.split(' ')[1];
+  .custom((value) => {
+    const jwt = value.split(' ')[1];
 
     return Boolean(jwt && validator.isJWT(jwt));
   })
