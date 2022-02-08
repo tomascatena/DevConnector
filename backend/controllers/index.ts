@@ -1,4 +1,4 @@
-export * from './auth.controller';
-export * from './post.controller';
-export * from './profile.controller';
-export * from './users.controller';
+export * as authControllers from './auth.controller';
+export * as postsControllers from './posts.controller';
+export * as profileControllers from './profile.controller';
+export * as usersControllers from './users.controller';

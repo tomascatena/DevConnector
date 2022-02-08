@@ -1,5 +1,5 @@
-import * as controllers from '@controllers/index';
-import * as validations from '@middleware/validations';
+import { profileControllers } from '@controllers/index';
+import { profileValidation } from '@middleware/validations';
 import { Router } from 'express';
 import { requireAuth } from '@middleware/requireAuth.middleware';
 
@@ -8,15 +8,15 @@ const router = Router();
 // @route     GET api/v1/profile
 // @desc      Get all profiles
 // @access    Public
-router.get('/', controllers.getAllProfiles);
+router.get('/', profileControllers.getAllProfiles);
 
 // @route     GET api/v1/profile/user/:userId
 // @desc      Get profile by userId
 // @access    Public
 router.get(
   '/user/:userId',
-  validations.getUserProfileById,
-  controllers.getProfileByUserId
+  profileValidation.getUserProfileById,
+  profileControllers.getProfileByUserId
 );
 
 // @route     POST api/v1/profile
@@ -24,9 +24,9 @@ router.get(
 // @access    Private
 router.post(
   '/',
-  validations.userProfile,
+  profileValidation.userProfile,
   requireAuth,
-  controllers.createUserProfile
+  profileControllers.createUserProfile
 );
 
 // @route     GET api/v1/profile/me
@@ -34,24 +34,24 @@ router.post(
 // @access    Private
 router.get(
   '/me',
-  validations.getUserProfile,
+  profileValidation.getUserProfile,
   requireAuth,
-  controllers.getUserProfile
+  profileControllers.getUserProfile
 );
 
 // @route     DELETE api/v1/profile
 // @desc      Delete profile, users & posts
 // @access    Private
-router.delete('/', requireAuth, controllers.deleteProfile);
+router.delete('/', requireAuth, profileControllers.deleteProfile);
 
 // @route     PUT api/v1/profile/experience
 // @desc      Add/Update profile experience
 // @access    Private
 router.put(
   '/experience',
-  validations.profileExperience,
+  profileValidation.profileExperience,
   requireAuth,
-  controllers.profileExperience
+  profileControllers.profileExperience
 );
 
 // @route     DELETE api/v1/profile/experience/:experienceId
@@ -59,9 +59,9 @@ router.put(
 // @access    Private
 router.delete(
   '/experience/:experienceId',
-  validations.deleteProfileExperience,
+  profileValidation.deleteProfileExperience,
   requireAuth,
-  controllers.deleteProfileExperience
+  profileControllers.deleteProfileExperience
 );
 
 // @route     PUT api/v1/profile/education
@@ -69,9 +69,9 @@ router.delete(
 // @access    Private
 router.put(
   '/education',
-  validations.profileEducation,
+  profileValidation.profileEducation,
   requireAuth,
-  controllers.profileEducation
+  profileControllers.profileEducation
 );
 
 // @route     DELETE api/v1/profile/education/:educationId
@@ -79,9 +79,9 @@ router.put(
 // @access    Private
 router.delete(
   '/education/:educationId',
-  validations.deleteProfileEducation,
+  profileValidation.deleteProfileEducation,
   requireAuth,
-  controllers.deleteProfileEducation
+  profileControllers.deleteProfileEducation
 );
 
 // @route     GET api/v1/profile/github/:githubUsername
@@ -89,9 +89,9 @@ router.delete(
 // @access    Public
 router.get(
   '/github/:githubUsername',
-  validations.getUserRepos,
+  profileValidation.getUserRepos,
   requireAuth,
-  controllers.getUserRepos
+  profileControllers.getUserRepos
 );
 
 export default router;

@@ -1,5 +1,5 @@
-import * as controllers from '@controllers/index';
-import * as validations from '@middleware/validations';
+import { postsControllers } from '@controllers/index';
+import { postsValidation } from '@middleware/validations';
 import { requireAuth } from '@middleware/requireAuth.middleware';
 import { Router } from 'express';
 
@@ -8,31 +8,36 @@ const router = Router();
 // @route     POST api/v1/posts
 // @desc      Create a post
 // @access    Private
-router.post('/', validations.createPost, requireAuth, controllers.createPost);
+router.post(
+  '/',
+  postsValidation.createPost,
+  requireAuth,
+  postsControllers.createPost
+);
 
 // @route     GET api/v1/posts/:postId
 // @desc      Get post by id
 // @access    Private
 router.get(
   '/:postId',
-  validations.getPostById,
+  postsValidation.getPostById,
   requireAuth,
-  controllers.getPostById
+  postsControllers.getPostById
 );
 
 // @route     GET api/v1/posts
 // @desc      Get all posts
 // @access    Private
-router.get('/', requireAuth, controllers.getAllPosts);
+router.get('/', requireAuth, postsControllers.getAllPosts);
 
 // @route     DELETE api/v1/posts/:postId
 // @desc      Delete post by id
 // @access    Private
 router.delete(
   '/:postId',
-  validations.deletePostById,
+  postsValidation.deletePostById,
   requireAuth,
-  controllers.deletePostById
+  postsControllers.deletePostById
 );
 
 export default router;
