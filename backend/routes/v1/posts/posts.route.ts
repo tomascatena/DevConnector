@@ -28,7 +28,11 @@ router.get(
 // @route     GET api/v1/posts
 // @desc      Get all posts
 // @access    Private
-router.get('/', requireAuth, postsControllers.getAllPosts);
+router.get(
+  '/', //
+  requireAuth,
+  postsControllers.getAllPosts
+);
 
 // @route     DELETE api/v1/posts/:postId
 // @desc      Delete post by id

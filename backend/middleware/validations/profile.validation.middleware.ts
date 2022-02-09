@@ -6,18 +6,19 @@ export const getUserProfileById = [
   validationsResults(),
 ];
 
-export const getUserProfile = [validators.userId, validationsResults()];
+export const getUserProfile = [
+  validators.userId, //
+  validationsResults(),
+];
 
 export const userProfile = [
-  validators.userId,
-  validators.userStatus,
-  validators.userSkills,
-  ...validators.userProfileOptionalFields,
+  ...validators.profile, //
+  ...validators.social,
   validationsResults(),
 ];
 
 export const profileExperience = [
-  ...validators.profileExperience,
+  ...validators.experience,
   validationsResults(),
 ];
 
@@ -27,7 +28,7 @@ export const deleteProfileExperience = [
 ];
 
 export const profileEducation = [
-  ...validators.profileEducation,
+  ...validators.education, //
   validationsResults(),
 ];
 

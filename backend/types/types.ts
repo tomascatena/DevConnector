@@ -1,29 +1,30 @@
 import { Request } from 'express';
-import { IEducation } from '@models/schemas/education.schema';
-import { IExperience } from '@models/schemas/experience.schema';
-import { ISocial } from '@models/schemas/social.schema';
 import { IUser } from '@models/user.model';
-import { IProfile } from '@models/profile.model';
 import { IComment } from '@models/schemas/comment.schema';
 import { IPost } from '@models/post.model';
+import { IExperience } from '@models/schemas/experience.schema';
+import { IEducation } from '@models/schemas/education.schema';
+import { ISocial } from '../models/schemas/social.schema';
 
 export interface RequestWithBody extends Request {
   body: {
     user?: Partial<IUser>;
-    profile?: Partial<IProfile>;
     name?: string;
     email?: string;
     password?: string;
-    company?: string;
-    githubUsername?: string;
-    status?: string;
-    skills?: string[];
-    website?: string;
-    location?: string;
-    bio?: string;
-    social?: Partial<ISocial>;
-    experience?: Partial<IExperience>[];
-    education?: Partial<IEducation>[];
+    profile?: {
+      user: string;
+      status: string;
+      skills: string[];
+      company?: string;
+      website?: string;
+      location?: string;
+      bio?: string;
+      githubUsername?: string;
+      experience?: IExperience[];
+      education?: IEducation[];
+      social?: ISocial;
+    };
     comment?: Partial<IComment>;
     post?: Partial<IPost>;
   };

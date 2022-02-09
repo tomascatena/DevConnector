@@ -8,7 +8,11 @@ const router = Router();
 // @route     POST api/v1/users
 // @desc      Register user
 // @access    Public
-router.post('/', usersValidation.registerUser, usersControllers.registerUser);
+router.post(
+  '/', //
+  usersValidation.registerUser,
+  usersControllers.registerUser
+);
 
 // @route     DELETE api/v1/users
 // @desc      Delete profile, users & posts

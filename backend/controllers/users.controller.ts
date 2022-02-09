@@ -60,8 +60,6 @@ export const registerUser = catchAsync(
 // @access    Private
 export const deleteUser = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    console.log(req.userId);
-
     const user = await User.findOneAndRemove({ _id: req.userId });
 
     if (!user) {

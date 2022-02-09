@@ -79,7 +79,7 @@ export const createUserProfile = catchAsync(
       githubUsername,
       skills,
       social,
-    } = req.body;
+    } = req.body.profile!;
 
     const profileFields = {
       user: req.userId,
@@ -143,11 +143,16 @@ export const deleteProfile = catchAsync(
 // @access    Private
 export const profileExperience = catchAsync(
   async (req: RequestWithBody, res: Response) => {
+    const { experience } = req.body.profile!;
+
     const profile = await Profile.findOneAndUpdate(
       { user: req.userId },
       {
         $push: {
-          experience: { $each: [...req.body.experience!], $position: 0 },
+          experience: {
+            $each: [...experience!],
+            $position: 0,
+          },
         },
       },
       { new: true }
@@ -198,11 +203,13 @@ export const deleteProfileExperience = catchAsync(
 // @access    Private
 export const profileEducation = catchAsync(
   async (req: RequestWithBody, res: Response) => {
+    const { education } = req.body.profile!;
+
     const profile = await Profile.findOneAndUpdate(
       { user: req.userId },
       {
         $push: {
-          education: { $each: [...req.body.education!], $position: 0 },
+          education: { $each: [...education!], $position: 0 },
         },
       },
       { new: true }

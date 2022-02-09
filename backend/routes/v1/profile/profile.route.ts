@@ -8,7 +8,10 @@ const router = Router();
 // @route     GET api/v1/profile
 // @desc      Get all profiles
 // @access    Public
-router.get('/', profileControllers.getAllProfiles);
+router.get(
+  '/', //
+  profileControllers.getAllProfiles
+);
 
 // @route     GET api/v1/profile/user/:userId
 // @desc      Get profile by userId
@@ -42,7 +45,11 @@ router.get(
 // @route     DELETE api/v1/profile
 // @desc      Delete profile, users & posts
 // @access    Private
-router.delete('/', requireAuth, profileControllers.deleteProfile);
+router.delete(
+  '/', //
+  requireAuth,
+  profileControllers.deleteProfile
+);
 
 // @route     PUT api/v1/profile/experience
 // @desc      Add/Update profile experience
