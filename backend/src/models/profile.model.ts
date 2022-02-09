@@ -13,8 +13,8 @@ export interface IProfile {
   skills: string[];
   bio: string;
   githubUsername: string;
-  experience: IExperience;
-  education: IEducation;
+  experience: IExperience[];
+  education: IEducation[];
   social: ISocial;
 }
 
