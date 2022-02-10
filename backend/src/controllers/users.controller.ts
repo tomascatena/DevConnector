@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import { catchAsync } from '@middleware/catchAsync.middleware';
+import { catchAsync } from 'utils/catchAsync';
 import { env } from '@config/config';
 import httpStatus from 'http-status-codes';
 import User from '@models/user.model';

@@ -15,7 +15,7 @@ const CUSTOM_LEVELS = {
     error: 'red',
     warn: 'italic yellow',
     info: 'bold blue',
-    http: 'bold green',
+    http: 'blue',
     debug: 'white',
   },
 };

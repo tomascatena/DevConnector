@@ -1,8 +1,9 @@
 import { Response } from 'express';
-import { catchAsync } from '@middleware/catchAsync.middleware';
+import { catchAsync } from 'utils/catchAsync';
 import httpStatus from 'http-status-codes';
 import User from '@models/user.model';
 import Post from '@models/post.model';
+import { ApiError } from 'utils/ApiError';
 import { RequestWithBody } from '../types/types';
 
 // @route     POST api/v1/posts
@@ -97,6 +98,55 @@ export const deletePostById = catchAsync(
 
     return res.status(httpStatus.OK).json({
       message: 'Successfully deleted post',
+    });
+  }
+);
+
+// @route     PUT api/v1/posts/like/:postId
+// @desc      Like post
+// @access    Private
+export const likePost = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
+    const post = await Post.findById(req.params.postId);
+
+    if (!post) {
+      return res.status(httpStatus.BAD_REQUEST).json({
+        message: 'Post not found',
+        post,
+      });
+    }
+
+    if (post.user.toString() === req.userId) {
+      return res.status(httpStatus.UNAUTHORIZED).json({
+        message: 'Cannot like own post',
+      });
+    }
+
+    const hasLikedPost = post.likes.some(
+      (like) => like.user.toString() === req.userId
+    );
+
+    if (hasLikedPost) {
+      return new ApiError(
+        httpStatus.UNAUTHORIZED,
+        'Cannot like a post more than once'
+      );
+    }
+
+    await Post.findByIdAndUpdate(
+      { _id: req.params.postId },
+      {
+        $push: {
+          likes: {
+            $each: [{ user: req.userId }],
+            $position: 0,
+          },
+        },
+      }
+    );
+
+    return res.status(httpStatus.OK).json({
+      message: 'Successfully liked post',
     });
   }
 );

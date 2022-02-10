@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import { env } from '@config/config';
-import { catchAsync } from '@middleware/catchAsync.middleware';
+import { catchAsync } from 'utils/catchAsync';
 import httpStatus from 'http-status-codes';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';

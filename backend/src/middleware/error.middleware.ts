@@ -1,33 +1,66 @@
 import { Request, Response, NextFunction } from 'express';
 import httpStatus, { ReasonPhrases } from 'http-status-codes';
 import { env } from '@config/config';
+import { ApiError } from 'utils/ApiError';
+import mongoose from 'mongoose';
+import { Logger, LoggerToFile } from '../config/logger';
 
 export const notFound = (req: Request, res: Response, next: NextFunction) => {
-  const error = new Error(`Not found - ${req.originalUrl}`);
+  next(new ApiError(httpStatus.NOT_FOUND, `Not found - ${req.originalUrl}`));
+};
 
-  res.status(httpStatus.NOT_FOUND);
+export const errorConverter = (
+  err: any,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  let error = err;
+
+  if (!(error instanceof ApiError)) {
+    const statusCode =
+      error.statusCode || error instanceof mongoose.Error
+        ? httpStatus.BAD_REQUEST
+        : httpStatus.INTERNAL_SERVER_ERROR;
+    const message = error.message || ReasonPhrases.INTERNAL_SERVER_ERROR;
+
+    error = new ApiError(statusCode, message, false, err.stack);
+  }
 
   next(error);
 };
 
-export const errorHandler = (err: Error, req: Request, res: Response) => {
-  if (res.statusCode === httpStatus.INTERNAL_SERVER_ERROR) {
-    return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-      message:
-        env.NODE_ENV === 'production'
-          ? ReasonPhrases.INTERNAL_SERVER_ERROR
-          : err.message,
-      stack: env.NODE_ENV === 'production' ? null : err.stack,
-    });
+export const errorHandler = (
+  err: ApiError,
+  req: Request,
+  res: Response,
+  // eslint-disable-next-line
+  next: NextFunction
+) => {
+  let { statusCode, message } = err;
+
+  if (env.NODE_ENV === 'production' && !err.isOperational) {
+    statusCode = httpStatus.INTERNAL_SERVER_ERROR;
+    message = ReasonPhrases.INTERNAL_SERVER_ERROR;
   }
 
-  const errorStatusCode =
-    res.statusCode === httpStatus.OK
-      ? httpStatus.INTERNAL_SERVER_ERROR
-      : res.statusCode;
+  res.locals.errorMessage = err.message;
 
-  return res.status(errorStatusCode).json({
+  if (env.NODE_ENV === 'development') {
+    Logger.error(err);
+  }
+
+  LoggerToFile.error({
     message: err.message,
-    stack: env.NODE_ENV === 'production' ? null : err.stack,
+    name: err.name,
+    isOperational: err.isOperational,
+    stack: err.stack,
+    statusCode: err.statusCode,
+  });
+
+  res.status(statusCode).json({
+    code: statusCode,
+    message,
+    ...(env.NODE_ENV === 'development' && { stack: err.stack }),
   });
 };

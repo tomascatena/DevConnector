@@ -1,7 +1,7 @@
 import { env } from '@config/config';
 import { connectDB } from '@config/connectDB';
 import { Logger } from '@config/logger';
-import app from './app';
+import { app } from './app';
 import { LoggerToFile } from './config/logger';
 
 const server = app.listen(env.PORT, () => {
@@ -65,6 +65,8 @@ process.on('uncaughtException', (err, origin) => {
 
 process.on('SIGTERM', () => {
   Logger.info('SIGTERM received');
+  LoggerToFile.info('SIGTERM received');
+
   if (server) {
     server.close();
   }

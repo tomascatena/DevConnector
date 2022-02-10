@@ -1,7 +1,7 @@
 import httpStatus, { ReasonPhrases } from 'http-status-codes';
 import { Response } from 'express';
 import { env } from '@config/config';
-import { catchAsync } from '@middleware/catchAsync.middleware';
+import { catchAsync } from 'utils/catchAsync';
 import request from 'request';
 import Profile from '@models/profile.model';
 import User from '@models/user.model';

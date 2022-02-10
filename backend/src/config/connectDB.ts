@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { env } from './config';
-import { Logger } from './logger';
+import { Logger, LoggerToFile } from './logger';
 
 export const connectDB = async () => {
   try {
@@ -10,8 +10,14 @@ export const connectDB = async () => {
   } catch (error) {
     if (error instanceof Error) {
       Logger.error(
-        `Something when wrong when connecting to mongoDB: ${error.message}`
+        `Something went wrong when connecting to mongoDB: ${error.message}`
       );
+
+      LoggerToFile.error({
+        name: error.name,
+        message: error.message,
+        stack: error.stack,
+      });
 
       process.exit(1);
     }

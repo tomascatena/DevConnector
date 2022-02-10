@@ -1,12 +1,17 @@
 import express from 'express';
-import { notFound, errorHandler } from '@middleware/error.middleware';
+import {
+  notFound,
+  errorHandler,
+  errorConverter,
+} from '@middleware/error.middleware';
 import helmet from 'helmet';
 import routes from '@routes/v1';
 import { morganHttpLogger } from '@config/morgan';
 import { env } from '@config/config';
+import mongoSanitize from 'express-mongo-sanitize';
 import { expressWinstonLogger } from './config/logger';
 
-const app = express();
+export const app = express();
 
 // secure Express app by setting various HTTP headers
 app.use(helmet());
@@ -17,10 +22,13 @@ if (env.NODE_ENV === 'development') {
 }
 
 // parse json request body
-app.use(express.json());
+app.use(express.json({ limit: '1kb' }));
 
 // parse urlencoded request body
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true, limit: '1kb' }));
+
+// sanitize request data
+app.use(mongoSanitize());
 
 // express-winston logger makes sense BEFORE the router
 app.use(expressWinstonLogger.info);
@@ -34,7 +42,8 @@ app.use(expressWinstonLogger.error);
 // Fallback for not found requests
 app.use(notFound);
 
+// convert error to ApiError, if needed
+app.use(errorConverter);
+
 // Error handler for failed requests
 app.use(errorHandler);
-
-export default app;

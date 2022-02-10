@@ -44,4 +44,14 @@ router.delete(
   postsControllers.deletePostById
 );
 
+// @route     PUT api/v1/posts/like/:postId
+// @desc      Like post
+// @access    Private
+router.put(
+  '/like/:postId',
+  postsValidation.likePost,
+  requireAuth,
+  postsControllers.likePost
+);
+
 export default router;
