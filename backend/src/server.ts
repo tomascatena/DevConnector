@@ -1,9 +1,11 @@
 import { env } from '@config/config';
 import { connectDB } from '@config/connectDB';
+import { Logger } from '@config/logger';
 import app from './app';
+import { LoggerToFile } from './config/logger';
 
 const server = app.listen(env.PORT, () => {
-  console.log(`Server listening in port ${env.PORT}`);
+  Logger.info(`Server listening on port ${env.PORT}`);
 
   connectDB();
 });
@@ -11,7 +13,7 @@ const server = app.listen(env.PORT, () => {
 const exitHandler = () => {
   if (server) {
     server.close(() => {
-      console.log('Server closed');
+      Logger.info('Server closed');
       process.exit(1);
     });
   } else {
@@ -19,16 +21,50 @@ const exitHandler = () => {
   }
 };
 
-const unexpectedErrorHandler = (error: Error) => {
-  console.log(error);
-  exitHandler();
-};
+process.on('unhandledRejection', (err: Error | undefined, p) => {
+  const errorToLog = {
+    message: 'Unhandled Rejection at Promise',
+    promise: p,
+    error: err,
+  };
 
-process.on('uncaughtException', unexpectedErrorHandler);
-process.on('unhandledRejection', unexpectedErrorHandler);
+  if (err instanceof Error) {
+    errorToLog.error = {
+      message: err.message,
+      name: err.name,
+      stack: err.stack,
+    };
+  }
+
+  LoggerToFile.error(errorToLog);
+
+  if (env.NODE_ENV === 'development') {
+    Logger.error(err);
+  }
+});
+
+process.on('uncaughtException', (err, origin) => {
+  const errorToLog = {
+    message: 'Uncaught Exception thrown',
+    error: {
+      message: err.message,
+      name: err.name,
+      stack: err.stack,
+    },
+    origin,
+  };
+
+  LoggerToFile.error(errorToLog);
+
+  if (env.NODE_ENV === 'development') {
+    Logger.error(err);
+  }
+
+  exitHandler();
+});
 
 process.on('SIGTERM', () => {
-  console.log('SIGTERM received');
+  Logger.info('SIGTERM received');
   if (server) {
     server.close();
   }

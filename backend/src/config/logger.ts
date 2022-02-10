@@ -1,64 +1,88 @@
-import expressWinston from 'express-winston';
 import winston from 'winston';
-import { env } from '@config/config';
+import expressWinston from 'express-winston';
 import 'winston-daily-rotate-file';
+import { env } from './config';
+
+const CUSTOM_LEVELS = {
+  levels: {
+    error: 0,
+    warn: 1,
+    info: 2,
+    http: 3,
+    debug: 4,
+  },
+  colors: {
+    error: 'red',
+    warn: 'italic yellow',
+    info: 'bold blue',
+    http: 'bold green',
+    debug: 'white',
+  },
+};
+
+winston.addColors(CUSTOM_LEVELS.colors);
 
 const enumerateErrorFormat = winston.format((info) => {
   if (info instanceof Error) {
     Object.assign(info, { message: info.stack });
   }
+
   return info;
 });
 
-const consoleFormat = winston.format.combine(
-  env.NODE_ENV === 'development'
-    ? winston.format.colorize()
-    : winston.format.uncolorize(),
+const formatToFile = winston.format.combine(
   enumerateErrorFormat(),
-  winston.format.timestamp(),
-  winston.format.splat(),
-  winston.format.printf(({ level, message, timestamp }) => {
-    return `[${timestamp}] ${level}: ${message}`;
-  })
+  winston.format.uncolorize(),
+  winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
+  winston.format.json()
 );
 
-const fileFormat = winston.format.combine(
-  env.NODE_ENV === 'development'
-    ? winston.format.colorize()
-    : winston.format.uncolorize(),
+const formatToConsole = winston.format.combine(
   enumerateErrorFormat(),
-  winston.format.timestamp(),
-  winston.format.splat(),
-  winston.format.printf((info) => {
-    return JSON.stringify(info);
-  })
+  winston.format.colorize({ all: true }),
+  winston.format.prettyPrint(),
+  winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
+  winston.format.label({
+    label: '[LOGGER]',
+  }),
+  winston.format.printf(
+    (info) =>
+      ` ${info.label}  ${info.timestamp}  ${info.level} : ${info.message}`
+  )
 );
 
-export const customLogger = (
-  level = env.NODE_ENV === 'development' ? 'debug' : 'info'
-) =>
-  expressWinston.logger({
-    transports: [
-      new winston.transports.Console({
-        handleExceptions: true,
-        format: consoleFormat,
-        level,
-        stderrLevels: ['error'],
-      }),
+const DailyRotateFileForErrors = new winston.transports.DailyRotateFile({
+  filename: 'logs/error/error-%DATE%.log',
+  level: 'error',
+});
 
-      new winston.transports.DailyRotateFile({
-        format: winston.format.combine(fileFormat, winston.format.uncolorize()),
-        filename: '../logs/activity/activity-%DATE%.json',
-        level: 'info',
-        datePattern: 'YYYY-MM-DD-HH',
-        zippedArchive: true,
-        maxSize: '20m',
-        maxFiles: '14d',
-      }),
-    ],
-    format: winston.format.combine(
-      winston.format.colorize(),
-      winston.format.json(),
-      winston.format.prettyPrint()
-    ),
-  });
+const DailyRotateFileForInfo = new winston.transports.DailyRotateFile({
+  filename: 'logs/activity/activity-%DATE%.log',
+  level: 'info',
+});
+
+export const Logger = winston.createLogger({
+  exitOnError: false,
+  levels: CUSTOM_LEVELS.levels,
+  level: env.NODE_ENV === 'development' ? 'debug' : 'warn',
+  format: formatToConsole,
+  transports: [new winston.transports.Console()],
+});
+
+export const LoggerToFile = winston.createLogger({
+  exitOnError: false,
+  levels: CUSTOM_LEVELS.levels,
+  format: formatToFile,
+  transports: [DailyRotateFileForErrors],
+});
+
+export const expressWinstonLogger = {
+  info: expressWinston.logger({
+    format: formatToFile,
+    transports: [DailyRotateFileForInfo],
+  }),
+  error: expressWinston.logger({
+    format: formatToFile,
+    transports: [DailyRotateFileForErrors],
+  }),
+};

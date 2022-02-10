@@ -6,6 +6,7 @@ import request from 'request';
 import Profile from '@models/profile.model';
 import User from '@models/user.model';
 import { RequestWithBody } from '../types/types';
+import { Logger } from '../config/logger';
 
 // @route     GET api/v1/profile/me
 // @desc      Get current users profile
@@ -272,7 +273,7 @@ export const getUserRepos = catchAsync(
 
     request(options, (error, response, body) => {
       if (error) {
-        console.log(error);
+        Logger.error(error);
 
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
           message: ReasonPhrases.INTERNAL_SERVER_ERROR,
