@@ -110,15 +110,18 @@ export const likePost = catchAsync(
     const post = await Post.findById(req.params.postId);
 
     if (!post) {
-      return res.status(httpStatus.BAD_REQUEST).json({
+      throw new ApiError({
+        statusCode: httpStatus.BAD_REQUEST,
         message: 'Post not found',
-        post,
+        isOperational: false,
       });
     }
 
     if (post.user.toString() === req.userId) {
-      return res.status(httpStatus.UNAUTHORIZED).json({
+      throw new ApiError({
+        statusCode: httpStatus.UNAUTHORIZED,
         message: 'Cannot like own post',
+        isOperational: false,
       });
     }
 
@@ -126,27 +129,35 @@ export const likePost = catchAsync(
       (like) => like.user.toString() === req.userId
     );
 
+    let updatedPost;
     if (hasLikedPost) {
-      return new ApiError(
-        httpStatus.UNAUTHORIZED,
-        'Cannot like a post more than once'
+      updatedPost = await Post.findByIdAndUpdate(
+        { _id: req.params.postId },
+        {
+          $pull: {
+            likes: { user: req.userId },
+          },
+        },
+        { new: true }
+      );
+    } else {
+      updatedPost = await Post.findByIdAndUpdate(
+        { _id: req.params.postId },
+        {
+          $push: {
+            likes: {
+              $each: [{ user: req.userId }],
+              $position: 0,
+            },
+          },
+        },
+        { new: true }
       );
     }
 
-    await Post.findByIdAndUpdate(
-      { _id: req.params.postId },
-      {
-        $push: {
-          likes: {
-            $each: [{ user: req.userId }],
-            $position: 0,
-          },
-        },
-      }
-    );
-
     return res.status(httpStatus.OK).json({
-      message: 'Successfully liked post',
+      message: 'Successfully updated post likes',
+      likes: updatedPost?.likes,
     });
   }
 );

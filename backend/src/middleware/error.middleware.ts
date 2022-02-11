@@ -6,7 +6,12 @@ import mongoose from 'mongoose';
 import { Logger, LoggerToFile } from '../config/logger';
 
 export const notFound = (req: Request, res: Response, next: NextFunction) => {
-  next(new ApiError(httpStatus.NOT_FOUND, `Not found - ${req.originalUrl}`));
+  next(
+    new ApiError({
+      statusCode: httpStatus.NOT_FOUND,
+      message: `Not found - ${req.originalUrl}`,
+    })
+  );
 };
 
 export const errorConverter = (
@@ -17,6 +22,8 @@ export const errorConverter = (
 ) => {
   let error = err;
 
+  console.log('in errorConverter');
+
   if (!(error instanceof ApiError)) {
     const statusCode =
       error.statusCode || error instanceof mongoose.Error
@@ -24,7 +31,12 @@ export const errorConverter = (
         : httpStatus.INTERNAL_SERVER_ERROR;
     const message = error.message || ReasonPhrases.INTERNAL_SERVER_ERROR;
 
-    error = new ApiError(statusCode, message, false, err.stack);
+    error = new ApiError({
+      statusCode,
+      message,
+      isOperational: false,
+      stack: err.stack,
+    });
   }
 
   next(error);

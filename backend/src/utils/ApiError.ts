@@ -1,14 +1,19 @@
+interface ApiErrorConstructor {
+  statusCode: number;
+  message: string;
+  isOperational?: boolean;
+  stack?: string;
+}
 export class ApiError extends Error {
   statusCode: number;
+  isOperational: boolean; // eslint-disable-line
 
-  isOperational: boolean;
-
-  constructor(
-    statusCode: number,
-    message: string,
+  constructor({
+    statusCode,
+    message,
     isOperational = true,
-    stack = ''
-  ) {
+    stack = '',
+  }: ApiErrorConstructor) {
     super(message);
 
     this.statusCode = statusCode;

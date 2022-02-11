@@ -1,8 +1,8 @@
 import express from 'express';
-import postsRoute from './posts/posts.route';
-import authRoute from './auth/auth.route';
-import profileRoute from './profile/profile.route';
-import usersRoute from './users/users.route';
+import postsRoute from './posts.route';
+import authRoute from './auth.route';
+import profileRoute from './profile.route';
+import usersRoute from './users.route';
 
 const router = express.Router();
 
