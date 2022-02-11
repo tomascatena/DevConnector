@@ -5,6 +5,7 @@ import httpStatus from 'http-status-codes';
 import User from '@models/user.model';
 import gravatar from 'gravatar';
 import jwt from 'jsonwebtoken';
+import { ApiError } from 'utils/ApiError';
 import { JWTPayload, RequestWithBody } from '../types/types';
 
 // @route     POST api/v1/users
@@ -63,10 +64,13 @@ export const deleteUser = catchAsync(
     const user = await User.findOneAndRemove({ _id: req.userId });
 
     if (!user) {
-      return res.status(httpStatus.BAD_REQUEST).json({
+      throw new ApiError({
+        statusCode: httpStatus.BAD_REQUEST,
         message: 'User does not exists',
+        isOperational: false,
       });
     }
+
     return res.status(httpStatus.CREATED).json({
       message: 'Successfully deleted user',
       user,

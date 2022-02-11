@@ -1,10 +1,11 @@
 import { Response } from 'express';
 import { env } from '@config/config';
 import { catchAsync } from 'utils/catchAsync';
-import httpStatus from 'http-status-codes';
+import httpStatus, { ReasonPhrases } from 'http-status-codes';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '@models/user.model';
+import { ApiError } from 'utils/ApiError';
 import { JWTPayload, RequestWithBody } from '../types/types';
 
 // @route     GET api/v1/auth
@@ -31,8 +32,10 @@ export const loginUser = catchAsync(
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(httpStatus.UNAUTHORIZED).json({
+      throw new ApiError({
+        statusCode: httpStatus.UNAUTHORIZED,
         message: 'Invalid Credentials',
+        isOperational: false,
       });
     }
 
@@ -46,8 +49,10 @@ export const loginUser = catchAsync(
       const isMatch = await bcryptjs.compare(password, user.password);
 
       if (!isMatch) {
-        return res.status(httpStatus.UNAUTHORIZED).json({
+        throw new ApiError({
+          statusCode: httpStatus.UNAUTHORIZED,
           message: 'Invalid Credentials',
+          isOperational: false,
         });
       }
 
@@ -71,8 +76,10 @@ export const loginUser = catchAsync(
         }
       );
     } else {
-      return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-        message: 'Internal Server Error',
+      throw new ApiError({
+        statusCode: httpStatus.INTERNAL_SERVER_ERROR,
+        message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+        isOperational: false,
       });
     }
   }

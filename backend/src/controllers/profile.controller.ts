@@ -5,6 +5,7 @@ import { catchAsync } from 'utils/catchAsync';
 import request from 'request';
 import Profile from '@models/profile.model';
 import User from '@models/user.model';
+import { ApiError } from 'utils/ApiError';
 import { RequestWithBody } from '../types/types';
 import { Logger } from '../config/logger';
 
@@ -18,8 +19,10 @@ export const getUserProfile = catchAsync(
       ['name', 'avatar']
     );
     if (!profile) {
-      return res.status(httpStatus.BAD_REQUEST).json({
+      throw new ApiError({
+        statusCode: httpStatus.BAD_REQUEST,
         message: 'No profile for the given user',
+        isOperational: false,
       });
     }
 
@@ -54,8 +57,10 @@ export const getProfileByUserId = catchAsync(
     }).populate('user', ['name', 'avatar']);
 
     if (!profile) {
-      return res.status(httpStatus.BAD_REQUEST).json({
+      throw new ApiError({
+        statusCode: httpStatus.BAD_REQUEST,
         message: 'Cannot find profile for given user',
+        isOperational: false,
       });
     }
 
@@ -127,8 +132,10 @@ export const deleteProfile = catchAsync(
     await User.findOneAndRemove({ _id: req.userId });
 
     if (!profile) {
-      return res.status(httpStatus.BAD_REQUEST).json({
+      throw new ApiError({
+        statusCode: httpStatus.BAD_REQUEST,
         message: 'User profile does not exists',
+        isOperational: false,
       });
     }
 
@@ -160,8 +167,10 @@ export const profileExperience = catchAsync(
     );
 
     if (!profile) {
-      return res.status(httpStatus.BAD_REQUEST).json({
+      throw new ApiError({
+        statusCode: httpStatus.BAD_REQUEST,
         message: 'Cannot find user profile',
+        isOperational: false,
       });
     }
 
@@ -188,8 +197,10 @@ export const deleteProfileExperience = catchAsync(
     );
 
     if (!profile) {
-      return res.status(httpStatus.BAD_REQUEST).json({
+      throw new ApiError({
+        statusCode: httpStatus.BAD_REQUEST,
         message: 'Cannot find user profile',
+        isOperational: false,
       });
     }
     return res.status(httpStatus.CREATED).json({
@@ -217,8 +228,10 @@ export const profileEducation = catchAsync(
     );
 
     if (!profile) {
-      return res.status(httpStatus.BAD_REQUEST).json({
+      throw new ApiError({
+        statusCode: httpStatus.BAD_REQUEST,
         message: 'Cannot find user profile',
+        isOperational: false,
       });
     }
     return res.status(httpStatus.CREATED).json({
@@ -244,8 +257,10 @@ export const deleteProfileEducation = catchAsync(
     );
 
     if (!profile) {
-      return res.status(httpStatus.BAD_REQUEST).json({
+      throw new ApiError({
+        statusCode: httpStatus.BAD_REQUEST,
         message: 'Cannot find user profile',
+        isOperational: false,
       });
     }
     return res.status(httpStatus.CREATED).json({
@@ -281,8 +296,10 @@ export const getUserRepos = catchAsync(
       }
 
       if (response.statusCode !== httpStatus.OK) {
-        return res.status(httpStatus.NOT_FOUND).json({
+        throw new ApiError({
+          statusCode: httpStatus.NOT_FOUND,
           message: 'Github user not found',
+          isOperational: false,
         });
       }
 

@@ -14,8 +14,10 @@ export const createPost = catchAsync(
     const user = await User.findById(req.userId).select('-password');
 
     if (!user) {
-      return res.status(httpStatus.BAD_REQUEST).json({
+      throw new ApiError({
+        statusCode: httpStatus.BAD_REQUEST,
         message: 'User not found',
+        isOperational: false,
       });
     }
 
@@ -33,8 +35,10 @@ export const createPost = catchAsync(
       });
     }
 
-    return res.status(httpStatus.BAD_REQUEST).json({
+    throw new ApiError({
+      statusCode: httpStatus.BAD_REQUEST,
       message: 'Can not create post',
+      isOperational: false,
     });
   }
 );
@@ -68,8 +72,11 @@ export const getPostById = catchAsync(
         post,
       });
     }
-    return res.status(httpStatus.BAD_REQUEST).json({
+
+    throw new ApiError({
+      statusCode: httpStatus.BAD_REQUEST,
       message: 'Post not found',
+      isOperational: false,
     });
   }
 );
@@ -82,15 +89,18 @@ export const deletePostById = catchAsync(
     const post = await Post.findById(req.params.postId);
 
     if (!post) {
-      return res.status(httpStatus.BAD_REQUEST).json({
+      throw new ApiError({
+        statusCode: httpStatus.BAD_REQUEST,
         message: 'Post not found',
-        post,
+        isOperational: false,
       });
     }
 
     if (post.user.toString() !== req.userId) {
-      return res.status(httpStatus.UNAUTHORIZED).json({
+      throw new ApiError({
+        statusCode: httpStatus.UNAUTHORIZED,
         message: 'Cannot delete posts from other user',
+        isOperational: false,
       });
     }
 
@@ -158,6 +168,82 @@ export const likePost = catchAsync(
     return res.status(httpStatus.OK).json({
       message: 'Successfully updated post likes',
       likes: updatedPost?.likes,
+    });
+  }
+);
+
+// @route     POST api/v1/posts/:postId/comments
+// @desc      Comment on a post
+// @access    Private
+export const commentPost = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
+    const user = await User.findById(req.userId).select('-password');
+
+    if (!user) {
+      throw new ApiError({
+        statusCode: httpStatus.BAD_REQUEST,
+        message: 'User not found',
+        isOperational: false,
+      });
+    }
+
+    if (req.body.comment?.text) {
+      const comment = await Post.findOneAndUpdate(
+        { user: req.userId },
+        {
+          $push: {
+            comments: {
+              $each: [
+                {
+                  text: req.body.comment.text,
+                  name: user.name,
+                  avatar: user.avatar,
+                  user: req.userId,
+                },
+              ],
+              $position: 0,
+            },
+          },
+        },
+        { new: true }
+      );
+
+      return res.status(httpStatus.CREATED).json({
+        message: 'Comment created',
+        comment,
+      });
+    }
+  }
+);
+
+// @route     DELETE api/v1/posts/:postId/comments/:commentId
+// @desc      Delete comment
+// @access    Private
+export const deleteComment = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
+    const post = await Post.findById(req.params.postId);
+
+    if (!post) {
+      throw new ApiError({
+        statusCode: httpStatus.BAD_REQUEST,
+        message: 'Post not found',
+        isOperational: false,
+      });
+    }
+
+    const updatedPost = await Post.findOneAndUpdate(
+      { user: req.userId },
+      {
+        $pull: {
+          comments: { _id: req.params.commentId },
+        },
+      },
+      { new: true }
+    );
+
+    return res.status(httpStatus.CREATED).json({
+      message: 'Comment deleted',
+      post: updatedPost,
     });
   }
 );

@@ -44,24 +44,34 @@ router.delete(
   postsControllers.deletePostById
 );
 
-// @route     PUT api/v1/posts/like/:postId
+// @route     PUT api/v1/posts/:postId/like
 // @desc      Like post
 // @access    Private
 router.put(
-  '/like/:postId',
+  '/:postId/like',
   postsValidation.likePost,
   requireAuth,
   postsControllers.likePost
 );
 
-// @route     PUT api/v1/posts/unlike/:postId
-// @desc      Like post
+// @route     POST api/v1/posts/:postId/comments
+// @desc      Comment on a post
 // @access    Private
-router.put(
-  '/like/:postId',
-  postsValidation.likePost,
+router.post(
+  '/:postId/comments',
+  postsValidation.commentPost,
   requireAuth,
-  postsControllers.likePost
+  postsControllers.commentPost
+);
+
+// @route     DELETE api/v1/posts/:postId/comments/:commentId
+// @desc      Delete comment
+// @access    Private
+router.delete(
+  '/:postId/comments/:commentId',
+  postsValidation.deleteComment,
+  requireAuth,
+  postsControllers.deleteComment
 );
 
 export default router;
