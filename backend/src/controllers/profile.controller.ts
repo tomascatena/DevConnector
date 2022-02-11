@@ -7,7 +7,6 @@ import Profile from '@models/profile.model';
 import User from '@models/user.model';
 import { ApiError } from 'utils/ApiError';
 import { RequestWithBody } from '../types/types';
-import { Logger } from '../config/logger';
 
 // @route     GET api/v1/profile/me
 // @desc      Get current users profile
@@ -18,6 +17,7 @@ export const getUserProfile = catchAsync(
       'user',
       ['name', 'avatar']
     );
+
     if (!profile) {
       throw new ApiError({
         statusCode: httpStatus.BAD_REQUEST,
@@ -288,10 +288,10 @@ export const getUserRepos = catchAsync(
 
     request(options, (error, response, body) => {
       if (error) {
-        Logger.error(error);
-
-        return res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+        throw new ApiError({
+          statusCode: httpStatus.INTERNAL_SERVER_ERROR,
           message: ReasonPhrases.INTERNAL_SERVER_ERROR,
+          isOperational: false,
         });
       }
 
