@@ -7,12 +7,17 @@ import { env } from '@config/config';
 import mongoSanitize from 'express-mongo-sanitize';
 import cors from 'cors';
 import { notFound } from '@middleware/notFound.middleware';
+// @ts-ignore
+import xssClean from 'xss-clean';
 import { expressWinstonLogger } from './config/logger';
 
 export const app = express();
 
 // secure Express app by setting various HTTP headers
 app.use(helmet());
+
+// Prevent cross site scripting attacks
+app.use(xssClean());
 
 if (env.NODE_ENV === 'development') {
   // HTTP request logger middleware

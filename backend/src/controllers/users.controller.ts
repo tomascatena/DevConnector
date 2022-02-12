@@ -73,7 +73,6 @@ export const deleteUser = catchAsync(
 
     return res.status(httpStatus.CREATED).json({
       message: 'Successfully deleted user',
-      user,
     });
   }
 );
