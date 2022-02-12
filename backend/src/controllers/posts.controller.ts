@@ -189,7 +189,7 @@ export const commentPost = catchAsync(
 
     if (req.body.comment?.text) {
       const comment = await Post.findOneAndUpdate(
-        { user: req.userId },
+        { _id: req.params.postId },
         {
           $push: {
             comments: {
@@ -207,6 +207,14 @@ export const commentPost = catchAsync(
         },
         { new: true }
       );
+
+      if (!comment) {
+        throw new ApiError({
+          statusCode: httpStatus.BAD_REQUEST,
+          message: 'Post not found',
+          isOperational: false,
+        });
+      }
 
       return res.status(httpStatus.CREATED).json({
         message: 'Comment created',
@@ -232,7 +240,7 @@ export const deleteComment = catchAsync(
     }
 
     const updatedPost = await Post.findOneAndUpdate(
-      { user: req.userId },
+      { _id: req.params.postId },
       {
         $pull: {
           comments: { _id: req.params.commentId },
@@ -240,6 +248,14 @@ export const deleteComment = catchAsync(
       },
       { new: true }
     );
+
+    if (!updatedPost) {
+      throw new ApiError({
+        statusCode: httpStatus.BAD_REQUEST,
+        message: 'Post not found',
+        isOperational: false,
+      });
+    }
 
     return res.status(httpStatus.CREATED).json({
       message: 'Comment deleted',

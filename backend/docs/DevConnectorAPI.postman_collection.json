@@ -1,0 +1,3180 @@
+{
+	"info": {
+		"_postman_id": "300e070d-8ea3-45b7-a7c2-ea8b603ec7bb",
+		"name": "DevConnector API",
+		"description": "DevConnector API docuementation.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users & auth",
+			"item": [
+				{
+					"name": "Register user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set('TOKEN', pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Sam Tester\",\n    \"email\":\"sam@gmail.com\",\n    \"password\": \"abc123\",\n    \"confirmPassword\": \"abc123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						},
+						"description": "Register a new user."
+					},
+					"response": [
+						{
+							"name": "Register user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"John Doe\",\n    \"email\":\"john@gmail.com\",\n    \"password\": \"abc123\",\n    \"confirmPassword\": \"abc123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/users",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "578"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"242-ok1NYf4LKPjyZTLYEzwFGVlLqgY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:10:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"New user successfully registered\",\n    \"user\": {\n        \"name\": \"John Doe\",\n        \"email\": \"john@gmail.com\",\n        \"password\": \"$2a$12$0Awb17w3g1WR4MgCsIsVrOFWQH0RdrWFtt2QrCB8j0StXIusT0356\",\n        \"avatar\": \"https://s.gravatar.com/avatar/1f9d9a9efc2f523b2f09629444632b5c?s=200&r=pg&d=retro\",\n        \"_id\": \"62076b5942eb48d4ba7342bd\",\n        \"createdAt\": \"2022-02-12T08:10:01.854Z\",\n        \"updatedAt\": \"2022-02-12T08:10:01.854Z\",\n        \"__v\": 0\n    },\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIwNzZiNTk0MmViNDhkNGJhNzM0MmJkIn0sImlhdCI6MTY0NDY1MzQwMiwiZXhwIjoxNjQ1MjU4MjAyfQ.8qtNA_IoHhSjEdrqWpHeaEp_1l4FFocSMHV0Mz56g0I\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get auth user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "{{TOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/api/v1/auth",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth"
+							]
+						},
+						"description": "Get authenticated user."
+					},
+					"response": [
+						{
+							"name": "Get auth user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+										"key": "Authorization",
+										"value": "{{TOKEN}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{URL}}/api/v1/auth",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "309"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"135-dYzFhIE/ARIzOzzO4txBE9/cQLM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:10:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully authenticated user\",\n    \"user\": {\n        \"_id\": \"62076b5942eb48d4ba7342bd\",\n        \"name\": \"John Doe\",\n        \"email\": \"john@gmail.com\",\n        \"avatar\": \"https://s.gravatar.com/avatar/1f9d9a9efc2f523b2f09629444632b5c?s=200&r=pg&d=retro\",\n        \"createdAt\": \"2022-02-12T08:10:01.854Z\",\n        \"updatedAt\": \"2022-02-12T08:10:01.854Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set('TOKEN', pm.response.json().token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"sam@gmail.com\",\n    \"password\": \"abc123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/auth",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth"
+							]
+						},
+						"description": "Login a user."
+					},
+					"response": [
+						{
+							"name": "Login user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"john@gmail.com\",\n    \"password\": \"abc123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/auth",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "230"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"e6-x5P3HLEYTID6pra2ijJva9pKfhM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:10:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully logged in\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjIwNzZiNTk0MmViNDhkNGJhNzM0MmJkIn0sImlhdCI6MTY0NDY1MzQzMiwiZXhwIjoxNjQ1MjU4MjMyfQ.o0fnSaqmwtPn-QGlmkaP7eP0NCAH6bZX33ihYW5My1A\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/users",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						},
+						"description": "Delete authenticated user."
+					},
+					"response": [
+						{
+							"name": "Delete user",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/users",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "377"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"179-10TmpNaHcPOOmKsO74gJWxvpkYA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:09:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully deleted user\",\n    \"user\": {\n        \"_id\": \"62076aed42eb48d4ba7342b7\",\n        \"name\": \"John Doe\",\n        \"email\": \"john@gmail.com\",\n        \"password\": \"$2a$12$deOAzRU/.Kwf2.09TkGJ4ec5O1ZItAJXDN0U38dSPEOvlPwjQPpBq\",\n        \"avatar\": \"https://s.gravatar.com/avatar/1f9d9a9efc2f523b2f09629444632b5c?s=200&r=pg&d=retro\",\n        \"createdAt\": \"2022-02-12T08:08:13.242Z\",\n        \"updatedAt\": \"2022-02-12T08:08:13.242Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "Routes related to users and authentication."
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Create post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"post\": {\n        \"text\": \"New post!\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/posts",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts"
+							]
+						},
+						"description": "Create a new post."
+					},
+					"response": [
+						{
+							"name": "Create post",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"post\": {\n        \"text\": \"Second post!\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/posts",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"posts"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "397"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"18d-sLZu/xg7m5264I+BAW0nOtjoM1c\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:40:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"New post successfully created\",\n    \"post\": {\n        \"user\": \"62076dd337e060a0cfea8b20\",\n        \"text\": \"Second post!\",\n        \"name\": \"John Doe\",\n        \"avatar\": \"https://s.gravatar.com/avatar/1f9d9a9efc2f523b2f09629444632b5c?s=200&r=pg&d=retro\",\n        \"_id\": \"62077282e5d1339e951f03f3\",\n        \"likes\": [],\n        \"comments\": [],\n        \"date\": \"2022-02-12T08:40:34.835Z\",\n        \"createdAt\": \"2022-02-12T08:40:34.835Z\",\n        \"updatedAt\": \"2022-02-12T08:40:34.835Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get all post from user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/posts",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts"
+							]
+						},
+						"description": "Get all post from the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Get all post from user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/posts",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"posts"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "757"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2f5-vtPhCd+KayfamaliWWTpUdixwB0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:40:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully fetched all posts from user\",\n    \"posts\": [\n        {\n            \"_id\": \"62077282e5d1339e951f03f3\",\n            \"user\": \"62076dd337e060a0cfea8b20\",\n            \"text\": \"Second post!\",\n            \"name\": \"John Doe\",\n            \"avatar\": \"https://s.gravatar.com/avatar/1f9d9a9efc2f523b2f09629444632b5c?s=200&r=pg&d=retro\",\n            \"likes\": [],\n            \"comments\": [],\n            \"date\": \"2022-02-12T08:40:34.835Z\",\n            \"createdAt\": \"2022-02-12T08:40:34.835Z\",\n            \"updatedAt\": \"2022-02-12T08:40:34.835Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"6207727ce5d1339e951f03f0\",\n            \"user\": \"62076dd337e060a0cfea8b20\",\n            \"text\": \"First post!\",\n            \"name\": \"John Doe\",\n            \"avatar\": \"https://s.gravatar.com/avatar/1f9d9a9efc2f523b2f09629444632b5c?s=200&r=pg&d=retro\",\n            \"likes\": [],\n            \"comments\": [],\n            \"date\": \"2022-02-12T08:40:28.724Z\",\n            \"createdAt\": \"2022-02-12T08:40:28.725Z\",\n            \"updatedAt\": \"2022-02-12T08:40:28.725Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get post by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/posts/6207727ce5d1339e951f03f0",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts",
+								"6207727ce5d1339e951f03f0"
+							]
+						},
+						"description": "Get a post by postId."
+					},
+					"response": [
+						{
+							"name": "Get post by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/posts/6207727ce5d1339e951f03f0",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"posts",
+										"6207727ce5d1339e951f03f0"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "392"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"188-DCWCcRDRz69Dstl+6zuu53dZUX8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:41:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully fetched post\",\n    \"post\": {\n        \"_id\": \"6207727ce5d1339e951f03f0\",\n        \"user\": \"62076dd337e060a0cfea8b20\",\n        \"text\": \"First post!\",\n        \"name\": \"John Doe\",\n        \"avatar\": \"https://s.gravatar.com/avatar/1f9d9a9efc2f523b2f09629444632b5c?s=200&r=pg&d=retro\",\n        \"likes\": [],\n        \"comments\": [],\n        \"date\": \"2022-02-12T08:40:28.724Z\",\n        \"createdAt\": \"2022-02-12T08:40:28.725Z\",\n        \"updatedAt\": \"2022-02-12T08:40:28.725Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete post by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/posts/6207727ce5d1339e951f03f0",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts",
+								"6207727ce5d1339e951f03f0"
+							]
+						},
+						"description": "Delete a post by postId."
+					},
+					"response": [
+						{
+							"name": "Delete post by id",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/posts/6207727ce5d1339e951f03f0",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"posts",
+										"6207727ce5d1339e951f03f0"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"27-lpv1+68uCEoyt7DHZ/KEJguj5A4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:41:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully deleted post\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Like post",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/posts/620772b5e5d1339e951f03fa/like",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts",
+								"620772b5e5d1339e951f03fa",
+								"like"
+							]
+						},
+						"description": "Like or unlike a post."
+					},
+					"response": [
+						{
+							"name": "Like post",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/posts/620772b5e5d1339e951f03fa/like",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"posts",
+										"620772b5e5d1339e951f03fa",
+										"like"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "124"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7c-nQ5jigw1GwNtS6C/JDKMkvgS/BE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:44:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully updated post likes\",\n    \"likes\": [\n        {\n            \"user\": \"620771ffe5d1339e951f03e2\",\n            \"_id\": \"6207735d810b280810362a75\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"comment\": {\n        \"text\": \"Such a great post!!!\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/posts/620772b5e5d1339e951f03fa/comments",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts",
+								"620772b5e5d1339e951f03fa",
+								"comments"
+							]
+						},
+						"description": "Create a comment in a post."
+					},
+					"response": [
+						{
+							"name": "Create Comment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"comment\": {\n        \"text\": \"Such a great post!!!\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/posts/620772b5e5d1339e951f03fa/comments",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"posts",
+										"620772b5e5d1339e951f03fa",
+										"comments"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "706"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2c2-8vvIbe9QOSPZlNqb0004FCFy19c\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:43:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Comment created\",\n    \"comment\": {\n        \"_id\": \"620772b5e5d1339e951f03fa\",\n        \"user\": \"62076dd337e060a0cfea8b20\",\n        \"text\": \"New post!\",\n        \"name\": \"John Doe\",\n        \"avatar\": \"https://s.gravatar.com/avatar/1f9d9a9efc2f523b2f09629444632b5c?s=200&r=pg&d=retro\",\n        \"likes\": [],\n        \"comments\": [\n            {\n                \"user\": \"620771ffe5d1339e951f03e2\",\n                \"text\": \"Such a great post!!!\",\n                \"name\": \"Sam Tester\",\n                \"avatar\": \"https://s.gravatar.com/avatar/8cdd21051a8dd11a0e3dc8300f36d31d?s=200&r=pg&d=retro\",\n                \"_id\": \"620773263276572cdb6a8ead\",\n                \"updatedAt\": \"2022-02-12T08:43:18.328Z\",\n                \"createdAt\": \"2022-02-12T08:43:18.328Z\",\n                \"date\": \"2022-02-12T08:43:18.333Z\"\n            }\n        ],\n        \"date\": \"2022-02-12T08:41:25.509Z\",\n        \"createdAt\": \"2022-02-12T08:41:25.510Z\",\n        \"updatedAt\": \"2022-02-12T08:43:18.328Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete comment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/posts/620772b5e5d1339e951f03fa/comments/620773263276572cdb6a8ead",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"posts",
+								"620772b5e5d1339e951f03fa",
+								"comments",
+								"620773263276572cdb6a8ead"
+							]
+						},
+						"description": "Delete a comment from a given post."
+					},
+					"response": [
+						{
+							"name": "Delete comment",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/posts/620772b5e5d1339e951f03fa/comments/620773263276572cdb6a8ead",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"posts",
+										"620772b5e5d1339e951f03fa",
+										"comments",
+										"620773263276572cdb6a8ead"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "448"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c0-VZwyDNaYTQfcT4r9XB5I91SqUmw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:45:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Comment deleted\",\n    \"post\": {\n        \"_id\": \"620772b5e5d1339e951f03fa\",\n        \"user\": \"62076dd337e060a0cfea8b20\",\n        \"text\": \"New post!\",\n        \"name\": \"John Doe\",\n        \"avatar\": \"https://s.gravatar.com/avatar/1f9d9a9efc2f523b2f09629444632b5c?s=200&r=pg&d=retro\",\n        \"likes\": [\n            {\n                \"user\": \"620771ffe5d1339e951f03e2\",\n                \"_id\": \"6207735d810b280810362a75\"\n            }\n        ],\n        \"comments\": [],\n        \"date\": \"2022-02-12T08:41:25.509Z\",\n        \"createdAt\": \"2022-02-12T08:41:25.510Z\",\n        \"updatedAt\": \"2022-02-12T08:45:29.942Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				}
+			],
+			"description": "Routes related to create, update, get and delete posts."
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "Get logged in users profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"62076dd337e060a0cfea8b20\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/profile/me",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"me"
+							]
+						},
+						"description": "Get the user profile of the logged in user."
+					},
+					"response": [
+						{
+							"name": "Get logged in users profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"userId\": \"62076aed42eb48d4ba7342b7\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/profile/me",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"profile",
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "795"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31b-nmmpbL2yYYxNZ22v5GPMO3YXKMY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:15:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully got user profile\",\n    \"profile\": {\n        \"_id\": \"62076c7642eb48d4ba7342c4\",\n        \"user\": {\n            \"_id\": \"62076b5942eb48d4ba7342bd\",\n            \"name\": \"John Doe\",\n            \"avatar\": \"https://s.gravatar.com/avatar/1f9d9a9efc2f523b2f09629444632b5c?s=200&r=pg&d=retro\"\n        },\n        \"company\": \"Test Company Inc.\",\n        \"website\": \"https://johndoe.com\",\n        \"location\": \"Austin, Texas, USA\",\n        \"status\": \"Frontend Developer\",\n        \"skills\": [\n            \"React\",\n            \"javascript\",\n            \"Typescript\"\n        ],\n        \"bio\": \"Highly motivated tech entrepeneur\",\n        \"social\": {\n            \"youtube\": \"johndoe\",\n            \"twitter\": \"johndoe\",\n            \"facebook\": \"johndoe\",\n            \"linkedin\": \"johndoe\",\n            \"instagram\": \"johndoe\",\n            \"_id\": \"62076c7642eb48d4ba7342c5\",\n            \"createdAt\": \"2022-02-12T08:14:46.591Z\",\n            \"updatedAt\": \"2022-02-12T08:14:46.591Z\"\n        },\n        \"experience\": [],\n        \"education\": [],\n        \"createdAt\": \"2022-02-12T08:14:46.591Z\",\n        \"updatedAt\": \"2022-02-12T08:14:46.591Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Create user profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"profile\": {\n        \"userId\": \"620771ffe5d1339e951f03e2\",\n        \"status\": \"Backend Developer\",\n        \"skills\": [\n            \"Java\",\n            \"PHP\",\n            \"SQL\"\n        ],\n        \"company\": \"Stasrting Up LLC\",\n        \"website\": \"https://sam.com\",\n        \"location\": \"Denver, Colorado, USA\",\n        \"bio\": \"Highly motivated tech entrepeneur\",\n        \"githubusernae\": \"sam\",\n        \"social\": {\n            \"instagram\": \"sam\",\n            \"facebook\": \"sam\",\n            \"linkedin\": \"sam\",\n            \"youtube\": \"sam\",\n            \"twitter\": \"sam\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/profile",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profile"
+							]
+						},
+						"description": "Create a user profile for the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Create user profile",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"profile\": {\n        \"userId\": \"62076aed42eb48d4ba7342b7\",\n        \"status\": \"Frontend Developer\",\n        \"skills\": [\n            \"React\",\n            \"javascript\",\n            \"Typescript\"\n        ],\n        \"company\": \"Test Company Inc.\",\n        \"website\": \"https://johndoe.com\",\n        \"location\": \"Austin, Texas, USA\",\n        \"bio\": \"Highly motivated tech entrepeneur\",\n        \"githubusernae\": \"johndoe\",\n        \"social\": {\n            \"instagram\": \"johndoe\",\n            \"facebook\": \"johndoe\",\n            \"linkedin\": \"johndoe\",\n            \"youtube\": \"johndoe\",\n            \"twitter\": \"johndoe\"\n        }\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/profile",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"profile"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "680"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a8-Yu5V2tFrtG6g2IHQWHN/hAnunNA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:14:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully created user profile\",\n    \"profile\": {\n        \"user\": \"62076b5942eb48d4ba7342bd\",\n        \"company\": \"Test Company Inc.\",\n        \"website\": \"https://johndoe.com\",\n        \"location\": \"Austin, Texas, USA\",\n        \"status\": \"Frontend Developer\",\n        \"skills\": [\n            \"React\",\n            \"javascript\",\n            \"Typescript\"\n        ],\n        \"bio\": \"Highly motivated tech entrepeneur\",\n        \"social\": {\n            \"youtube\": \"johndoe\",\n            \"twitter\": \"johndoe\",\n            \"facebook\": \"johndoe\",\n            \"linkedin\": \"johndoe\",\n            \"instagram\": \"johndoe\",\n            \"_id\": \"62076c7642eb48d4ba7342c5\",\n            \"createdAt\": \"2022-02-12T08:14:46.591Z\",\n            \"updatedAt\": \"2022-02-12T08:14:46.591Z\"\n        },\n        \"_id\": \"62076c7642eb48d4ba7342c4\",\n        \"experience\": [],\n        \"education\": [],\n        \"createdAt\": \"2022-02-12T08:14:46.591Z\",\n        \"updatedAt\": \"2022-02-12T08:14:46.591Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get all user profiles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/profile",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profile"
+							]
+						},
+						"description": "Get all users profiles."
+					},
+					"response": [
+						{
+							"name": "Get all user profiles",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/profile",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"profile"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2211"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8a3-PACWgC6ic1Pnzemvw09l66QojeE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:40:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully got all user profiles\",\n    \"profiles\": [\n        {\n            \"_id\": \"62076df637e060a0cfea8b23\",\n            \"user\": {\n                \"_id\": \"62076dd337e060a0cfea8b20\",\n                \"name\": \"John Doe\",\n                \"avatar\": \"https://s.gravatar.com/avatar/1f9d9a9efc2f523b2f09629444632b5c?s=200&r=pg&d=retro\"\n            },\n            \"company\": \"Test Company Inc.\",\n            \"website\": \"https://johndoe.com\",\n            \"location\": \"Austin, Texas, USA\",\n            \"status\": \"Frontend Developer\",\n            \"skills\": [\n                \"React\",\n                \"javascript\",\n                \"Typescript\"\n            ],\n            \"bio\": \"Highly motivated tech entrepeneur\",\n            \"social\": {\n                \"youtube\": \"johndoe\",\n                \"twitter\": \"johndoe\",\n                \"facebook\": \"johndoe\",\n                \"linkedin\": \"johndoe\",\n                \"instagram\": \"johndoe\",\n                \"_id\": \"62076df637e060a0cfea8b24\",\n                \"createdAt\": \"2022-02-12T08:21:10.908Z\",\n                \"updatedAt\": \"2022-02-12T08:21:10.908Z\"\n            },\n            \"experience\": [\n                {\n                    \"title\": \"Frontend Developer\",\n                    \"company\": \"Test Company SA\",\n                    \"location\": \"Pasadena California\",\n                    \"from\": \"2018-01-05T00:00:00.000Z\",\n                    \"to\": \"2018-01-15T00:00:00.000Z\",\n                    \"current\": false,\n                    \"description\": \"Create microfronends for e-commerce\",\n                    \"_id\": \"6207713ae5d1339e951f03d0\",\n                    \"updatedAt\": \"2022-02-12T08:35:06.422Z\",\n                    \"createdAt\": \"2022-02-12T08:35:06.422Z\"\n                }\n            ],\n            \"education\": [\n                {\n                    \"school\": \"ASU\",\n                    \"degree\": \"Master in Computer Science\",\n                    \"fieldOfStudy\": \"Computer Science\",\n                    \"from\": \"2005-01-05T00:00:00.000Z\",\n                    \"to\": \"2010-04-20T00:00:00.000Z\",\n                    \"current\": false,\n                    \"description\": \"University degree in computer science with focus on web technologies\",\n                    \"_id\": \"620771d8e5d1339e951f03dc\",\n                    \"updatedAt\": \"2022-02-12T08:37:44.492Z\",\n                    \"createdAt\": \"2022-02-12T08:37:44.492Z\"\n                }\n            ],\n            \"createdAt\": \"2022-02-12T08:21:10.908Z\",\n            \"updatedAt\": \"2022-02-12T08:37:44.492Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"62077260e5d1339e951f03e5\",\n            \"user\": {\n                \"_id\": \"620771ffe5d1339e951f03e2\",\n                \"name\": \"Sam Tester\",\n                \"avatar\": \"https://s.gravatar.com/avatar/8cdd21051a8dd11a0e3dc8300f36d31d?s=200&r=pg&d=retro\"\n            },\n            \"company\": \"Stasrting Up LLC\",\n            \"website\": \"https://sam.com\",\n            \"location\": \"Denver, Colorado, USA\",\n            \"status\": \"Backend Developer\",\n            \"skills\": [\n                \"Java\",\n                \"PHP\",\n                \"SQL\"\n            ],\n            \"bio\": \"Highly motivated tech entrepeneur\",\n            \"social\": {\n                \"youtube\": \"sam\",\n                \"twitter\": \"sam\",\n                \"facebook\": \"sam\",\n                \"linkedin\": \"sam\",\n                \"instagram\": \"sam\",\n                \"_id\": \"62077260e5d1339e951f03e6\",\n                \"createdAt\": \"2022-02-12T08:40:00.083Z\",\n                \"updatedAt\": \"2022-02-12T08:40:00.083Z\"\n            },\n            \"experience\": [],\n            \"education\": [],\n            \"createdAt\": \"2022-02-12T08:40:00.084Z\",\n            \"updatedAt\": \"2022-02-12T08:40:00.084Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get profile by userId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/profile/user/62076dd337e060a0cfea8b20",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"user",
+								"62076dd337e060a0cfea8b20"
+							]
+						},
+						"description": "Get a profile by userId."
+					},
+					"response": [
+						{
+							"name": "Get profile by userId",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/profile/user/62076dd337e060a0cfea8b20",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"profile",
+										"user",
+										"62076dd337e060a0cfea8b20"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "799"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"31f-GDyeOfWrkcMOQXjWxKnklyip7eo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:21:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully got the user profile\",\n    \"profile\": {\n        \"_id\": \"62076df637e060a0cfea8b23\",\n        \"user\": {\n            \"_id\": \"62076dd337e060a0cfea8b20\",\n            \"name\": \"John Doe\",\n            \"avatar\": \"https://s.gravatar.com/avatar/1f9d9a9efc2f523b2f09629444632b5c?s=200&r=pg&d=retro\"\n        },\n        \"company\": \"Test Company Inc.\",\n        \"website\": \"https://johndoe.com\",\n        \"location\": \"Austin, Texas, USA\",\n        \"status\": \"Frontend Developer\",\n        \"skills\": [\n            \"React\",\n            \"javascript\",\n            \"Typescript\"\n        ],\n        \"bio\": \"Highly motivated tech entrepeneur\",\n        \"social\": {\n            \"youtube\": \"johndoe\",\n            \"twitter\": \"johndoe\",\n            \"facebook\": \"johndoe\",\n            \"linkedin\": \"johndoe\",\n            \"instagram\": \"johndoe\",\n            \"_id\": \"62076df637e060a0cfea8b24\",\n            \"createdAt\": \"2022-02-12T08:21:10.908Z\",\n            \"updatedAt\": \"2022-02-12T08:21:10.908Z\"\n        },\n        \"experience\": [],\n        \"education\": [],\n        \"createdAt\": \"2022-02-12T08:21:10.908Z\",\n        \"updatedAt\": \"2022-02-12T08:21:10.908Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete user profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/profile",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profile"
+							]
+						},
+						"description": "Delete a user profile."
+					},
+					"response": [
+						{
+							"name": "Delete user profile",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/profile",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"profile"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "680"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a8-4Or4MFAHNpN6MTC3s3QCjPVtVa0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:20:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully deleted user profile\",\n    \"profile\": {\n        \"_id\": \"62076c7642eb48d4ba7342c4\",\n        \"user\": \"62076b5942eb48d4ba7342bd\",\n        \"company\": \"Test Company Inc.\",\n        \"website\": \"https://johndoe.com\",\n        \"location\": \"Austin, Texas, USA\",\n        \"status\": \"Frontend Developer\",\n        \"skills\": [\n            \"React\",\n            \"javascript\",\n            \"Typescript\"\n        ],\n        \"bio\": \"Highly motivated tech entrepeneur\",\n        \"social\": {\n            \"youtube\": \"johndoe\",\n            \"twitter\": \"johndoe\",\n            \"facebook\": \"johndoe\",\n            \"linkedin\": \"johndoe\",\n            \"instagram\": \"johndoe\",\n            \"_id\": \"62076c7642eb48d4ba7342c5\",\n            \"createdAt\": \"2022-02-12T08:14:46.591Z\",\n            \"updatedAt\": \"2022-02-12T08:14:46.591Z\"\n        },\n        \"experience\": [],\n        \"education\": [],\n        \"createdAt\": \"2022-02-12T08:14:46.591Z\",\n        \"updatedAt\": \"2022-02-12T08:14:46.591Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Add/Update Profile Experience",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"profile\": {\n        \"experience\": [\n            {\n                \"title\": \"Frontend Developer\",\n                \"company\": \"Test Company SA\",\n                \"from\": \"2018-01-05\",\n                \"to\": \"2018-01-15\",\n                \"current\": false,\n                \"location\": \"Pasadena California\",\n                \"description\": \"Create microfronends for e-commerce\"\n\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/profile/experience",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"experience"
+							]
+						},
+						"description": "add or update user profile experience."
+					},
+					"response": [
+						{
+							"name": "Add/Update Profile Experience",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"profile\": {\n        \"experience\": [\n            {\n                \"title\": \"Frontend Developer\",\n                \"company\": \"Test Company SA\",\n                \"from\": \"2018-01-05\",\n                \"to\": \"2018-01-15\",\n                \"current\": false,\n                \"location\": \"Pasadena California\",\n                \"description\": \"Create microfronends for e-commerce\"\n\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/profile/experience",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"profile",
+										"experience"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1033"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"409-buXwgkg+Up56sxYpgvzw46pPISc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:32:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully added/updated user profile experience\",\n    \"profile\": {\n        \"_id\": \"62076df637e060a0cfea8b23\",\n        \"user\": \"62076dd337e060a0cfea8b20\",\n        \"company\": \"Test Company Inc.\",\n        \"website\": \"https://johndoe.com\",\n        \"location\": \"Austin, Texas, USA\",\n        \"status\": \"Frontend Developer\",\n        \"skills\": [\n            \"React\",\n            \"javascript\",\n            \"Typescript\"\n        ],\n        \"bio\": \"Highly motivated tech entrepeneur\",\n        \"social\": {\n            \"youtube\": \"johndoe\",\n            \"twitter\": \"johndoe\",\n            \"facebook\": \"johndoe\",\n            \"linkedin\": \"johndoe\",\n            \"instagram\": \"johndoe\",\n            \"_id\": \"62076df637e060a0cfea8b24\",\n            \"createdAt\": \"2022-02-12T08:21:10.908Z\",\n            \"updatedAt\": \"2022-02-12T08:21:10.908Z\"\n        },\n        \"experience\": [\n            {\n                \"title\": \"Frontend Developer\",\n                \"company\": \"Test Company SA\",\n                \"location\": \"Pasadena California\",\n                \"from\": \"2018-01-05T00:00:00.000Z\",\n                \"to\": \"2018-01-15T00:00:00.000Z\",\n                \"current\": false,\n                \"description\": \"Create microfronends for e-commerce\",\n                \"_id\": \"620770a4ff077f50627b907f\",\n                \"updatedAt\": \"2022-02-12T08:32:36.990Z\",\n                \"createdAt\": \"2022-02-12T08:32:36.990Z\"\n            }\n        ],\n        \"education\": [],\n        \"createdAt\": \"2022-02-12T08:21:10.908Z\",\n        \"updatedAt\": \"2022-02-12T08:32:36.990Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Profile Experience",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/profile/experience/620770a4ff077f50627b907f",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"experience",
+								"620770a4ff077f50627b907f"
+							]
+						},
+						"description": "Delete experience from a profile."
+					},
+					"response": [
+						{
+							"name": "Delete Profile Experience",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/profile/experience/620770a4ff077f50627b907f",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"profile",
+										"experience",
+										"620770a4ff077f50627b907f"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "697"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b9-xbKo3bRwarf8jH8dClJ6CZcxq5o\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:33:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully added/updated user profile experience\",\n    \"profile\": {\n        \"_id\": \"62076df637e060a0cfea8b23\",\n        \"user\": \"62076dd337e060a0cfea8b20\",\n        \"company\": \"Test Company Inc.\",\n        \"website\": \"https://johndoe.com\",\n        \"location\": \"Austin, Texas, USA\",\n        \"status\": \"Frontend Developer\",\n        \"skills\": [\n            \"React\",\n            \"javascript\",\n            \"Typescript\"\n        ],\n        \"bio\": \"Highly motivated tech entrepeneur\",\n        \"social\": {\n            \"youtube\": \"johndoe\",\n            \"twitter\": \"johndoe\",\n            \"facebook\": \"johndoe\",\n            \"linkedin\": \"johndoe\",\n            \"instagram\": \"johndoe\",\n            \"_id\": \"62076df637e060a0cfea8b24\",\n            \"createdAt\": \"2022-02-12T08:21:10.908Z\",\n            \"updatedAt\": \"2022-02-12T08:21:10.908Z\"\n        },\n        \"experience\": [],\n        \"education\": [],\n        \"createdAt\": \"2022-02-12T08:21:10.908Z\",\n        \"updatedAt\": \"2022-02-12T08:33:44.677Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Add/Update Profile Education",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"profile\": {\n        \"education\": [\n            {\n                \"degree\": \"Master in Computer Science\",\n                \"school\": \"ASU\",\n                \"from\": \"2005-01-05\",\n                \"to\": \"2010-04-20\",\n                \"fieldOfStudy\": \"Computer Science\",\n                \"current\": false,\n                \"description\": \"University degree in computer science with focus on web technologies\"\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/profile/education",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"education"
+							]
+						},
+						"description": "Add or update profile education."
+					},
+					"response": [
+						{
+							"name": "Add/Update Profile Education",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"profile\": {\n        \"education\": [\n            {\n                \"degree\": \"Master in Computer Science\",\n                \"school\": \"ASU\",\n                \"from\": \"2005-01-05\",\n                \"to\": \"2010-04-20\",\n                \"fieldOfStudy\": \"Computer Science\",\n                \"current\": false,\n                \"description\": \"University degree in computer science with focus on web technologies\"\n            }\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/profile/education",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"profile",
+										"education"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1398"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"576-G7wJJeNQ17eP3wjKlURGUakNDTw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:37:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully added/updated user profile education\",\n    \"profile\": {\n        \"_id\": \"62076df637e060a0cfea8b23\",\n        \"user\": \"62076dd337e060a0cfea8b20\",\n        \"company\": \"Test Company Inc.\",\n        \"website\": \"https://johndoe.com\",\n        \"location\": \"Austin, Texas, USA\",\n        \"status\": \"Frontend Developer\",\n        \"skills\": [\n            \"React\",\n            \"javascript\",\n            \"Typescript\"\n        ],\n        \"bio\": \"Highly motivated tech entrepeneur\",\n        \"social\": {\n            \"youtube\": \"johndoe\",\n            \"twitter\": \"johndoe\",\n            \"facebook\": \"johndoe\",\n            \"linkedin\": \"johndoe\",\n            \"instagram\": \"johndoe\",\n            \"_id\": \"62076df637e060a0cfea8b24\",\n            \"createdAt\": \"2022-02-12T08:21:10.908Z\",\n            \"updatedAt\": \"2022-02-12T08:21:10.908Z\"\n        },\n        \"experience\": [\n            {\n                \"title\": \"Frontend Developer\",\n                \"company\": \"Test Company SA\",\n                \"location\": \"Pasadena California\",\n                \"from\": \"2018-01-05T00:00:00.000Z\",\n                \"to\": \"2018-01-15T00:00:00.000Z\",\n                \"current\": false,\n                \"description\": \"Create microfronends for e-commerce\",\n                \"_id\": \"6207713ae5d1339e951f03d0\",\n                \"updatedAt\": \"2022-02-12T08:35:06.422Z\",\n                \"createdAt\": \"2022-02-12T08:35:06.422Z\"\n            }\n        ],\n        \"education\": [\n            {\n                \"school\": \"ASU\",\n                \"degree\": \"Master in Computer Science\",\n                \"fieldOfStudy\": \"Computer Science\",\n                \"from\": \"2005-01-05T00:00:00.000Z\",\n                \"to\": \"2010-04-20T00:00:00.000Z\",\n                \"current\": false,\n                \"description\": \"University degree in computer science with focus on web technologies\",\n                \"_id\": \"620771b9e5d1339e951f03d4\",\n                \"updatedAt\": \"2022-02-12T08:37:13.094Z\",\n                \"createdAt\": \"2022-02-12T08:37:13.094Z\"\n            }\n        ],\n        \"createdAt\": \"2022-02-12T08:21:10.908Z\",\n        \"updatedAt\": \"2022-02-12T08:37:13.094Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Profile Education",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/profile/education/620771b9e5d1339e951f03d4",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"education",
+								"620771b9e5d1339e951f03d4"
+							]
+						},
+						"description": "Delete profile education."
+					},
+					"response": [
+						{
+							"name": "Delete Profile Education",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/profile/education/620771b9e5d1339e951f03d4",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"profile",
+										"education",
+										"620771b9e5d1339e951f03d4"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1032"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"408-KcprDDCh/We+lehqW5i2Ia6k38k\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:37:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully added/updated user profile education\",\n    \"profile\": {\n        \"_id\": \"62076df637e060a0cfea8b23\",\n        \"user\": \"62076dd337e060a0cfea8b20\",\n        \"company\": \"Test Company Inc.\",\n        \"website\": \"https://johndoe.com\",\n        \"location\": \"Austin, Texas, USA\",\n        \"status\": \"Frontend Developer\",\n        \"skills\": [\n            \"React\",\n            \"javascript\",\n            \"Typescript\"\n        ],\n        \"bio\": \"Highly motivated tech entrepeneur\",\n        \"social\": {\n            \"youtube\": \"johndoe\",\n            \"twitter\": \"johndoe\",\n            \"facebook\": \"johndoe\",\n            \"linkedin\": \"johndoe\",\n            \"instagram\": \"johndoe\",\n            \"_id\": \"62076df637e060a0cfea8b24\",\n            \"createdAt\": \"2022-02-12T08:21:10.908Z\",\n            \"updatedAt\": \"2022-02-12T08:21:10.908Z\"\n        },\n        \"experience\": [\n            {\n                \"title\": \"Frontend Developer\",\n                \"company\": \"Test Company SA\",\n                \"location\": \"Pasadena California\",\n                \"from\": \"2018-01-05T00:00:00.000Z\",\n                \"to\": \"2018-01-15T00:00:00.000Z\",\n                \"current\": false,\n                \"description\": \"Create microfronends for e-commerce\",\n                \"_id\": \"6207713ae5d1339e951f03d0\",\n                \"updatedAt\": \"2022-02-12T08:35:06.422Z\",\n                \"createdAt\": \"2022-02-12T08:35:06.422Z\"\n            }\n        ],\n        \"education\": [],\n        \"createdAt\": \"2022-02-12T08:21:10.908Z\",\n        \"updatedAt\": \"2022-02-12T08:37:38.393Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get user Github repos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/profile/github/tomascatena",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"profile",
+								"github",
+								"tomascatena"
+							]
+						},
+						"description": "Get Github repos for a given githubUsername."
+					},
+					"response": [
+						{
+							"name": "Get user Github repos",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/profile/github/tomascatena",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"profile",
+										"github",
+										"tomascatena"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Security-Policy",
+									"value": "default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+								},
+								{
+									"key": "Cross-Origin-Embedder-Policy",
+									"value": "require-corp"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Resource-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "Expect-CT",
+									"value": "max-age=0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Origin-Agent-Cluster",
+									"value": "?1"
+								},
+								{
+									"key": "X-Permitted-Cross-Domain-Policies",
+									"value": "none"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "no-referrer"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "26025"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"65a9-w9ya5MH1qaktbJv0P+nGmtm9Mw8\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 12 Feb 2022 08:37:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Successfully fetched user Github repos\",\n    \"body\": [\n        {\n            \"id\": 442580405,\n            \"node_id\": \"R_kgDOGmE9tQ\",\n            \"name\": \"React-Typescript-MFE-App\",\n            \"full_name\": \"tomascatena/React-Typescript-MFE-App\",\n            \"private\": false,\n            \"owner\": {\n                \"login\": \"tomascatena\",\n                \"id\": 63950136,\n                \"node_id\": \"MDQ6VXNlcjYzOTUwMTM2\",\n                \"avatar_url\": \"https://avatars.githubusercontent.com/u/63950136?v=4\",\n                \"gravatar_id\": \"\",\n                \"url\": \"https://api.github.com/users/tomascatena\",\n                \"html_url\": \"https://github.com/tomascatena\",\n                \"followers_url\": \"https://api.github.com/users/tomascatena/followers\",\n                \"following_url\": \"https://api.github.com/users/tomascatena/following{/other_user}\",\n                \"gists_url\": \"https://api.github.com/users/tomascatena/gists{/gist_id}\",\n                \"starred_url\": \"https://api.github.com/users/tomascatena/starred{/owner}{/repo}\",\n                \"subscriptions_url\": \"https://api.github.com/users/tomascatena/subscriptions\",\n                \"organizations_url\": \"https://api.github.com/users/tomascatena/orgs\",\n                \"repos_url\": \"https://api.github.com/users/tomascatena/repos\",\n                \"events_url\": \"https://api.github.com/users/tomascatena/events{/privacy}\",\n                \"received_events_url\": \"https://api.github.com/users/tomascatena/received_events\",\n                \"type\": \"User\",\n                \"site_admin\": false\n            },\n            \"html_url\": \"https://github.com/tomascatena/React-Typescript-MFE-App\",\n            \"description\": \"Microfrontend App made in React and Typescript\",\n            \"fork\": false,\n            \"url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App\",\n            \"forks_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/forks\",\n            \"keys_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/keys{/key_id}\",\n            \"collaborators_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/collaborators{/collaborator}\",\n            \"teams_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/teams\",\n            \"hooks_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/hooks\",\n            \"issue_events_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/issues/events{/number}\",\n            \"events_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/events\",\n            \"assignees_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/assignees{/user}\",\n            \"branches_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/branches{/branch}\",\n            \"tags_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/tags\",\n            \"blobs_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/git/blobs{/sha}\",\n            \"git_tags_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/git/tags{/sha}\",\n            \"git_refs_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/git/refs{/sha}\",\n            \"trees_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/git/trees{/sha}\",\n            \"statuses_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/statuses/{sha}\",\n            \"languages_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/languages\",\n            \"stargazers_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/stargazers\",\n            \"contributors_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/contributors\",\n            \"subscribers_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/subscribers\",\n            \"subscription_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/subscription\",\n            \"commits_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/commits{/sha}\",\n            \"git_commits_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/git/commits{/sha}\",\n            \"comments_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/comments{/number}\",\n            \"issue_comment_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/issues/comments{/number}\",\n            \"contents_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/contents/{+path}\",\n            \"compare_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/compare/{base}...{head}\",\n            \"merges_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/merges\",\n            \"archive_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/{archive_format}{/ref}\",\n            \"downloads_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/downloads\",\n            \"issues_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/issues{/number}\",\n            \"pulls_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/pulls{/number}\",\n            \"milestones_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/milestones{/number}\",\n            \"notifications_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/notifications{?since,all,participating}\",\n            \"labels_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/labels{/name}\",\n            \"releases_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/releases{/id}\",\n            \"deployments_url\": \"https://api.github.com/repos/tomascatena/React-Typescript-MFE-App/deployments\",\n            \"created_at\": \"2021-12-28T20:49:16Z\",\n            \"updated_at\": \"2022-01-02T15:32:58Z\",\n            \"pushed_at\": \"2022-01-02T15:32:56Z\",\n            \"git_url\": \"git://github.com/tomascatena/React-Typescript-MFE-App.git\",\n            \"ssh_url\": \"git@github.com:tomascatena/React-Typescript-MFE-App.git\",\n            \"clone_url\": \"https://github.com/tomascatena/React-Typescript-MFE-App.git\",\n            \"svn_url\": \"https://github.com/tomascatena/React-Typescript-MFE-App\",\n            \"homepage\": null,\n            \"size\": 435,\n            \"stargazers_count\": 0,\n            \"watchers_count\": 0,\n            \"language\": \"TypeScript\",\n            \"has_issues\": true,\n            \"has_projects\": true,\n            \"has_downloads\": true,\n            \"has_wiki\": true,\n            \"has_pages\": false,\n            \"forks_count\": 0,\n            \"mirror_url\": null,\n            \"archived\": false,\n            \"disabled\": false,\n            \"open_issues_count\": 0,\n            \"license\": null,\n            \"allow_forking\": true,\n            \"is_template\": false,\n            \"topics\": [],\n            \"visibility\": \"public\",\n            \"forks\": 0,\n            \"open_issues\": 0,\n            \"watchers\": 0,\n            \"default_branch\": \"main\"\n        },\n        {\n            \"id\": 442481832,\n            \"node_id\": \"R_kgDOGl-8qA\",\n            \"name\": \"simple-MFE-app\",\n            \"full_name\": \"tomascatena/simple-MFE-app\",\n            \"private\": false,\n            \"owner\": {\n                \"login\": \"tomascatena\",\n                \"id\": 63950136,\n                \"node_id\": \"MDQ6VXNlcjYzOTUwMTM2\",\n                \"avatar_url\": \"https://avatars.githubusercontent.com/u/63950136?v=4\",\n                \"gravatar_id\": \"\",\n                \"url\": \"https://api.github.com/users/tomascatena\",\n                \"html_url\": \"https://github.com/tomascatena\",\n                \"followers_url\": \"https://api.github.com/users/tomascatena/followers\",\n                \"following_url\": \"https://api.github.com/users/tomascatena/following{/other_user}\",\n                \"gists_url\": \"https://api.github.com/users/tomascatena/gists{/gist_id}\",\n                \"starred_url\": \"https://api.github.com/users/tomascatena/starred{/owner}{/repo}\",\n                \"subscriptions_url\": \"https://api.github.com/users/tomascatena/subscriptions\",\n                \"organizations_url\": \"https://api.github.com/users/tomascatena/orgs\",\n                \"repos_url\": \"https://api.github.com/users/tomascatena/repos\",\n                \"events_url\": \"https://api.github.com/users/tomascatena/events{/privacy}\",\n                \"received_events_url\": \"https://api.github.com/users/tomascatena/received_events\",\n                \"type\": \"User\",\n                \"site_admin\": false\n            },\n            \"html_url\": \"https://github.com/tomascatena/simple-MFE-app\",\n            \"description\": \"Microforntend app implemented in Typescript with Module Federation\",\n            \"fork\": false,\n            \"url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app\",\n            \"forks_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/forks\",\n            \"keys_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/keys{/key_id}\",\n            \"collaborators_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/collaborators{/collaborator}\",\n            \"teams_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/teams\",\n            \"hooks_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/hooks\",\n            \"issue_events_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/issues/events{/number}\",\n            \"events_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/events\",\n            \"assignees_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/assignees{/user}\",\n            \"branches_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/branches{/branch}\",\n            \"tags_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/tags\",\n            \"blobs_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/git/blobs{/sha}\",\n            \"git_tags_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/git/tags{/sha}\",\n            \"git_refs_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/git/refs{/sha}\",\n            \"trees_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/git/trees{/sha}\",\n            \"statuses_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/statuses/{sha}\",\n            \"languages_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/languages\",\n            \"stargazers_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/stargazers\",\n            \"contributors_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/contributors\",\n            \"subscribers_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/subscribers\",\n            \"subscription_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/subscription\",\n            \"commits_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/commits{/sha}\",\n            \"git_commits_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/git/commits{/sha}\",\n            \"comments_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/comments{/number}\",\n            \"issue_comment_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/issues/comments{/number}\",\n            \"contents_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/contents/{+path}\",\n            \"compare_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/compare/{base}...{head}\",\n            \"merges_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/merges\",\n            \"archive_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/{archive_format}{/ref}\",\n            \"downloads_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/downloads\",\n            \"issues_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/issues{/number}\",\n            \"pulls_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/pulls{/number}\",\n            \"milestones_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/milestones{/number}\",\n            \"notifications_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/notifications{?since,all,participating}\",\n            \"labels_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/labels{/name}\",\n            \"releases_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/releases{/id}\",\n            \"deployments_url\": \"https://api.github.com/repos/tomascatena/simple-MFE-app/deployments\",\n            \"created_at\": \"2021-12-28T14:04:39Z\",\n            \"updated_at\": \"2021-12-28T17:05:47Z\",\n            \"pushed_at\": \"2021-12-28T17:05:44Z\",\n            \"git_url\": \"git://github.com/tomascatena/simple-MFE-app.git\",\n            \"ssh_url\": \"git@github.com:tomascatena/simple-MFE-app.git\",\n            \"clone_url\": \"https://github.com/tomascatena/simple-MFE-app.git\",\n            \"svn_url\": \"https://github.com/tomascatena/simple-MFE-app\",\n            \"homepage\": null,\n            \"size\": 832,\n            \"stargazers_count\": 0,\n            \"watchers_count\": 0,\n            \"language\": \"TypeScript\",\n            \"has_issues\": true,\n            \"has_projects\": true,\n            \"has_downloads\": true,\n            \"has_wiki\": true,\n            \"has_pages\": false,\n            \"forks_count\": 0,\n            \"mirror_url\": null,\n            \"archived\": false,\n            \"disabled\": false,\n            \"open_issues_count\": 0,\n            \"license\": null,\n            \"allow_forking\": true,\n            \"is_template\": false,\n            \"topics\": [],\n            \"visibility\": \"public\",\n            \"forks\": 0,\n            \"open_issues\": 0,\n            \"watchers\": 0,\n            \"default_branch\": \"main\"\n        },\n        {\n            \"id\": 441987301,\n            \"node_id\": \"R_kgDOGlgw5Q\",\n            \"name\": \"simple-ssr-app\",\n            \"full_name\": \"tomascatena/simple-ssr-app\",\n            \"private\": false,\n            \"owner\": {\n                \"login\": \"tomascatena\",\n                \"id\": 63950136,\n                \"node_id\": \"MDQ6VXNlcjYzOTUwMTM2\",\n                \"avatar_url\": \"https://avatars.githubusercontent.com/u/63950136?v=4\",\n                \"gravatar_id\": \"\",\n                \"url\": \"https://api.github.com/users/tomascatena\",\n                \"html_url\": \"https://github.com/tomascatena\",\n                \"followers_url\": \"https://api.github.com/users/tomascatena/followers\",\n                \"following_url\": \"https://api.github.com/users/tomascatena/following{/other_user}\",\n                \"gists_url\": \"https://api.github.com/users/tomascatena/gists{/gist_id}\",\n                \"starred_url\": \"https://api.github.com/users/tomascatena/starred{/owner}{/repo}\",\n                \"subscriptions_url\": \"https://api.github.com/users/tomascatena/subscriptions\",\n                \"organizations_url\": \"https://api.github.com/users/tomascatena/orgs\",\n                \"repos_url\": \"https://api.github.com/users/tomascatena/repos\",\n                \"events_url\": \"https://api.github.com/users/tomascatena/events{/privacy}\",\n                \"received_events_url\": \"https://api.github.com/users/tomascatena/received_events\",\n                \"type\": \"User\",\n                \"site_admin\": false\n            },\n            \"html_url\": \"https://github.com/tomascatena/simple-ssr-app\",\n            \"description\": \"Simple React Typescript Express SSR App\",\n            \"fork\": false,\n            \"url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app\",\n            \"forks_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/forks\",\n            \"keys_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/keys{/key_id}\",\n            \"collaborators_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/collaborators{/collaborator}\",\n            \"teams_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/teams\",\n            \"hooks_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/hooks\",\n            \"issue_events_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/issues/events{/number}\",\n            \"events_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/events\",\n            \"assignees_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/assignees{/user}\",\n            \"branches_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/branches{/branch}\",\n            \"tags_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/tags\",\n            \"blobs_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/git/blobs{/sha}\",\n            \"git_tags_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/git/tags{/sha}\",\n            \"git_refs_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/git/refs{/sha}\",\n            \"trees_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/git/trees{/sha}\",\n            \"statuses_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/statuses/{sha}\",\n            \"languages_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/languages\",\n            \"stargazers_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/stargazers\",\n            \"contributors_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/contributors\",\n            \"subscribers_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/subscribers\",\n            \"subscription_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/subscription\",\n            \"commits_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/commits{/sha}\",\n            \"git_commits_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/git/commits{/sha}\",\n            \"comments_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/comments{/number}\",\n            \"issue_comment_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/issues/comments{/number}\",\n            \"contents_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/contents/{+path}\",\n            \"compare_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/compare/{base}...{head}\",\n            \"merges_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/merges\",\n            \"archive_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/{archive_format}{/ref}\",\n            \"downloads_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/downloads\",\n            \"issues_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/issues{/number}\",\n            \"pulls_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/pulls{/number}\",\n            \"milestones_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/milestones{/number}\",\n            \"notifications_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/notifications{?since,all,participating}\",\n            \"labels_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/labels{/name}\",\n            \"releases_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/releases{/id}\",\n            \"deployments_url\": \"https://api.github.com/repos/tomascatena/simple-ssr-app/deployments\",\n            \"created_at\": \"2021-12-26T21:30:14Z\",\n            \"updated_at\": \"2021-12-31T18:54:22Z\",\n            \"pushed_at\": \"2021-12-31T18:54:19Z\",\n            \"git_url\": \"git://github.com/tomascatena/simple-ssr-app.git\",\n            \"ssh_url\": \"git@github.com:tomascatena/simple-ssr-app.git\",\n            \"clone_url\": \"https://github.com/tomascatena/simple-ssr-app.git\",\n            \"svn_url\": \"https://github.com/tomascatena/simple-ssr-app\",\n            \"homepage\": null,\n            \"size\": 4587,\n            \"stargazers_count\": 0,\n            \"watchers_count\": 0,\n            \"language\": \"TypeScript\",\n            \"has_issues\": true,\n            \"has_projects\": true,\n            \"has_downloads\": true,\n            \"has_wiki\": true,\n            \"has_pages\": false,\n            \"forks_count\": 0,\n            \"mirror_url\": null,\n            \"archived\": false,\n            \"disabled\": false,\n            \"open_issues_count\": 0,\n            \"license\": null,\n            \"allow_forking\": true,\n            \"is_template\": false,\n            \"topics\": [],\n            \"visibility\": \"public\",\n            \"forks\": 0,\n            \"open_issues\": 0,\n            \"watchers\": 0,\n            \"default_branch\": \"main\"\n        },\n        {\n            \"id\": 439967040,\n            \"node_id\": \"R_kgDOGjldQA\",\n            \"name\": \"jbook\",\n            \"full_name\": \"tomascatena/jbook\",\n            \"private\": false,\n            \"owner\": {\n                \"login\": \"tomascatena\",\n                \"id\": 63950136,\n                \"node_id\": \"MDQ6VXNlcjYzOTUwMTM2\",\n                \"avatar_url\": \"https://avatars.githubusercontent.com/u/63950136?v=4\",\n                \"gravatar_id\": \"\",\n                \"url\": \"https://api.github.com/users/tomascatena\",\n                \"html_url\": \"https://github.com/tomascatena\",\n                \"followers_url\": \"https://api.github.com/users/tomascatena/followers\",\n                \"following_url\": \"https://api.github.com/users/tomascatena/following{/other_user}\",\n                \"gists_url\": \"https://api.github.com/users/tomascatena/gists{/gist_id}\",\n                \"starred_url\": \"https://api.github.com/users/tomascatena/starred{/owner}{/repo}\",\n                \"subscriptions_url\": \"https://api.github.com/users/tomascatena/subscriptions\",\n                \"organizations_url\": \"https://api.github.com/users/tomascatena/orgs\",\n                \"repos_url\": \"https://api.github.com/users/tomascatena/repos\",\n                \"events_url\": \"https://api.github.com/users/tomascatena/events{/privacy}\",\n                \"received_events_url\": \"https://api.github.com/users/tomascatena/received_events\",\n                \"type\": \"User\",\n                \"site_admin\": false\n            },\n            \"html_url\": \"https://github.com/tomascatena/jbook\",\n            \"description\": \"React Typescript App\",\n            \"fork\": false,\n            \"url\": \"https://api.github.com/repos/tomascatena/jbook\",\n            \"forks_url\": \"https://api.github.com/repos/tomascatena/jbook/forks\",\n            \"keys_url\": \"https://api.github.com/repos/tomascatena/jbook/keys{/key_id}\",\n            \"collaborators_url\": \"https://api.github.com/repos/tomascatena/jbook/collaborators{/collaborator}\",\n            \"teams_url\": \"https://api.github.com/repos/tomascatena/jbook/teams\",\n            \"hooks_url\": \"https://api.github.com/repos/tomascatena/jbook/hooks\",\n            \"issue_events_url\": \"https://api.github.com/repos/tomascatena/jbook/issues/events{/number}\",\n            \"events_url\": \"https://api.github.com/repos/tomascatena/jbook/events\",\n            \"assignees_url\": \"https://api.github.com/repos/tomascatena/jbook/assignees{/user}\",\n            \"branches_url\": \"https://api.github.com/repos/tomascatena/jbook/branches{/branch}\",\n            \"tags_url\": \"https://api.github.com/repos/tomascatena/jbook/tags\",\n            \"blobs_url\": \"https://api.github.com/repos/tomascatena/jbook/git/blobs{/sha}\",\n            \"git_tags_url\": \"https://api.github.com/repos/tomascatena/jbook/git/tags{/sha}\",\n            \"git_refs_url\": \"https://api.github.com/repos/tomascatena/jbook/git/refs{/sha}\",\n            \"trees_url\": \"https://api.github.com/repos/tomascatena/jbook/git/trees{/sha}\",\n            \"statuses_url\": \"https://api.github.com/repos/tomascatena/jbook/statuses/{sha}\",\n            \"languages_url\": \"https://api.github.com/repos/tomascatena/jbook/languages\",\n            \"stargazers_url\": \"https://api.github.com/repos/tomascatena/jbook/stargazers\",\n            \"contributors_url\": \"https://api.github.com/repos/tomascatena/jbook/contributors\",\n            \"subscribers_url\": \"https://api.github.com/repos/tomascatena/jbook/subscribers\",\n            \"subscription_url\": \"https://api.github.com/repos/tomascatena/jbook/subscription\",\n            \"commits_url\": \"https://api.github.com/repos/tomascatena/jbook/commits{/sha}\",\n            \"git_commits_url\": \"https://api.github.com/repos/tomascatena/jbook/git/commits{/sha}\",\n            \"comments_url\": \"https://api.github.com/repos/tomascatena/jbook/comments{/number}\",\n            \"issue_comment_url\": \"https://api.github.com/repos/tomascatena/jbook/issues/comments{/number}\",\n            \"contents_url\": \"https://api.github.com/repos/tomascatena/jbook/contents/{+path}\",\n            \"compare_url\": \"https://api.github.com/repos/tomascatena/jbook/compare/{base}...{head}\",\n            \"merges_url\": \"https://api.github.com/repos/tomascatena/jbook/merges\",\n            \"archive_url\": \"https://api.github.com/repos/tomascatena/jbook/{archive_format}{/ref}\",\n            \"downloads_url\": \"https://api.github.com/repos/tomascatena/jbook/downloads\",\n            \"issues_url\": \"https://api.github.com/repos/tomascatena/jbook/issues{/number}\",\n            \"pulls_url\": \"https://api.github.com/repos/tomascatena/jbook/pulls{/number}\",\n            \"milestones_url\": \"https://api.github.com/repos/tomascatena/jbook/milestones{/number}\",\n            \"notifications_url\": \"https://api.github.com/repos/tomascatena/jbook/notifications{?since,all,participating}\",\n            \"labels_url\": \"https://api.github.com/repos/tomascatena/jbook/labels{/name}\",\n            \"releases_url\": \"https://api.github.com/repos/tomascatena/jbook/releases{/id}\",\n            \"deployments_url\": \"https://api.github.com/repos/tomascatena/jbook/deployments\",\n            \"created_at\": \"2021-12-19T21:01:06Z\",\n            \"updated_at\": \"2022-01-09T10:30:53Z\",\n            \"pushed_at\": \"2022-01-09T10:30:49Z\",\n            \"git_url\": \"git://github.com/tomascatena/jbook.git\",\n            \"ssh_url\": \"git@github.com:tomascatena/jbook.git\",\n            \"clone_url\": \"https://github.com/tomascatena/jbook.git\",\n            \"svn_url\": \"https://github.com/tomascatena/jbook\",\n            \"homepage\": null,\n            \"size\": 13735,\n            \"stargazers_count\": 0,\n            \"watchers_count\": 0,\n            \"language\": \"TypeScript\",\n            \"has_issues\": true,\n            \"has_projects\": true,\n            \"has_downloads\": true,\n            \"has_wiki\": true,\n            \"has_pages\": false,\n            \"forks_count\": 0,\n            \"mirror_url\": null,\n            \"archived\": false,\n            \"disabled\": false,\n            \"open_issues_count\": 0,\n            \"license\": null,\n            \"allow_forking\": true,\n            \"is_template\": false,\n            \"topics\": [],\n            \"visibility\": \"public\",\n            \"forks\": 0,\n            \"open_issues\": 0,\n            \"watchers\": 0,\n            \"default_branch\": \"main\"\n        },\n        {\n            \"id\": 432732661,\n            \"node_id\": \"R_kgDOGcr59Q\",\n            \"name\": \"carpincho\",\n            \"full_name\": \"tomascatena/carpincho\",\n            \"private\": false,\n            \"owner\": {\n                \"login\": \"tomascatena\",\n                \"id\": 63950136,\n                \"node_id\": \"MDQ6VXNlcjYzOTUwMTM2\",\n                \"avatar_url\": \"https://avatars.githubusercontent.com/u/63950136?v=4\",\n                \"gravatar_id\": \"\",\n                \"url\": \"https://api.github.com/users/tomascatena\",\n                \"html_url\": \"https://github.com/tomascatena\",\n                \"followers_url\": \"https://api.github.com/users/tomascatena/followers\",\n                \"following_url\": \"https://api.github.com/users/tomascatena/following{/other_user}\",\n                \"gists_url\": \"https://api.github.com/users/tomascatena/gists{/gist_id}\",\n                \"starred_url\": \"https://api.github.com/users/tomascatena/starred{/owner}{/repo}\",\n                \"subscriptions_url\": \"https://api.github.com/users/tomascatena/subscriptions\",\n                \"organizations_url\": \"https://api.github.com/users/tomascatena/orgs\",\n                \"repos_url\": \"https://api.github.com/users/tomascatena/repos\",\n                \"events_url\": \"https://api.github.com/users/tomascatena/events{/privacy}\",\n                \"received_events_url\": \"https://api.github.com/users/tomascatena/received_events\",\n                \"type\": \"User\",\n                \"site_admin\": false\n            },\n            \"html_url\": \"https://github.com/tomascatena/carpincho\",\n            \"description\": \"MERN e-commerce\",\n            \"fork\": false,\n            \"url\": \"https://api.github.com/repos/tomascatena/carpincho\",\n            \"forks_url\": \"https://api.github.com/repos/tomascatena/carpincho/forks\",\n            \"keys_url\": \"https://api.github.com/repos/tomascatena/carpincho/keys{/key_id}\",\n            \"collaborators_url\": \"https://api.github.com/repos/tomascatena/carpincho/collaborators{/collaborator}\",\n            \"teams_url\": \"https://api.github.com/repos/tomascatena/carpincho/teams\",\n            \"hooks_url\": \"https://api.github.com/repos/tomascatena/carpincho/hooks\",\n            \"issue_events_url\": \"https://api.github.com/repos/tomascatena/carpincho/issues/events{/number}\",\n            \"events_url\": \"https://api.github.com/repos/tomascatena/carpincho/events\",\n            \"assignees_url\": \"https://api.github.com/repos/tomascatena/carpincho/assignees{/user}\",\n            \"branches_url\": \"https://api.github.com/repos/tomascatena/carpincho/branches{/branch}\",\n            \"tags_url\": \"https://api.github.com/repos/tomascatena/carpincho/tags\",\n            \"blobs_url\": \"https://api.github.com/repos/tomascatena/carpincho/git/blobs{/sha}\",\n            \"git_tags_url\": \"https://api.github.com/repos/tomascatena/carpincho/git/tags{/sha}\",\n            \"git_refs_url\": \"https://api.github.com/repos/tomascatena/carpincho/git/refs{/sha}\",\n            \"trees_url\": \"https://api.github.com/repos/tomascatena/carpincho/git/trees{/sha}\",\n            \"statuses_url\": \"https://api.github.com/repos/tomascatena/carpincho/statuses/{sha}\",\n            \"languages_url\": \"https://api.github.com/repos/tomascatena/carpincho/languages\",\n            \"stargazers_url\": \"https://api.github.com/repos/tomascatena/carpincho/stargazers\",\n            \"contributors_url\": \"https://api.github.com/repos/tomascatena/carpincho/contributors\",\n            \"subscribers_url\": \"https://api.github.com/repos/tomascatena/carpincho/subscribers\",\n            \"subscription_url\": \"https://api.github.com/repos/tomascatena/carpincho/subscription\",\n            \"commits_url\": \"https://api.github.com/repos/tomascatena/carpincho/commits{/sha}\",\n            \"git_commits_url\": \"https://api.github.com/repos/tomascatena/carpincho/git/commits{/sha}\",\n            \"comments_url\": \"https://api.github.com/repos/tomascatena/carpincho/comments{/number}\",\n            \"issue_comment_url\": \"https://api.github.com/repos/tomascatena/carpincho/issues/comments{/number}\",\n            \"contents_url\": \"https://api.github.com/repos/tomascatena/carpincho/contents/{+path}\",\n            \"compare_url\": \"https://api.github.com/repos/tomascatena/carpincho/compare/{base}...{head}\",\n            \"merges_url\": \"https://api.github.com/repos/tomascatena/carpincho/merges\",\n            \"archive_url\": \"https://api.github.com/repos/tomascatena/carpincho/{archive_format}{/ref}\",\n            \"downloads_url\": \"https://api.github.com/repos/tomascatena/carpincho/downloads\",\n            \"issues_url\": \"https://api.github.com/repos/tomascatena/carpincho/issues{/number}\",\n            \"pulls_url\": \"https://api.github.com/repos/tomascatena/carpincho/pulls{/number}\",\n            \"milestones_url\": \"https://api.github.com/repos/tomascatena/carpincho/milestones{/number}\",\n            \"notifications_url\": \"https://api.github.com/repos/tomascatena/carpincho/notifications{?since,all,participating}\",\n            \"labels_url\": \"https://api.github.com/repos/tomascatena/carpincho/labels{/name}\",\n            \"releases_url\": \"https://api.github.com/repos/tomascatena/carpincho/releases{/id}\",\n            \"deployments_url\": \"https://api.github.com/repos/tomascatena/carpincho/deployments\",\n            \"created_at\": \"2021-11-28T14:19:18Z\",\n            \"updated_at\": \"2022-01-09T18:55:19Z\",\n            \"pushed_at\": \"2022-01-09T18:55:16Z\",\n            \"git_url\": \"git://github.com/tomascatena/carpincho.git\",\n            \"ssh_url\": \"git@github.com:tomascatena/carpincho.git\",\n            \"clone_url\": \"https://github.com/tomascatena/carpincho.git\",\n            \"svn_url\": \"https://github.com/tomascatena/carpincho\",\n            \"homepage\": null,\n            \"size\": 1352,\n            \"stargazers_count\": 0,\n            \"watchers_count\": 0,\n            \"language\": \"TypeScript\",\n            \"has_issues\": true,\n            \"has_projects\": true,\n            \"has_downloads\": true,\n            \"has_wiki\": true,\n            \"has_pages\": false,\n            \"forks_count\": 0,\n            \"mirror_url\": null,\n            \"archived\": false,\n            \"disabled\": false,\n            \"open_issues_count\": 0,\n            \"license\": null,\n            \"allow_forking\": true,\n            \"is_template\": false,\n            \"topics\": [],\n            \"visibility\": \"public\",\n            \"forks\": 0,\n            \"open_issues\": 0,\n            \"watchers\": 0,\n            \"default_branch\": \"main\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "Routes related to user profile."
+		}
+	]
+}

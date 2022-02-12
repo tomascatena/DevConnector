@@ -127,11 +127,11 @@ export const experience = [
     .withMessage('Invalid user profile experience: location'),
   check('profile.experience.*.from', 'from date is required')
     .notEmpty()
-    .isDate()
+    .isISO8601()
     .withMessage('Invalid user profile experience: from'),
   check('profile.experience.*.to')
     .optional({ nullable: true })
-    .isDate()
+    .isISO8601()
     .withMessage('Invalid user profile experience: to'),
   check('profile.experience.*.current')
     .optional({ nullable: true })

@@ -52,6 +52,7 @@ export const getAllProfiles = catchAsync(
 // @access    Public
 export const getProfileByUserId = catchAsync(
   async (req: RequestWithBody, res: Response) => {
+    console.log(req.params.userId);
     const profile = await Profile.findOne({
       user: req.params.userId,
     }).populate('user', ['name', 'avatar']);
@@ -129,6 +130,7 @@ export const createUserProfile = catchAsync(
 export const deleteProfile = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const profile = await Profile.findOneAndRemove({ user: req.userId });
+
     await User.findOneAndRemove({ _id: req.userId });
 
     if (!profile) {
@@ -204,7 +206,7 @@ export const deleteProfileExperience = catchAsync(
       });
     }
     return res.status(httpStatus.CREATED).json({
-      message: 'Successfully added/updated user profile experience',
+      message: 'Successfully deleted user profile experience',
       profile,
     });
   }
@@ -234,6 +236,7 @@ export const profileEducation = catchAsync(
         isOperational: false,
       });
     }
+
     return res.status(httpStatus.CREATED).json({
       message: 'Successfully added/updated user profile education',
       profile,

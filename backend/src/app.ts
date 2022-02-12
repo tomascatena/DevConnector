@@ -9,6 +9,7 @@ import routes from '@routes/v1';
 import { morganHttpLogger } from '@config/morgan';
 import { env } from '@config/config';
 import mongoSanitize from 'express-mongo-sanitize';
+import cors from 'cors';
 import { expressWinstonLogger } from './config/logger';
 
 export const app = express();
@@ -30,8 +31,16 @@ app.use(express.urlencoded({ extended: true, limit: '1kb' }));
 // sanitize request data
 app.use(mongoSanitize());
 
+// enable cors
+app.use(cors());
+// enable pre-flight
+app.options('*', cors);
+
 // express-winston logger makes sense BEFORE the router
 app.use(expressWinstonLogger.info);
+
+// v1 api Documentation
+app.use('/api/v1/docs', express.static('public'));
 
 // v1 api routes
 app.use('/api/v1', routes);

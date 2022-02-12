@@ -22,8 +22,6 @@ export const errorConverter = (
 ) => {
   let error = err;
 
-  console.log('in errorConverter');
-
   if (!(error instanceof ApiError)) {
     const statusCode =
       error.statusCode || error instanceof mongoose.Error
