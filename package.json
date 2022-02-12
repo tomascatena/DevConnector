@@ -5,6 +5,7 @@
   "license": "MIT",
   "description": "MERN Social Network For Developers",
   "main": "index.ts",
+  "repository": "git@github.com:tomascatena/DevConnector.git",
   "scripts": {
     "start": "ts-node ./backend/server.ts",
     "dev-server": "npm run dev-server --prefix ./backend",
