@@ -28,7 +28,7 @@ app.use(mongoSanitize());
 app.use(
   rateLimit({
     windowMs: 10 * 60 * 1000, // 10 Minutes
-    max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+    max: 100, // Limit each IP to 100 requests per `window` (here, per 10 minutes)
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
   })
@@ -45,7 +45,7 @@ app.use(express.json({ limit: '1kb' }));
 // Parse urlencoded request body
 app.use(express.urlencoded({ extended: true, limit: '1kb' }));
 
-// Express middleware to protect against HTTP Parameter Pollution attacks
+// Protect against HTTP Parameter Pollution attacks
 app.use(hpp());
 
 // Enable cors
