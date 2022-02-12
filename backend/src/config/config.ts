@@ -26,4 +26,7 @@ export const env = cleanEnv(process.env, {
   GITHUB_API_CLIENT_SECRET: str({
     desc: 'github API clientSecret',
   }),
+  API_BASE_URL: str({
+    desc: 'API base URL',
+  }),
 });

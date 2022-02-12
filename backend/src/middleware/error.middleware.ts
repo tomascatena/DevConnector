@@ -5,15 +5,6 @@ import { ApiError } from 'utils/ApiError';
 import mongoose from 'mongoose';
 import { Logger, LoggerToFile } from '../config/logger';
 
-export const notFound = (req: Request, res: Response, next: NextFunction) => {
-  next(
-    new ApiError({
-      statusCode: httpStatus.NOT_FOUND,
-      message: `Not found - ${req.originalUrl}`,
-    })
-  );
-};
-
 export const errorConverter = (
   err: any,
   req: Request,
@@ -68,9 +59,5 @@ export const errorHandler = (
     statusCode: err.statusCode,
   });
 
-  res.status(statusCode).json({
-    code: statusCode,
-    message,
-    ...(env.NODE_ENV === 'development' && { stack: err.stack }),
-  });
+  res.status(statusCode).send(message);
 };

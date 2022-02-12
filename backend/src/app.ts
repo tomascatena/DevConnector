@@ -1,15 +1,12 @@
 import express from 'express';
-import {
-  notFound,
-  errorHandler,
-  errorConverter,
-} from '@middleware/error.middleware';
+import { errorHandler, errorConverter } from '@middleware/error.middleware';
 import helmet from 'helmet';
 import routes from '@routes/v1';
 import { morganHttpLogger } from '@config/morgan';
 import { env } from '@config/config';
 import mongoSanitize from 'express-mongo-sanitize';
 import cors from 'cors';
+import { notFound } from '@middleware/notFound.middleware';
 import { expressWinstonLogger } from './config/logger';
 
 export const app = express();
