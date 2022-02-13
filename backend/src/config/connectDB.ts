@@ -8,7 +8,7 @@ export const connectDB = async () => {
 
     Logger.info(`MongoDB connected`);
   } catch (error) {
-    if (error instanceof Error) {
+    if (error instanceof Error || error instanceof mongoose.Error) {
       Logger.error(
         `Something went wrong when connecting to mongoDB: ${error.message}`
       );

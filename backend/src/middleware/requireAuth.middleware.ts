@@ -3,6 +3,7 @@ import { NextFunction, Response } from 'express';
 import { env } from '@config/config';
 import httpStatus from 'http-status-codes';
 import jwt from 'jsonwebtoken';
+import { ApiError } from 'utils/ApiError';
 import { validationsResults } from './validations.middleware';
 import { JWTPayload, RequestWithBody } from '../types/types';
 
@@ -17,11 +18,12 @@ export const requireAuth = [
 
       req.userId = (<JWTPayload>decoded).user.id;
     } catch (error) {
-      if (error instanceof Error) {
-        return res.status(httpStatus.UNAUTHORIZED).json({
-          message: 'No authorized to access this endpoint',
-        });
-      }
+      throw new ApiError({
+        statusCode: httpStatus.UNAUTHORIZED,
+        message: 'No authorized to access this endpoint',
+        isOperational: false,
+        stack: error instanceof Error ? error.stack : undefined,
+      });
     }
 
     next();

@@ -22,23 +22,13 @@ const CUSTOM_LEVELS = {
 
 winston.addColors(CUSTOM_LEVELS.colors);
 
-const enumerateErrorFormat = winston.format((info) => {
-  if (info instanceof Error) {
-    Object.assign(info, { message: info.stack });
-  }
-
-  return info;
-});
-
 const formatToFile = winston.format.combine(
-  enumerateErrorFormat(),
   winston.format.uncolorize(),
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
   winston.format.json()
 );
 
 const formatToConsole = winston.format.combine(
-  enumerateErrorFormat(),
   winston.format.colorize({ all: true }),
   winston.format.prettyPrint(),
   winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),

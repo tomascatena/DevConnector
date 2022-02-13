@@ -9,7 +9,8 @@
   "scripts": {
     "start": "ts-node ./backend/server.ts",
     "dev-server": "npm run dev-server --prefix ./backend",
-    "client": "nodemon ./frontend/index.ts"
+    "frontend": "npm run start --prefix ./frontend",
+    "dev": "concurrently \"npm run dev-server\" \"npm run frontend\""
   },
   "keywords": [],
   "devDependencies": {

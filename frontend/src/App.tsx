@@ -1,27 +1,38 @@
 import React, { FC, useState, lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import defaultTheme from './themes/defaultDarkTheme';
-import defaultDarkTheme from './themes/defaultDarkTheme';
+import lightTheme from './themes/darkTheme';
+import darkTheme from './themes/darkTheme';
 import { ThemeProvider } from '@mui/material/styles';
+import ResponsiveAppBar from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import { MainLayout, MainBox } from './App.styled';
+import { ROUTES } from './constants/constants';
 
-const HomePage = lazy(() => import('./pages/HomePage'));
+const LandingPage = lazy(() => import('./pages/LandingPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 
 const App: FC = () => {
-  const [darkTheme, setDarkTheme] = useState<boolean>(true);
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(true);
 
   return (
     <BrowserRouter>
-      <ThemeProvider theme={darkTheme ? defaultDarkTheme : defaultTheme}>
-        <Routes>
-          <Route
-            path='/'
-            element={
-              <Suspense fallback='Loading...'>
-                <HomePage />
-              </Suspense>
-            }
-          />
-        </Routes>
+      <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+        <MainLayout>
+          <ResponsiveAppBar />
+
+          <MainBox>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Routes>
+                <Route path='/' element={<LandingPage />} />
+                <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+                <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+              </Routes>
+            </Suspense>
+          </MainBox>
+
+          <Footer />
+        </MainLayout>
       </ThemeProvider>
     </BrowserRouter>
   );

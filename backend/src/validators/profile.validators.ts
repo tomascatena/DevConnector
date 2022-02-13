@@ -167,11 +167,11 @@ export const education = [
     .withMessage('Invalid user profile education: fieldOfStudy'),
   check('profile.education.*.from', 'from date is required')
     .notEmpty()
-    .isDate()
+    .isISO8601()
     .withMessage('Invalid user profile education: from'),
   check('profile.education.*.to')
     .optional({ nullable: true })
-    .isDate()
+    .isISO8601()
     .withMessage('Invalid user profile education: to'),
   check('profile.education.*.current')
     .optional({ nullable: true })

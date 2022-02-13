@@ -23,7 +23,7 @@ export const post = [
   check('post.date', 'date is required')
     .optional({ nullable: true })
     .notEmpty()
-    .isDate()
+    .isISO8601()
     .withMessage('Invalid post field: date'),
 ];
 
