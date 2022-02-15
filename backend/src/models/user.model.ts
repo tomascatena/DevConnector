@@ -5,7 +5,8 @@ import bcryptjs from 'bcryptjs';
 
 export interface IUser {
   _id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   avatar: string;
@@ -13,7 +14,12 @@ export interface IUser {
 
 const userSchema = new Schema<IUser>(
   {
-    name: {
+    firstName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    lastName: {
       type: String,
       required: true,
       trim: true,

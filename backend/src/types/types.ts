@@ -7,7 +7,8 @@ import { IProfile } from '@models/profile.model';
 export interface RequestWithBody extends Request {
   body: {
     user?: Partial<IUser>;
-    name?: string;
+    firstName?: string;
+    lastName?: string;
     email?: string;
     password?: string;
     profile?: IProfile;

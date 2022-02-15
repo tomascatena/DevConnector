@@ -13,7 +13,7 @@ import { JWTPayload, RequestWithBody } from '../types/types';
 // @access    Public
 export const registerUser = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const { name, email, password } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
     const avatar = gravatar.url(
       email!,
@@ -25,7 +25,13 @@ export const registerUser = catchAsync(
       true
     );
 
-    const user = await User.create({ name, email, password, avatar });
+    const user = await User.create({
+      firstName,
+      lastName,
+      email,
+      password,
+      avatar,
+    });
 
     const payload: JWTPayload = {
       user: {

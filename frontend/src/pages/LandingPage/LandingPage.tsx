@@ -3,11 +3,11 @@ import { styled } from '@mui/system';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import showCaseImage from '../assets/showCaseImage.png';
+import showCaseImage from '../../assets/showCaseImage.png';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '../constants/constants';
+import { ROUTES } from '../../constants/constants';
 
-const LandingContainer = styled(Box)(({ theme }) => ({
+const LandingBox = styled(Box)(({ theme }) => ({
   flex: 1,
   color: theme.palette.primary.main,
   backgroundImage: `linear-gradient(rgba(39,39,39,0.6), rgba(39,39,39,0.6)), url(${showCaseImage})`,
@@ -25,7 +25,7 @@ const ButtonsContainer = styled(Box)(({ theme }) => ({
 
 const LandingPage: FC = () => {
   return (
-    <LandingContainer>
+    <LandingBox>
       <Typography variant='h3' align='center' color='text.primary'>
         Developer Connector
       </Typography>
@@ -44,7 +44,7 @@ const LandingPage: FC = () => {
           Login
         </Button>
       </ButtonsContainer>
-    </LandingContainer>
+    </LandingBox>
   );
 };
 

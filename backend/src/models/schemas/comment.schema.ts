@@ -3,7 +3,8 @@ import { Schema, ObjectId } from 'mongoose';
 export interface IComment {
   user: ObjectId;
   text: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   avatar: string;
   date: Date;
 }
@@ -19,7 +20,10 @@ export const commentSchema = new Schema<IComment>(
       trim: true,
       required: true,
     },
-    name: {
+    firstName: {
+      type: String,
+    },
+    lastName: {
       type: String,
     },
     avatar: {

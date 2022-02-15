@@ -5,7 +5,8 @@ export interface IPost {
   _id: string;
   user: ObjectId;
   text: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   avatar: string;
   likes: { user: ObjectId }[];
   comments: IComment[];
@@ -24,7 +25,10 @@ const postSchema = new Schema<IPost>(
       trim: true,
       required: true,
     },
-    name: {
+    firstName: {
+      type: String,
+    },
+    lastName: {
       type: String,
     },
     avatar: {

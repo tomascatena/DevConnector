@@ -8,9 +8,9 @@ import Footer from './components/Footer/Footer';
 import { MainLayout, MainBox } from './App.styled';
 import { ROUTES } from './constants/constants';
 
-const LandingPage = lazy(() => import('./pages/LandingPage'));
-const LoginPage = lazy(() => import('./pages/LoginPage'));
-const RegisterPage = lazy(() => import('./pages/RegisterPage'));
+const LandingPage = lazy(() => import('./pages/LandingPage/LandingPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'));
+const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
 
 const App: FC = () => {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(true);

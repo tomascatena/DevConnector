@@ -2,11 +2,18 @@ import { check } from 'express-validator';
 import { env } from '../config/config';
 import User from '../models/user.model';
 
-export const name = check('name', 'Name is required')
+export const firstName = check('firstName', 'First name is required')
   .trim()
   .isString()
   .isLength({ min: 2 })
-  .withMessage(`Name must be at least 2 characters long`)
+  .withMessage(`First name must be at least 2 characters long`)
+  .escape();
+
+export const lastName = check('lastName', 'Last name is required')
+  .trim()
+  .isString()
+  .isLength({ min: 2 })
+  .withMessage(`Last name must be at least 2 characters long`)
   .escape();
 
 export const emailForRegister = check('email', 'Email is required')

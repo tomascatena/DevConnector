@@ -24,7 +24,8 @@ export const createPost = catchAsync(
     if (req.body.post?.text) {
       const post = await Post.create({
         text: req.body.post.text,
-        name: user.name,
+        firstName: user.firstName,
+        lastName: user.lastName,
         avatar: user.avatar,
         user: req.userId,
       });
@@ -196,7 +197,8 @@ export const commentPost = catchAsync(
               $each: [
                 {
                   text: req.body.comment.text,
-                  name: user.name,
+                  firstName: user.firstName,
+                  lastName: user.lastName,
                   avatar: user.avatar,
                   user: req.userId,
                 },
