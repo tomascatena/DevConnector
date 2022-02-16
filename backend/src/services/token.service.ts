@@ -43,6 +43,7 @@ export const saveToken = async (
 
 export const verifyToken = async (token: string, type: TokenTypes) => {
   const payload = jwt.verify(token, env.JWT_SECRET);
+
   const tokenDoc = await Token.findOne({
     token,
     type,

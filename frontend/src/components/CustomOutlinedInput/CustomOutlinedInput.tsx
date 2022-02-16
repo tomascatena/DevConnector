@@ -17,6 +17,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import { ValidatorResult } from '../../utils/validator';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { useEffect } from 'react';
+import { Nullable } from '../../typings/types';
 
 interface FormState {
   value: string;
@@ -30,6 +31,7 @@ type Props = {
   label: string;
   validation: ValidatorResult;
   customHelperText?: string;
+  serverValidationError?: Nullable<string>;
 };
 
 const CustomOutlinedInput: FC<Props> = ({
@@ -39,9 +41,14 @@ const CustomOutlinedInput: FC<Props> = ({
   label,
   validation,
   customHelperText,
+  serverValidationError = null,
 }) => {
   const [isBlur, setIsBlur] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [hasServerValidationError, setHasServerValidationError] = useState(
+    Boolean(serverValidationError)
+  );
+
   const { isValid, validationErrors } = validation.exec();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -49,6 +56,8 @@ const CustomOutlinedInput: FC<Props> = ({
       value: event.target.value,
       isValid: isBlur && isValid,
     });
+
+    setHasServerValidationError(false);
   };
 
   useEffect(() => {
@@ -60,6 +69,12 @@ const CustomOutlinedInput: FC<Props> = ({
     // eslint-disable-next-line
   }, [isBlur, isValid, inputState.value]);
 
+  useEffect(() => {
+    setHasServerValidationError(Boolean(serverValidationError));
+
+    // eslint-disable-next-line
+  }, [serverValidationError]);
+
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -68,6 +83,10 @@ const CustomOutlinedInput: FC<Props> = ({
     let { focused } = useFormControl() || {};
 
     const helperText = useMemo(() => {
+      if (hasServerValidationError) {
+        return serverValidationError;
+      }
+
       if (focused && validationErrors.length) {
         return validationErrors[0];
       }
@@ -85,7 +104,7 @@ const CustomOutlinedInput: FC<Props> = ({
   };
 
   const inputColor = isBlur && isValid ? 'success' : undefined;
-  const shouldShowError = isBlur && !isValid;
+  const shouldShowError = (isBlur && !isValid) || hasServerValidationError;
 
   let inputType = type;
   if (type === 'password') {
@@ -94,7 +113,9 @@ const CustomOutlinedInput: FC<Props> = ({
 
   const endAdornment = (
     <InputAdornment position='end'>
-      {isBlur && isValid && <CheckCircleOutlineIcon color='success' />}
+      {isBlur && isValid && !hasServerValidationError && (
+        <CheckCircleOutlineIcon color='success' />
+      )}
 
       {type === 'password' && (
         <IconButton

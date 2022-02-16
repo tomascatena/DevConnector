@@ -1,9 +1,8 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, FormEvent } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
 import { ROUTES } from '../../constants/constants';
 import { validate } from '../../utils/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
@@ -13,8 +12,13 @@ import {
   StyledForm,
   StyledLink,
 } from './RegisterPage.styled';
+import { useAppDispatch, useTypedSelector } from '../../hooks';
+import { userRegister } from '../../store/features/user/user.thunk';
 
 const RegisterPage: FC = () => {
+  const dispatch = useAppDispatch();
+  const { serverValidationErrors } = useTypedSelector((state) => state.user);
+
   const [emailState, setEmailState] = useState({
     value: '',
     isValid: false,
@@ -50,13 +54,27 @@ const RegisterPage: FC = () => {
 
   const isButtonDisabled = formData.some(({ isValid }) => !isValid);
 
+  const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const registerForm = {
+      firstName: firstNameState.value,
+      lastName: lastNameState.value,
+      email: emailState.value,
+      password: passwordState.value,
+      confirmPassword: confirmPasswordState.value,
+    };
+
+    dispatch(userRegister(registerForm));
+  };
+
   return (
     <RegisterContainer>
       <Typography variant='h4' align='center'>
         Sign Up
       </Typography>
 
-      <StyledForm>
+      <StyledForm noValidate onSubmit={handleFormSubmit}>
         <Box
           sx={{
             display: 'flex',
@@ -74,6 +92,7 @@ const RegisterPage: FC = () => {
           validation={validate(emailState.value).required().isEmail()}
           type='email'
           label='Email'
+          serverValidationError={serverValidationErrors?.email?.msg}
         />
 
         <Grid container spacing={3}>
@@ -108,8 +127,8 @@ const RegisterPage: FC = () => {
           inputState={passwordState}
           setInputState={setPasswordState}
           validation={validate(passwordState.value).required().isLength({
-            min: 2,
-            max: 5,
+            min: 6,
+            max: 20,
           })}
           type='password'
           label='Password'
@@ -122,8 +141,8 @@ const RegisterPage: FC = () => {
           validation={validate(confirmPasswordState.value)
             .required()
             .isLength({
-              min: 2,
-              max: 5,
+              min: 6,
+              max: 20,
             })
             .custom(
               'Passwords must match',
@@ -135,10 +154,9 @@ const RegisterPage: FC = () => {
 
         <Button
           sx={{ maxWidth: { sm: '10rem' } }}
-          component={Link}
-          to={ROUTES.REGISTER}
           variant='contained'
           disabled={isButtonDisabled}
+          type='submit'
         >
           Register
         </Button>
