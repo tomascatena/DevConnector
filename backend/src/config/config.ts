@@ -20,6 +20,18 @@ export const env = cleanEnv(process.env, {
   JWT_EXPIRES_IN: str({
     desc: 'Json Web Token expires in option',
   }),
+  JWT_ACCESS_EXPIRATION_MINUTES: num({
+    desc: 'Number of minutes after which an access token expires',
+  }),
+  JWT_REFRESH_EXPIRATION_DAYS: num({
+    desc: 'Number of days after which a refresh token expires',
+  }),
+  JWT_RESET_PASSWORD_EXPIRATION_MINUTES: num({
+    desc: 'Number of minutes after which a reset password token expires',
+  }),
+  JWT_VERIFY_EMAIL_EXPIRATION_MINUTES: num({
+    desc: 'Number of minutes after which a verify email token expires',
+  }),
   GITHUB_API_CLIENT_ID: str({
     desc: 'Github API clientId',
   }),
