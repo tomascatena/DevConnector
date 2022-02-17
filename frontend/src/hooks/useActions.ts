@@ -1,10 +1,12 @@
 import { bindActionCreators } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 
-import { userActions } from '../store/features/user/userSlice';
+import { userRegisterActions } from '../store/features/userRegister/userRegisterSlice';
+import { userLoginActions } from '../store/features/userLogin/userLoginSlice';
 
 const actions = {
-  ...userActions,
+  ...userRegisterActions,
+  ...userLoginActions,
 };
 
 export const useActions = (): typeof actions => {

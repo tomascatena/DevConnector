@@ -12,6 +12,7 @@ import xssClean from 'xss-clean';
 import hpp from 'hpp';
 import rateLimit from 'express-rate-limit';
 import { expressWinstonLogger } from './config/logger';
+import { authLimiter } from './middleware/authLimiter';
 
 export const app = express();
 
@@ -58,6 +59,11 @@ app.use(expressWinstonLogger.info);
 
 // v1 api Documentation
 app.use('/api/v1/docs', express.static('public'));
+
+// Limit repeated failed requests to auth endpoints
+if (env.NODE_ENV === 'production') {
+  app.use('/v1/auth', authLimiter);
+}
 
 // v1 api routes
 app.use('/api/v1', routes);

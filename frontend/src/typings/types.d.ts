@@ -8,6 +8,11 @@ export interface IUserRegisterForm {
   confirmPassword: string;
 }
 
+export interface IUserLoginForm {
+  email: string;
+  password: string;
+}
+
 export interface IUser {
   _id: string;
   firstName: string;
@@ -27,3 +32,5 @@ export type ValidationError = {
   param: string;
   location: string;
 };
+
+export type Token = {};

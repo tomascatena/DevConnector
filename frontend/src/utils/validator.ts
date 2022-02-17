@@ -3,7 +3,7 @@ import validator from 'validator';
 type Handler = (message?: string, options?: any) => ValidatorResult;
 type HandlerNoMessage = (options?: any) => ValidatorResult;
 type CustomHandler = (
-  message: string,
+  message: string | null,
   callback: (value: string) => boolean
 ) => ValidatorResult;
 
@@ -75,7 +75,7 @@ export const validate = (value: string): ValidatorResult => {
       return this;
     },
     custom(message, cb) {
-      if (cb(_value)) {
+      if (cb(_value) || message === null) {
         return this;
       }
 

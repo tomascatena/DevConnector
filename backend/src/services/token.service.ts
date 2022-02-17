@@ -1,14 +1,13 @@
 import { env } from '@config/config';
 import { TokenTypes, tokenTypes } from '@config/tokens';
 import jwt from 'jsonwebtoken';
-import { ObjectId } from 'mongoose';
 import getUnixTime from 'date-fns/getUnixTime';
 import addMinutes from 'date-fns/addMinutes';
 import addDays from 'date-fns/addDays';
 import Token from '../models/token.model';
 
 export const generateToken = (
-  userId: ObjectId,
+  userId: string,
   expires: Date,
   type: TokenTypes,
   secret = env.JWT_SECRET
@@ -25,7 +24,7 @@ export const generateToken = (
 
 export const saveToken = async (
   token: string,
-  userId: ObjectId,
+  userId: string,
   expires: Date,
   type: TokenTypes,
   blacklisted = false
@@ -58,7 +57,9 @@ export const verifyToken = async (token: string, type: TokenTypes) => {
   return tokenDoc;
 };
 
-export const generateAuthTokens = async (userId: ObjectId) => {
+export const generateAuthTokens = async (userId: string) => {
+  console.log(userId);
+
   const accessTokenExpires = addMinutes(
     new Date(),
     env.JWT_ACCESS_EXPIRATION_MINUTES

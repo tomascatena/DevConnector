@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
 import { IUser, Nullable, ServerValidationError } from '../../../typings/types';
-import { userRegister } from './user.thunk';
+import { userRegister } from './userRegister.thunk';
 
 export interface UserState {
   user: Nullable<IUser>;
@@ -24,8 +24,6 @@ export const userSlice = createSlice({
   reducers: {
     setError(state, action: PayloadAction<ServerValidationError>) {
       state.serverValidationErrors = action.payload;
-
-      console.log(action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -62,6 +60,6 @@ export const userSlice = createSlice({
   },
 });
 
-export const userActions = userSlice.actions;
+export const userRegisterActions = userSlice.actions;
 
 export default userSlice.reducer;

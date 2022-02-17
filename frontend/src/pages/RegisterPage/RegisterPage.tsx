@@ -13,11 +13,13 @@ import {
   StyledLink,
 } from './RegisterPage.styled';
 import { useAppDispatch, useTypedSelector } from '../../hooks';
-import { userRegister } from '../../store/features/user/user.thunk';
+import { userRegister } from '../../store/features/userRegister/userRegister.thunk';
 
 const RegisterPage: FC = () => {
   const dispatch = useAppDispatch();
-  const { serverValidationErrors } = useTypedSelector((state) => state.user);
+  const { serverValidationErrors } = useTypedSelector(
+    (state) => state.userRegister
+  );
 
   const [emailState, setEmailState] = useState({
     value: '',
@@ -89,10 +91,15 @@ const RegisterPage: FC = () => {
         <CustomOutlinedInput
           inputState={emailState}
           setInputState={setEmailState}
-          validation={validate(emailState.value).required().isEmail()}
+          validation={validate(emailState.value)
+            .required()
+            .isEmail()
+            .custom(
+              serverValidationErrors?.email?.msg || null,
+              (value) => value !== serverValidationErrors?.email?.value
+            )}
           type='email'
           label='Email'
-          serverValidationError={serverValidationErrors?.email?.msg}
         />
 
         <Grid container spacing={3}>
