@@ -10,11 +10,14 @@
     "start": "ts-node ./backend/server.ts",
     "dev-server": "npm run dev-server --prefix ./backend",
     "frontend": "npm run start --prefix ./frontend",
-    "dev": "concurrently \"npm run dev-server\" \"npm run frontend\""
+    "dev": "concurrently \"npm run dev-server\" \"npm run frontend\"",
+    "prepare": "husky install",
+    "lint": "npm run lint --prefix ./backend"
   },
   "keywords": [],
   "devDependencies": {
     "concurrently": "7.0.0",
+    "husky": "^7.0.4",
     "nodemon": "2.0.15",
     "ts-node": "10.4.0",
     "typescript": "4.5.5"
