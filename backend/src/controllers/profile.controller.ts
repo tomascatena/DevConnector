@@ -3,9 +3,19 @@ import { Response } from 'express';
 import { env } from '@config/config';
 import { catchAsync } from 'utils/catchAsync';
 import request from 'request';
-import Profile from '@models/profile.model';
-import User from '@models/user.model';
 import { ApiError } from 'utils/ApiError';
+import {
+  addOrUpdateProfileEducation,
+  addOrUpdateProfileExperience,
+  createProfile,
+  findProfileByUserIdAndUpdate,
+  getAllPopulatedProfiles,
+  getPopulatedProfileByUserId,
+  removeEducationFromProfile,
+  removeExperienceFromProfile,
+  removeProfileByUserId,
+} from 'services/profile.service';
+import { removeUserById } from 'services/user.service';
 import { RequestWithBody } from '../types/types';
 
 // @route     GET api/v1/profile/me
@@ -13,10 +23,7 @@ import { RequestWithBody } from '../types/types';
 // @access    Private
 export const getUserProfile = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const profile = await Profile.findOne({ user: req.userId }).populate(
-      'user',
-      ['name', 'avatar']
-    );
+    const profile = await getPopulatedProfileByUserId(req.userId!);
 
     if (!profile) {
       throw new ApiError({
@@ -38,7 +45,7 @@ export const getUserProfile = catchAsync(
 // @access    Public
 export const getAllProfiles = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+    const profiles = await getAllPopulatedProfiles();
 
     return res.status(httpStatus.CREATED).json({
       message: 'Successfully got all user profiles',
@@ -52,10 +59,7 @@ export const getAllProfiles = catchAsync(
 // @access    Public
 export const getProfileByUserId = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    console.log(req.params.userId);
-    const profile = await Profile.findOne({
-      user: req.params.userId,
-    }).populate('user', ['name', 'avatar']);
+    const profile = await getPopulatedProfileByUserId(req.params.userId);
 
     if (!profile) {
       throw new ApiError({
@@ -100,14 +104,10 @@ export const createUserProfile = catchAsync(
       ...(social && { social }),
     };
 
-    let profile = await Profile.findOne({ user: req.userId });
+    let profile = await getPopulatedProfileByUserId(req.userId!);
 
     if (profile) {
-      profile = await Profile.findOneAndUpdate(
-        { user: req.userId },
-        { $set: profileFields },
-        { new: true }
-      );
+      profile = await findProfileByUserIdAndUpdate(req.userId!, profileFields);
 
       return res.status(httpStatus.OK).json({
         message: 'Successfully updated user profile',
@@ -115,7 +115,7 @@ export const createUserProfile = catchAsync(
       });
     }
 
-    profile = await Profile.create(profileFields);
+    profile = await createProfile(profileFields);
 
     return res.status(httpStatus.CREATED).json({
       message: 'Successfully created user profile',
@@ -129,9 +129,9 @@ export const createUserProfile = catchAsync(
 // @access    Private
 export const deleteProfile = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const profile = await Profile.findOneAndRemove({ user: req.userId });
+    const profile = await removeProfileByUserId(req.userId!);
 
-    await User.findOneAndRemove({ _id: req.userId });
+    await removeUserById(req.userId!);
 
     if (!profile) {
       throw new ApiError({
@@ -155,18 +155,7 @@ export const profileExperience = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const { experience } = req.body.profile!;
 
-    const profile = await Profile.findOneAndUpdate(
-      { user: req.userId },
-      {
-        $push: {
-          experience: {
-            $each: [...experience!],
-            $position: 0,
-          },
-        },
-      },
-      { new: true }
-    );
+    const profile = await addOrUpdateProfileExperience(req.userId!, experience);
 
     if (!profile) {
       throw new ApiError({
@@ -188,14 +177,9 @@ export const profileExperience = catchAsync(
 // @access    Private
 export const deleteProfileExperience = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const profile = await Profile.findOneAndUpdate(
-      { user: req.userId },
-      {
-        $pull: {
-          experience: { _id: req.params.experienceId },
-        },
-      },
-      { new: true }
+    const profile = await removeExperienceFromProfile(
+      req.userId!,
+      req.params.experienceId
     );
 
     if (!profile) {
@@ -219,15 +203,7 @@ export const profileEducation = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const { education } = req.body.profile!;
 
-    const profile = await Profile.findOneAndUpdate(
-      { user: req.userId },
-      {
-        $push: {
-          education: { $each: [...education!], $position: 0 },
-        },
-      },
-      { new: true }
-    );
+    const profile = await addOrUpdateProfileEducation(req.userId!, education);
 
     if (!profile) {
       throw new ApiError({
@@ -249,14 +225,9 @@ export const profileEducation = catchAsync(
 // @access    Private
 export const deleteProfileEducation = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const profile = await Profile.findOneAndUpdate(
-      { user: req.userId },
-      {
-        $pull: {
-          education: { _id: req.params.educationId },
-        },
-      },
-      { new: true }
+    const profile = await removeEducationFromProfile(
+      req.userId!,
+      req.params.educationId
     );
 
     if (!profile) {

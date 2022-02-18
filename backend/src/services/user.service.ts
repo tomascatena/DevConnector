@@ -37,3 +37,7 @@ export const createUser = async (userBody: Partial<IUser>) => {
 
   return user;
 };
+
+export const removeUserById = async (userId: string) => {
+  await User.findOneAndRemove({ _id: userId });
+};

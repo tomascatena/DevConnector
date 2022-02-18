@@ -5,7 +5,7 @@ import { ISocial, socialSchema } from './schemas/social.schema';
 
 export interface IProfile {
   _id: string;
-  user: ObjectId;
+  user: ObjectId | string;
   company: string;
   website: string;
   location: string;
