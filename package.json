@@ -12,7 +12,8 @@
     "frontend": "npm run start --prefix ./frontend",
     "dev": "concurrently \"npm run dev-server\" \"npm run frontend\"",
     "prepare": "husky install",
-    "lint": "npm run lint --prefix ./backend"
+    "lint": "npm run lint --prefix ./backend",
+    "postinstall": "(cd frontend && npm install) && (cd backend && npm install)"
   },
   "keywords": [],
   "devDependencies": {
