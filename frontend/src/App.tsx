@@ -15,6 +15,8 @@ const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
 const App: FC = () => {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(true);
 
+  setIsDarkTheme(true);
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>

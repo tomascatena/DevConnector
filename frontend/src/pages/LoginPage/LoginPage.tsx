@@ -7,7 +7,7 @@ import { validate } from '../../utils/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import CustomOutlinedInput from '../../components/CustomOutlinedInput/CustomOutlinedInput';
 import { LoginContainer, StyledForm, StyledLink } from './LoginPage.styled';
-import { useAppDispatch, useTypedSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks';
 import { userLogin } from '../../store/features/userLogin/userLogin.thunk';
 
 const RegisterPage: FC = () => {

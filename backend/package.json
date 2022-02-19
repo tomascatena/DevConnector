@@ -42,10 +42,8 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
-    "@types/axios": "^0.14.0",
     "@types/bcryptjs": "2.4.2",
     "@types/cors": "^2.8.12",
-    "@types/date-fns": "^2.6.0",
     "@types/express": "^4.17.13",
     "@types/express-rate-limit": "^6.0.0",
     "@types/gravatar": "1.8.3",
