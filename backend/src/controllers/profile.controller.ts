@@ -245,9 +245,7 @@ export const deleteProfileEducation = catchAsync(
 // @access    Public
 export const getUserRepos = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const repos = await githubService.fetchGithubRepos(
-      req.params.githubUsername
-    );
+    const repos = await githubService.fetchRepos(req.params.githubUsername);
 
     if (repos) {
       return res.status(httpStatus.OK).json({
