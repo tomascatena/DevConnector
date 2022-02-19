@@ -1,6 +1,6 @@
 import React, { FC, useState, lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import lightTheme from './themes/darkTheme';
+import lightTheme from './themes/lightTheme';
 import darkTheme from './themes/darkTheme';
 import { ThemeProvider } from '@mui/material/styles';
 import Header from './components/Header/Header';
@@ -15,13 +15,11 @@ const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
 const App: FC = () => {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(true);
 
-  setIsDarkTheme(true);
-
   return (
     <BrowserRouter>
       <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
         <MainLayout>
-          <Header />
+          <Header setIsDarkTheme={setIsDarkTheme} isDarkTheme={isDarkTheme} />
 
           <MainBox>
             <Suspense fallback={<div>Loading...</div>}>

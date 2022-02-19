@@ -1,4 +1,10 @@
-import React, { FC, useState, MouseEvent } from 'react';
+import React, {
+  FC,
+  useState,
+  MouseEvent,
+  Dispatch,
+  SetStateAction,
+} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,6 +20,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@constants/constants';
+import MaterialUISwitch from '@components/MUISwitch/MUISwitch';
 
 const pages = [
   {
@@ -29,9 +36,15 @@ const pages = [
     route: ROUTES.LOGIN,
   },
 ];
+
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const ResponsiveAppBar: FC = () => {
+interface Props {
+  setIsDarkTheme: Dispatch<SetStateAction<boolean>>;
+  isDarkTheme: boolean;
+}
+
+const ResponsiveAppBar: FC<Props> = ({ setIsDarkTheme, isDarkTheme }) => {
   const navigate = useNavigate();
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -132,6 +145,14 @@ const ResponsiveAppBar: FC = () => {
 
           {TitleMobile}
 
+          <MenuItem>
+            <MaterialUISwitch
+              sx={{ display: { xs: 'flex', md: 'none' } }}
+              checked={isDarkTheme}
+              onChange={() => setIsDarkTheme(!isDarkTheme)}
+            />
+          </MenuItem>
+
           {true ? (
             <Box
               sx={{
@@ -141,6 +162,14 @@ const ResponsiveAppBar: FC = () => {
                 display: { xs: 'none', md: 'flex' },
               }}
             >
+              <MenuItem>
+                <MaterialUISwitch
+                  sx={{ display: { xs: 'none', md: 'flex' } }}
+                  checked={isDarkTheme}
+                  onChange={() => setIsDarkTheme(!isDarkTheme)}
+                />
+              </MenuItem>
+
               {pages.map(({ title, route }) => (
                 <Button
                   key={title}
@@ -177,6 +206,14 @@ const ResponsiveAppBar: FC = () => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
+                <MenuItem>
+                  <MaterialUISwitch
+                    sx={{ display: { xs: 'none', md: 'flex' } }}
+                    checked={isDarkTheme}
+                    onChange={() => setIsDarkTheme(!isDarkTheme)}
+                  />
+                </MenuItem>
+
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography textAlign='center'>{setting}</Typography>

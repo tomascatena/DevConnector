@@ -23,43 +23,36 @@
       "node_modules/@types",
       "src/typings"
     ],
+    "baseUrl": "./src",
     "paths": {
       "@constants/*": [
-        "./src/constants/*"
+        "constants/*"
       ],
       "@hooks/*": [
-        "./src/hooks/*"
+        "hooks/*"
       ],
       "@components/*": [
-        "./src/components/*"
+        "components/*"
       ],
       "@pages/*": [
-        "./src/pages/*"
+        "pages/*"
       ],
       "@themes/*": [
-        "./src/themes/*"
+        "themes/*"
       ],
       "@store/*": [
-        "./src/store/*"
+        "store/*"
       ],
       "@utils/*": [
-        "./src/utils/*"
+        "utils/*"
       ],
       "@typings": [
-        "./src/typings/*"
+        "typings/*"
       ],
-      "@assets": [
-        "./src/assets/*"
-      ]
     },
   },
   "include": [
     "src",
     "src/typings/declarations.ts"
   ],
-  "ts-node": {
-    "require": [
-      "tsconfig-paths/register"
-    ]
-  }
 }

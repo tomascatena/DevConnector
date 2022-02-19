@@ -3,7 +3,7 @@ import { styled } from '@mui/system';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import showCaseImage from '@assets/showCaseImage.png';
+import showCaseImage from '../../assets/showCaseImage.png';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@constants/constants';
 
@@ -26,11 +26,11 @@ const ButtonsContainer = styled(Box)(({ theme }) => ({
 const LandingPage: FC = () => {
   return (
     <LandingBox>
-      <Typography variant='h3' align='center' color='text.primary'>
+      <Typography variant='h3' align='center' color='#fff'>
         Developer Connector
       </Typography>
 
-      <Typography variant='h5' align='center' color='text.primary'>
+      <Typography variant='h5' align='center' color='#fff'>
         Create a developer profile/portfolio, share posts and learn from other
         developers
       </Typography>

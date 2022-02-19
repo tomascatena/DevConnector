@@ -6,7 +6,10 @@ import { styled } from '@mui/system';
 const FooterContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  backgroundColor: theme.palette.grey[900],
+  backgroundColor:
+    theme.palette.mode === 'dark'
+      ? theme.palette.grey[900]
+      : theme.palette.grey.A400,
   justifyContent: 'center',
   alignItems: 'center',
   padding: theme.spacing(2),

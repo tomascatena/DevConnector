@@ -9,9 +9,12 @@ import CustomOutlinedInput from '@components/CustomOutlinedInput/CustomOutlinedI
 import { LoginContainer, StyledForm, StyledLink } from './LoginPage.styled';
 import { useAppDispatch } from '@hooks/index';
 import { userLogin } from '@store/features/userLogin/userLogin.thunk';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import CustomAlert from '@components/CustomAlert/CustomAlert';
 
 const RegisterPage: FC = () => {
   const dispatch = useAppDispatch();
+  const { error } = useTypedSelector((state) => state.userLogin);
 
   const [emailState, setEmailState] = useState({
     value: '',
@@ -43,6 +46,11 @@ const RegisterPage: FC = () => {
       <Typography variant='h4' align='center'>
         Sign In
       </Typography>
+
+      <CustomAlert
+        shouldShowAlert={Boolean(error)}
+        message='Invalid credentials'
+      />
 
       <StyledForm noValidate onSubmit={handleFormSubmit}>
         <Box
