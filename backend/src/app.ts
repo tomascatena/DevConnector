@@ -10,7 +10,7 @@ import { notFound } from '@middleware/notFound.middleware';
 // @ts-ignore
 import xssClean from 'xss-clean';
 import hpp from 'hpp';
-import rateLimit from 'express-rate-limit';
+import { rateLimiter } from '@middleware/rateLimiter';
 import { expressWinstonLogger } from './config/logger';
 import { authLimiter } from './middleware/authLimiter';
 
@@ -25,15 +25,8 @@ app.use(xssClean());
 // Sanitize request data
 app.use(mongoSanitize());
 
-// Basic rate-limiting middleware for Express
-app.use(
-  rateLimit({
-    windowMs: 10 * 60 * 1000, // 10 Minutes
-    max: 100, // Limit each IP to 100 requests per `window` (here, per 10 minutes)
-    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-  })
-);
+// Basic rate-limiting middleware
+app.use(rateLimiter);
 
 if (env.NODE_ENV === 'development') {
   // HTTP request logger middleware

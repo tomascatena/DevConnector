@@ -1,10 +1,8 @@
-import httpStatus, { ReasonPhrases } from 'http-status-codes';
+import httpStatus from 'http-status-codes';
 import { Response } from 'express';
-import { env } from '@config/config';
 import { catchAsync } from 'utils/catchAsync';
-import request from 'request';
 import { ApiError } from 'utils/ApiError';
-import { profileService, userService } from 'services';
+import { githubService, profileService, userService } from 'services';
 import { RequestWithBody } from '../types/types';
 
 // @route     GET api/v1/profile/me
@@ -247,38 +245,21 @@ export const deleteProfileEducation = catchAsync(
 // @access    Public
 export const getUserRepos = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const baseURL = `https://api.github.com/users/${req.params.githubUsername}/repos`;
-    const queryString = `per_page=5&sort=created:asc&client_id=${env.GITHUB_API_CLIENT_ID}&client_secret=${env.GITHUB_API_CLIENT_SECRET}`;
+    const repos = await githubService.fetchGithubRepos(
+      req.params.githubUsername
+    );
 
-    const options = {
-      uri: `${baseURL}?${queryString}`,
-      method: 'GET',
-      headers: {
-        'user-agent': 'node.js',
-      },
-    };
-
-    request(options, (error, response, body) => {
-      if (error) {
-        throw new ApiError({
-          statusCode: httpStatus.INTERNAL_SERVER_ERROR,
-          message: ReasonPhrases.INTERNAL_SERVER_ERROR,
-          isOperational: false,
-        });
-      }
-
-      if (response.statusCode !== httpStatus.OK) {
-        throw new ApiError({
-          statusCode: httpStatus.NOT_FOUND,
-          message: 'Github user not found',
-          isOperational: false,
-        });
-      }
-
+    if (repos) {
       return res.status(httpStatus.OK).json({
         message: 'Successfully fetched user Github repos',
-        body: JSON.parse(body),
+        repos,
       });
+    }
+
+    throw new ApiError({
+      statusCode: httpStatus.NOT_FOUND,
+      message: 'Github user not found',
+      isOperational: false,
     });
   }
 );

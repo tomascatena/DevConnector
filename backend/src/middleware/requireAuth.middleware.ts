@@ -5,7 +5,7 @@ import httpStatus, { ReasonPhrases } from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 import { ApiError } from 'utils/ApiError';
 import { validationsResults } from './validations.middleware';
-import { JWTPayload, RequestWithBody } from '../types/types';
+import { RequestWithBody } from '../types/types';
 
 export const requireAuth = [
   validators.authorizationHeader,
@@ -16,7 +16,7 @@ export const requireAuth = [
     try {
       const decoded = jwt.verify(token, env.JWT_SECRET);
 
-      req.userId = (<JWTPayload>decoded).user.id;
+      req.userId = decoded.sub as string;
     } catch (error) {
       throw new ApiError({
         statusCode: httpStatus.UNAUTHORIZED,
