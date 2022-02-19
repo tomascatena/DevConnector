@@ -23,34 +23,33 @@
       "node_modules/@types",
       "src/typings"
     ],
-    "baseUrl": "./src",
     "paths": {
       "@constants/*": [
-        "constants/*"
+        "./src/constants/*"
       ],
       "@hooks/*": [
-        "hooks/*"
+        "./src/hooks/*"
       ],
       "@components/*": [
-        "components/*"
+        "./src/components/*"
       ],
       "@pages/*": [
-        "pages/*"
+        "./src/pages/*"
       ],
       "@themes/*": [
-        "themes/*"
+        "./src/themes/*"
       ],
       "@store/*": [
-        "store/*"
+        "./src/store/*"
       ],
       "@utils/*": [
-        "utils/*"
+        "./src/utils/*"
       ],
       "@typings": [
-        "typings/*"
+        "./src/typings/*"
       ],
       "@assets": [
-        "assets/*"
+        "./src/assets/*"
       ]
     },
   },
