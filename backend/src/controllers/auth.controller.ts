@@ -1,7 +1,7 @@
 import { Response } from 'express';
-import { catchAsync } from 'utils/catchAsync';
 import httpStatus from 'http-status-codes';
 import { authService, tokenService, userService } from 'services';
+import { catchAsync } from 'utils/catchAsync';
 import { RequestWithBody } from '../types/types';
 
 // @route     GET api/v1/auth

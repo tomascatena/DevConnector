@@ -44,6 +44,9 @@
       "@validators/*": [
         "validators/*"
       ],
+      "@utils/*": [
+        "utils/*"
+      ],
       "@types": [
         "types/*"
       ]

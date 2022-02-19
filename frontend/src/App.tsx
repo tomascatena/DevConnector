@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import lightTheme from './themes/darkTheme';
 import darkTheme from './themes/darkTheme';
 import { ThemeProvider } from '@mui/material/styles';
-import ResponsiveAppBar from './components/Header/Header';
+import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import { MainLayout, MainBox } from './App.styled';
 import { ROUTES } from './constants/constants';
@@ -19,7 +19,7 @@ const App: FC = () => {
     <BrowserRouter>
       <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
         <MainLayout>
-          <ResponsiveAppBar />
+          <Header />
 
           <MainBox>
             <Suspense fallback={<div>Loading...</div>}>

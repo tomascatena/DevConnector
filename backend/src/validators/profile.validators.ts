@@ -20,7 +20,7 @@ export const githubUsernameParam = param(
   'githubUsername is required'
 )
   .matches(/^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i)
-  .withMessage('Invalid githubUsername')
+  .withMessage('Invalid Github username')
   .escape();
 
 export const userId = check('userId', 'userId is required')

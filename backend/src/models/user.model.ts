@@ -14,7 +14,10 @@ export interface IUser {
 }
 
 interface IUserModel extends Model<IUser> {
-  isEmailTaken: (email: string, excludeUserId?: string | undefined) => boolean;
+  isEmailTaken: (
+    email: string,
+    excludeUserId?: string | undefined
+  ) => Promise<boolean>;
 }
 
 const userSchema = new Schema<IUser, IUserModel>(
@@ -64,10 +67,10 @@ const userSchema = new Schema<IUser, IUserModel>(
 userSchema.statics.isEmailTaken = async function (
   email: string,
   excludeUserId: string | undefined = undefined
-) {
+): Promise<boolean> {
   const user = await this.findOne({ email, _id: { $ne: excludeUserId } });
 
-  return !!user;
+  return Boolean(user);
 };
 
 userSchema.methods.isPasswordMatch = async function (password: string) {
