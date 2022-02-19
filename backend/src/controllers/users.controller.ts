@@ -1,11 +1,9 @@
 import { Response } from 'express';
 import { catchAsync } from 'utils/catchAsync';
 import httpStatus from 'http-status-codes';
-import { deleteUserById } from 'services/user.service';
-import { generateAuthTokens } from 'services/token.service';
+import { userService, tokenService } from 'services';
 import { RequestWithBody } from '../types/types';
 import { createAvatar } from '../utils/createAvatar';
-import { createUser } from '../services/user.service';
 
 // @route     POST api/v1/users
 // @desc      Register user
@@ -16,7 +14,7 @@ export const registerUser = catchAsync(
 
     const avatar = createAvatar(email!);
 
-    const user = await createUser({
+    const user = await userService.createUser({
       firstName,
       lastName,
       email,
@@ -24,7 +22,7 @@ export const registerUser = catchAsync(
       avatar,
     });
 
-    const tokens = await generateAuthTokens(user._id);
+    const tokens = await tokenService.generateAuthTokens(user._id);
 
     return res.status(httpStatus.CREATED).json({
       message: 'New user successfully registered',
@@ -43,7 +41,7 @@ export const registerUser = catchAsync(
 // @access    Private
 export const deleteUser = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    await deleteUserById(req.userId!);
+    await userService.deleteUserById(req.userId!);
 
     return res.status(httpStatus.CREATED).json({
       message: 'Successfully deleted user',

@@ -1,7 +1,7 @@
 import * as validators from '@validators/index';
 import { NextFunction, Response } from 'express';
 import { env } from '@config/config';
-import httpStatus from 'http-status-codes';
+import httpStatus, { ReasonPhrases } from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 import { ApiError } from 'utils/ApiError';
 import { validationsResults } from './validations.middleware';
@@ -20,7 +20,7 @@ export const requireAuth = [
     } catch (error) {
       throw new ApiError({
         statusCode: httpStatus.UNAUTHORIZED,
-        message: 'No authorized to access this endpoint',
+        message: ReasonPhrases.UNAUTHORIZED,
         isOperational: false,
         stack: error instanceof Error ? error.stack : undefined,
       });

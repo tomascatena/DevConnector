@@ -1,9 +1,8 @@
 import { Response } from 'express';
 import { catchAsync } from 'utils/catchAsync';
 import httpStatus from 'http-status-codes';
-import User from '@models/user.model';
-import Post from '@models/post.model';
 import { ApiError } from 'utils/ApiError';
+import { postService, userService } from 'services';
 import { RequestWithBody } from '../types/types';
 
 // @route     POST api/v1/posts
@@ -11,7 +10,7 @@ import { RequestWithBody } from '../types/types';
 // @access    Private
 export const createPost = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const user = await User.findById(req.userId).select('-password');
+    const user = await userService.getUserById(req.userId!);
 
     if (!user) {
       throw new ApiError({
@@ -22,13 +21,7 @@ export const createPost = catchAsync(
     }
 
     if (req.body.post?.text) {
-      const post = await Post.create({
-        text: req.body.post.text,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        avatar: user.avatar,
-        user: req.userId,
-      });
+      const post = await postService.createPost(user, req.body.post.text!);
 
       return res.status(httpStatus.CREATED).json({
         message: 'New post successfully created',
@@ -49,9 +42,7 @@ export const createPost = catchAsync(
 // @access    Private
 export const getAllPosts = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const posts = await Post.find({ user: req.userId }).sort({
-      date: -1,
-    });
+    const posts = postService.getPostByUserId(req.userId!);
 
     return res.status(httpStatus.CREATED).json({
       message: 'Successfully fetched all posts from user',
@@ -65,7 +56,7 @@ export const getAllPosts = catchAsync(
 // @access    Private
 export const getPostById = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const post = await Post.findById(req.params.postId);
+    const post = await postService.getPostById(req.params.postId);
 
     if (post) {
       return res.status(httpStatus.OK).json({
@@ -87,7 +78,7 @@ export const getPostById = catchAsync(
 // @access    Private
 export const deletePostById = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const post = await Post.findById(req.params.postId);
+    const post = await postService.getPostById(req.params.postId);
 
     if (!post) {
       throw new ApiError({
@@ -105,7 +96,7 @@ export const deletePostById = catchAsync(
       });
     }
 
-    await Post.findByIdAndRemove(req.params.postId);
+    await postService.removePost(req.params.postId);
 
     return res.status(httpStatus.OK).json({
       message: 'Successfully deleted post',
@@ -118,7 +109,7 @@ export const deletePostById = catchAsync(
 // @access    Private
 export const likePost = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const post = await Post.findById(req.params.postId);
+    const post = await postService.getPostById(req.params.postId);
 
     if (!post) {
       throw new ApiError({
@@ -142,27 +133,14 @@ export const likePost = catchAsync(
 
     let updatedPost;
     if (hasLikedPost) {
-      updatedPost = await Post.findByIdAndUpdate(
-        { _id: req.params.postId },
-        {
-          $pull: {
-            likes: { user: req.userId },
-          },
-        },
-        { new: true }
+      updatedPost = await postService.removeLikeFromPost(
+        req.userId!,
+        req.params.postId
       );
     } else {
-      updatedPost = await Post.findByIdAndUpdate(
-        { _id: req.params.postId },
-        {
-          $push: {
-            likes: {
-              $each: [{ user: req.userId }],
-              $position: 0,
-            },
-          },
-        },
-        { new: true }
+      updatedPost = await postService.addLikeToPost(
+        req.userId!,
+        req.params.postId
       );
     }
 
@@ -178,7 +156,7 @@ export const likePost = catchAsync(
 // @access    Private
 export const commentPost = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const user = await User.findById(req.userId).select('-password');
+    const user = await userService.getUserById(req.userId!);
 
     if (!user) {
       throw new ApiError({
@@ -188,41 +166,24 @@ export const commentPost = catchAsync(
       });
     }
 
-    if (req.body.comment?.text) {
-      const comment = await Post.findOneAndUpdate(
-        { _id: req.params.postId },
-        {
-          $push: {
-            comments: {
-              $each: [
-                {
-                  text: req.body.comment.text,
-                  firstName: user.firstName,
-                  lastName: user.lastName,
-                  avatar: user.avatar,
-                  user: req.userId,
-                },
-              ],
-              $position: 0,
-            },
-          },
-        },
-        { new: true }
-      );
+    const comment = postService.addCommentToPost(
+      req.params.postId,
+      req.body.comment?.text!,
+      user
+    );
 
-      if (!comment) {
-        throw new ApiError({
-          statusCode: httpStatus.BAD_REQUEST,
-          message: 'Post not found',
-          isOperational: false,
-        });
-      }
-
-      return res.status(httpStatus.CREATED).json({
-        message: 'Comment created',
-        comment,
+    if (!comment) {
+      throw new ApiError({
+        statusCode: httpStatus.BAD_REQUEST,
+        message: 'Post not found',
+        isOperational: false,
       });
     }
+
+    return res.status(httpStatus.CREATED).json({
+      message: 'Comment created',
+      comment,
+    });
   }
 );
 
@@ -231,7 +192,7 @@ export const commentPost = catchAsync(
 // @access    Private
 export const deleteComment = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const post = await Post.findById(req.params.postId);
+    const post = await postService.getPostById(req.params.postId);
 
     if (!post) {
       throw new ApiError({
@@ -241,14 +202,9 @@ export const deleteComment = catchAsync(
       });
     }
 
-    const updatedPost = await Post.findOneAndUpdate(
-      { _id: req.params.postId },
-      {
-        $pull: {
-          comments: { _id: req.params.commentId },
-        },
-      },
-      { new: true }
+    const updatedPost = await postService.removeCommentFromPost(
+      req.params.postId,
+      req.params.commentId
     );
 
     if (!updatedPost) {

@@ -2,7 +2,7 @@ import Profile, { IProfile } from '@models/profile.model';
 import { IEducation } from '@models/schemas/education.schema';
 import { IExperience } from '@models/schemas/experience.schema';
 
-export const getPopulatedProfileByUserId = async (userId: string) => {
+export const getProfileByUserId = async (userId: string) => {
   const profile = await Profile.findOne({ user: userId }).populate('user', [
     'name',
     'avatar',
@@ -11,13 +11,13 @@ export const getPopulatedProfileByUserId = async (userId: string) => {
   return profile;
 };
 
-export const getAllPopulatedProfiles = async () => {
+export const getAllProfiles = async () => {
   const profiles = await Profile.find().populate('user', ['name', 'avatar']);
 
   return profiles;
 };
 
-export const findProfileByUserIdAndUpdate = async (
+export const getProfileByUserIdAndUpdate = async (
   userId: string,
   profileFields: Partial<IProfile>
 ) => {

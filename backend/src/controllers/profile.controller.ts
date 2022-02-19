@@ -4,18 +4,7 @@ import { env } from '@config/config';
 import { catchAsync } from 'utils/catchAsync';
 import request from 'request';
 import { ApiError } from 'utils/ApiError';
-import {
-  addOrUpdateProfileEducation,
-  addOrUpdateProfileExperience,
-  createProfile,
-  findProfileByUserIdAndUpdate,
-  getAllPopulatedProfiles,
-  getPopulatedProfileByUserId,
-  removeEducationFromProfile,
-  removeExperienceFromProfile,
-  removeProfileByUserId,
-} from 'services/profile.service';
-import { removeUserById } from 'services/user.service';
+import { profileService, userService } from 'services';
 import { RequestWithBody } from '../types/types';
 
 // @route     GET api/v1/profile/me
@@ -23,7 +12,7 @@ import { RequestWithBody } from '../types/types';
 // @access    Private
 export const getUserProfile = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const profile = await getPopulatedProfileByUserId(req.userId!);
+    const profile = await profileService.getProfileByUserId(req.userId!);
 
     if (!profile) {
       throw new ApiError({
@@ -45,7 +34,7 @@ export const getUserProfile = catchAsync(
 // @access    Public
 export const getAllProfiles = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const profiles = await getAllPopulatedProfiles();
+    const profiles = await profileService.getAllProfiles();
 
     return res.status(httpStatus.CREATED).json({
       message: 'Successfully got all user profiles',
@@ -59,7 +48,7 @@ export const getAllProfiles = catchAsync(
 // @access    Public
 export const getProfileByUserId = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const profile = await getPopulatedProfileByUserId(req.params.userId);
+    const profile = await profileService.getProfileByUserId(req.params.userId);
 
     if (!profile) {
       throw new ApiError({
@@ -104,10 +93,13 @@ export const createUserProfile = catchAsync(
       ...(social && { social }),
     };
 
-    let profile = await getPopulatedProfileByUserId(req.userId!);
+    let profile = await profileService.getProfileByUserId(req.userId!);
 
     if (profile) {
-      profile = await findProfileByUserIdAndUpdate(req.userId!, profileFields);
+      profile = await profileService.getProfileByUserIdAndUpdate(
+        req.userId!,
+        profileFields
+      );
 
       return res.status(httpStatus.OK).json({
         message: 'Successfully updated user profile',
@@ -115,7 +107,7 @@ export const createUserProfile = catchAsync(
       });
     }
 
-    profile = await createProfile(profileFields);
+    profile = await profileService.createProfile(profileFields);
 
     return res.status(httpStatus.CREATED).json({
       message: 'Successfully created user profile',
@@ -129,9 +121,9 @@ export const createUserProfile = catchAsync(
 // @access    Private
 export const deleteProfile = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const profile = await removeProfileByUserId(req.userId!);
+    const profile = await profileService.removeProfileByUserId(req.userId!);
 
-    await removeUserById(req.userId!);
+    await userService.removeUserById(req.userId!);
 
     if (!profile) {
       throw new ApiError({
@@ -155,7 +147,10 @@ export const profileExperience = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const { experience } = req.body.profile!;
 
-    const profile = await addOrUpdateProfileExperience(req.userId!, experience);
+    const profile = await profileService.addOrUpdateProfileExperience(
+      req.userId!,
+      experience
+    );
 
     if (!profile) {
       throw new ApiError({
@@ -177,7 +172,7 @@ export const profileExperience = catchAsync(
 // @access    Private
 export const deleteProfileExperience = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const profile = await removeExperienceFromProfile(
+    const profile = await profileService.removeExperienceFromProfile(
       req.userId!,
       req.params.experienceId
     );
@@ -203,7 +198,10 @@ export const profileEducation = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const { education } = req.body.profile!;
 
-    const profile = await addOrUpdateProfileEducation(req.userId!, education);
+    const profile = await profileService.addOrUpdateProfileEducation(
+      req.userId!,
+      education
+    );
 
     if (!profile) {
       throw new ApiError({
@@ -225,7 +223,7 @@ export const profileEducation = catchAsync(
 // @access    Private
 export const deleteProfileEducation = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const profile = await removeEducationFromProfile(
+    const profile = await profileService.removeEducationFromProfile(
       req.userId!,
       req.params.educationId
     );
