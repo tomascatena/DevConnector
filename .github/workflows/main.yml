@@ -6,10 +6,8 @@ on:
       - main
     paths:
       - 'package.json'
-      - 'frontend/**'
       - 'frontend/src/**'
       - 'frontend/package.json'
-      - 'backend/**'
       - 'backend/src/**'
       - 'backend/package.json'
       - '.github/workflows/**'

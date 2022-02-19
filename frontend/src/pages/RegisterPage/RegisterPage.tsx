@@ -3,17 +3,17 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { ROUTES } from '../../constants/constants';
-import { validate } from '../../utils/validator';
+import { ROUTES } from '@constants/constants';
+import { validate } from '@utils/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import CustomOutlinedInput from '../../components/CustomOutlinedInput/CustomOutlinedInput';
+import CustomOutlinedInput from '@components/CustomOutlinedInput/CustomOutlinedInput';
 import {
   RegisterContainer,
   StyledForm,
   StyledLink,
 } from './RegisterPage.styled';
-import { useAppDispatch, useTypedSelector } from '../../hooks';
-import { userRegister } from '../../store/features/userRegister/userRegister.thunk';
+import { useAppDispatch, useTypedSelector } from '@hooks/index';
+import { userRegister } from '@store/features/userRegister/userRegister.thunk';
 
 const RegisterPage: FC = () => {
   const dispatch = useAppDispatch();

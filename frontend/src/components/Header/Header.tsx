@@ -13,7 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '../../constants/constants';
+import { ROUTES } from '@constants/constants';
 
 const pages = [
   {

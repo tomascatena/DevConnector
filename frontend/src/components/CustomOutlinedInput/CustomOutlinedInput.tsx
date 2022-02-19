@@ -14,7 +14,7 @@ import FormControl, { useFormControl } from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import FormHelperText from '@mui/material/FormHelperText';
-import { ValidatorResult } from '../../utils/validator';
+import { ValidatorResult } from '@utils/validator';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { useEffect } from 'react';
 

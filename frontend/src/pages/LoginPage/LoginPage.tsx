@@ -2,13 +2,13 @@ import React, { FC, useState, FormEvent } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { ROUTES } from '../../constants/constants';
-import { validate } from '../../utils/validator';
+import { ROUTES } from '@constants/constants';
+import { validate } from '@utils/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import CustomOutlinedInput from '../../components/CustomOutlinedInput/CustomOutlinedInput';
+import CustomOutlinedInput from '@components/CustomOutlinedInput/CustomOutlinedInput';
 import { LoginContainer, StyledForm, StyledLink } from './LoginPage.styled';
-import { useAppDispatch } from '../../hooks';
-import { userLogin } from '../../store/features/userLogin/userLogin.thunk';
+import { useAppDispatch } from '@hooks/index';
+import { userLogin } from '@store/features/userLogin/userLogin.thunk';
 
 const RegisterPage: FC = () => {
   const dispatch = useAppDispatch();

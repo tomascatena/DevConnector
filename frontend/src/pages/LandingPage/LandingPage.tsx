@@ -3,9 +3,9 @@ import { styled } from '@mui/system';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import showCaseImage from '../../assets/showCaseImage.png';
+import showCaseImage from '@assets/showCaseImage.png';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '../../constants/constants';
+import { ROUTES } from '@constants/constants';
 
 const LandingBox = styled(Box)(({ theme }) => ({
   flex: 1,

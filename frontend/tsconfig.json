@@ -22,10 +22,45 @@
     "typeRoots": [
       "node_modules/@types",
       "src/typings"
-    ]
+    ],
+    "baseUrl": "./src",
+    "paths": {
+      "@constants/*": [
+        "constants/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@pages/*": [
+        "pages/*"
+      ],
+      "@themes/*": [
+        "themes/*"
+      ],
+      "@store/*": [
+        "store/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
+      "@typings": [
+        "typings/*"
+      ],
+      "@assets": [
+        "assets/*"
+      ]
+    },
   },
   "include": [
     "src",
     "src/typings/declarations.ts"
-  ]
+  ],
+  "ts-node": {
+    "require": [
+      "tsconfig-paths/register"
+    ]
+  }
 }
