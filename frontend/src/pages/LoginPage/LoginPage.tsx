@@ -8,13 +8,13 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import CustomOutlinedInput from '@components/CustomOutlinedInput/CustomOutlinedInput';
 import { LoginContainer, StyledForm, StyledLink } from './LoginPage.styled';
 import { useAppDispatch } from '@hooks/index';
-import { userLogin } from '@store/features/userLogin/userLogin.thunk';
+import { login } from '@store/features/auth/auth.thunk';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import CustomAlert from '@components/CustomAlert/CustomAlert';
 
 const RegisterPage: FC = () => {
   const dispatch = useAppDispatch();
-  const { error } = useTypedSelector((state) => state.userLogin);
+  const { serverValidationErrors } = useTypedSelector((state) => state.auth);
 
   const [emailState, setEmailState] = useState({
     value: '',
@@ -38,7 +38,7 @@ const RegisterPage: FC = () => {
       password: passwordState.value,
     };
 
-    dispatch(userLogin(loginForm));
+    dispatch(login(loginForm));
   };
 
   return (
@@ -48,7 +48,7 @@ const RegisterPage: FC = () => {
       </Typography>
 
       <CustomAlert
-        shouldShowAlert={Boolean(error)}
+        shouldShowAlert={Boolean(serverValidationErrors)}
         message='Invalid credentials'
       />
 
@@ -70,6 +70,7 @@ const RegisterPage: FC = () => {
           validation={validate(emailState.value).required()}
           type='email'
           label='Email'
+          showCheckIcon={false}
         />
 
         <CustomOutlinedInput
@@ -78,6 +79,7 @@ const RegisterPage: FC = () => {
           validation={validate(passwordState.value).required()}
           type='password'
           label='Password'
+          showCheckIcon={false}
         />
 
         <Button

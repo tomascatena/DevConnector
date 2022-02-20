@@ -1,4 +1,9 @@
 import React, { FC, useState, FormEvent } from 'react';
+import {
+  RegisterContainer,
+  StyledForm,
+  StyledLink,
+} from './RegisterPage.styled';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -7,19 +12,12 @@ import { ROUTES } from '@constants/constants';
 import { validate } from '@utils/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import CustomOutlinedInput from '@components/CustomOutlinedInput/CustomOutlinedInput';
-import {
-  RegisterContainer,
-  StyledForm,
-  StyledLink,
-} from './RegisterPage.styled';
 import { useAppDispatch, useTypedSelector } from '@hooks/index';
-import { userRegister } from '@store/features/userRegister/userRegister.thunk';
+import { register } from '@store/features/auth/auth.thunk';
 
 const RegisterPage: FC = () => {
   const dispatch = useAppDispatch();
-  const { serverValidationErrors } = useTypedSelector(
-    (state) => state.userRegister
-  );
+  const { serverValidationErrors } = useTypedSelector((state) => state.auth);
 
   const [emailState, setEmailState] = useState({
     value: '',
@@ -67,7 +65,7 @@ const RegisterPage: FC = () => {
       confirmPassword: confirmPasswordState.value,
     };
 
-    dispatch(userRegister(registerForm));
+    dispatch(register(registerForm));
   };
 
   return (

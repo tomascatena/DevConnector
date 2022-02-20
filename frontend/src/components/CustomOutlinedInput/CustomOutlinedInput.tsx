@@ -30,6 +30,7 @@ type Props = {
   label: string;
   validation: ValidatorResult;
   customHelperText?: string;
+  showCheckIcon?: boolean;
 };
 
 const CustomOutlinedInput: FC<Props> = ({
@@ -39,6 +40,7 @@ const CustomOutlinedInput: FC<Props> = ({
   label,
   validation,
   customHelperText,
+  showCheckIcon = true,
 }) => {
   const [isBlur, setIsBlur] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -95,7 +97,9 @@ const CustomOutlinedInput: FC<Props> = ({
 
   const endAdornment = (
     <InputAdornment position='end'>
-      {isBlur && isValid && <CheckCircleOutlineIcon color='success' />}
+      {showCheckIcon && isBlur && isValid && (
+        <CheckCircleOutlineIcon color='success' />
+      )}
 
       {type === 'password' && (
         <IconButton

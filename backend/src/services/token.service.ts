@@ -58,8 +58,6 @@ export const verifyToken = async (token: string, type: TokenTypes) => {
 };
 
 export const generateAuthTokens = async (userId: string) => {
-  console.log(userId);
-
   const accessTokenExpires = addMinutes(
     new Date(),
     env.JWT_ACCESS_EXPIRATION_MINUTES
