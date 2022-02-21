@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
 import { IUser, Nullable, ServerValidationError } from '../../../typings/types';
-import { login, register } from './auth.thunk';
+import { login, register, getUser } from './auth.thunk';
 
 export interface AuthState {
   user: Nullable<IUser>;
@@ -9,7 +9,7 @@ export interface AuthState {
   serverValidationErrors: null | ServerValidationError;
   error: null | SerializedError;
   isAuthenticated: boolean;
-  accessToken: Nullable<string>;
+  accessToken: Nullable<string> | undefined;
 }
 
 const initialState: AuthState = {
@@ -42,6 +42,8 @@ export const authSlice = createSlice({
       state.isAuthenticated = false;
       state.accessToken = null;
       state.user = null;
+
+      localStorage.removeItem('accessToken');
     },
   },
   extraReducers: (builder) => {
@@ -58,11 +60,16 @@ export const authSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         const { requestId } = action.meta;
         if (state.loading && state.currentRequestId === requestId) {
-          state.user = action.payload;
+          state.user = action.payload.user;
           state.loading = false;
           state.currentRequestId = undefined;
+          state.isAuthenticated = true;
+          state.accessToken = action.payload.tokens?.access;
 
-          localStorage.setItem('userInfo', JSON.stringify(state.user));
+          localStorage.setItem(
+            'accessToken',
+            JSON.stringify(state.accessToken)
+          );
         }
       })
       .addCase(login.rejected, (state, action) => {
@@ -73,6 +80,10 @@ export const authSlice = createSlice({
           state.serverValidationErrors = null;
           state.error = action.error;
           state.currentRequestId = undefined;
+          state.isAuthenticated = false;
+          state.accessToken = null;
+
+          localStorage.removeItem('accessToken');
         }
       })
       .addCase(register.pending, (state, action) => {
@@ -87,11 +98,11 @@ export const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         const { requestId } = action.meta;
         if (state.loading && state.currentRequestId === requestId) {
-          state.user = action.payload;
+          state.user = action.payload.user;
           state.loading = false;
           state.currentRequestId = undefined;
-
-          localStorage.setItem('userInfo', JSON.stringify(state.user));
+          state.isAuthenticated = true;
+          state.accessToken = action.payload.tokens?.access;
         }
       })
       .addCase(register.rejected, (state, action) => {
@@ -102,6 +113,39 @@ export const authSlice = createSlice({
           state.serverValidationErrors = null;
           state.error = action.error;
           state.currentRequestId = undefined;
+          state.isAuthenticated = false;
+          state.accessToken = null;
+        }
+      })
+      .addCase(getUser.pending, (state, action) => {
+        if (!state.loading) {
+          state.user = null;
+          state.loading = true;
+          state.serverValidationErrors = null;
+          state.error = null;
+          state.currentRequestId = action.meta.requestId;
+        }
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        const { requestId } = action.meta;
+        if (state.loading && state.currentRequestId === requestId) {
+          state.user = action.payload.user;
+          state.loading = false;
+          state.currentRequestId = undefined;
+          state.isAuthenticated = true;
+          state.accessToken = action.payload.tokens?.access;
+        }
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        const { requestId } = action.meta;
+        if (state.loading && state.currentRequestId === requestId) {
+          state.user = null;
+          state.loading = false;
+          state.serverValidationErrors = null;
+          state.error = action.error;
+          state.currentRequestId = undefined;
+          state.isAuthenticated = false;
+          state.accessToken = null;
         }
       });
   },

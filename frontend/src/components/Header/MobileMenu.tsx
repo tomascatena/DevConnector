@@ -77,7 +77,7 @@ const MobileMenu: FC<Props> = ({
           }}
         >
           {isAuthenticated ? (
-            <>
+            <div>
               {settings.map(({ title, route }) => (
                 <Button
                   key={title}
@@ -99,7 +99,7 @@ const MobileMenu: FC<Props> = ({
               >
                 Logout
               </Button>
-            </>
+            </div>
           ) : (
             pages.map(({ title, route }) => (
               <Button

@@ -33,4 +33,12 @@ export type ValidationError = {
   location: string;
 };
 
-export type Token = {};
+export type Tokens = {
+  access: string;
+  refresh: string;
+};
+
+export interface AuthData {
+  user: IUser;
+  tokens?: Tokens;
+}

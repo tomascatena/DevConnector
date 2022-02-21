@@ -1,7 +1,6 @@
-import React, { FC, useState, FormEvent } from 'react';
+import React, { FC, useState, FormEvent, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import { ROUTES } from '@constants/constants';
 import { validate } from '@utils/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
@@ -11,10 +10,18 @@ import { useAppDispatch } from '@hooks/index';
 import { login } from '@store/features/auth/auth.thunk';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import CustomAlert from '@components/CustomAlert/CustomAlert';
+import { useNavigate } from 'react-router';
+import { useSearchParams } from 'react-router-dom';
+import CustomButton from '@components/CustomButton/CustomButton';
 
 const RegisterPage: FC = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { serverValidationErrors } = useTypedSelector((state) => state.auth);
+  const { serverValidationErrors, user, error, loading, isAuthenticated } =
+    useTypedSelector((state) => state.auth);
+
+  const [searchParams] = useSearchParams();
+  const redirect = searchParams.get('redirect');
 
   const [emailState, setEmailState] = useState({
     value: '',
@@ -41,6 +48,18 @@ const RegisterPage: FC = () => {
     dispatch(login(loginForm));
   };
 
+  useEffect(() => {
+    if (isAuthenticated && user && !error && !loading) {
+      if (redirect) {
+        navigate(`/${redirect}`);
+      } else {
+        navigate(ROUTES.DASHBOARD);
+      }
+    }
+
+    // eslint-disable-next-line
+  }, [isAuthenticated, user, error, loading]);
+
   return (
     <LoginContainer>
       <Typography variant='h4' align='center'>
@@ -61,6 +80,7 @@ const RegisterPage: FC = () => {
           }}
         >
           <PersonOutlineIcon color='action' />
+
           <Typography color='text.primary'>Sign Into Your Account</Typography>
         </Box>
 
@@ -82,14 +102,14 @@ const RegisterPage: FC = () => {
           showCheckIcon={false}
         />
 
-        <Button
+        <CustomButton
           sx={{ maxWidth: { sm: '10rem' } }}
           variant='contained'
-          disabled={isButtonDisabled}
+          isDisabled={isButtonDisabled}
+          isLoading={loading}
           type='submit'
-        >
-          Login
-        </Button>
+          text='Login'
+        />
 
         <Typography
           color='text.primary'

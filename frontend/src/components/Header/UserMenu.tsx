@@ -88,29 +88,37 @@ const UserMenu: FC<Props> = ({
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <>
-          {settings.map(({ title, route }) => (
-            <Button
-              key={title}
-              onClick={handleCloseUserMenu}
-              component={Link}
-              to={route}
-              sx={{ my: 1, color: 'white', display: 'block' }}
-            >
-              {title}
-            </Button>
-          ))}
-
+        {settings.map(({ title, route }) => (
           <Button
-            key='logout'
-            onClick={handleLogout}
+            key={title}
+            onClick={handleCloseUserMenu}
             component={Link}
-            to='/'
-            sx={{ my: 1, color: 'white', display: 'block' }}
+            to={route}
+            sx={{
+              my: 1,
+              color: 'white',
+              display: 'block',
+              width: 150,
+            }}
           >
-            Logout
+            {title}
           </Button>
-        </>
+        ))}
+
+        <Button
+          key='logout'
+          onClick={handleLogout}
+          component={Link}
+          to='/'
+          sx={{
+            my: 1,
+            color: 'white',
+            display: 'block',
+            width: 150,
+          }}
+        >
+          Logout
+        </Button>
       </Menu>
     </StyledBox>
   );
