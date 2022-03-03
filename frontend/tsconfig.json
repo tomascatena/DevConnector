@@ -49,6 +49,9 @@
       "@typings": [
         "typings/*"
       ],
+      "@utils": [
+        "utils/*"
+      ],
     },
   },
   "include": [

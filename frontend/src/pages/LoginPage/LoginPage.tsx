@@ -12,17 +12,9 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import CustomAlert from '@components/CustomAlert/CustomAlert';
 import { useNavigate } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
-import CustomButton from '@components/CustomButton/CustomButton';
+import LoadingButton from '@components/LoadingButton/LoadingButton';
 
 const RegisterPage: FC = () => {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const { serverValidationErrors, user, error, loading, isAuthenticated } =
-    useTypedSelector((state) => state.auth);
-
-  const [searchParams] = useSearchParams();
-  const redirect = searchParams.get('redirect');
-
   const [emailState, setEmailState] = useState({
     value: '',
     isValid: false,
@@ -48,8 +40,19 @@ const RegisterPage: FC = () => {
     dispatch(login(loginForm));
   };
 
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const {
+    serverValidationErrors, //
+    loading,
+    isAuthenticated,
+  } = useTypedSelector((state) => state.auth);
+
+  const [searchParams] = useSearchParams();
+  const redirect = searchParams.get('redirect');
+
   useEffect(() => {
-    if (isAuthenticated && user && !error && !loading) {
+    if (isAuthenticated) {
       if (redirect) {
         navigate(`/${redirect}`);
       } else {
@@ -58,7 +61,7 @@ const RegisterPage: FC = () => {
     }
 
     // eslint-disable-next-line
-  }, [isAuthenticated, user, error, loading]);
+  }, [isAuthenticated]);
 
   return (
     <LoginContainer>
@@ -102,7 +105,7 @@ const RegisterPage: FC = () => {
           showCheckIcon={false}
         />
 
-        <CustomButton
+        <LoadingButton
           sx={{ maxWidth: { sm: '10rem' } }}
           variant='contained'
           isDisabled={isButtonDisabled}

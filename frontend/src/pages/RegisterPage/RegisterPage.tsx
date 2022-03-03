@@ -1,4 +1,4 @@
-import React, { FC, useState, FormEvent } from 'react';
+import React, { FC, useState, FormEvent, useEffect } from 'react';
 import {
   RegisterContainer,
   StyledForm,
@@ -7,17 +7,21 @@ import {
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import { ROUTES } from '@constants/constants';
 import { validate } from '@utils/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import CustomOutlinedInput from '@components/CustomOutlinedInput/CustomOutlinedInput';
 import { useAppDispatch, useTypedSelector } from '@hooks/index';
 import { register } from '@store/features/auth/auth.thunk';
+import { useNavigate } from 'react-router';
+import { useSearchParams } from 'react-router-dom';
+import LoadingButton from '@components/LoadingButton/LoadingButton';
 
 const RegisterPage: FC = () => {
   const dispatch = useAppDispatch();
-  const { serverValidationErrors } = useTypedSelector((state) => state.auth);
+  const { serverValidationErrors, loading, isAuthenticated } = useTypedSelector(
+    (state) => state.auth
+  );
 
   const [emailState, setEmailState] = useState({
     value: '',
@@ -67,6 +71,23 @@ const RegisterPage: FC = () => {
 
     dispatch(register(registerForm));
   };
+
+  const navigate = useNavigate();
+
+  const [searchParams] = useSearchParams();
+  const redirect = searchParams.get('redirect');
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      if (redirect) {
+        navigate(`/${redirect}`);
+      } else {
+        navigate(ROUTES.DASHBOARD);
+      }
+    }
+
+    // eslint-disable-next-line
+  }, [isAuthenticated]);
 
   return (
     <RegisterContainer>
@@ -157,14 +178,14 @@ const RegisterPage: FC = () => {
           label='Confirm password'
         />
 
-        <Button
+        <LoadingButton
           sx={{ maxWidth: { sm: '10rem' } }}
           variant='contained'
-          disabled={isButtonDisabled}
+          isDisabled={isButtonDisabled}
+          isLoading={loading}
           type='submit'
-        >
-          Register
-        </Button>
+          text='Register'
+        />
 
         <Typography
           color='text.primary'
