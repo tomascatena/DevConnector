@@ -19,7 +19,7 @@ export const login = createAsyncThunk<
   { state: RootState; rejectValue: RejectValue }
 >(
   'auth/login',
-  async (registerForm, { getState, requestId, dispatch, rejectWithValue }) => {
+  async (registerForm, { getState, requestId, rejectWithValue }) => {
     const { loading, currentRequestId } = getState().auth;
 
     if (!loading || requestId !== currentRequestId) {
@@ -44,7 +44,7 @@ export const register = createAsyncThunk<
   { state: RootState; rejectValue: RejectValue }
 >(
   'auth/register',
-  async (registerForm, { getState, requestId, dispatch, rejectWithValue }) => {
+  async (registerForm, { getState, requestId, rejectWithValue }) => {
     const { loading, currentRequestId } = getState().auth;
 
     if (!loading || requestId !== currentRequestId) {
@@ -67,7 +67,7 @@ export const getUser = createAsyncThunk<
   AuthData,
   void,
   { rejectValue: RejectValue }
->('auth/getUser', async (_, { dispatch, rejectWithValue }) => {
+>('auth/getUser', async (_, { rejectWithValue }) => {
   try {
     const { data } = await axios.get('/api/v1/auth');
 

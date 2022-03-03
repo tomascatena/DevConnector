@@ -11,8 +11,9 @@ import { login } from '@store/features/auth/auth.thunk';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import CustomAlert from '@components/CustomAlert/CustomAlert';
 import { useNavigate } from 'react-router';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import LoadingButton from '@components/LoadingButton/LoadingButton';
+import { LocationState } from '@components/routing/ProtectedRoute/ProtectedRoute';
 
 const RegisterPage: FC = () => {
   const [emailState, setEmailState] = useState({
@@ -41,6 +42,9 @@ const RegisterPage: FC = () => {
   };
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const state = location.state as LocationState;
+
   const dispatch = useAppDispatch();
   const {
     serverValidationErrors, //
@@ -48,13 +52,10 @@ const RegisterPage: FC = () => {
     isAuthenticated,
   } = useTypedSelector((state) => state.auth);
 
-  const [searchParams] = useSearchParams();
-  const redirect = searchParams.get('redirect');
-
   useEffect(() => {
     if (isAuthenticated) {
-      if (redirect) {
-        navigate(`/${redirect}`);
+      if (state?.from?.pathname) {
+        navigate(state?.from?.pathname);
       } else {
         navigate(ROUTES.DASHBOARD);
       }

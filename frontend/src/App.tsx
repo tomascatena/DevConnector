@@ -7,10 +7,12 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import { MainLayout, MainBox } from './App.styled';
 import { ROUTES } from './constants/constants';
+import ProtectedRoute from '@components/routing/ProtectedRoute/ProtectedRoute';
 
-const LandingPage = lazy(() => import('./pages/LandingPage/LandingPage'));
-const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'));
-const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'));
+const LandingPage = lazy(() => import('@pages/LandingPage/LandingPage'));
+const LoginPage = lazy(() => import('@pages/LoginPage/LoginPage'));
+const RegisterPage = lazy(() => import('@pages/RegisterPage/RegisterPage'));
+const DashboardPage = lazy(() => import('@pages/DashboardPage/DashboardPage'));
 
 const App: FC = () => {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(true);
@@ -27,6 +29,14 @@ const App: FC = () => {
                 <Route path='/' element={<LandingPage />} />
                 <Route path={ROUTES.LOGIN} element={<LoginPage />} />
                 <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+                <Route
+                  path={ROUTES.DASHBOARD}
+                  element={
+                    <ProtectedRoute>
+                      <DashboardPage />
+                    </ProtectedRoute>
+                  }
+                />
               </Routes>
             </Suspense>
           </MainBox>
