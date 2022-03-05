@@ -32,11 +32,12 @@ const MobileMenu: FC<Props> = ({
   setIsDarkTheme,
   handleOpenNavMenu,
 }) => {
-  const { logout } = useActions();
+  const { logout, clearProfile } = useActions();
 
   const handleLogout = () => {
     handleCloseUserMenu();
 
+    clearProfile();
     logout();
   };
 

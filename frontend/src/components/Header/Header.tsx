@@ -12,6 +12,8 @@ import UserMenu from './UserMenu';
 import GuestMenu from './GuestMenu';
 import HeaderBrand from './HeaderBrand';
 import MobileMenu from './MobileMenu';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 export const pages = [
   {
@@ -32,14 +34,12 @@ export const settings = [
   {
     title: 'Profile',
     route: ROUTES.PROFILE,
-  },
-  {
-    title: 'Account',
-    route: ROUTES.ACCOUNT,
+    icon: <AccountBoxIcon />,
   },
   {
     title: 'Dashboard',
     route: ROUTES.DASHBOARD,
+    icon: <DashboardIcon />,
   },
 ];
 

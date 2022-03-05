@@ -30,7 +30,13 @@ const initialState: ProfileState = {
 export const profileSlice = createSlice({
   name: 'profile',
   initialState,
-  reducers: {},
+  reducers: {
+    clearProfile(state) {
+      state.profile = null;
+      state.profiles = null;
+      state.repos = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getCurrentUsersProfile.pending, (state, action) => {

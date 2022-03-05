@@ -9,6 +9,7 @@ import {
   Button,
   IconButton,
 } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { settings } from './Header';
 import { styled } from '@mui/system';
 import { Link } from 'react-router-dom';
@@ -46,12 +47,13 @@ const UserMenu: FC<Props> = ({
   setIsDarkTheme,
   handleOpenUserMenu,
 }) => {
-  const { logout } = useActions();
+  const { logout, clearProfile } = useActions();
   const { user } = useTypedSelector((state) => state.auth);
 
   const handleLogout = () => {
     handleCloseUserMenu();
 
+    clearProfile();
     logout();
   };
 
@@ -90,37 +92,41 @@ const UserMenu: FC<Props> = ({
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        {settings.map(({ title, route }) => (
+        <Box sx={{ display: 'flex', flexDirection: 'column', padding: 1 }}>
+          {settings.map(({ title, route, icon = null }) => (
+            <Button
+              key={title}
+              onClick={handleCloseUserMenu}
+              component={Link}
+              to={route}
+              startIcon={icon}
+              sx={{
+                marginBottom: 0.5,
+                color: 'white',
+                width: 175,
+                justifyContent: 'flex-start',
+              }}
+            >
+              {title}
+            </Button>
+          ))}
+
           <Button
-            key={title}
-            onClick={handleCloseUserMenu}
+            key='logout'
+            onClick={handleLogout}
             component={Link}
-            to={route}
+            to='/'
+            startIcon={<LogoutIcon />}
             sx={{
-              my: 1,
+              marginTop: 1,
               color: 'white',
-              display: 'block',
-              width: 150,
+              width: 175,
+              justifyContent: 'flex-start',
             }}
           >
-            {title}
+            Logout
           </Button>
-        ))}
-
-        <Button
-          key='logout'
-          onClick={handleLogout}
-          component={Link}
-          to='/'
-          sx={{
-            my: 1,
-            color: 'white',
-            display: 'block',
-            width: 150,
-          }}
-        >
-          Logout
-        </Button>
+        </Box>
       </Menu>
     </StyledBox>
   );

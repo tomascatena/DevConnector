@@ -1,4 +1,5 @@
 import { authActions } from './features/auth/authSlice';
+import { profileActions } from './features/profile/profileSlice';
 import { store } from './store';
 import validator from 'validator';
 import { getUser } from './features/auth/auth.thunk';
@@ -15,8 +16,9 @@ export const getAccessToken = () => {
       store.dispatch(getUser());
     }
   } catch (error) {
+    store.dispatch(profileActions.clearProfile());
     store.dispatch(authActions.logout());
 
-    console.log(error);
+    console.error(error);
   }
 };

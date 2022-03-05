@@ -5,4 +5,5 @@ export const ROUTES = {
   PROFILE: '/profile',
   ACCOUNT: '/account',
   DASHBOARD: '/dashboard',
+  CREATE_PROFILE: '/create-profile',
 } as const;
