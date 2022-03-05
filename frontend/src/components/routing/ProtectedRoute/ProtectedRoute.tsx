@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useTypedSelector } from '@hooks/useTypedSelector';
-import { ROUTES } from '@constants/constants';
+import { ROUTES } from '@constants/routes';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
 export type LocationState = {
@@ -23,7 +23,7 @@ const ProtectedRoute: FC<Props> = ({
     return <Navigate to={redirectPath} state={{ from: location }} />;
   }
 
-  return children ? children : <Outlet />;
+  return children ?? <Outlet />;
 };
 
 export default ProtectedRoute;

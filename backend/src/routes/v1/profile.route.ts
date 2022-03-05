@@ -36,8 +36,7 @@ router.post(
 // @desc      Get current users profile
 // @access    Private
 router.get(
-  '/me',
-  profileValidation.getUserProfile,
+  '/me', //
   requireAuth,
   profileControllers.getUserProfile
 );

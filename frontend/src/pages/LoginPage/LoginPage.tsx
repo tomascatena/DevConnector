@@ -1,7 +1,6 @@
 import React, { FC, useState, FormEvent, useEffect } from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import { ROUTES } from '@constants/constants';
+import { Box, Typography } from '@mui/material';
+import { ROUTES } from '@constants/routes';
 import { validate } from '@utils/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import CustomOutlinedInput from '@components/CustomOutlinedInput/CustomOutlinedInput';

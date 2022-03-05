@@ -5,16 +5,12 @@ import React, {
   MouseEvent,
   Fragment,
 } from 'react';
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
+import { IconButton, Menu, Box, Button, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import Box from '@mui/material/Box';
 import { pages, settings } from './Header';
-import MenuItem from '@mui/material/MenuItem';
 import HeaderBrand from './HeaderBrand';
 import MaterialUISwitch from '@components/MUISwitch/MUISwitch';
 import { Link } from 'react-router-dom';
-import Button from '@mui/material/Button';
 import { useActions } from '@hooks/index';
 
 type Props = {

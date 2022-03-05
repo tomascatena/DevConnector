@@ -1,7 +1,6 @@
 import React, { FC, Dispatch, SetStateAction } from 'react';
 import MaterialUISwitch from '@components/MUISwitch/MUISwitch';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import { Box, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { pages } from './Header';
 

@@ -4,17 +4,14 @@ import {
   StyledForm,
   StyledLink,
 } from './RegisterPage.styled';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import { ROUTES } from '@constants/constants';
+import { Box, Grid, Typography } from '@mui/material';
+import { ROUTES } from '@constants/routes';
 import { validate } from '@utils/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import CustomOutlinedInput from '@components/CustomOutlinedInput/CustomOutlinedInput';
 import { useAppDispatch, useTypedSelector } from '@hooks/index';
 import { register } from '@store/features/auth/auth.thunk';
 import { useNavigate } from 'react-router';
-import { useSearchParams } from 'react-router-dom';
 import LoadingButton from '@components/LoadingButton/LoadingButton';
 
 const RegisterPage: FC = () => {
@@ -74,16 +71,9 @@ const RegisterPage: FC = () => {
 
   const navigate = useNavigate();
 
-  const [searchParams] = useSearchParams();
-  const redirect = searchParams.get('redirect');
-
   useEffect(() => {
     if (isAuthenticated) {
-      if (redirect) {
-        navigate(`/${redirect}`);
-      } else {
-        navigate(ROUTES.DASHBOARD);
-      }
+      navigate(ROUTES.DASHBOARD);
     }
 
     // eslint-disable-next-line

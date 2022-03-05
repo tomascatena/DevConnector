@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
+import { setAuthToken } from '@utils/setAuthToken';
 import { IUser, Nullable, ServerValidationError } from '../../../typings/types';
 import { login, register, getUser } from './auth.thunk';
 
@@ -26,9 +27,6 @@ export const authSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setIsLoggedIn(state, action: PayloadAction<boolean>) {
-      state.isAuthenticated = action.payload;
-    },
     hydrateAccessToken(state, action: PayloadAction<string | null>) {
       state.accessToken = action.payload;
     },
@@ -58,12 +56,14 @@ export const authSlice = createSlice({
           state.loading = false;
           state.currentRequestId = undefined;
           state.isAuthenticated = true;
-          state.accessToken = action.payload.tokens?.access ?? null;
+          state.accessToken = action.payload.tokens?.access.token ?? null;
 
           localStorage.setItem(
             'accessToken',
             JSON.stringify(state.accessToken)
           );
+
+          setAuthToken(state.accessToken);
         }
       })
       .addCase(login.rejected, (state, action) => {
@@ -72,12 +72,14 @@ export const authSlice = createSlice({
           state.user = null;
           state.loading = false;
           state.serverValidationErrors = action.payload?.errors ?? null;
-          state.error = action.error;
+          state.error = action.payload ?? null;
           state.currentRequestId = undefined;
           state.isAuthenticated = false;
           state.accessToken = null;
 
           localStorage.removeItem('accessToken');
+
+          setAuthToken(null);
         }
       })
       .addCase(register.pending, (state, action) => {
@@ -96,12 +98,14 @@ export const authSlice = createSlice({
           state.loading = false;
           state.currentRequestId = undefined;
           state.isAuthenticated = true;
-          state.accessToken = action.payload.tokens?.access ?? null;
+          state.accessToken = action.payload.tokens?.access.token ?? null;
 
           localStorage.setItem(
             'accessToken',
             JSON.stringify(state.accessToken)
           );
+
+          setAuthToken(state.accessToken);
         }
       })
       .addCase(register.rejected, (state, action) => {
@@ -110,12 +114,14 @@ export const authSlice = createSlice({
           state.user = null;
           state.loading = false;
           state.serverValidationErrors = action.payload?.errors ?? null;
-          state.error = action.error;
+          state.error = action.payload ?? null;
           state.currentRequestId = undefined;
           state.isAuthenticated = false;
           state.accessToken = null;
 
           localStorage.removeItem('accessToken');
+
+          setAuthToken(null);
         }
       })
       .addCase(getUser.pending, (state, action) => {
@@ -134,7 +140,7 @@ export const authSlice = createSlice({
           state.loading = false;
           state.currentRequestId = undefined;
           state.isAuthenticated = true;
-          state.accessToken = action.payload.tokens?.access ?? null;
+          state.accessToken = action.payload.tokens?.access.token ?? null;
         }
       })
       .addCase(getUser.rejected, (state, action) => {
@@ -143,7 +149,7 @@ export const authSlice = createSlice({
           state.user = null;
           state.loading = false;
           state.serverValidationErrors = action.payload?.errors ?? null;
-          state.error = action.error;
+          state.error = action.payload ?? null;
           state.currentRequestId = undefined;
           state.isAuthenticated = false;
           state.accessToken = null;

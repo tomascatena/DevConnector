@@ -8,9 +8,11 @@ import {
   ServerValidationError,
 } from '../../../typings/types';
 import { RootState } from '@store/store';
+import { API_ENDPOINTS } from '@constants/APIEndpoints';
 
 type RejectValue = {
-  errors: Nullable<ServerValidationError>;
+  message?: string;
+  errors?: Nullable<ServerValidationError>;
 };
 
 export const login = createAsyncThunk<
@@ -27,7 +29,7 @@ export const login = createAsyncThunk<
     }
 
     try {
-      const { data } = await axios.post('/api/v1/auth', registerForm);
+      const { data } = await axios.post(API_ENDPOINTS.AUTH, registerForm);
 
       return data;
     } catch (error) {
@@ -52,7 +54,7 @@ export const register = createAsyncThunk<
     }
 
     try {
-      const { data } = await axios.post('/api/v1/users', registerForm);
+      const { data } = await axios.post(API_ENDPOINTS.USERS, registerForm);
 
       return data;
     } catch (error) {
@@ -69,7 +71,7 @@ export const getUser = createAsyncThunk<
   { rejectValue: RejectValue }
 >('auth/getUser', async (_, { rejectWithValue }) => {
   try {
-    const { data } = await axios.get('/api/v1/auth');
+    const { data } = await axios.get(API_ENDPOINTS.AUTH);
 
     return data;
   } catch (error) {

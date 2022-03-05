@@ -5,10 +5,8 @@ import React, {
   SetStateAction,
   MouseEvent,
 } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Container from '@mui/material/Container';
-import { ROUTES } from '@constants/constants';
+import { AppBar, Toolbar, Container } from '@mui/material';
+import { ROUTES } from '@constants/routes';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import UserMenu from './UserMenu';
 import GuestMenu from './GuestMenu';

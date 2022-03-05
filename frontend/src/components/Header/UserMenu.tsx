@@ -1,12 +1,14 @@
 import React, { FC, Dispatch, SetStateAction, MouseEvent } from 'react';
 import MaterialUISwitch from '@components/MUISwitch/MUISwitch';
-import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
-import Menu from '@mui/material/Menu';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
+import {
+  Avatar,
+  Tooltip,
+  Menu,
+  Box,
+  Typography,
+  Button,
+  IconButton,
+} from '@mui/material';
 import { settings } from './Header';
 import { styled } from '@mui/system';
 import { Link } from 'react-router-dom';

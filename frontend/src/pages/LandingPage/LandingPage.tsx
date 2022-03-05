@@ -1,11 +1,9 @@
 import React, { FC } from 'react';
 import { styled } from '@mui/system';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { Box, Button, Typography } from '@mui/material';
 import showCaseImage from '../../assets/showCaseImage.png';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '@constants/constants';
+import { ROUTES } from '@constants/routes';
 
 const LandingBox = styled(Box)(({ theme }) => ({
   flex: 1,

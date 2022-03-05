@@ -6,7 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import { MainLayout, MainBox } from './App.styled';
-import { ROUTES } from './constants/constants';
+import { ROUTES } from '@constants/routes';
 import ProtectedRoute from '@components/routing/ProtectedRoute/ProtectedRoute';
 
 const LandingPage = lazy(() => import('@pages/LandingPage/LandingPage'));
