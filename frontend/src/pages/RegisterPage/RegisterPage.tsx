@@ -4,7 +4,7 @@ import {
   StyledForm,
   StyledLink,
 } from './RegisterPage.styled';
-import { Box, Grid, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import { ROUTES } from '@constants/routes';
 import { validate } from '@utils/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
@@ -13,6 +13,7 @@ import { useAppDispatch, useTypedSelector } from '@hooks/index';
 import { register } from '@store/features/auth/auth.thunk';
 import { useNavigate } from 'react-router';
 import LoadingButton from '@components/LoadingButton/LoadingButton';
+import TextWithIcon from '@components/TextWithIcon/TextWithIcon';
 
 const RegisterPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -86,16 +87,10 @@ const RegisterPage: FC = () => {
       </Typography>
 
       <StyledForm noValidate onSubmit={handleFormSubmit}>
-        <Box
-          sx={{
-            display: 'flex',
-            alignSelf: 'flex-start',
-            maxWidth: '30rem',
-          }}
-        >
-          <PersonOutlineIcon color='action' />
-          <Typography color='text.primary'>Create Your Account</Typography>
-        </Box>
+        <TextWithIcon
+          text='Create Your Account'
+          icon={<PersonOutlineIcon color='action' />}
+        />
 
         <CustomOutlinedInput
           inputState={emailState}

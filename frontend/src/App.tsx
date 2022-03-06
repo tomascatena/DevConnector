@@ -13,6 +13,9 @@ const LandingPage = lazy(() => import('@pages/LandingPage/LandingPage'));
 const LoginPage = lazy(() => import('@pages/LoginPage/LoginPage'));
 const RegisterPage = lazy(() => import('@pages/RegisterPage/RegisterPage'));
 const DashboardPage = lazy(() => import('@pages/DashboardPage/DashboardPage'));
+const CreateProfilePage = lazy(
+  () => import('@pages/CreateProfilePage/CreateProfilePage')
+);
 
 const App: FC = () => {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(true);
@@ -27,13 +30,25 @@ const App: FC = () => {
             <Suspense fallback={<div>Loading...</div>}>
               <Routes>
                 <Route path='/' element={<LandingPage />} />
+
                 <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+
                 <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+
                 <Route
                   path={ROUTES.DASHBOARD}
                   element={
                     <ProtectedRoute>
                       <DashboardPage />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path={ROUTES.CREATE_PROFILE}
+                  element={
+                    <ProtectedRoute>
+                      <CreateProfilePage />
                     </ProtectedRoute>
                   }
                 />

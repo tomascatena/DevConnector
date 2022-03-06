@@ -12,6 +12,8 @@ export interface ValidatorResult {
   isNumeric: Handler;
   isAlpha: Handler;
   isAlphaWithSpecialCharacters: Handler;
+  isURL: Handler;
+  isGithubUsername: Handler;
   isEmail: Handler;
   isLength: HandlerNoMessage;
   custom: CustomHandler;
@@ -20,7 +22,7 @@ export interface ValidatorResult {
 
 export const validate = (value: string): ValidatorResult => {
   const _errors: string[] = [];
-  const _value = value;
+  let _value = value;
 
   return {
     required(message = 'This field is required.') {
@@ -40,7 +42,9 @@ export const validate = (value: string): ValidatorResult => {
       return this;
     },
     isEmail(message = 'Must be a valid email.') {
-      if (validator.isEmail(_value)) {
+      if (validator.isEmail(_value) && validator.normalizeEmail(_value)) {
+        _value = validator.normalizeEmail(_value) || _value;
+
         return this;
       }
 
@@ -82,9 +86,26 @@ export const validate = (value: string): ValidatorResult => {
       _errors.push(message);
       return this;
     },
+    isURL(message = `Must ba a valid URL.`) {
+      if (validator.isURL(_value)) {
+        return this;
+      }
+
+      _errors.push(message);
+      return this;
+    },
+    isGithubUsername(message = `Must ba a valid Github Username.`) {
+      const regex = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
+      if (regex.test(_value)) {
+        return this;
+      }
+
+      _errors.push(message);
+      return this;
+    },
     exec: () => {
       return {
-        value: _value,
+        value: validator.trim(validator.escape(_value)),
         isValid: _errors.length === 0,
         validationErrors: _errors,
       };

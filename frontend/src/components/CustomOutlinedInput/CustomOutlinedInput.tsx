@@ -6,14 +6,17 @@ import {
   Dispatch,
   SetStateAction,
 } from 'react';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormControl, { useFormControl } from '@mui/material/FormControl';
+import {
+  OutlinedInput,
+  InputLabel,
+  IconButton,
+  InputAdornment,
+  FormHelperText,
+  FormControl,
+} from '@mui/material';
+import { useFormControl } from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import FormHelperText from '@mui/material/FormHelperText';
 import { ValidatorResult } from '@utils/validator';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { useEffect } from 'react';
@@ -31,6 +34,9 @@ type Props = {
   validation: ValidatorResult;
   customHelperText?: string;
   showCheckIcon?: boolean;
+  isRequired?: boolean;
+  placeholder?: string;
+  isMultiline?: boolean;
 };
 
 const CustomOutlinedInput: FC<Props> = ({
@@ -41,6 +47,9 @@ const CustomOutlinedInput: FC<Props> = ({
   validation,
   customHelperText,
   showCheckIcon = true,
+  isRequired = true,
+  placeholder = '',
+  isMultiline = false,
 }) => {
   const [isBlur, setIsBlur] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -50,14 +59,16 @@ const CustomOutlinedInput: FC<Props> = ({
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputState({
       value: event.target.value,
-      isValid: isBlur && isValid,
+      isValid:
+        event.target.value === '' && !isRequired ? true : isBlur && isValid,
     });
   };
 
   useEffect(() => {
     setInputState({
       ...inputState,
-      isValid: isBlur && isValid,
+      isValid:
+        inputState.value === '' && !isRequired ? true : isBlur && isValid,
     });
 
     // eslint-disable-next-line
@@ -77,6 +88,8 @@ const CustomOutlinedInput: FC<Props> = ({
 
       if (isBlur && !validationErrors.length) {
         return 'Looks good!';
+      } else if (isBlur && !isRequired && inputState.value === '') {
+        return customHelperText || '';
       } else if (isBlur && validationErrors.length) {
         return validationErrors[0];
       } else {
@@ -88,7 +101,9 @@ const CustomOutlinedInput: FC<Props> = ({
   };
 
   const inputColor = isBlur && isValid ? 'success' : undefined;
-  const shouldShowError = isBlur && !isValid;
+  const shouldShowError = isRequired
+    ? isBlur && !isValid
+    : isBlur && !isValid && inputState.value !== '';
 
   let inputType = type;
   if (type === 'password') {
@@ -119,17 +134,22 @@ const CustomOutlinedInput: FC<Props> = ({
       color={inputColor}
       error={shouldShowError}
     >
-      <InputLabel>{label}</InputLabel>
+      <InputLabel>{isRequired ? `* ${label}` : label}</InputLabel>
 
       <OutlinedInput
+        required={isRequired}
         error={shouldShowError}
         color={inputColor}
         type={inputType}
+        placeholder={isRequired ? `* ${placeholder}` : placeholder}
         value={inputState.value}
         onChange={handleChange}
         endAdornment={endAdornment}
-        label={label}
+        label={isRequired ? `* ${label}` : label}
         onBlur={() => setIsBlur(true)}
+        multiline={isMultiline}
+        minRows={2}
+        maxRows={4}
       />
 
       <CustomFormHelperText />

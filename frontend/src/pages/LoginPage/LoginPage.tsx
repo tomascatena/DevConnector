@@ -1,5 +1,5 @@
 import React, { FC, useState, FormEvent, useEffect } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { ROUTES } from '@constants/routes';
 import { validate } from '@utils/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
 import LoadingButton from '@components/LoadingButton/LoadingButton';
 import { LocationState } from '@components/routing/ProtectedRoute/ProtectedRoute';
+import TextWithIcon from '@components/TextWithIcon/TextWithIcon';
 
 const RegisterPage: FC = () => {
   const [emailState, setEmailState] = useState({
@@ -75,17 +76,10 @@ const RegisterPage: FC = () => {
       />
 
       <StyledForm noValidate onSubmit={handleFormSubmit}>
-        <Box
-          sx={{
-            display: 'flex',
-            alignSelf: 'flex-start',
-            maxWidth: '30rem',
-          }}
-        >
-          <PersonOutlineIcon color='action' />
-
-          <Typography color='text.primary'>Sign Into Your Account</Typography>
-        </Box>
+        <TextWithIcon
+          text='Sign Into Your Account'
+          icon={<PersonOutlineIcon color='action' />}
+        />
 
         <CustomOutlinedInput
           inputState={emailState}

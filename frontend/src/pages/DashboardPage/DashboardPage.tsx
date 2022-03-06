@@ -1,5 +1,5 @@
 import React, { useEffect, FC } from 'react';
-import { Container, Typography, Box, Button } from '@mui/material';
+import { Container, Typography, Button } from '@mui/material';
 import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import { getCurrentUsersProfile } from '../../store/features/profile/profile.thunk';
@@ -8,6 +8,7 @@ import { styled } from '@mui/system';
 import PersonIcon from '@mui/icons-material/Person';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@constants/routes';
+import TextWithIcon from '@components/TextWithIcon/TextWithIcon';
 
 export const DashboardContainer = styled(Container)(({ theme }) => ({
   color: theme.palette.primary.main,
@@ -37,11 +38,10 @@ const DashboardPage: FC<Props> = () => {
         Dashboard
       </Typography>
 
-      <Box sx={{ display: 'flex', gap: 1 }}>
-        <PersonIcon color='action' />
-
-        <Typography color='text.primary'>Welcome {user?.firstName}</Typography>
-      </Box>
+      <TextWithIcon
+        text={`Welcome ${user?.firstName}`}
+        icon={<PersonIcon color='action' />}
+      />
 
       {loading ? (
         <CircularLoader sx={{ alignSelf: 'center' }} />
