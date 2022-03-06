@@ -44,9 +44,12 @@ const CreateProfilePage: FC = () => {
   const [instagramState, setInstagramState] = useState(initialInputState);
   const [githubUsernameState, setGithubUsernameState] =
     useState(initialInputState);
-  const [skillsState, setSkillsState] = useState({
-    value: ['PHP', 'Javascript'],
-    isValid: true,
+  const [skillsState, setSkillsState] = useState<{
+    value: string[];
+    isValid: boolean;
+  }>({
+    value: [],
+    isValid: false,
   });
 
   const formData = [
@@ -63,8 +66,6 @@ const CreateProfilePage: FC = () => {
     youtubeState,
     instagramState,
   ];
-
-  console.log(formData);
 
   const isButtonDisabled = formData.some(({ isValid }) => !isValid);
 
@@ -118,7 +119,6 @@ const CreateProfilePage: FC = () => {
               setInputState={setCompanyState}
               validation={validate(companyState.value)
                 .required()
-                .isAlphaWithSpecialCharacters()
                 .isLength({ min: 3, max: 50 })}
               type='text'
               label='Company'
@@ -163,7 +163,6 @@ const CreateProfilePage: FC = () => {
           setInputState={setLocationState}
           validation={validate(locationState.value)
             .required()
-            .isAlphaWithSpecialCharacters()
             .isLength({ min: 3, max: 50 })}
           type='text'
           label='Location'
@@ -176,7 +175,7 @@ const CreateProfilePage: FC = () => {
           setInputState={setSkillsState}
           label='Skills'
           placeholder='Add a skill and press Enter.'
-          customHelperText='Add your skills, separated by an Enter keystroke (eg. Javascript, PHP).'
+          customHelperText='Add your skills (eg. Javascript, PHP, Java, SQL, etc).'
         />
 
         <CustomOutlinedInput
