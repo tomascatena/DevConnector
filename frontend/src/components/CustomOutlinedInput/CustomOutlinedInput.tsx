@@ -5,6 +5,7 @@ import {
   useState,
   Dispatch,
   SetStateAction,
+  useEffect,
 } from 'react';
 import {
   OutlinedInput,
@@ -19,7 +20,6 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { ValidatorResult } from '@utils/validator';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import { useEffect } from 'react';
 
 interface FormFieldState {
   value: string;
@@ -73,6 +73,17 @@ const CustomOutlinedInput: FC<Props> = ({
 
     // eslint-disable-next-line
   }, [isBlur, isValid, inputState.value]);
+
+  useEffect(() => {
+    if (!isRequired) {
+      setInputState({
+        ...inputState,
+        isValid: true,
+      });
+    }
+
+    // eslint-disable-next-line
+  }, []);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);

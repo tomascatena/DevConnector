@@ -1,13 +1,5 @@
-import React, { useState, FormEvent } from 'react';
-import {
-  Container,
-  Typography,
-  Grid,
-  Button,
-  Box,
-  Collapse,
-} from '@mui/material';
-import { styled } from '@mui/system';
+import React, { useState, FormEvent, FC } from 'react';
+import { Typography, Grid, Button, Collapse } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import TextWithIcon from '@components/TextWithIcon/TextWithIcon';
 import CustomSelect from '@components/CustomSelect/CustomSelect';
@@ -23,107 +15,38 @@ import PrependIcon from '@components/PrependIcon/PrependIcon';
 import LoadingButton from '@components/LoadingButton/LoadingButton';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@constants/routes';
+import ChipsInput from '@components/ChipsInput/ChipsInput';
+import {
+  CreateProfileContainer,
+  StyledForm,
+  ButtonsBox,
+  SocialNetworkLinksBox,
+  ShowSocialNetworkLinksBox,
+} from './CreateProfilePage.styled';
 
-export const CreateProfileContainer = styled(Container)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: theme.spacing(3),
-  marginTop: theme.spacing(4),
-}));
-
-export const StyledForm = styled('form')(({ theme }) => ({
-  flexDirection: 'column',
-  display: 'flex',
-  width: '100%',
-  maxWidth: '60rem',
-  gap: theme.spacing(3),
-  marginBottom: theme.spacing(10),
-}));
-
-export const ButtonsBox = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  gap: theme.spacing(4),
-  marginTop: theme.spacing(3),
-}));
-
-export const SocialNetworkLinksBox = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  gap: theme.spacing(3),
-  flexDirection: 'column',
-}));
-
-export const ShowSocialNetworkLinksBox = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(3),
-  marginTop: theme.spacing(3),
-}));
-
-type Props = {};
-
-const CreateProfilePage = (props: Props) => {
+const CreateProfilePage: FC = () => {
   const [showSocialNetworkLinks, setShowSocialNetworkLinks] = useState(false);
 
-  const [companyState, setCompanyState] = useState({
+  const initialInputState = {
     value: '',
     isValid: false,
-  });
+  };
 
-  const [websiteState, setWebsiteState] = useState({
-    value: '',
-    isValid: false,
-  });
-
-  const [locationState, setLocationState] = useState({
-    value: '',
-    isValid: false,
-  });
-
-  const [statusState, setStatusState] = useState({
-    value: '',
-    isValid: false,
-  });
-
+  const [companyState, setCompanyState] = useState(initialInputState);
+  const [websiteState, setWebsiteState] = useState(initialInputState);
+  const [locationState, setLocationState] = useState(initialInputState);
+  const [statusState, setStatusState] = useState(initialInputState);
+  const [bioState, setBioState] = useState(initialInputState);
+  const [twitterState, setTwitterState] = useState(initialInputState);
+  const [facebookState, setFacebookState] = useState(initialInputState);
+  const [linkedInState, setLinkedInState] = useState(initialInputState);
+  const [youtubeState, setYoutubeState] = useState(initialInputState);
+  const [instagramState, setInstagramState] = useState(initialInputState);
+  const [githubUsernameState, setGithubUsernameState] =
+    useState(initialInputState);
   const [skillsState, setSkillsState] = useState({
-    value: '',
-    isValid: false,
-  });
-
-  const [githubUsernameState, setGithubUsernameState] = useState({
-    value: '',
-    isValid: false,
-  });
-
-  const [bioState, setBioState] = useState({
-    value: '',
-    isValid: false,
-  });
-
-  const [twitterState, setTwitterState] = useState({
-    value: '',
-    isValid: false,
-  });
-
-  const [facebookState, setFacebookState] = useState({
-    value: '',
-    isValid: false,
-  });
-
-  const [linkedInState, setLinkedInState] = useState({
-    value: '',
-    isValid: false,
-  });
-
-  const [youtubeState, setYoutubeState] = useState({
-    value: '',
-    isValid: false,
-  });
-
-  const [instagramState, setInstagramState] = useState({
-    value: '',
-    isValid: false,
+    value: ['PHP', 'Javascript'],
+    isValid: true,
   });
 
   const formData = [
@@ -140,6 +63,8 @@ const CreateProfilePage = (props: Props) => {
     youtubeState,
     instagramState,
   ];
+
+  console.log(formData);
 
   const isButtonDisabled = formData.some(({ isValid }) => !isValid);
 
@@ -246,14 +171,11 @@ const CreateProfilePage = (props: Props) => {
           customHelperText='City &amp; state suggested (eg. Austin, TX).'
         />
 
-        <CustomOutlinedInput
+        <ChipsInput
           inputState={skillsState}
           setInputState={setSkillsState}
-          validation={validate(skillsState.value).isLength({ min: 1, max: 20 })}
-          type='text'
           label='Skills'
           placeholder='Add a skill and press Enter.'
-          isRequired={false}
           customHelperText='Add your skills, separated by an Enter keystroke (eg. Javascript, PHP).'
         />
 
