@@ -1,10 +1,4 @@
-import React, {
-  FC,
-  useState,
-  Dispatch,
-  SetStateAction,
-  MouseEvent,
-} from 'react';
+import { FC, useState, Dispatch, SetStateAction, MouseEvent } from 'react';
 import { AppBar, Toolbar, Container } from '@mui/material';
 import { ROUTES } from '@constants/routes';
 import { useTypedSelector } from '@hooks/useTypedSelector';

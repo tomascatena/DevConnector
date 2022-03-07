@@ -30,6 +30,8 @@ const RegisterPage: FC = () => {
 
   const isButtonDisabled = formData.some(({ isValid }) => !isValid);
 
+  const dispatch = useAppDispatch();
+
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -45,7 +47,6 @@ const RegisterPage: FC = () => {
   const location = useLocation();
   const state = location.state as LocationState;
 
-  const dispatch = useAppDispatch();
   const {
     serverValidationErrors, //
     loading,
@@ -76,10 +77,7 @@ const RegisterPage: FC = () => {
       />
 
       <StyledForm noValidate onSubmit={handleFormSubmit}>
-        <TextWithIcon
-          text='Sign Into Your Account'
-          icon={<PersonOutlineIcon color='action' />}
-        />
+        <TextWithIcon text='Sign Into Your Account' icon={<PersonOutlineIcon color='action' />} />
 
         <CustomOutlinedInput
           inputState={emailState}
@@ -114,8 +112,7 @@ const RegisterPage: FC = () => {
           variant='body1'
           align='center'
         >
-          Do not have an account?{' '}
-          <StyledLink to={ROUTES.REGISTER}>Sign Up</StyledLink>
+          Do not have an account? <StyledLink to={ROUTES.REGISTER}>Sign Up</StyledLink>
         </Typography>
       </StyledForm>
     </LoginContainer>

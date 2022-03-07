@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 import { Box } from '@mui/material';
 
 type Props = {
@@ -7,11 +7,7 @@ type Props = {
   iconColor?: string;
 };
 
-const PrependIcon: FC<Props> = ({
-  icon,
-  children,
-  iconColor = 'text.main',
-}) => {
+const PrependIcon: FC<Props> = ({ icon, children, iconColor = 'text.main' }) => {
   return (
     <Box
       sx={{

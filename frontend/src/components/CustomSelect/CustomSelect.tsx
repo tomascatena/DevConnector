@@ -1,4 +1,4 @@
-import { FC, useState, Dispatch, SetStateAction } from 'react';
+import { FC, useState, Dispatch, SetStateAction, useEffect } from 'react';
 import {
   InputLabel,
   InputAdornment,
@@ -9,7 +9,6 @@ import {
 } from '@mui/material';
 import { ValidatorResult } from '@utils/validator';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import { useEffect } from 'react';
 import { SelectChangeEvent } from '@mui/material/Select';
 
 type FormFieldState = {
@@ -77,9 +76,7 @@ const CustomSelect: FC<Props> = ({
 
   const endAdornment = (
     <InputAdornment position='end' sx={{ right: 35, position: 'absolute' }}>
-      {showCheckIcon && isClose && isValid && (
-        <CheckCircleOutlineIcon color='success' />
-      )}
+      {showCheckIcon && isClose && isValid && <CheckCircleOutlineIcon color='success' />}
     </InputAdornment>
   );
 

@@ -32,7 +32,10 @@
     "start": "BROWSER=none craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "craco eject"
+    "eject": "craco eject",
+    "lint": "eslint src/**/*.ts src/**/*.tsx",
+    "lint:fix": "eslint src/**/*.ts src/**/*.tsx --fix",
+    "lint:quiet": "eslint src/**/*.ts src/**/*.tsx --quiet"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -58,6 +61,14 @@
     "@types/react-router": "^5.1.18",
     "@types/react-router-dom": "^5.3.3",
     "@types/validator": "^13.7.1",
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "@typescript-eslint/parser": "^5.13.0",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "eslint-plugin-react": "^7.29.3",
     "tsconfig-paths-webpack-plugin": "^3.5.2"
   },
   "proxy": "http://localhost:5000",

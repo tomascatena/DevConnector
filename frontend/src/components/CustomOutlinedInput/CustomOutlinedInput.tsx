@@ -1,4 +1,4 @@
-import {
+import React, {
   FC,
   ChangeEvent,
   useMemo,
@@ -59,16 +59,14 @@ const CustomOutlinedInput: FC<Props> = ({
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputState({
       value: event.target.value,
-      isValid:
-        event.target.value === '' && !isRequired ? true : isBlur && isValid,
+      isValid: event.target.value === '' && !isRequired ? true : isBlur && isValid,
     });
   };
 
   useEffect(() => {
     setInputState({
       ...inputState,
-      isValid:
-        inputState.value === '' && !isRequired ? true : isBlur && isValid,
+      isValid: inputState.value === '' && !isRequired ? true : isBlur && isValid,
     });
 
     // eslint-disable-next-line
@@ -90,7 +88,7 @@ const CustomOutlinedInput: FC<Props> = ({
   };
 
   const CustomFormHelperText = () => {
-    let { focused } = useFormControl() || {};
+    const { focused } = useFormControl() || {};
 
     const helperText = useMemo(() => {
       if (focused && validationErrors.length && inputState.value !== '') {
@@ -123,9 +121,7 @@ const CustomOutlinedInput: FC<Props> = ({
 
   const endAdornment = (
     <InputAdornment position='end'>
-      {showCheckIcon && isBlur && isValid && (
-        <CheckCircleOutlineIcon color='success' />
-      )}
+      {showCheckIcon && isBlur && isValid && <CheckCircleOutlineIcon color='success' />}
 
       {type === 'password' && (
         <IconButton
@@ -140,11 +136,7 @@ const CustomOutlinedInput: FC<Props> = ({
   );
 
   return (
-    <FormControl
-      sx={{ width: '100%' }}
-      color={inputColor}
-      error={shouldShowError}
-    >
+    <FormControl sx={{ width: '100%' }} color={inputColor} error={shouldShowError}>
       <InputLabel>{isRequired ? `* ${label}` : label}</InputLabel>
 
       <OutlinedInput

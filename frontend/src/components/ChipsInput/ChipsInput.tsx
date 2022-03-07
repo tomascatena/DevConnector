@@ -1,18 +1,5 @@
-import {
-  FC,
-  ChangeEvent,
-  useState,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-} from 'react';
-import {
-  InputLabel,
-  FormHelperText,
-  FormControl,
-  Chip,
-  Typography,
-} from '@mui/material';
+import React, { FC, ChangeEvent, useState, Dispatch, SetStateAction, useEffect } from 'react';
+import { InputLabel, FormHelperText, FormControl, Chip, Typography } from '@mui/material';
 import { StyledOutlinedInput } from './ChipsInput.styled';
 
 interface FormFieldState {
@@ -43,9 +30,7 @@ const ChipsInput: FC<Props> = ({
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [chips, setChips] = useState(inputState.value);
-  const [isValidInput, setIsValidInput] = useState(
-    inputValue.length <= maxCharactersPerChip
-  );
+  const [isValidInput, setIsValidInput] = useState(inputValue.length <= maxCharactersPerChip);
 
   useEffect(() => {
     setInputState({
@@ -60,9 +45,7 @@ const ChipsInput: FC<Props> = ({
     setChips((chips) => chips.filter((_, i) => i !== index));
   };
 
-  const handleInputChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const rawInput = event.target.value.trim();
 
     setIsValidInput(rawInput.length <= maxCharactersPerChip);
@@ -118,11 +101,7 @@ const ChipsInput: FC<Props> = ({
         startAdornment={startAdornment}
         label={label}
         isValidInput={isValidInput}
-        placeholder={
-          chips.length < maxChips
-            ? placeholder
-            : `You can add up to ${maxChips}.`
-        }
+        placeholder={chips.length < maxChips ? placeholder : `You can add up to ${maxChips}.`}
       />
 
       <CustomFormHelperText />

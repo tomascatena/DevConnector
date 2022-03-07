@@ -59,7 +59,7 @@ export const validate = (value: string): ValidatorResult => {
       _errors.push(`Must be between ${min} and ${max} characters long.`);
       return this;
     },
-    isAlpha(message = `Must contain only letters.`) {
+    isAlpha(message = 'Must contain only letters.') {
       if (validator.isAlpha(_value)) {
         return this;
       }
@@ -67,9 +67,7 @@ export const validate = (value: string): ValidatorResult => {
       _errors.push(message);
       return this;
     },
-    isAlphaWithSpecialCharacters(
-      message = `Must contain only letters with or without accents.`
-    ) {
+    isAlphaWithSpecialCharacters(message = 'Must contain only letters with or without accents.') {
       const regex = /^[^\s]+[a-zA-ZÀ-ÿ\u00f1\u00d1]*$/g;
       if (regex.test(_value)) {
         return this;
@@ -86,7 +84,7 @@ export const validate = (value: string): ValidatorResult => {
       _errors.push(message);
       return this;
     },
-    isURL(message = `Must ba a valid URL.`) {
+    isURL(message = 'Must ba a valid URL.') {
       if (validator.isURL(_value)) {
         return this;
       }
@@ -94,7 +92,7 @@ export const validate = (value: string): ValidatorResult => {
       _errors.push(message);
       return this;
     },
-    isGithubUsername(message = `Must ba a valid Github Username.`) {
+    isGithubUsername(message = 'Must ba a valid Github Username.') {
       const regex = /^[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}$/i;
       if (regex.test(_value)) {
         return this;
