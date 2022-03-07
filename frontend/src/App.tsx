@@ -13,9 +13,10 @@ const LandingPage = lazy(() => import('@pages/LandingPage/LandingPage'));
 const LoginPage = lazy(() => import('@pages/LoginPage/LoginPage'));
 const RegisterPage = lazy(() => import('@pages/RegisterPage/RegisterPage'));
 const DashboardPage = lazy(() => import('@pages/DashboardPage/DashboardPage'));
-const CreateProfilePage = lazy(
-  () => import('@pages/CreateProfilePage/CreateProfilePage')
-);
+const CreateProfilePage = lazy(() => import('@pages/CreateProfilePage/CreateProfilePage'));
+const EditProfilePage = lazy(() => import('@pages/EditProfilePage/EditProfilePage'));
+const AddEducationPage = lazy(() => import('@pages/AddEducationPage/AddEducationPage'));
+const AddExperiencePage = lazy(() => import('@pages/AddExperiencePage/AddExperiencePage'));
 
 const App: FC = () => {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(true);
@@ -49,6 +50,33 @@ const App: FC = () => {
                   element={
                     <ProtectedRoute>
                       <CreateProfilePage />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path={ROUTES.EDIT_PROFILE}
+                  element={
+                    <ProtectedRoute>
+                      <EditProfilePage />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path={ROUTES.ADD_EDUCATION}
+                  element={
+                    <ProtectedRoute>
+                      <AddEducationPage />
+                    </ProtectedRoute>
+                  }
+                />
+
+                <Route
+                  path={ROUTES.ADD_EXPERIENCE}
+                  element={
+                    <ProtectedRoute>
+                      <AddExperiencePage />
                     </ProtectedRoute>
                   }
                 />

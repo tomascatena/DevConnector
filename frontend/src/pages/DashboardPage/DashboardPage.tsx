@@ -5,10 +5,11 @@ import { useTypedSelector } from '@hooks/useTypedSelector';
 import { getCurrentUsersProfile } from '../../store/features/profile/profile.thunk';
 import CircularLoader from '../../components/CircularLoader/CircularLoader';
 import { styled } from '@mui/system';
-import PersonIcon from '@mui/icons-material/Person';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@constants/routes';
 import TextWithIcon from '@components/TextWithIcon/TextWithIcon';
+import PersonIcon from '@mui/icons-material/Person';
+import DashboardActions from '@components/DashboardActions/DashboardActions';
 
 export const DashboardContainer = styled(Container)(({ theme }) => ({
   color: theme.palette.primary.main,
@@ -38,33 +39,30 @@ const DashboardPage: FC<Props> = () => {
         Dashboard
       </Typography>
 
-      <TextWithIcon
-        text={`Welcome ${user?.firstName}`}
-        icon={<PersonIcon color='action' />}
-      />
+      <TextWithIcon text={`Welcome ${user?.firstName}`} icon={<PersonIcon color='action' />} />
 
       {loading ? (
         <CircularLoader sx={{ alignSelf: 'center' }} />
       ) : (
         <>
-          {profile !== null ? (
+          {profile === null ? (
             <>
               <Typography color='text.primary' variant='body1' align='left'>
                 You have not yet setup a profile, please add some info.
               </Typography>
 
-              <Button
-                component={Link}
-                to={ROUTES.CREATE_PROFILE}
-                variant='contained'
-              >
+              <Button component={Link} to={ROUTES.CREATE_PROFILE} variant='contained'>
                 Create Profile
               </Button>
             </>
           ) : (
-            <Typography variant='body1' align='center'>
-              User Profile
-            </Typography>
+            <>
+              <Typography variant='body1' align='center'>
+                User Profile
+              </Typography>
+
+              <DashboardActions />
+            </>
           )}
         </>
       )}
