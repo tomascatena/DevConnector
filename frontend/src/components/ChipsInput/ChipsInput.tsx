@@ -8,26 +8,13 @@ import {
   useEffect,
 } from 'react';
 import {
-  OutlinedInput,
   InputLabel,
   FormHelperText,
   FormControl,
   Chip,
   Typography,
 } from '@mui/material';
-import { styled } from '@mui/system';
-
-export const StyledOutlinedInput = styled(OutlinedInput)(({ theme }) => ({
-  display: 'flex',
-  flexWrap: 'wrap',
-  paddingTop: theme.spacing(1.5),
-  alignItems: 'center',
-
-  '& .MuiOutlinedInput-input': {
-    width: 'auto',
-    marginLeft: theme.spacing(1),
-  },
-}));
+import { StyledOutlinedInput } from './ChipsInput.styled';
 
 interface FormFieldState {
   value: string[];
@@ -41,7 +28,7 @@ type Props = {
   customHelperText?: string;
   placeholder?: string;
   maxChips?: number;
-  maxCharactersInChip?: number;
+  maxCharactersPerChip?: number;
 };
 
 const ChipsInput: FC<Props> = ({
@@ -51,12 +38,12 @@ const ChipsInput: FC<Props> = ({
   customHelperText,
   placeholder = '',
   maxChips = 10,
-  maxCharactersInChip = 25,
+  maxCharactersPerChip = 25,
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [chips, setChips] = useState(inputState.value);
   const [isValidInput, setIsValidInput] = useState(
-    inputValue.length <= maxCharactersInChip
+    inputValue.length <= maxCharactersPerChip
   );
 
   const handleKeyDown = (
@@ -83,7 +70,7 @@ const ChipsInput: FC<Props> = ({
   ) => {
     const rawInput = event.target.value.trim();
 
-    setIsValidInput(rawInput.length <= maxCharactersInChip);
+    setIsValidInput(rawInput.length <= maxCharactersPerChip);
 
     if (isValidInput) {
       setInputValue(rawInput);
@@ -104,7 +91,7 @@ const ChipsInput: FC<Props> = ({
       if (chips.length >= maxChips) {
         return `You can add up to ${maxChips}.`;
       } else if (!isValidInput) {
-        return `Maximum ${maxCharactersInChip} characters.`;
+        return `Maximum ${maxCharactersPerChip} characters.`;
       } else {
         return customHelperText || '';
       }
@@ -133,7 +120,7 @@ const ChipsInput: FC<Props> = ({
         onKeyDown={handleKeyDown}
         startAdornment={startAdornment}
         label={label}
-        sx={{ color: isValidInput ? '' : 'red' }}
+        isValidInput={isValidInput}
         placeholder={
           chips.length < maxChips
             ? placeholder
