@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, useState, Dispatch, SetStateAction, useEffect } from 'react';
+import { FC, ChangeEvent, useState, Dispatch, SetStateAction, useEffect } from 'react';
 import { InputLabel, FormHelperText, FormControl, Chip, Typography } from '@mui/material';
 import { StyledOutlinedInput } from './ChipsInput.styled';
 

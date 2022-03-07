@@ -1,4 +1,4 @@
-import React, { FC, useState, FormEvent, useEffect } from 'react';
+import { FC, useState, FormEvent, useEffect } from 'react';
 import {
   RegisterContainer,
   StyledForm,

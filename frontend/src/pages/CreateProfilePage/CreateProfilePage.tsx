@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Typography } from '@mui/material';
 import { CreateProfileContainer } from './CreateProfilePage.styled';
 import { useAppDispatch, useTypedSelector } from '@hooks/index';

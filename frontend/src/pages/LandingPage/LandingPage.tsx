@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { styled } from '@mui/system';
 import { Box, Button, Typography } from '@mui/material';
 import showCaseImage from '../../assets/showCaseImage.png';

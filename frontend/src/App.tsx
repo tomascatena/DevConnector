@@ -1,4 +1,4 @@
-import React, { FC, useState, lazy, Suspense } from 'react';
+import { FC, useState, lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import lightTheme from './themes/lightTheme';
 import darkTheme from './themes/darkTheme';

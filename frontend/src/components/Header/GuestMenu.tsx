@@ -1,4 +1,4 @@
-import React, { FC, Dispatch, SetStateAction } from 'react';
+import { FC, Dispatch, SetStateAction } from 'react';
 import MaterialUISwitch from '@components/MUISwitch/MUISwitch';
 import { Box, Button } from '@mui/material';
 import { Link } from 'react-router-dom';

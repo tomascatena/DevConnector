@@ -1,4 +1,4 @@
-import React, { useState, FC, FormEvent } from 'react';
+import { useState, FC, FormEvent } from 'react';
 import { Typography, Grid, Button, Collapse } from '@mui/material';
 import { StyledForm, ButtonsBox, SocialNetworkLinksBox, ShowSocialNetworkLinksBox } from './ProfileForm.styled';
 import PersonIcon from '@mui/icons-material/Person';

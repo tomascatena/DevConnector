@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useNavigate } from 'react-router';
 import Typography from '@mui/material/Typography';
 

@@ -1,4 +1,4 @@
-import React, { FC, Dispatch, SetStateAction, MouseEvent } from 'react';
+import { FC, Dispatch, SetStateAction, MouseEvent } from 'react';
 import MaterialUISwitch from '@components/MUISwitch/MUISwitch';
 import {
   Avatar,

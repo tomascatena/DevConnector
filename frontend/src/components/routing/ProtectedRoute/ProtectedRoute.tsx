@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import { ROUTES } from '@constants/routes';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';

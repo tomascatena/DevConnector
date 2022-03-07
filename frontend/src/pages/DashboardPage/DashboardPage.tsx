@@ -1,4 +1,4 @@
-import React, { useEffect, FC } from 'react';
+import { useEffect, FC } from 'react';
 import { Container, Typography, Button } from '@mui/material';
 import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useTypedSelector } from '@hooks/useTypedSelector';
