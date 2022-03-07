@@ -8,6 +8,7 @@ import Footer from './components/Footer/Footer';
 import { MainLayout, MainBox } from './App.styled';
 import { ROUTES } from '@constants/routes';
 import ProtectedRoute from '@components/routing/ProtectedRoute/ProtectedRoute';
+import CustomBackdrop from '@components/CustomBackdrop/CustomBackdrop';
 
 const LandingPage = lazy(() => import('@pages/LandingPage/LandingPage'));
 const LoginPage = lazy(() => import('@pages/LoginPage/LoginPage'));
@@ -21,6 +22,13 @@ const AddExperiencePage = lazy(() => import('@pages/AddExperiencePage/AddExperie
 const App: FC = () => {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(true);
 
+  const SuspenseFallback = (
+    <CustomBackdrop
+      isOpen={true}
+      message='Loading... Please wait.'
+    />
+  );
+
   return (
     <BrowserRouter>
       <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
@@ -31,7 +39,7 @@ const App: FC = () => {
           />
 
           <MainBox>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={SuspenseFallback}>
               <Routes>
                 <Route
                   path='/'

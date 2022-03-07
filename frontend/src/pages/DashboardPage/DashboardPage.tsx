@@ -2,7 +2,7 @@ import { useEffect, FC } from 'react';
 import { Container, Typography, Button } from '@mui/material';
 import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useTypedSelector } from '@hooks/useTypedSelector';
-import { getCurrentUsersProfile } from '../../store/features/profile/profile.thunk';
+import { getCurrentUserProfile } from '../../store/features/profile/profile.thunk';
 import CircularLoader from '../../components/CircularLoader/CircularLoader';
 import { styled } from '@mui/system';
 import { Link } from 'react-router-dom';
@@ -28,7 +28,7 @@ const DashboardPage: FC<Props> = () => {
   const { user } = useTypedSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(getCurrentUsersProfile());
+    dispatch(getCurrentUserProfile());
 
     // eslint-disable-next-line
   }, []);

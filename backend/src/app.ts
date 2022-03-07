@@ -26,7 +26,9 @@ app.use(xssClean());
 app.use(mongoSanitize());
 
 // Basic rate-limiting middleware
-app.use(rateLimiter);
+if (env.NODE_ENV === 'production') {
+  app.use(rateLimiter);
+}
 
 if (env.NODE_ENV === 'development') {
   // HTTP request logger middleware

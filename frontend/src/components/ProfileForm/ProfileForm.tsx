@@ -1,5 +1,5 @@
 import { useState, FC, FormEvent } from 'react';
-import { Typography, Grid, Button, Collapse } from '@mui/material';
+import { Typography, Button, Collapse } from '@mui/material';
 import { StyledForm, ButtonsBox, SocialNetworkLinksBox, ShowSocialNetworkLinksBox } from './ProfileForm.styled';
 import PersonIcon from '@mui/icons-material/Person';
 import TextWithIcon from '@components/TextWithIcon/TextWithIcon';
@@ -16,80 +16,46 @@ import PrependIcon from '@components/PrependIcon/PrependIcon';
 import LoadingButton from '@components/LoadingButton/LoadingButton';
 import { Link } from 'react-router-dom';
 import ChipsInput from '@components/ChipsInput/ChipsInput';
-import { IProfile } from '../../typings/types';
+import { IProfile, Nullable } from '../../typings/types';
 import { ROUTES } from '@constants/routes';
+import TwoElementsGrid from '@components/TwoElementsGrid/TwoElementsGrid';
 
 type Props = {
   dispatchCreateOrUpdateProfile: (profileForm: Partial<IProfile>) => void;
   loading: boolean;
-  profile?: Partial<IProfile>;
+  profile?: Nullable<Partial<IProfile>>;
 };
 
 const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profile }) => {
   const [showSocialNetworkLinks, setShowSocialNetworkLinks] = useState(false);
 
-  const [companyState, setCompanyState] = useState({
-    value: profile?.company || '',
-    isValid: false,
-  });
+  const initialCompanyState = { value: profile?.company || '', isValid: Boolean(profile?.company) };
+  const initialWebsiteState = { value: profile?.website || '', isValid: Boolean(profile?.website) };
+  const initialLocationState = { value: profile?.location || '', isValid: Boolean(profile?.location) };
+  const initialStatusState = { value: profile?.status || '', isValid: Boolean(profile?.status) };
+  const initialBioState = { value: profile?.bio || '', isValid: Boolean(profile?.bio) };
+  const initialTwitterState = { value: profile?.social?.twitter || '', isValid: true };
+  const initialFacebookState = { value: profile?.social?.facebook || '', isValid: true };
+  const initialLinkedinState = { value: profile?.social?.linkedin || '', isValid: true };
+  const initialYoutubeState = { value: profile?.social?.youtube || '', isValid: true };
+  const initialInstagramState = { value: profile?.social?.instagram || '', isValid: true };
+  const initialGithubUsernameState = { value: profile?.githubUsername || '', isValid: Boolean(profile?.githubUsername) };
+  const initialSkillsState = { value: profile?.skills || [], isValid: Boolean(profile?.skills?.length) };
 
-  const [websiteState, setWebsiteState] = useState({
-    value: profile?.website || '',
-    isValid: false,
-  });
+  const [companyState, setCompanyState] = useState(initialCompanyState);
+  const [websiteState, setWebsiteState] = useState(initialWebsiteState);
+  const [locationState, setLocationState] = useState(initialLocationState);
+  const [statusState, setStatusState] = useState(initialStatusState);
+  const [bioState, setBioState] = useState(initialBioState);
+  const [twitterState, setTwitterState] = useState(initialTwitterState);
+  const [facebookState, setFacebookState] = useState(initialFacebookState);
+  const [linkedInState, setLinkedInState] = useState(initialLinkedinState);
+  const [youtubeState, setYoutubeState] = useState(initialYoutubeState);
+  const [instagramState, setInstagramState] = useState(initialInstagramState);
+  const [githubUsernameState, setGithubUsernameState] = useState(initialGithubUsernameState);
 
-  const [locationState, setLocationState] = useState({
-    value: profile?.location || '',
-    isValid: false,
-  });
-
-  const [statusState, setStatusState] = useState({
-    value: profile?.status || '',
-    isValid: false,
-  });
-
-  const [bioState, setBioState] = useState({
-    value: profile?.bio || '',
-    isValid: false,
-  });
-
-  const [twitterState, setTwitterState] = useState({
-    value: profile?.social?.twitter || '',
-    isValid: false,
-  });
-
-  const [facebookState, setFacebookState] = useState({
-    value: profile?.social?.facebook || '',
-    isValid: false,
-  });
-
-  const [linkedInState, setLinkedInState] = useState({
-    value: profile?.social?.linkedin || '',
-    isValid: false,
-  });
-
-  const [youtubeState, setYoutubeState] = useState({
-    value: profile?.social?.youtube || '',
-    isValid: false,
-  });
-
-  const [instagramState, setInstagramState] = useState({
-    value: profile?.social?.instagram || '',
-    isValid: false,
-  });
-
-  const [githubUsernameState, setGithubUsernameState] = useState({
-    value: profile?.githubUsername || '',
-    isValid: false,
-  });
-
-  const [skillsState, setSkillsState] = useState<{
-    value: string[];
-    isValid: boolean;
-  }>({
-    value: profile?.skills || [],
-    isValid: false,
-  });
+  type SkillsState = {value: string[];isValid: boolean;}
+  const [skillsState, setSkillsState] = useState<SkillsState>(initialSkillsState);
 
   const formData = [
     companyState,
@@ -141,80 +107,54 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         text="Let's get some information to make your profile stand out."
       />
 
-      <Grid
-        container
-        spacing={3}
-      >
-        <Grid
-          item
-          xs={12}
-          md={6}
-        >
-          <CustomSelect
-            inputState={statusState}
-            setInputState={setStatusState}
-            label='Select Your Professional Status'
-            customHelperText='Give us an idea of where you are in your career.'
-            validation={validate(statusState.value).required()}
-            options={PROFESSIONAL_STATUS_OPTIONS}
-          />
-        </Grid>
+      <TwoElementsGrid>
+        <CustomSelect
+          inputState={statusState}
+          setInputState={setStatusState}
+          label='Select Your Professional Status'
+          customHelperText='Give us an idea of where you are in your career.'
+          validation={validate(statusState.value).required()}
+          options={PROFESSIONAL_STATUS_OPTIONS}
+          isDisabled={loading}
+        />
 
-        <Grid
-          item
-          xs={12}
-          md={6}
-        >
-          <CustomOutlinedInput
-            inputState={companyState}
-            setInputState={setCompanyState}
-            validation={validate(companyState.value).required().isLength({ min: 3, max: 50 })}
-            type='text'
-            label='Company'
-            placeholder='Company'
-            customHelperText='Could be your own company or one you work for.'
-          />
-        </Grid>
-      </Grid>
+        <CustomOutlinedInput
+          inputState={companyState}
+          setInputState={setCompanyState}
+          validation={validate(companyState.value).required().isLength({ min: 3, max: 50 })}
+          type='text'
+          label='Company'
+          placeholder='Company'
+          customHelperText='Could be your own company or one you work for.'
+          isDisabled={loading}
+        />
+      </TwoElementsGrid>
 
-      <Grid
-        container
-        spacing={3}
-      >
-        <Grid
-          item
-          xs={12}
-          md={6}
-        >
-          <CustomOutlinedInput
-            inputState={websiteState}
-            setInputState={setWebsiteState}
-            validation={validate(websiteState.value).isURL()}
-            type='text'
-            label='Website'
-            placeholder='Website'
-            isRequired={false}
-            customHelperText='Could be your own or a company website.'
-          />
-        </Grid>
+      <TwoElementsGrid>
+         <CustomOutlinedInput
+           inputState={websiteState}
+           setInputState={setWebsiteState}
+           validation={validate(websiteState.value).isURL()}
+           type='text'
+           label='Website'
+           placeholder='Website'
+           isRequired={false}
+           customHelperText='Could be your own or a company website.'
+           isDisabled={loading}
+         />
 
-        <Grid
-          item
-          xs={12}
-          md={6}
-        >
-          <CustomOutlinedInput
-            inputState={githubUsernameState}
-            setInputState={setGithubUsernameState}
-            validation={validate(githubUsernameState.value).isGithubUsername()}
-            type='text'
-            label='Github Username'
-            placeholder='Github Username'
-            isRequired={false}
-            customHelperText='If you want your latest repos and a Github link, include your username.'
-          />
-        </Grid>
-      </Grid>
+         <CustomOutlinedInput
+           inputState={githubUsernameState}
+           setInputState={setGithubUsernameState}
+           validation={validate(githubUsernameState.value).isGithubUsername()}
+           type='text'
+           label='Github Username'
+           placeholder='Github Username'
+           isRequired={false}
+           customHelperText='If you want your latest repos and a Github link, include your username.'
+           isDisabled={loading}
+         />
+      </TwoElementsGrid>
 
       <CustomOutlinedInput
         inputState={locationState}
@@ -224,6 +164,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         label='Location'
         placeholder='Location'
         customHelperText='City &amp; state suggested (eg. Austin, TX).'
+        isDisabled={loading}
       />
 
       <ChipsInput
@@ -232,6 +173,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         label='Skills'
         placeholder='Add a skill and press Enter.'
         customHelperText='Add your skills (eg. Javascript, PHP, Java, SQL, etc).'
+        isDisabled={loading}
       />
 
       <CustomOutlinedInput
@@ -244,6 +186,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         placeholder='A short bio of yourself.'
         customHelperText='Tell us a little about yourself.'
         isMultiline
+        isDisabled={loading}
       />
 
       <ShowSocialNetworkLinksBox>
@@ -276,6 +219,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
               label='Twitter URL'
               placeholder='Twitter URL'
               isRequired={false}
+              isDisabled={loading}
             />
           </PrependIcon>
 
@@ -291,6 +235,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
               label='Facebook URL'
               placeholder='Facebook URL'
               isRequired={false}
+              isDisabled={loading}
             />
           </PrependIcon>
 
@@ -306,6 +251,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
               label='Youtube URL'
               placeholder='Youtube URL'
               isRequired={false}
+              isDisabled={loading}
             />
           </PrependIcon>
 
@@ -321,6 +267,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
               label='LinkedIn URL'
               placeholder='LinkedIn URL'
               isRequired={false}
+              isDisabled={loading}
             />
           </PrependIcon>
 
@@ -336,6 +283,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
               label='Instagram URL'
               placeholder='Instagram URL'
               isRequired={false}
+              isDisabled={loading}
             />
           </PrependIcon>
         </SocialNetworkLinksBox>

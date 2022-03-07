@@ -16,6 +16,7 @@ type Props = {
   maxChips?: number;
   maxCharactersPerChip?: number;
   chipDelimiter?: string;
+  isDisabled?:boolean;
 };
 
 const ChipsInput: FC<Props> = ({
@@ -27,6 +28,7 @@ const ChipsInput: FC<Props> = ({
   maxChips = 10,
   maxCharactersPerChip = 25,
   chipDelimiter = ',',
+  isDisabled = false
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [chips, setChips] = useState(inputState.value);
@@ -57,15 +59,6 @@ const ChipsInput: FC<Props> = ({
       setInputValue(rawInput);
     }
   };
-
-  useEffect(() => {
-    setInputState({
-      ...inputState,
-      isValid: true,
-    });
-
-    // eslint-disable-next-line
-  }, []);
 
   const CustomFormHelperText = () => {
     const helperText = () => {
@@ -102,6 +95,7 @@ const ChipsInput: FC<Props> = ({
         label={label}
         isValidInput={isValidInput}
         placeholder={chips.length < maxChips ? placeholder : `You can add up to ${maxChips}.`}
+        disabled={isDisabled}
       />
 
       <CustomFormHelperText />

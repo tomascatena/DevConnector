@@ -29,6 +29,7 @@ type Props = {
   customHelperText?: string;
   showCheckIcon?: boolean;
   options: Option[];
+  isDisabled?:boolean
 };
 
 const CustomSelect: FC<Props> = ({
@@ -39,23 +40,18 @@ const CustomSelect: FC<Props> = ({
   customHelperText,
   showCheckIcon = true,
   options,
+  isDisabled = false
 }) => {
   const [isClose, setIsClose] = useState(false);
 
   const { isValid, validationErrors } = validation.exec();
 
   const handleChange = (event: SelectChangeEvent) => {
-    setInputState({
-      value: event.target.value,
-      isValid: isClose && isValid,
-    });
+    setInputState({ value: event.target.value, isValid: isClose && isValid, });
   };
 
   useEffect(() => {
-    setInputState({
-      ...inputState,
-      isValid: isClose && isValid,
-    });
+    setInputState({ ...inputState, isValid: isClose && isValid, });
 
     // eslint-disable-next-line
   }, [isClose, isValid, inputState.value]);
@@ -99,6 +95,7 @@ const CustomSelect: FC<Props> = ({
         endAdornment={endAdornment}
         label={label}
         onClose={() => setIsClose(true)}
+        disabled={isDisabled}
       >
         <MenuItem value=''>
           <em>Please choose one...</em>

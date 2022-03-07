@@ -37,6 +37,7 @@ type Props = {
   isRequired?: boolean;
   placeholder?: string;
   isMultiline?: boolean;
+  isDisabled?:boolean
 };
 
 const CustomOutlinedInput: FC<Props> = ({
@@ -50,11 +51,14 @@ const CustomOutlinedInput: FC<Props> = ({
   isRequired = true,
   placeholder = '',
   isMultiline = false,
+  isDisabled = false
 }) => {
   const [isBlur, setIsBlur] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
   const { isValid, validationErrors } = validation.exec();
+
+  console.log('Rendering');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputState({
@@ -74,10 +78,7 @@ const CustomOutlinedInput: FC<Props> = ({
 
   useEffect(() => {
     if (!isRequired) {
-      setInputState({
-        ...inputState,
-        isValid: true,
-      });
+      setInputState({ ...inputState, isValid: true, });
     }
 
     // eslint-disable-next-line
@@ -157,6 +158,7 @@ const CustomOutlinedInput: FC<Props> = ({
         multiline={isMultiline}
         minRows={2}
         maxRows={4}
+        disabled={isDisabled}
       />
 
       <CustomFormHelperText />

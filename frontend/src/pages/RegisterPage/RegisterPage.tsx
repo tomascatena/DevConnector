@@ -4,7 +4,7 @@ import {
   StyledForm,
   StyledLink,
 } from './RegisterPage.styled';
-import { Grid, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import { ROUTES } from '@constants/routes';
 import { validate } from '@utils/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
@@ -14,6 +14,7 @@ import { register } from '@store/features/auth/auth.thunk';
 import { useNavigate } from 'react-router';
 import LoadingButton from '@components/LoadingButton/LoadingButton';
 import TextWithIcon from '@components/TextWithIcon/TextWithIcon';
+import TwoElementsGrid from '@components/TwoElementsGrid/TwoElementsGrid';
 
 const RegisterPage: FC = () => {
   const dispatch = useAppDispatch();
@@ -112,44 +113,29 @@ const RegisterPage: FC = () => {
           label='Email'
         />
 
-        <Grid
-          container
-          spacing={3}
-        >
-          <Grid
-            item
-            xs={12}
-            md={6}
-          >
-            <CustomOutlinedInput
-              inputState={firstNameState}
-              setInputState={setFirstNameState}
-              validation={validate(firstNameState.value)
-                .required()
-                .isAlphaWithSpecialCharacters()
-                .isLength({ min: 3, max: 30 })}
-              type='text'
-              label='First Name'
-            />
-          </Grid>
+        <TwoElementsGrid>
+          <CustomOutlinedInput
+            inputState={firstNameState}
+            setInputState={setFirstNameState}
+            validation={validate(firstNameState.value)
+              .required()
+              .isAlphaWithSpecialCharacters()
+              .isLength({ min: 3, max: 30 })}
+            type='text'
+            label='First Name'
+          />
 
-          <Grid
-            item
-            xs={12}
-            md={6}
-          >
-            <CustomOutlinedInput
-              inputState={lastNameState}
-              setInputState={setLastNameState}
-              validation={validate(lastNameState.value)
-                .required()
-                .isAlphaWithSpecialCharacters()
-                .isLength({ min: 3, max: 30 })}
-              type='text'
-              label='Last Name'
-            />
-          </Grid>
-        </Grid>
+          <CustomOutlinedInput
+            inputState={lastNameState}
+            setInputState={setLastNameState}
+            validation={validate(lastNameState.value)
+              .required()
+              .isAlphaWithSpecialCharacters()
+              .isLength({ min: 3, max: 30 })}
+            type='text'
+            label='Last Name'
+          />
+        </TwoElementsGrid>
 
         <CustomOutlinedInput
           inputState={passwordState}

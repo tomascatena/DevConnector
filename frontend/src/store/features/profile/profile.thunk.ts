@@ -13,12 +13,12 @@ type RejectValue = {
   errors?: Nullable<ServerValidationError>;
 };
 
-export const getCurrentUsersProfile = createAsyncThunk<
+export const getCurrentUserProfile = createAsyncThunk<
   IProfile,
   void,
   { state: RootState; rejectValue: RejectValue }
 >(
-  'profile/getCurrentUsersProfile',
+  'profile/getCurrentUserProfile',
   async (_, { getState, requestId, rejectWithValue }) => {
     const { loading, currentRequestId } = getState().profile;
 

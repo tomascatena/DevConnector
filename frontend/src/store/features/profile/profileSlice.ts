@@ -5,7 +5,7 @@ import {
   Nullable,
   ServerValidationError,
 } from '../../../typings/types';
-import { getCurrentUsersProfile, createOrUpdateProfile } from './profile.thunk';
+import { getCurrentUserProfile, createOrUpdateProfile } from './profile.thunk';
 
 export interface ProfileState {
   profile: Nullable<IProfile>;
@@ -15,6 +15,7 @@ export interface ProfileState {
   currentRequestId: string | undefined;
   serverValidationErrors: Nullable<ServerValidationError>;
   error: Nullable<SerializedError>;
+  isFetchingProfile: boolean;
 }
 
 const initialState: ProfileState = {
@@ -25,6 +26,7 @@ const initialState: ProfileState = {
   currentRequestId: undefined,
   serverValidationErrors: null,
   error: null,
+  isFetchingProfile: false
 };
 
 export const profileSlice = createSlice({
@@ -39,31 +41,34 @@ export const profileSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getCurrentUsersProfile.pending, (state, action) => {
+      .addCase(getCurrentUserProfile.pending, (state, action) => {
         if (!state.loading) {
           state.profile = null;
           state.loading = true;
+          state.isFetchingProfile = true;
           state.serverValidationErrors = null;
           state.error = null;
           state.currentRequestId = action.meta.requestId;
         }
       })
-      .addCase(getCurrentUsersProfile.fulfilled, (state, action) => {
+      .addCase(getCurrentUserProfile.fulfilled, (state, action) => {
         const { requestId } = action.meta;
         if (state.loading && state.currentRequestId === requestId) {
           state.profile = action.payload;
           state.loading = false;
+          state.isFetchingProfile = false;
           state.currentRequestId = undefined;
           if (!action.payload) {
             state.error = { message: 'Profile is empty' };
           }
         }
       })
-      .addCase(getCurrentUsersProfile.rejected, (state, action) => {
+      .addCase(getCurrentUserProfile.rejected, (state, action) => {
         const { requestId } = action.meta;
         if (state.loading && state.currentRequestId === requestId) {
           state.profile = null;
           state.loading = false;
+          state.isFetchingProfile = false;
           state.serverValidationErrors = action.payload?.errors ?? null;
           state.error = action.payload ?? null;
           state.currentRequestId = undefined;
@@ -73,6 +78,7 @@ export const profileSlice = createSlice({
         if (!state.loading) {
           state.profile = null;
           state.loading = true;
+          state.isFetchingProfile = false;
           state.serverValidationErrors = null;
           state.error = null;
           state.currentRequestId = action.meta.requestId;
@@ -83,6 +89,7 @@ export const profileSlice = createSlice({
         if (state.loading && state.currentRequestId === requestId) {
           state.profile = action.payload;
           state.loading = false;
+          state.isFetchingProfile = false;
           state.currentRequestId = undefined;
           if (!action.payload) {
             state.error = { message: 'Profile is empty' };
@@ -94,6 +101,7 @@ export const profileSlice = createSlice({
         if (state.loading && state.currentRequestId === requestId) {
           state.profile = null;
           state.loading = false;
+          state.isFetchingProfile = false;
           state.serverValidationErrors = action.payload?.errors ?? null;
           state.error = action.payload ?? null;
           state.currentRequestId = undefined;

@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import { ROUTES } from '@constants/routes';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import CustomBackdrop from '@components/CustomBackdrop/CustomBackdrop';
 
 export type LocationState = {
   from: Location;
@@ -17,13 +18,24 @@ const ProtectedRoute: FC<Props> = ({
   redirectPath = ROUTES.LOGIN,
 }) => {
   const location = useLocation();
-  const { isAuthenticated } = useTypedSelector((state) => state.auth);
+  const { isAuthenticated, loading } = useTypedSelector((state) => state.auth);
+
+  if (loading) {
+    return (
+      <CustomBackdrop
+        isOpen={loading}
+        message='Verifying authentication status. Please wait.'
+      />
+    );
+  }
 
   if (!isAuthenticated) {
-    return <Navigate
-      to={redirectPath}
-      state={{ from: location }}
-           />;
+    return (
+      <Navigate
+        to={redirectPath}
+        state={{ from: location }}
+      />
+    );
   }
 
   return children ?? <Outlet />;

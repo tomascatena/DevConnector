@@ -1,17 +1,15 @@
 import { FC } from 'react';
-import CircularProgress, {
-  CircularProgressProps,
-  circularProgressClasses,
-} from '@mui/material/CircularProgress';
+import CircularProgress, { circularProgressClasses } from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { SxProps, Theme } from '@mui/material';
 
 interface Props {
-  circularProgressProps?: CircularProgressProps;
+  size?: number;
+  thickness?: number;
   sx?: SxProps<Theme> | undefined;
 }
 
-const CircularLoader: FC<Props> = ({ circularProgressProps, sx }) => {
+const CircularLoader: FC<Props> = ({ size = 40, thickness = 4, sx }) => {
   return (
     <Box sx={{ position: 'relative', ...sx }}>
       <CircularProgress
@@ -20,9 +18,8 @@ const CircularLoader: FC<Props> = ({ circularProgressProps, sx }) => {
           color: (theme) =>
             theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
         }}
-        size={40}
-        thickness={4}
-        {...circularProgressProps}
+        size={size}
+        thickness={thickness}
         value={100}
       />
 
@@ -37,9 +34,8 @@ const CircularLoader: FC<Props> = ({ circularProgressProps, sx }) => {
             strokeLinecap: 'round',
           },
         }}
-        size={40}
-        thickness={4}
-        {...circularProgressProps}
+        size={size}
+        thickness={thickness}
       />
     </Box>
   );
