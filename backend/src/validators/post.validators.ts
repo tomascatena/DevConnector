@@ -21,7 +21,7 @@ export const post = [
     .isLength({ min: 3, max: 100 })
     .withMessage('Invalid post field: text'),
   check('post.date', 'date is required')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .notEmpty()
     .isISO8601()
     .withMessage('Invalid post field: date'),

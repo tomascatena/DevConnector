@@ -33,10 +33,6 @@ export const profile = [
     .isObject()
     .custom((value) => Object.keys(value).length)
     .withMessage('Invalid user profile'),
-  check('profile.userId', 'profile.userId is required')
-    .isMongoId()
-    .withMessage('Invalid profile.userId')
-    .escape(),
   check('profile.status', 'profile.status is required')
     .trim()
     .notEmpty()
@@ -48,27 +44,27 @@ export const profile = [
     .isArray()
     .withMessage('Invalid user profile.skills'),
   check('profile.company')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isString()
     .isLength({ min: 3, max: 50 })
     .withMessage('Invalid user profile.company'),
   check('profile.website')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isString()
     .isLength({ min: 3, max: 50 })
     .withMessage('Invalid user profile.website'),
   check('profile.location')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isString()
     .isLength({ min: 3, max: 100 })
     .withMessage('Invalid user profile.location'),
   check('profile.bio')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isString()
     .isLength({ min: 0, max: 500 })
     .withMessage('Invalid user profile.bio'),
   check('profile.githubUsername')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isString()
     .isLength({ min: 3, max: 50 })
     .withMessage('Invalid user profile.githubUsername'),
@@ -76,32 +72,32 @@ export const profile = [
 
 export const social = [
   check('profile.social')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isObject()
     .custom((value) => Object.keys(value).length)
     .withMessage('Invalid user social media'),
   check('profile.social.youtube')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isString()
     .isLength({ min: 3, max: 100 })
     .withMessage('Invalid user youtube'),
   check('profile.social.twitter')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isString()
     .isLength({ min: 3, max: 100 })
     .withMessage('Invalid user twitter'),
   check('profile.social.facebook')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isString()
     .isLength({ min: 3, max: 100 })
     .withMessage('Invalid user facebook'),
   check('profile.social.linkedin')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isString()
     .isLength({ min: 3, max: 100 })
     .withMessage('Invalid user linkedin'),
   check('profile.social.instagram')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isString()
     .isLength({ min: 3, max: 100 })
     .withMessage('Invalid user instagram'),
@@ -121,7 +117,7 @@ export const experience = [
     .isLength({ min: 3, max: 100 })
     .withMessage('Invalid user profile experience: company'),
   check('profile.experience.*.location')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isString()
     .isLength({ min: 3, max: 100 })
     .withMessage('Invalid user profile experience: location'),
@@ -130,15 +126,15 @@ export const experience = [
     .isISO8601()
     .withMessage('Invalid user profile experience: from'),
   check('profile.experience.*.to')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isISO8601()
     .withMessage('Invalid user profile experience: to'),
   check('profile.experience.*.current')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isBoolean()
     .withMessage('Invalid user profile experience: current'),
   check('profile.experience.*.description')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isString()
     .isLength({ min: 3, max: 500 })
     .withMessage('Invalid user profile experience: description'),
@@ -160,7 +156,7 @@ export const education = [
     .isLength({ min: 3, max: 100 })
     .withMessage('Invalid user profile education: degree'),
   check('profile.education.*.fieldOfStudy')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isString()
     .trim()
     .isLength({ min: 3, max: 200 })
@@ -170,15 +166,15 @@ export const education = [
     .isISO8601()
     .withMessage('Invalid user profile education: from'),
   check('profile.education.*.to')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isISO8601()
     .withMessage('Invalid user profile education: to'),
   check('profile.education.*.current')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isBoolean()
     .withMessage('Invalid user profile education: current'),
   check('profile.education.*.description')
-    .optional({ nullable: true })
+    .optional({ nullable: true, checkFalsy: true })
     .isString()
     .isLength({ min: 3, max: 500 })
     .withMessage('Invalid user profile education: description'),

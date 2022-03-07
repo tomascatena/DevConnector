@@ -14,7 +14,6 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import PrependIcon from '@components/PrependIcon/PrependIcon';
 import LoadingButton from '@components/LoadingButton/LoadingButton';
 import { Link } from 'react-router-dom';
-import { ROUTES } from '@constants/routes';
 import ChipsInput from '@components/ChipsInput/ChipsInput';
 import {
   CreateProfileContainer,
@@ -23,8 +22,15 @@ import {
   SocialNetworkLinksBox,
   ShowSocialNetworkLinksBox,
 } from './CreateProfilePage.styled';
+import { useAppDispatch, useTypedSelector } from '@hooks/index';
+import { createOrUpdateProfile } from '@store/features/profile/profile.thunk';
+import { ROUTES } from '@constants/routes';
+import { useNavigate } from 'react-router';
 
 const CreateProfilePage: FC = () => {
+  const dispatch = useAppDispatch();
+  const { loading } = useTypedSelector((state) => state.profile);
+
   const [showSocialNetworkLinks, setShowSocialNetworkLinks] = useState(false);
 
   const initialInputState = {
@@ -69,6 +75,8 @@ const CreateProfilePage: FC = () => {
 
   const isButtonDisabled = formData.some(({ isValid }) => !isValid);
 
+  const navigate = useNavigate();
+
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -80,14 +88,18 @@ const CreateProfilePage: FC = () => {
       skills: skillsState.value,
       githubUsername: githubUsernameState.value,
       bio: bioState.value,
-      twitter: twitterState.value,
-      facebook: facebookState.value,
-      linkedIn: linkedInState.value,
-      youtube: youtubeState.value,
-      instagram: instagramState.value,
+      social: {
+        twitter: twitterState.value,
+        facebook: facebookState.value,
+        linkedin: linkedInState.value,
+        youtube: youtubeState.value,
+        instagram: instagramState.value,
+      },
     };
 
-    console.log(createProfileForm);
+    dispatch(createOrUpdateProfile(createProfileForm)).then(() => {
+      navigate(ROUTES.DASHBOARD);
+    });
   };
 
   return (
@@ -275,7 +287,7 @@ const CreateProfilePage: FC = () => {
             sx={{ maxWidth: { sm: '10rem' } }}
             variant='contained'
             isDisabled={isButtonDisabled}
-            isLoading={false}
+            isLoading={loading}
             type='submit'
             text='Submit'
           />

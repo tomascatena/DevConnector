@@ -1,6 +1,5 @@
 import {
   FC,
-  KeyboardEvent,
   ChangeEvent,
   useState,
   Dispatch,
@@ -29,6 +28,7 @@ type Props = {
   placeholder?: string;
   maxChips?: number;
   maxCharactersPerChip?: number;
+  chipDelimiter?: string;
 };
 
 const ChipsInput: FC<Props> = ({
@@ -39,6 +39,7 @@ const ChipsInput: FC<Props> = ({
   placeholder = '',
   maxChips = 10,
   maxCharactersPerChip = 25,
+  chipDelimiter = ',',
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [chips, setChips] = useState(inputState.value);
@@ -46,20 +47,14 @@ const ChipsInput: FC<Props> = ({
     inputValue.length <= maxCharactersPerChip
   );
 
-  const handleKeyDown = (
-    event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    if (event.key === 'Enter' && inputValue !== '') {
-      setChips([...chips, inputValue]);
+  useEffect(() => {
+    setInputState({
+      ...inputState,
+      value: chips,
+    });
 
-      setInputValue('');
-
-      setInputState({
-        ...inputState,
-        value: chips,
-      });
-    }
-  };
+    // eslint-disable-next-line
+  }, [chips]);
 
   const handleDelete = (index: number) => {
     setChips((chips) => chips.filter((_, i) => i !== index));
@@ -72,7 +67,10 @@ const ChipsInput: FC<Props> = ({
 
     setIsValidInput(rawInput.length <= maxCharactersPerChip);
 
-    if (isValidInput) {
+    if (isValidInput && rawInput.slice(-1) === chipDelimiter) {
+      setChips([...chips, rawInput.replace(chipDelimiter, '')]);
+      setInputValue('');
+    } else if (isValidInput) {
       setInputValue(rawInput);
     }
   };
@@ -117,7 +115,6 @@ const ChipsInput: FC<Props> = ({
         readOnly={chips.length >= maxChips}
         value={inputValue}
         onChange={handleInputChange}
-        onKeyDown={handleKeyDown}
         startAdornment={startAdornment}
         label={label}
         isValidInput={isValidInput}

@@ -93,7 +93,7 @@ const CustomOutlinedInput: FC<Props> = ({
     let { focused } = useFormControl() || {};
 
     const helperText = useMemo(() => {
-      if (focused && validationErrors.length) {
+      if (focused && validationErrors.length && inputState.value !== '') {
         return validationErrors[0];
       }
 

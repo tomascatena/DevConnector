@@ -1,5 +1,6 @@
 import { styled } from '@mui/system';
 import { OutlinedInput } from '@mui/material';
+
 interface StyledOutlinedInputProps {
   isValidInput: boolean;
 }
