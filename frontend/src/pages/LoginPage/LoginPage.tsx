@@ -67,7 +67,10 @@ const RegisterPage: FC = () => {
 
   return (
     <LoginContainer>
-      <Typography variant='h4' align='center'>
+      <Typography
+        variant='h4'
+        align='center'
+      >
         Sign In
       </Typography>
 
@@ -76,8 +79,14 @@ const RegisterPage: FC = () => {
         message='Invalid credentials'
       />
 
-      <StyledForm noValidate onSubmit={handleFormSubmit}>
-        <TextWithIcon text='Sign Into Your Account' icon={<PersonOutlineIcon color='action' />} />
+      <StyledForm
+        noValidate
+        onSubmit={handleFormSubmit}
+      >
+        <TextWithIcon
+          text='Sign Into Your Account'
+          icon={<PersonOutlineIcon color='action' />}
+        />
 
         <CustomOutlinedInput
           inputState={emailState}

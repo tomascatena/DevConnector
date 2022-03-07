@@ -75,7 +75,10 @@ const CustomSelect: FC<Props> = ({
   const shouldShowError = isClose && !isValid;
 
   const endAdornment = (
-    <InputAdornment position='end' sx={{ right: 35, position: 'absolute' }}>
+    <InputAdornment
+      position='end'
+      sx={{ right: 35, position: 'absolute' }}
+    >
       {showCheckIcon && isClose && isValid && <CheckCircleOutlineIcon color='success' />}
     </InputAdornment>
   );
@@ -102,7 +105,10 @@ const CustomSelect: FC<Props> = ({
         </MenuItem>
 
         {options.map(({ value, label }) => (
-          <MenuItem key={value} value={value}>
+          <MenuItem
+            key={value}
+            value={value}
+          >
             {label}
           </MenuItem>
         ))}

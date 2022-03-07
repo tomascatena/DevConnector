@@ -68,7 +68,10 @@ const UserMenu: FC<Props> = ({
       <Typography>Welcome {user?.firstName}</Typography>
 
       <Tooltip title={<Typography color='inherit'>Open Settings</Typography>}>
-        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+        <IconButton
+          onClick={handleOpenUserMenu}
+          sx={{ p: 0 }}
+        >
           <Avatar
             alt={`${user?.firstName} ${user?.lastName}`}
             src={user?.avatar}

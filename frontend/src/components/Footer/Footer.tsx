@@ -18,11 +18,17 @@ const FooterContainer = styled(Box)(({ theme }) => ({
 const Footer: FC = () => {
   return (
     <FooterContainer>
-      <Typography align='center' color='text.primary'>
+      <Typography
+        align='center'
+        color='text.primary'
+      >
         Copyright &copy; DevConnector
       </Typography>
 
-      <Typography align='center' color='text.primary'>
+      <Typography
+        align='center'
+        color='text.primary'
+      >
         Built by <strong>Tomás Catena</strong>
       </Typography>
     </FooterContainer>

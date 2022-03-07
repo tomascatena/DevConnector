@@ -24,21 +24,37 @@ const ButtonsContainer = styled(Box)(({ theme }) => ({
 const LandingPage: FC = () => {
   return (
     <LandingBox>
-      <Typography variant='h3' align='center' color='#fff'>
+      <Typography
+        variant='h3'
+        align='center'
+        color='#fff'
+      >
         Developer Connector
       </Typography>
 
-      <Typography variant='h5' align='center' color='#fff'>
+      <Typography
+        variant='h5'
+        align='center'
+        color='#fff'
+      >
         Create a developer profile/portfolio, share posts and learn from other
         developers
       </Typography>
 
       <ButtonsContainer>
-        <Button component={Link} to={ROUTES.REGISTER} variant='contained'>
+        <Button
+          component={Link}
+          to={ROUTES.REGISTER}
+          variant='contained'
+        >
           Sign Up
         </Button>
 
-        <Button component={Link} to={ROUTES.LOGIN} variant='outlined'>
+        <Button
+          component={Link}
+          to={ROUTES.LOGIN}
+          variant='outlined'
+        >
           Login
         </Button>
       </ButtonsContainer>

@@ -132,13 +132,24 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
   };
 
   return (
-    <StyledForm noValidate onSubmit={handleFormSubmit}>
+    <StyledForm
+      noValidate
+      onSubmit={handleFormSubmit}
+    >
       <TextWithIcon
         icon={<PersonIcon color='action' />}
         text="Let's get some information to make your profile stand out."
       />
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
+
+      <Grid
+        container
+        spacing={3}
+      >
+        <Grid
+          item
+          xs={12}
+          md={6}
+        >
           <CustomSelect
             inputState={statusState}
             setInputState={setStatusState}
@@ -149,7 +160,11 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
           />
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid
+          item
+          xs={12}
+          md={6}
+        >
           <CustomOutlinedInput
             inputState={companyState}
             setInputState={setCompanyState}
@@ -162,8 +177,15 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         </Grid>
       </Grid>
 
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
+      <Grid
+        container
+        spacing={3}
+      >
+        <Grid
+          item
+          xs={12}
+          md={6}
+        >
           <CustomOutlinedInput
             inputState={websiteState}
             setInputState={setWebsiteState}
@@ -176,7 +198,11 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
           />
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid
+          item
+          xs={12}
+          md={6}
+        >
           <CustomOutlinedInput
             inputState={githubUsernameState}
             setInputState={setGithubUsernameState}
@@ -232,9 +258,16 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         <Typography color='text.primary'>Optional</Typography>
       </ShowSocialNetworkLinksBox>
 
-      <Collapse in={showSocialNetworkLinks} timeout={750} easing='cubic-bezier(0.4, 0, 0.2, 1)'>
+      <Collapse
+        in={showSocialNetworkLinks}
+        timeout={750}
+        easing='cubic-bezier(0.4, 0, 0.2, 1)'
+      >
         <SocialNetworkLinksBox>
-          <PrependIcon icon={<TwitterIcon />} iconColor='#1DA1F2'>
+          <PrependIcon
+            icon={<TwitterIcon />}
+            iconColor='#1DA1F2'
+          >
             <CustomOutlinedInput
               inputState={twitterState}
               setInputState={setTwitterState}
@@ -246,7 +279,10 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
             />
           </PrependIcon>
 
-          <PrependIcon icon={<FacebookIcon />} iconColor='#4267B2'>
+          <PrependIcon
+            icon={<FacebookIcon />}
+            iconColor='#4267B2'
+          >
             <CustomOutlinedInput
               inputState={facebookState}
               setInputState={setFacebookState}
@@ -258,7 +294,10 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
             />
           </PrependIcon>
 
-          <PrependIcon icon={<YouTubeIcon />} iconColor='#FF0000'>
+          <PrependIcon
+            icon={<YouTubeIcon />}
+            iconColor='#FF0000'
+          >
             <CustomOutlinedInput
               inputState={youtubeState}
               setInputState={setYoutubeState}
@@ -270,7 +309,10 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
             />
           </PrependIcon>
 
-          <PrependIcon icon={<LinkedInIcon />} iconColor='#0e76a8'>
+          <PrependIcon
+            icon={<LinkedInIcon />}
+            iconColor='#0e76a8'
+          >
             <CustomOutlinedInput
               inputState={linkedInState}
               setInputState={setLinkedInState}
@@ -282,7 +324,10 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
             />
           </PrependIcon>
 
-          <PrependIcon icon={<InstagramIcon />} iconColor='#405DE6'>
+          <PrependIcon
+            icon={<InstagramIcon />}
+            iconColor='#405DE6'
+          >
             <CustomOutlinedInput
               inputState={instagramState}
               setInputState={setInstagramState}
@@ -306,7 +351,11 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
           text='Submit'
         />
 
-        <Button component={Link} to={ROUTES.DASHBOARD} variant='outlined'>
+        <Button
+          component={Link}
+          to={ROUTES.DASHBOARD}
+          variant='outlined'
+        >
           Go To Dashboard
         </Button>
       </ButtonsBox>

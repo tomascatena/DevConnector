@@ -136,7 +136,11 @@ const CustomOutlinedInput: FC<Props> = ({
   );
 
   return (
-    <FormControl sx={{ width: '100%' }} color={inputColor} error={shouldShowError}>
+    <FormControl
+      sx={{ width: '100%' }}
+      color={inputColor}
+      error={shouldShowError}
+    >
       <InputLabel>{isRequired ? `* ${label}` : label}</InputLabel>
 
       <OutlinedInput

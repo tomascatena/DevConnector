@@ -25,16 +25,28 @@ const App: FC = () => {
     <BrowserRouter>
       <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
         <MainLayout>
-          <Header setIsDarkTheme={setIsDarkTheme} isDarkTheme={isDarkTheme} />
+          <Header
+            setIsDarkTheme={setIsDarkTheme}
+            isDarkTheme={isDarkTheme}
+          />
 
           <MainBox>
             <Suspense fallback={<div>Loading...</div>}>
               <Routes>
-                <Route path='/' element={<LandingPage />} />
+                <Route
+                  path='/'
+                  element={<LandingPage />}
+                />
 
-                <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+                <Route
+                  path={ROUTES.LOGIN}
+                  element={<LoginPage />}
+                />
 
-                <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+                <Route
+                  path={ROUTES.REGISTER}
+                  element={<RegisterPage />}
+                />
 
                 <Route
                   path={ROUTES.DASHBOARD}

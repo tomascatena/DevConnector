@@ -24,7 +24,10 @@ const CustomButton: FC<Props> = ({
 }) => {
   const loadingState = (
     <>
-      <CircularProgress size={20} sx={{ marginRight: 1 }} />{' '}
+      <CircularProgress
+        size={20}
+        sx={{ marginRight: 1 }}
+      />{' '}
       {loadingText || text}
     </>
   );

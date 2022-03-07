@@ -24,7 +24,10 @@ const CreateProfilePage: FC = () => {
 
   return (
     <CreateProfileContainer>
-      <Typography variant='h4' align='center'>
+      <Typography
+        variant='h4'
+        align='center'
+      >
         Create Your Profile
       </Typography>
 

@@ -82,11 +82,17 @@ const RegisterPage: FC = () => {
 
   return (
     <RegisterContainer>
-      <Typography variant='h4' align='center'>
+      <Typography
+        variant='h4'
+        align='center'
+      >
         Sign Up
       </Typography>
 
-      <StyledForm noValidate onSubmit={handleFormSubmit}>
+      <StyledForm
+        noValidate
+        onSubmit={handleFormSubmit}
+      >
         <TextWithIcon
           text='Create Your Account'
           icon={<PersonOutlineIcon color='action' />}
@@ -106,8 +112,15 @@ const RegisterPage: FC = () => {
           label='Email'
         />
 
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6}>
+        <Grid
+          container
+          spacing={3}
+        >
+          <Grid
+            item
+            xs={12}
+            md={6}
+          >
             <CustomOutlinedInput
               inputState={firstNameState}
               setInputState={setFirstNameState}
@@ -120,7 +133,11 @@ const RegisterPage: FC = () => {
             />
           </Grid>
 
-          <Grid item xs={12} md={6}>
+          <Grid
+            item
+            xs={12}
+            md={6}
+          >
             <CustomOutlinedInput
               inputState={lastNameState}
               setInputState={setLastNameState}

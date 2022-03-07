@@ -20,7 +20,10 @@ const ProtectedRoute: FC<Props> = ({
   const { isAuthenticated } = useTypedSelector((state) => state.auth);
 
   if (!isAuthenticated) {
-    return <Navigate to={redirectPath} state={{ from: location }} />;
+    return <Navigate
+      to={redirectPath}
+      state={{ from: location }}
+           />;
   }
 
   return children ?? <Outlet />;

@@ -35,11 +35,17 @@ const DashboardPage: FC<Props> = () => {
 
   return (
     <DashboardContainer>
-      <Typography variant='h4' align='center'>
+      <Typography
+        variant='h4'
+        align='center'
+      >
         Dashboard
       </Typography>
 
-      <TextWithIcon text={`Welcome ${user?.firstName}`} icon={<PersonIcon color='action' />} />
+      <TextWithIcon
+        text={`Welcome ${user?.firstName}`}
+        icon={<PersonIcon color='action' />}
+      />
 
       {loading ? (
         <CircularLoader sx={{ alignSelf: 'center' }} />
@@ -47,17 +53,28 @@ const DashboardPage: FC<Props> = () => {
         <>
           {profile === null ? (
             <>
-              <Typography color='text.primary' variant='body1' align='left'>
+              <Typography
+                color='text.primary'
+                variant='body1'
+                align='left'
+              >
                 You have not yet setup a profile, please add some info.
               </Typography>
 
-              <Button component={Link} to={ROUTES.CREATE_PROFILE} variant='contained'>
+              <Button
+                component={Link}
+                to={ROUTES.CREATE_PROFILE}
+                variant='contained'
+              >
                 Create Profile
               </Button>
             </>
           ) : (
             <>
-              <Typography variant='body1' align='center'>
+              <Typography
+                variant='body1'
+                align='center'
+              >
                 User Profile
               </Typography>
 
