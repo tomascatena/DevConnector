@@ -19,6 +19,7 @@ import { IProfile, Nullable } from '../../typings/types';
 import { ROUTES } from '@constants/routes';
 import TwoElementsGrid from '@components/TwoElementsGrid/TwoElementsGrid';
 import LinkButton from '@components/LinkButton/LinkButton';
+import SaveIcon from '@mui/icons-material/Save';
 
 type Props = {
   dispatchCreateOrUpdateProfile: (profileForm: Partial<IProfile>) => void;
@@ -292,7 +293,8 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
           isDisabled={isButtonDisabled}
           isLoading={loading}
           type='submit'
-          text='Submit'
+          text='Save'
+          startIcon={<SaveIcon/>}
         />
 
         <LinkButton to={ROUTES.DASHBOARD}>
