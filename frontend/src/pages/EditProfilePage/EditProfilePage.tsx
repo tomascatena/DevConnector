@@ -2,16 +2,16 @@ import { FC, useEffect } from 'react';
 import { Typography } from '@mui/material';
 import { EditProfileContainer } from './EditProfilePage.styled';
 import { useAppDispatch, useTypedSelector } from '@hooks/index';
-import { createOrUpdateProfile } from '@store/features/profile/profile.thunk';
+import { createOrUpdateProfile, getCurrentUserProfile } from '@store/features/profile/profile.thunk';
 import { ROUTES } from '@constants/routes';
 import { useNavigate } from 'react-router';
 import { IProfile } from '../../typings/types';
 import ProfileForm from '@components/ProfileForm/ProfileForm';
-import { getCurrentUserProfile } from '../../store/features/profile/profile.thunk';
+import CustomBackdrop from '@components/CustomBackdrop/CustomBackdrop';
 
 const EditProfilePage: FC = () => {
   const dispatch = useAppDispatch();
-  const { loading, profile } = useTypedSelector((state) => state.profile);
+  const { loading, profile, isFetchingProfile } = useTypedSelector((state) => state.profile);
 
   const navigate = useNavigate();
 
@@ -24,8 +24,10 @@ const EditProfilePage: FC = () => {
   };
 
   useEffect(() => {
-    dispatch(getCurrentUserProfile());
-  }, []);
+    if (!profile) {
+      dispatch(getCurrentUserProfile());
+    }
+  }, [profile]);
 
   return (
     <EditProfileContainer>
@@ -36,11 +38,18 @@ const EditProfilePage: FC = () => {
         Edit Your Profile
       </Typography>
 
-      <ProfileForm
-        dispatchCreateOrUpdateProfile={dispatchCreateOrUpdateProfile}
-        loading={loading}
-        profile={profile}
-      />
+      {isFetchingProfile ? (
+        <CustomBackdrop
+          isOpen={isFetchingProfile}
+          message='Loading profile. Please wait.'
+        />
+      ) : (
+        <ProfileForm
+          dispatchCreateOrUpdateProfile={dispatchCreateOrUpdateProfile}
+          loading={loading}
+          profile={profile}
+        />
+      )}
     </EditProfileContainer>
   );
 };

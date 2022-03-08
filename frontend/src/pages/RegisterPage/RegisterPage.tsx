@@ -111,6 +111,7 @@ const RegisterPage: FC = () => {
             )}
           type='email'
           label='Email'
+          isRequired
         />
 
         <TwoElementsGrid>
@@ -123,6 +124,7 @@ const RegisterPage: FC = () => {
               .isLength({ min: 3, max: 30 })}
             type='text'
             label='First Name'
+            isRequired
           />
 
           <CustomOutlinedInput
@@ -134,6 +136,7 @@ const RegisterPage: FC = () => {
               .isLength({ min: 3, max: 30 })}
             type='text'
             label='Last Name'
+            isRequired
           />
         </TwoElementsGrid>
 
@@ -147,6 +150,7 @@ const RegisterPage: FC = () => {
           type='password'
           label='Password'
           customHelperText='Choose a strong password'
+          isRequired
         />
 
         <CustomOutlinedInput
@@ -164,6 +168,7 @@ const RegisterPage: FC = () => {
             )}
           type='password'
           label='Confirm password'
+          isRequired
         />
 
         <LoadingButton

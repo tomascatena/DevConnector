@@ -94,7 +94,8 @@ const RegisterPage: FC = () => {
           validation={validate(emailState.value).required()}
           type='email'
           label='Email'
-          showCheckIcon={false}
+          shouldShowCheckIcon={false}
+          isRequired
         />
 
         <CustomOutlinedInput
@@ -103,7 +104,8 @@ const RegisterPage: FC = () => {
           validation={validate(passwordState.value).required()}
           type='password'
           label='Password'
-          showCheckIcon={false}
+          shouldShowCheckIcon={false}
+          isRequired
         />
 
         <LoadingButton

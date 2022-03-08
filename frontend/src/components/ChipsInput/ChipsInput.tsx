@@ -1,6 +1,7 @@
 import { FC, ChangeEvent, useState, Dispatch, SetStateAction, useEffect } from 'react';
-import { InputLabel, FormHelperText, FormControl, Chip, Typography } from '@mui/material';
+import { InputLabel, FormHelperText, FormControl, Chip, Typography, InputAdornment, Box } from '@mui/material';
 import { StyledOutlinedInput } from './ChipsInput.styled';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 interface FormFieldState {
   value: string[];
@@ -17,6 +18,8 @@ type Props = {
   maxCharactersPerChip?: number;
   chipDelimiter?: string;
   isDisabled?:boolean;
+  isRequired?:boolean;
+  shouldShowCheckIcon?: boolean;
 };
 
 const ChipsInput: FC<Props> = ({
@@ -28,17 +31,24 @@ const ChipsInput: FC<Props> = ({
   maxChips = 10,
   maxCharactersPerChip = 25,
   chipDelimiter = ',',
-  isDisabled = false
+  isDisabled = false,
+  isRequired = false,
+  shouldShowCheckIcon = true
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [chips, setChips] = useState(inputState.value);
-  const [isValidInput, setIsValidInput] = useState(inputValue.length <= maxCharactersPerChip);
+
+  const hasMoreChipsThanAllowed = chips.length >= maxChips;
+
+  const isEmpty = inputState.value.length === 0;
+  const isInitialInputValid = isRequired
+    ? !isEmpty && inputValue.length <= maxCharactersPerChip
+    : inputValue.length <= maxCharactersPerChip;
+
+  const [isValidInput, setIsValidInput] = useState(isInitialInputValid);
 
   useEffect(() => {
-    setInputState({
-      ...inputState,
-      value: chips,
-    });
+    setInputState({ ...inputState, value: chips, });
 
     // eslint-disable-next-line
   }, [chips]);
@@ -48,22 +58,28 @@ const ChipsInput: FC<Props> = ({
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const rawInput = event.target.value.trim();
+    const rawInput = event.target.value;
+    const hasExcessiveLength = rawInput.length > maxCharactersPerChip;
+    const isRepeated = chips.includes(rawInput);
 
-    setIsValidInput(rawInput.length <= maxCharactersPerChip);
+    setIsValidInput(!hasExcessiveLength && !isRepeated);
 
-    if (isValidInput && rawInput.slice(-1) === chipDelimiter) {
-      setChips([...chips, rawInput.replace(chipDelimiter, '')]);
+    if (!hasExcessiveLength && !isRepeated && rawInput.trim().slice(-1) === chipDelimiter) {
+      setChips([...chips, rawInput.trim().replace(chipDelimiter, '')]);
       setInputValue('');
-    } else if (isValidInput) {
+    } else if (!hasExcessiveLength) {
       setInputValue(rawInput);
     }
   };
 
   const CustomFormHelperText = () => {
     const helperText = () => {
-      if (chips.length >= maxChips) {
+      if (isRequired && isEmpty) {
+        return 'This field is required.';
+      } else if (hasMoreChipsThanAllowed) {
         return `You can add up to ${maxChips}.`;
+      } else if (chips.includes(inputValue)) {
+        return `${inputValue} already exists.`;
       } else if (!isValidInput) {
         return `Maximum ${maxCharactersPerChip} characters.`;
       } else {
@@ -75,27 +91,57 @@ const ChipsInput: FC<Props> = ({
   };
 
   const startAdornment = chips.map((item, index) => (
-    <Chip
-      onDelete={() => handleDelete(index)}
-      sx={{ m: 0.5 }}
+    <Box
       key={item}
-      label={<Typography>{item}</Typography>}
-    />
+      sx={{ paddingInline: 0.5, paddingBlock: 1.5 }}
+    >
+      <Chip
+        onDelete={() => handleDelete(index)}
+        label={<Typography>{item}</Typography>}
+      />
+    </Box>
   ));
 
+  const placeholderText = (
+    chips.length < maxChips
+      ? isRequired ? `* ${placeholder}` : placeholder
+      : `You can add up to ${maxChips}.`
+  );
+
+  const inputColor = isValidInput ? 'success' : undefined;
+  const shouldShowError = isRequired
+    ? !isValidInput || isEmpty
+    : !isValidInput;
+
+  const endAdornment = (
+    <InputAdornment
+      position='end'
+      sx={{ right: 15, position: 'absolute' }}
+    >
+      {shouldShowCheckIcon && !shouldShowError && <CheckCircleOutlineIcon color='success' />}
+    </InputAdornment>
+  );
+
   return (
-    <FormControl sx={{ width: '100%' }}>
-      <InputLabel>{label}</InputLabel>
+    <FormControl
+      sx={{ width: '100%' }}
+      color={inputColor}
+      error={shouldShowError}
+    >
+      <InputLabel>{isRequired ? `* ${label}` : label}</InputLabel>
 
       <StyledOutlinedInput
-        readOnly={chips.length >= maxChips}
+        error={shouldShowError}
+        color={inputColor}
+        readOnly={hasMoreChipsThanAllowed}
         value={inputValue}
         onChange={handleInputChange}
         startAdornment={startAdornment}
-        label={label}
+        label={isRequired ? `* ${label}` : label}
         isValidInput={isValidInput}
-        placeholder={chips.length < maxChips ? placeholder : `You can add up to ${maxChips}.`}
+        placeholder={placeholderText}
         disabled={isDisabled}
+        endAdornment={endAdornment}
       />
 
       <CustomFormHelperText />

@@ -14,11 +14,11 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import PrependIcon from '@components/PrependIcon/PrependIcon';
 import LoadingButton from '@components/LoadingButton/LoadingButton';
-import { Link } from 'react-router-dom';
 import ChipsInput from '@components/ChipsInput/ChipsInput';
 import { IProfile, Nullable } from '../../typings/types';
 import { ROUTES } from '@constants/routes';
 import TwoElementsGrid from '@components/TwoElementsGrid/TwoElementsGrid';
+import LinkButton from '@components/LinkButton/LinkButton';
 
 type Props = {
   dispatchCreateOrUpdateProfile: (profileForm: Partial<IProfile>) => void;
@@ -116,6 +116,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
           validation={validate(statusState.value).required()}
           options={PROFESSIONAL_STATUS_OPTIONS}
           isDisabled={loading}
+          isRequired
         />
 
         <CustomOutlinedInput
@@ -127,6 +128,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
           placeholder='Company'
           customHelperText='Could be your own company or one you work for.'
           isDisabled={loading}
+          isRequired
         />
       </TwoElementsGrid>
 
@@ -138,7 +140,6 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
            type='text'
            label='Website'
            placeholder='Website'
-           isRequired={false}
            customHelperText='Could be your own or a company website.'
            isDisabled={loading}
          />
@@ -150,7 +151,6 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
            type='text'
            label='Github Username'
            placeholder='Github Username'
-           isRequired={false}
            customHelperText='If you want your latest repos and a Github link, include your username.'
            isDisabled={loading}
          />
@@ -165,15 +165,17 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         placeholder='Location'
         customHelperText='City &amp; state suggested (eg. Austin, TX).'
         isDisabled={loading}
+        isRequired
       />
 
       <ChipsInput
         inputState={skillsState}
         setInputState={setSkillsState}
         label='Skills'
-        placeholder='Add a skill and press Enter.'
-        customHelperText='Add your skills (eg. Javascript, PHP, Java, SQL, etc).'
+        placeholder='Add a skill and a comma.'
+        customHelperText='Add your skills separated by commas (eg. Javascript, PHP, Java, SQL, etc).'
         isDisabled={loading}
+        isRequired
       />
 
       <CustomOutlinedInput
@@ -182,7 +184,6 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         validation={validate(bioState.value).isLength({ min: 1, max: 100 })}
         type='text'
         label='Bio'
-        isRequired={false}
         placeholder='A short bio of yourself.'
         customHelperText='Tell us a little about yourself.'
         isMultiline
@@ -218,7 +219,6 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
               type='text'
               label='Twitter URL'
               placeholder='Twitter URL'
-              isRequired={false}
               isDisabled={loading}
             />
           </PrependIcon>
@@ -234,7 +234,6 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
               type='text'
               label='Facebook URL'
               placeholder='Facebook URL'
-              isRequired={false}
               isDisabled={loading}
             />
           </PrependIcon>
@@ -250,7 +249,6 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
               type='text'
               label='Youtube URL'
               placeholder='Youtube URL'
-              isRequired={false}
               isDisabled={loading}
             />
           </PrependIcon>
@@ -266,7 +264,6 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
               type='text'
               label='LinkedIn URL'
               placeholder='LinkedIn URL'
-              isRequired={false}
               isDisabled={loading}
             />
           </PrependIcon>
@@ -282,7 +279,6 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
               type='text'
               label='Instagram URL'
               placeholder='Instagram URL'
-              isRequired={false}
               isDisabled={loading}
             />
           </PrependIcon>
@@ -299,13 +295,9 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
           text='Submit'
         />
 
-        <Button
-          component={Link}
-          to={ROUTES.DASHBOARD}
-          variant='outlined'
-        >
+        <LinkButton to={ROUTES.DASHBOARD}>
           Go To Dashboard
-        </Button>
+        </LinkButton>
       </ButtonsBox>
     </StyledForm>
   );

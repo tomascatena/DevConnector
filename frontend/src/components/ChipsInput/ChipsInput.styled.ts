@@ -12,7 +12,6 @@ export const StyledOutlinedInput = styled(OutlinedInput, {
 })<StyledOutlinedInputProps>(({ theme, isValidInput }) => ({
   display: 'flex',
   flexWrap: 'wrap',
-  paddingTop: theme.spacing(1.5),
   alignItems: 'center',
 
   '& .MuiOutlinedInput-input': {

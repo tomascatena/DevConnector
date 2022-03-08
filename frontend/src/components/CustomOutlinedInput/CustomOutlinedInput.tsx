@@ -33,7 +33,7 @@ type Props = {
   label: string;
   validation: ValidatorResult;
   customHelperText?: string;
-  showCheckIcon?: boolean;
+  shouldShowCheckIcon?: boolean;
   isRequired?: boolean;
   placeholder?: string;
   isMultiline?: boolean;
@@ -47,8 +47,8 @@ const CustomOutlinedInput: FC<Props> = ({
   label,
   validation,
   customHelperText,
-  showCheckIcon = true,
-  isRequired = true,
+  shouldShowCheckIcon = true,
+  isRequired = false,
   placeholder = '',
   isMultiline = false,
   isDisabled = false
@@ -58,19 +58,25 @@ const CustomOutlinedInput: FC<Props> = ({
 
   const { isValid, validationErrors } = validation.exec();
 
-  console.log('Rendering');
+  const isEmpty = inputState.value === '';
+  const hasChangedAndIsValid = isBlur && isValid;
+  const hasChangedAndIsNotValid = isBlur && !isValid;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const isEmptyAndNotRequired = event.target.value === '' && !isRequired;
+
     setInputState({
       value: event.target.value,
-      isValid: event.target.value === '' && !isRequired ? true : isBlur && isValid,
+      isValid: isEmptyAndNotRequired ? true : hasChangedAndIsValid,
     });
   };
 
   useEffect(() => {
+    const isEmptyAndNotRequired = isEmpty && !isRequired;
+
     setInputState({
       ...inputState,
-      isValid: inputState.value === '' && !isRequired ? true : isBlur && isValid,
+      isValid: isEmptyAndNotRequired ? true : hasChangedAndIsValid,
     });
 
     // eslint-disable-next-line
@@ -81,8 +87,12 @@ const CustomOutlinedInput: FC<Props> = ({
       setInputState({ ...inputState, isValid: true, });
     }
 
+    if (!isEmpty) {
+      setIsBlur(true);
+    }
+
     // eslint-disable-next-line
-  }, []);
+  }, [inputState.value]);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -92,13 +102,13 @@ const CustomOutlinedInput: FC<Props> = ({
     const { focused } = useFormControl() || {};
 
     const helperText = useMemo(() => {
-      if (focused && validationErrors.length && inputState.value !== '') {
+      if (focused && validationErrors.length && !isEmpty) {
         return validationErrors[0];
       }
 
       if (isBlur && !validationErrors.length) {
         return 'Looks good!';
-      } else if (isBlur && !isRequired && inputState.value === '') {
+      } else if (isBlur && !isRequired && isEmpty) {
         return customHelperText || '';
       } else if (isBlur && validationErrors.length) {
         return validationErrors[0];
@@ -110,10 +120,10 @@ const CustomOutlinedInput: FC<Props> = ({
     return <FormHelperText>{helperText}</FormHelperText>;
   };
 
-  const inputColor = isBlur && isValid ? 'success' : undefined;
+  const inputColor = hasChangedAndIsValid ? 'success' : undefined;
   const shouldShowError = isRequired
-    ? isBlur && !isValid
-    : isBlur && !isValid && inputState.value !== '';
+    ? hasChangedAndIsNotValid && isEmpty
+    : hasChangedAndIsNotValid;
 
   let inputType = type;
   if (type === 'password') {
@@ -122,7 +132,7 @@ const CustomOutlinedInput: FC<Props> = ({
 
   const endAdornment = (
     <InputAdornment position='end'>
-      {showCheckIcon && isBlur && isValid && <CheckCircleOutlineIcon color='success' />}
+      {shouldShowCheckIcon && hasChangedAndIsValid && <CheckCircleOutlineIcon color='success' />}
 
       {type === 'password' && (
         <IconButton

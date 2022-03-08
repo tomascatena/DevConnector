@@ -1,15 +1,15 @@
 import { useEffect, FC } from 'react';
-import { Container, Typography, Button } from '@mui/material';
+import { Container, Typography } from '@mui/material';
 import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useTypedSelector } from '@hooks/useTypedSelector';
 import { getCurrentUserProfile } from '../../store/features/profile/profile.thunk';
-import CircularLoader from '../../components/CircularLoader/CircularLoader';
 import { styled } from '@mui/system';
-import { Link } from 'react-router-dom';
 import { ROUTES } from '@constants/routes';
 import TextWithIcon from '@components/TextWithIcon/TextWithIcon';
 import PersonIcon from '@mui/icons-material/Person';
 import DashboardActions from '@components/DashboardActions/DashboardActions';
+import LinkButton from '@components/LinkButton/LinkButton';
+import CustomBackdrop from '@components/CustomBackdrop/CustomBackdrop';
 
 export const DashboardContainer = styled(Container)(({ theme }) => ({
   color: theme.palette.primary.main,
@@ -24,7 +24,7 @@ type Props = {};
 
 const DashboardPage: FC<Props> = () => {
   const dispatch = useAppDispatch();
-  const { loading, profile } = useTypedSelector((state) => state.profile);
+  const { loading, profile, isFetchingProfile } = useTypedSelector((state) => state.profile);
   const { user } = useTypedSelector((state) => state.auth);
 
   useEffect(() => {
@@ -48,7 +48,10 @@ const DashboardPage: FC<Props> = () => {
       />
 
       {loading ? (
-        <CircularLoader sx={{ alignSelf: 'center' }} />
+        <CustomBackdrop
+          isOpen={loading}
+          message='Loading profile. Please wait.'
+        />
       ) : (
         <>
           {profile === null ? (
@@ -61,13 +64,9 @@ const DashboardPage: FC<Props> = () => {
                 You have not yet setup a profile, please add some info.
               </Typography>
 
-              <Button
-                component={Link}
-                to={ROUTES.CREATE_PROFILE}
-                variant='contained'
-              >
+              <LinkButton to={ROUTES.CREATE_PROFILE} >
                 Create Profile
-              </Button>
+              </LinkButton>
             </>
           ) : (
             <>
@@ -78,7 +77,7 @@ const DashboardPage: FC<Props> = () => {
                 User Profile
               </Typography>
 
-              <DashboardActions />
+              <DashboardActions isFetchingProfile={isFetchingProfile}/>
             </>
           )}
         </>

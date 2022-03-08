@@ -11,6 +11,7 @@ type Props = {
   text: string;
   loadingText?: string;
   sx?: SxProps<Theme> | undefined;
+  startIcon?: JSX.Element
 };
 
 const CustomButton: FC<Props> = ({
@@ -21,6 +22,7 @@ const CustomButton: FC<Props> = ({
   text,
   loadingText,
   sx,
+  startIcon
 }) => {
   const loadingState = (
     <>
@@ -37,6 +39,7 @@ const CustomButton: FC<Props> = ({
       sx={sx}
       variant={variant}
       type={type}
+      startIcon={startIcon}
       disabled={isDisabled || isLoading}
     >
       {isLoading ? loadingState : <>{text}</>}

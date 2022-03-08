@@ -27,9 +27,11 @@ type Props = {
   label: string;
   validation: ValidatorResult;
   customHelperText?: string;
-  showCheckIcon?: boolean;
+  shouldShowCheckIcon?: boolean;
   options: Option[];
-  isDisabled?:boolean
+  isDisabled?:boolean;
+  isRequired?: boolean;
+  defaultOption?: string
 };
 
 const CustomSelect: FC<Props> = ({
@@ -38,20 +40,43 @@ const CustomSelect: FC<Props> = ({
   label,
   validation,
   customHelperText,
-  showCheckIcon = true,
+  shouldShowCheckIcon = true,
   options,
-  isDisabled = false
+  isDisabled = false,
+  isRequired = false,
+  defaultOption = 'Please choose one...'
 }) => {
   const [isClose, setIsClose] = useState(false);
 
   const { isValid, validationErrors } = validation.exec();
 
+  const hasChangedAndIsValid = isClose && isValid;
+  const hasChangedAndIsNotValid = isClose && !isValid;
+
   const handleChange = (event: SelectChangeEvent) => {
-    setInputState({ value: event.target.value, isValid: isClose && isValid, });
+    const isEmptyAndNotRequired = event.target.value === '' && !isRequired;
+
+    setInputState({
+      value: event.target.value,
+      isValid: isEmptyAndNotRequired ? true : hasChangedAndIsValid,
+    });
   };
 
   useEffect(() => {
-    setInputState({ ...inputState, isValid: isClose && isValid, });
+    if (inputState.value !== '') {
+      setIsClose(true);
+    }
+
+    // eslint-disable-next-line
+  }, [inputState.value]);
+
+  useEffect(() => {
+    const isEmptyAndNotRequired = inputState.value === '' && !isRequired;
+
+    setInputState({
+      ...inputState,
+      isValid: isEmptyAndNotRequired ? true : hasChangedAndIsValid,
+    });
 
     // eslint-disable-next-line
   }, [isClose, isValid, inputState.value]);
@@ -67,16 +92,35 @@ const CustomSelect: FC<Props> = ({
     return <FormHelperText>{helperText}</FormHelperText>;
   };
 
-  const inputColor = isClose && isValid ? 'success' : undefined;
-  const shouldShowError = isClose && !isValid;
+  const inputColor = hasChangedAndIsValid ? 'success' : undefined;
+  const shouldShowError = isRequired
+    ? hasChangedAndIsNotValid
+    : hasChangedAndIsNotValid && inputState.value !== '';
 
   const endAdornment = (
     <InputAdornment
       position='end'
       sx={{ right: 35, position: 'absolute' }}
     >
-      {showCheckIcon && isClose && isValid && <CheckCircleOutlineIcon color='success' />}
+      {shouldShowCheckIcon && hasChangedAndIsValid && <CheckCircleOutlineIcon color='success' />}
     </InputAdornment>
+  );
+
+  const DefaultOption = (
+    <MenuItem value=''>
+      <em>{defaultOption}</em>
+    </MenuItem>
+  );
+
+  const OptionsList = (
+    options.map(({ value, label }) => (
+     <MenuItem
+       key={value}
+       value={value}
+     >
+       {label}
+     </MenuItem>
+    ))
   );
 
   return (
@@ -85,7 +129,7 @@ const CustomSelect: FC<Props> = ({
       color={inputColor}
       error={shouldShowError}
     >
-      <InputLabel>{label}</InputLabel>
+      <InputLabel>{isRequired ? `* ${label}` : label}</InputLabel>
 
       <Select
         error={shouldShowError}
@@ -93,22 +137,13 @@ const CustomSelect: FC<Props> = ({
         value={inputState.value}
         onChange={handleChange}
         endAdornment={endAdornment}
-        label={label}
+        label={isRequired ? `* ${label}` : label}
         onClose={() => setIsClose(true)}
         disabled={isDisabled}
       >
-        <MenuItem value=''>
-          <em>Please choose one...</em>
-        </MenuItem>
+        {DefaultOption}
 
-        {options.map(({ value, label }) => (
-          <MenuItem
-            key={value}
-            value={value}
-          >
-            {label}
-          </MenuItem>
-        ))}
+        {OptionsList}
       </Select>
 
       <CustomFormHelperText />
