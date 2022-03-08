@@ -1,4 +1,4 @@
-import { FC, useState, Dispatch, SetStateAction, useEffect } from 'react';
+import React, { FC, useState, Dispatch, SetStateAction, useEffect } from 'react';
 import {
   InputLabel,
   InputAdornment,
@@ -52,6 +52,7 @@ const CustomSelect: FC<Props> = ({
 
   const hasChangedAndIsValid = isClose && isValid;
   const hasChangedAndIsNotValid = isClose && !isValid;
+  const isEmpty = inputState.value === '';
 
   const handleChange = (event: SelectChangeEvent) => {
     const isEmptyAndNotRequired = event.target.value === '' && !isRequired;
@@ -63,7 +64,7 @@ const CustomSelect: FC<Props> = ({
   };
 
   useEffect(() => {
-    if (inputState.value !== '') {
+    if (!isEmpty) {
       setIsClose(true);
     }
 
@@ -71,7 +72,7 @@ const CustomSelect: FC<Props> = ({
   }, [inputState.value]);
 
   useEffect(() => {
-    const isEmptyAndNotRequired = inputState.value === '' && !isRequired;
+    const isEmptyAndNotRequired = isEmpty && !isRequired;
 
     setInputState({
       ...inputState,
@@ -92,17 +93,22 @@ const CustomSelect: FC<Props> = ({
     return <FormHelperText>{helperText}</FormHelperText>;
   };
 
-  const inputColor = hasChangedAndIsValid ? 'success' : undefined;
+  const inputColor = hasChangedAndIsValid && !isEmpty ? 'success' : undefined;
   const shouldShowError = isRequired
-    ? hasChangedAndIsNotValid
-    : hasChangedAndIsNotValid && inputState.value !== '';
+    ? hasChangedAndIsNotValid || isEmpty
+    : isEmpty ? false : hasChangedAndIsNotValid;
 
   const endAdornment = (
     <InputAdornment
       position='end'
       sx={{ right: 35, position: 'absolute' }}
     >
-      {shouldShowCheckIcon && hasChangedAndIsValid && <CheckCircleOutlineIcon color='success' />}
+      {
+        shouldShowCheckIcon &&
+        !isEmpty &&
+        hasChangedAndIsValid &&
+        <CheckCircleOutlineIcon color='success' />
+      }
     </InputAdornment>
   );
 
@@ -151,4 +157,9 @@ const CustomSelect: FC<Props> = ({
   );
 };
 
-export default CustomSelect;
+const areEqualProps = (prevProps: Props, nextProps: Props): boolean => {
+  return prevProps.inputState === nextProps.inputState &&
+    prevProps.isDisabled === nextProps.isDisabled;
+};
+
+export default React.memo(CustomSelect, areEqualProps);

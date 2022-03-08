@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useState, Dispatch, SetStateAction, useEffect } from 'react';
+import React, { FC, ChangeEvent, useState, Dispatch, SetStateAction, useEffect } from 'react';
 import { InputLabel, FormHelperText, FormControl, Chip, Typography, InputAdornment, Box } from '@mui/material';
 import { StyledOutlinedInput } from './ChipsInput.styled';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
@@ -149,4 +149,9 @@ const ChipsInput: FC<Props> = ({
   );
 };
 
-export default ChipsInput;
+const areEqualProps = (prevProps: Props, nextProps: Props): boolean => {
+  return prevProps.inputState === nextProps.inputState &&
+    prevProps.isDisabled === nextProps.isDisabled;
+};
+
+export default React.memo(ChipsInput, areEqualProps);

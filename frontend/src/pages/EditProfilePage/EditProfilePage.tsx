@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Typography } from '@mui/material';
 import { EditProfileContainer } from './EditProfilePage.styled';
 import { useAppDispatch, useTypedSelector } from '@hooks/index';
@@ -54,4 +54,4 @@ const EditProfilePage: FC = () => {
   );
 };
 
-export default EditProfilePage;
+export default React.memo(EditProfilePage);

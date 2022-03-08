@@ -1,4 +1,4 @@
-import {
+import React, {
   FC,
   ChangeEvent,
   useMemo,
@@ -59,15 +59,16 @@ const CustomOutlinedInput: FC<Props> = ({
   const { isValid, validationErrors } = validation.exec();
 
   const isEmpty = inputState.value === '';
-  const hasChangedAndIsValid = isBlur && isValid;
-  const hasChangedAndIsNotValid = isBlur && !isValid;
+  const hasChangedAndIsInputValid = isBlur && inputState.isValid;
+  const hasChangedAndIsNotInputValid = isBlur && !inputState.isValid;
+  const hasChangedAndPassValidation = isBlur && isValid;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const isEmptyAndNotRequired = event.target.value === '' && !isRequired;
 
     setInputState({
       value: event.target.value,
-      isValid: isEmptyAndNotRequired ? true : hasChangedAndIsValid,
+      isValid: isEmptyAndNotRequired ? true : hasChangedAndPassValidation,
     });
   };
 
@@ -76,11 +77,11 @@ const CustomOutlinedInput: FC<Props> = ({
 
     setInputState({
       ...inputState,
-      isValid: isEmptyAndNotRequired ? true : hasChangedAndIsValid,
+      isValid: isEmptyAndNotRequired ? true : hasChangedAndPassValidation,
     });
 
     // eslint-disable-next-line
-  }, [isBlur, isValid, inputState.value]);
+  }, [isBlur, isValid]);
 
   useEffect(() => {
     if (!isRequired) {
@@ -92,7 +93,7 @@ const CustomOutlinedInput: FC<Props> = ({
     }
 
     // eslint-disable-next-line
-  }, [inputState.value]);
+  }, []);
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -115,15 +116,15 @@ const CustomOutlinedInput: FC<Props> = ({
       } else {
         return customHelperText || '';
       }
-    }, [focused]);
+    }, [focused, isBlur, isEmpty, isRequired]);
 
     return <FormHelperText>{helperText}</FormHelperText>;
   };
 
-  const inputColor = hasChangedAndIsValid ? 'success' : undefined;
+  const inputColor = hasChangedAndIsInputValid && !isEmpty ? 'success' : undefined;
   const shouldShowError = isRequired
-    ? hasChangedAndIsNotValid && isEmpty
-    : hasChangedAndIsNotValid;
+    ? hasChangedAndIsNotInputValid
+    : isEmpty ? false : hasChangedAndIsNotInputValid;
 
   let inputType = type;
   if (type === 'password') {
@@ -132,7 +133,12 @@ const CustomOutlinedInput: FC<Props> = ({
 
   const endAdornment = (
     <InputAdornment position='end'>
-      {shouldShowCheckIcon && hasChangedAndIsValid && <CheckCircleOutlineIcon color='success' />}
+      {
+        shouldShowCheckIcon &&
+        !isEmpty &&
+        hasChangedAndIsInputValid &&
+        <CheckCircleOutlineIcon color='success' />
+      }
 
       {type === 'password' && (
         <IconButton
@@ -146,24 +152,27 @@ const CustomOutlinedInput: FC<Props> = ({
     </InputAdornment>
   );
 
+  const labelText = isRequired ? `* ${label}` : label;
+  const placeholderText = isRequired ? `* ${placeholder}` : placeholder;
+
   return (
     <FormControl
       sx={{ width: '100%' }}
       color={inputColor}
       error={shouldShowError}
     >
-      <InputLabel>{isRequired ? `* ${label}` : label}</InputLabel>
+      <InputLabel>{labelText}</InputLabel>
 
       <OutlinedInput
         required={isRequired}
         error={shouldShowError}
         color={inputColor}
         type={inputType}
-        placeholder={isRequired ? `* ${placeholder}` : placeholder}
+        placeholder={placeholderText}
         value={inputState.value}
         onChange={handleChange}
         endAdornment={endAdornment}
-        label={isRequired ? `* ${label}` : label}
+        label={labelText}
         onBlur={() => setIsBlur(true)}
         multiline={isMultiline}
         minRows={2}
@@ -176,4 +185,9 @@ const CustomOutlinedInput: FC<Props> = ({
   );
 };
 
-export default CustomOutlinedInput;
+const areEqualProps = (prevProps: Props, nextProps: Props): boolean => {
+  return prevProps.inputState === nextProps.inputState &&
+    prevProps.isDisabled === nextProps.isDisabled;
+};
+
+export default React.memo(CustomOutlinedInput, areEqualProps);
