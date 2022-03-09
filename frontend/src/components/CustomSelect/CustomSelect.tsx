@@ -31,7 +31,8 @@ type Props = {
   options: Option[];
   isDisabled?:boolean;
   isRequired?: boolean;
-  defaultOption?: string
+  defaultOption?: string;
+  variant?: 'outlined' | 'filled' | 'standard'
 };
 
 const CustomSelect: FC<Props> = ({
@@ -44,7 +45,8 @@ const CustomSelect: FC<Props> = ({
   options,
   isDisabled = false,
   isRequired = false,
-  defaultOption = 'Please choose one...'
+  defaultOption = 'Please choose one...',
+  variant = 'outlined'
 }) => {
   const [isClose, setIsClose] = useState(false);
 
@@ -146,6 +148,7 @@ const CustomSelect: FC<Props> = ({
         label={isRequired ? `* ${label}` : label}
         onClose={() => setIsClose(true)}
         disabled={isDisabled}
+        variant={variant}
       >
         {DefaultOption}
 

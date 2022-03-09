@@ -1,6 +1,6 @@
 import React, { FC, ChangeEvent, useState, Dispatch, SetStateAction, useEffect } from 'react';
 import { InputLabel, FormHelperText, FormControl, Chip, Typography, InputAdornment, Box } from '@mui/material';
-import { StyledOutlinedInput } from './ChipsInput.styled';
+import { StyledOutlinedInput, StyledInput } from './ChipsInput.styled';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 interface FormFieldState {
@@ -20,6 +20,7 @@ type Props = {
   isDisabled?:boolean;
   isRequired?:boolean;
   shouldShowCheckIcon?: boolean;
+  variant?: 'standard' | 'outlined'
 };
 
 const ChipsInput: FC<Props> = ({
@@ -33,7 +34,8 @@ const ChipsInput: FC<Props> = ({
   chipDelimiter = ',',
   isDisabled = false,
   isRequired = false,
-  shouldShowCheckIcon = true
+  shouldShowCheckIcon = true,
+  variant = 'outlined'
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [chips, setChips] = useState(inputState.value);
@@ -130,19 +132,38 @@ const ChipsInput: FC<Props> = ({
     >
       <InputLabel>{isRequired ? `* ${label}` : label}</InputLabel>
 
-      <StyledOutlinedInput
-        error={shouldShowError}
-        color={inputColor}
-        readOnly={hasMoreChipsThanAllowed}
-        value={inputValue}
-        onChange={handleInputChange}
-        startAdornment={startAdornment}
-        label={isRequired ? `* ${label}` : label}
-        isValidInput={isValidInput}
-        placeholder={placeholderText}
-        disabled={isDisabled}
-        endAdornment={endAdornment}
-      />
+      {
+        variant === 'outlined' &&
+        <StyledOutlinedInput
+          error={shouldShowError}
+          color={inputColor}
+          readOnly={hasMoreChipsThanAllowed}
+          value={inputValue}
+          onChange={handleInputChange}
+          startAdornment={startAdornment}
+          label={isRequired ? `* ${label}` : label}
+          isValidInput={isValidInput}
+          placeholder={placeholderText}
+          disabled={isDisabled}
+          endAdornment={endAdornment}
+        />
+      }
+
+      {
+        variant === 'standard' &&
+        <StyledInput
+          error={shouldShowError}
+          color={inputColor}
+          readOnly={hasMoreChipsThanAllowed}
+          value={inputValue}
+          onChange={handleInputChange}
+          startAdornment={startAdornment}
+          isValidInput={isValidInput}
+          placeholder={placeholderText}
+          disabled={isDisabled}
+          endAdornment={endAdornment}
+        />
+      }
 
       <CustomFormHelperText />
     </FormControl>

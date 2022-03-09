@@ -14,6 +14,7 @@ import {
   InputAdornment,
   FormHelperText,
   FormControl,
+  Input
 } from '@mui/material';
 import { useFormControl } from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
@@ -37,7 +38,8 @@ type Props = {
   isRequired?: boolean;
   placeholder?: string;
   isMultiline?: boolean;
-  isDisabled?:boolean
+  isDisabled?:boolean;
+  variant?: 'standard' | 'outlined'
 };
 
 const CustomOutlinedInput: FC<Props> = ({
@@ -51,7 +53,8 @@ const CustomOutlinedInput: FC<Props> = ({
   isRequired = false,
   placeholder = '',
   isMultiline = false,
-  isDisabled = false
+  isDisabled = false,
+  variant = 'outlined'
 }) => {
   const [isBlur, setIsBlur] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -163,22 +166,44 @@ const CustomOutlinedInput: FC<Props> = ({
     >
       <InputLabel>{labelText}</InputLabel>
 
-      <OutlinedInput
-        required={isRequired}
-        error={shouldShowError}
-        color={inputColor}
-        type={inputType}
-        placeholder={placeholderText}
-        value={inputState.value}
-        onChange={handleChange}
-        endAdornment={endAdornment}
-        label={labelText}
-        onBlur={() => setIsBlur(true)}
-        multiline={isMultiline}
-        minRows={2}
-        maxRows={4}
-        disabled={isDisabled}
-      />
+      {
+        variant === 'outlined' &&
+        <OutlinedInput
+          required={isRequired}
+          error={shouldShowError}
+          color={inputColor}
+          type={inputType}
+          placeholder={placeholderText}
+          value={inputState.value}
+          onChange={handleChange}
+          endAdornment={endAdornment}
+          label={labelText}
+          onBlur={() => setIsBlur(true)}
+          multiline={isMultiline}
+          minRows={2}
+          maxRows={4}
+          disabled={isDisabled}
+        />
+      }
+
+      {
+        variant === 'standard' &&
+        <Input
+          required={isRequired}
+          error={shouldShowError}
+          color={inputColor}
+          type={inputType}
+          placeholder={placeholderText}
+          value={inputState.value}
+          onChange={handleChange}
+          endAdornment={endAdornment}
+          onBlur={() => setIsBlur(true)}
+          multiline={isMultiline}
+          minRows={2}
+          maxRows={4}
+          disabled={isDisabled}
+        />
+      }
 
       <CustomFormHelperText />
     </FormControl>

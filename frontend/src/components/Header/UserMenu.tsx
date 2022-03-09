@@ -105,7 +105,6 @@ const UserMenu: FC<Props> = ({
               startIcon={icon}
               sx={{
                 marginBottom: 0.5,
-                color: 'white',
                 width: 175,
                 justifyContent: 'flex-start',
               }}
@@ -122,7 +121,6 @@ const UserMenu: FC<Props> = ({
             startIcon={<LogoutIcon />}
             sx={{
               marginTop: 1,
-              color: 'white',
               width: 175,
               justifyContent: 'flex-start',
             }}

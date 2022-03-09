@@ -13,7 +13,7 @@ type Props = {
 
 const CustomBackdrop:FC<Props> = ({
   isOpen,
-  message = 'Loading...',
+  message = 'Loading... Please wait.',
   loaderSize = 100,
   loaderThickness = 4,
   textVariant = 'h4'
