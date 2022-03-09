@@ -62,8 +62,8 @@ export interface IExperience {
   title: string;
   company: string;
   location: string;
-  from: Date;
-  to: Date;
+  from: string | null;
+  to: string | null;
   current: boolean;
   description: string;
 }

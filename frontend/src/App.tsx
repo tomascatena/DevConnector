@@ -9,6 +9,8 @@ import { MainLayout, MainBox } from './App.styled';
 import { ROUTES } from '@constants/routes';
 import ProtectedRoute from '@components/routing/ProtectedRoute/ProtectedRoute';
 import CustomBackdrop from '@components/CustomBackdrop/CustomBackdrop';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 const LandingPage = lazy(() => import('@pages/LandingPage/LandingPage'));
 const LoginPage = lazy(() => import('@pages/LoginPage/LoginPage'));
@@ -32,80 +34,83 @@ const App: FC = () => {
   return (
     <BrowserRouter>
       <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
-        <MainLayout>
-          <Header
-            setIsDarkTheme={setIsDarkTheme}
-            isDarkTheme={isDarkTheme}
-          />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
 
-          <MainBox>
-            <Suspense fallback={SuspenseFallback}>
-              <Routes>
-                <Route
-                  path='/'
-                  element={<LandingPage />}
-                />
+          <MainLayout>
+            <Header
+              setIsDarkTheme={setIsDarkTheme}
+              isDarkTheme={isDarkTheme}
+            />
 
-                <Route
-                  path={ROUTES.LOGIN}
-                  element={<LoginPage />}
-                />
+            <MainBox>
+              <Suspense fallback={SuspenseFallback}>
+                <Routes>
+                  <Route
+                    path='/'
+                    element={<LandingPage />}
+                  />
 
-                <Route
-                  path={ROUTES.REGISTER}
-                  element={<RegisterPage />}
-                />
+                  <Route
+                    path={ROUTES.LOGIN}
+                    element={<LoginPage />}
+                  />
 
-                <Route
-                  path={ROUTES.DASHBOARD}
-                  element={
-                    <ProtectedRoute>
-                      <DashboardPage />
-                    </ProtectedRoute>
-                  }
-                />
+                  <Route
+                    path={ROUTES.REGISTER}
+                    element={<RegisterPage />}
+                  />
 
-                <Route
-                  path={ROUTES.CREATE_PROFILE}
-                  element={
-                    <ProtectedRoute>
-                      <CreateProfilePage />
-                    </ProtectedRoute>
-                  }
-                />
+                  <Route
+                    path={ROUTES.DASHBOARD}
+                    element={
+                      <ProtectedRoute>
+                        <DashboardPage />
+                      </ProtectedRoute>
+                    }
+                  />
 
-                <Route
-                  path={ROUTES.EDIT_PROFILE}
-                  element={
-                    <ProtectedRoute>
-                      <EditProfilePage />
-                    </ProtectedRoute>
-                  }
-                />
+                  <Route
+                    path={ROUTES.CREATE_PROFILE}
+                    element={
+                      <ProtectedRoute>
+                        <CreateProfilePage />
+                      </ProtectedRoute>
+                    }
+                  />
 
-                <Route
-                  path={ROUTES.ADD_EDUCATION}
-                  element={
-                    <ProtectedRoute>
-                      <AddEducationPage />
-                    </ProtectedRoute>
-                  }
-                />
+                  <Route
+                    path={ROUTES.EDIT_PROFILE}
+                    element={
+                      <ProtectedRoute>
+                        <EditProfilePage />
+                      </ProtectedRoute>
+                    }
+                  />
 
-                <Route
-                  path={ROUTES.ADD_EXPERIENCE}
-                  element={
-                    <ProtectedRoute>
-                      <AddExperiencePage />
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
-            </Suspense>
-          </MainBox>
+                  <Route
+                    path={ROUTES.ADD_EDUCATION}
+                    element={
+                      <ProtectedRoute>
+                        <AddEducationPage />
+                      </ProtectedRoute>
+                    }
+                  />
 
-          <Footer />
-        </MainLayout>
+                  <Route
+                    path={ROUTES.ADD_EXPERIENCE}
+                    element={
+                      <ProtectedRoute>
+                        <AddExperiencePage />
+                      </ProtectedRoute>
+                    }
+                  />
+                </Routes>
+              </Suspense>
+            </MainBox>
+
+            <Footer />
+          </MainLayout>
+        </LocalizationProvider>
       </ThemeProvider>
     </BrowserRouter>
   );

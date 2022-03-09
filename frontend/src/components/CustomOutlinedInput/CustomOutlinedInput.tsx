@@ -39,7 +39,8 @@ type Props = {
   placeholder?: string;
   isMultiline?: boolean;
   isDisabled?:boolean;
-  variant?: 'standard' | 'outlined'
+  variant?: 'standard' | 'outlined';
+  successMessage?: string;
 };
 
 const CustomOutlinedInput: FC<Props> = ({
@@ -54,7 +55,8 @@ const CustomOutlinedInput: FC<Props> = ({
   placeholder = '',
   isMultiline = false,
   isDisabled = false,
-  variant = 'outlined'
+  variant = 'outlined',
+  successMessage = null,
 }) => {
   const [isBlur, setIsBlur] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -111,7 +113,7 @@ const CustomOutlinedInput: FC<Props> = ({
       }
 
       if (isBlur && !validationErrors.length) {
-        return 'Looks good!';
+        return successMessage || '';
       } else if (isBlur && !isRequired && isEmpty) {
         return customHelperText || '';
       } else if (isBlur && validationErrors.length) {
@@ -164,11 +166,12 @@ const CustomOutlinedInput: FC<Props> = ({
       color={inputColor}
       error={shouldShowError}
     >
-      <InputLabel>{labelText}</InputLabel>
+      <InputLabel htmlFor='custom-input'>{labelText}</InputLabel>
 
       {
         variant === 'outlined' &&
         <OutlinedInput
+          id='custom-input'
           required={isRequired}
           error={shouldShowError}
           color={inputColor}
@@ -189,6 +192,7 @@ const CustomOutlinedInput: FC<Props> = ({
       {
         variant === 'standard' &&
         <Input
+          id='custom-input'
           required={isRequired}
           error={shouldShowError}
           color={inputColor}
