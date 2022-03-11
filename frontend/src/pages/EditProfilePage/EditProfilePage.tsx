@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { Typography } from '@mui/material';
-import { EditProfileContainer } from './EditProfilePage.styled';
+import { EditProfileContainer, EditProfilePaper } from './EditProfilePage.styled';
 import { useAppDispatch, useTypedSelector } from '@hooks/index';
 import { createOrUpdateProfile, getCurrentUserProfile } from '@store/features/profile/profile.thunk';
 import { ROUTES } from '@constants/routes';
@@ -31,25 +31,27 @@ const EditProfilePage: FC = () => {
 
   return (
     <EditProfileContainer>
-      <Typography
-        variant='h4'
-        align='center'
-      >
-        Edit Your Profile
-      </Typography>
+      <EditProfilePaper elevation={3} >
+        <Typography
+          variant='h4'
+          align='center'
+        >
+          Edit Your Profile
+        </Typography>
 
-      {isFetchingProfile ? (
-        <CustomBackdrop
-          isOpen={isFetchingProfile}
-          message='Loading profile. Please wait.'
-        />
-      ) : (
-        <ProfileForm
-          dispatchCreateOrUpdateProfile={dispatchCreateOrUpdateProfile}
-          loading={loading}
-          profile={profile}
-        />
-      )}
+        {isFetchingProfile ? (
+          <CustomBackdrop
+            isOpen={isFetchingProfile}
+            message='Loading profile. Please wait.'
+          />
+        ) : (
+          <ProfileForm
+            dispatchCreateOrUpdateProfile={dispatchCreateOrUpdateProfile}
+            loading={loading}
+            profile={profile}
+          />
+        )}
+      </EditProfilePaper>
     </EditProfileContainer>
   );
 };

@@ -1,11 +1,16 @@
 import { styled } from '@mui/system';
-import { Container } from '@mui/material';
+import { Container, Paper } from '@mui/material';
 
-export const AddExperienceProfile = styled(Container)(({ theme }) => ({
-  color: theme.palette.primary.main,
+export const AddExperienceContainer = styled(Container)(({ theme }) => ({
+  marginTop: theme.spacing(7),
+}));
+
+export const AddExperiencePaper = styled(Paper)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   gap: theme.spacing(3),
-  marginTop: theme.spacing(4),
+  padding: theme.spacing(7),
+  maxWidth: '50rem',
+  margin: 'auto'
 }));

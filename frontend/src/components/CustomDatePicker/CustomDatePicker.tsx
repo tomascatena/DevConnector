@@ -20,7 +20,7 @@ const CustomDatePicker:FC<Props> = ({
   inputState,
   setInputState,
   label,
-  variant = 'outlined',
+  variant = 'standard',
   isDisabled = false
 }) => {
   const handleChange = (newDate: Date | null) => {
@@ -41,6 +41,7 @@ const CustomDatePicker:FC<Props> = ({
         <TextField
           variant={variant}
           fullWidth
+          disabled={isDisabled}
           {...params}
         />
       }

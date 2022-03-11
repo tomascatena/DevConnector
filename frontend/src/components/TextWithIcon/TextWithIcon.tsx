@@ -8,7 +8,7 @@ type Props = {
 
 const TextWithIcon: FC<Props> = ({ icon, text }) => {
   return (
-    <Box sx={{ display: 'flex', gap: 1 }}>
+    <Box sx={{ display: 'flex', gap: 1, mb: 3 }}>
       {icon}
 
       <Typography color='text.primary'>{text}</Typography>

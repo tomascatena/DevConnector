@@ -4,7 +4,7 @@ import { ROUTES } from '@constants/routes';
 import { validate } from '@utils/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import CustomOutlinedInput from '@components/CustomOutlinedInput/CustomOutlinedInput';
-import { LoginContainer, StyledForm, StyledLink } from './LoginPage.styled';
+import { LoginContainer, LoginPaper, StyledForm, StyledLink } from './LoginPage.styled';
 import { useAppDispatch } from '@hooks/index';
 import { login } from '@store/features/auth/auth.thunk';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
@@ -67,65 +67,67 @@ const RegisterPage: FC = () => {
 
   return (
     <LoginContainer>
-      <Typography
-        variant='h4'
-        align='center'
-      >
-        Sign In
-      </Typography>
-
-      <CustomAlert
-        shouldShowAlert={Boolean(serverValidationErrors)}
-        message='Invalid credentials'
-      />
-
-      <StyledForm
-        noValidate
-        onSubmit={handleFormSubmit}
-      >
-        <TextWithIcon
-          text='Sign Into Your Account'
-          icon={<PersonOutlineIcon color='action' />}
-        />
-
-        <CustomOutlinedInput
-          inputState={emailState}
-          setInputState={setEmailState}
-          validation={validate(emailState.value).required()}
-          type='email'
-          label='Email'
-          shouldShowCheckIcon={false}
-          isRequired
-        />
-
-        <CustomOutlinedInput
-          inputState={passwordState}
-          setInputState={setPasswordState}
-          validation={validate(passwordState.value).required()}
-          type='password'
-          label='Password'
-          shouldShowCheckIcon={false}
-          isRequired
-        />
-
-        <LoadingButton
-          sx={{ maxWidth: { sm: '10rem' } }}
-          variant='contained'
-          isDisabled={isButtonDisabled}
-          isLoading={loading}
-          type='submit'
-          text='Login'
-        />
-
+      <LoginPaper elevation={3}>
         <Typography
-          color='text.primary'
-          sx={{ alignSelf: 'flex-start' }}
-          variant='body1'
+          variant='h4'
           align='center'
         >
-          Do not have an account? <StyledLink to={ROUTES.REGISTER}>Sign Up</StyledLink>
+          Sign In
         </Typography>
-      </StyledForm>
+
+        <CustomAlert
+          shouldShowAlert={Boolean(serverValidationErrors)}
+          message='Invalid credentials'
+        />
+
+        <StyledForm
+          noValidate
+          onSubmit={handleFormSubmit}
+        >
+          <TextWithIcon
+            text='Sign Into Your Account'
+            icon={<PersonOutlineIcon color='action' />}
+          />
+
+          <CustomOutlinedInput
+            inputState={emailState}
+            setInputState={setEmailState}
+            validation={validate(emailState.value).required()}
+            type='email'
+            label='Email'
+            shouldShowCheckIcon={false}
+            isRequired
+          />
+
+          <CustomOutlinedInput
+            inputState={passwordState}
+            setInputState={setPasswordState}
+            validation={validate(passwordState.value).required()}
+            type='password'
+            label='Password'
+            shouldShowCheckIcon={false}
+            isRequired
+          />
+
+          <LoadingButton
+            sx={{ maxWidth: { sm: '10rem' }, mt: 5 }}
+            variant='contained'
+            isDisabled={isButtonDisabled}
+            isLoading={loading}
+            type='submit'
+            text='Login'
+          />
+
+          <Typography
+            color='text.primary'
+            sx={{ alignSelf: 'flex-start' }}
+            variant='body1'
+            align='center'
+          >
+            Do not have an account? <StyledLink to={ROUTES.REGISTER}>Sign Up</StyledLink>
+          </Typography>
+        </StyledForm>
+      </LoginPaper>
     </LoginContainer>
   );
 };

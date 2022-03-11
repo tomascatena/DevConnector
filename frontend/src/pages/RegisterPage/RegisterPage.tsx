@@ -1,6 +1,7 @@
 import { FC, useState, FormEvent, useEffect } from 'react';
 import {
   RegisterContainer,
+  RegisterPaper,
   StyledForm,
   StyledLink,
 } from './RegisterPage.styled';
@@ -83,113 +84,115 @@ const RegisterPage: FC = () => {
 
   return (
     <RegisterContainer>
-      <Typography
-        variant='h4'
-        align='center'
-      >
-        Sign Up
-      </Typography>
-
-      <StyledForm
-        noValidate
-        onSubmit={handleFormSubmit}
-      >
-        <TextWithIcon
-          text='Create Your Account'
-          icon={<PersonOutlineIcon color='action' />}
-        />
-
-        <CustomOutlinedInput
-          inputState={emailState}
-          setInputState={setEmailState}
-          validation={validate(emailState.value)
-            .required()
-            .isEmail()
-            .custom(
-              serverValidationErrors?.email?.msg || null,
-              (value) => value !== serverValidationErrors?.email?.value
-            )}
-          type='email'
-          label='Email'
-          isRequired
-        />
-
-        <TwoElementsGrid>
-          <CustomOutlinedInput
-            inputState={firstNameState}
-            setInputState={setFirstNameState}
-            validation={validate(firstNameState.value)
-              .required()
-              .isAlphaWithSpecialCharacters()
-              .isLength({ min: 3, max: 30 })}
-            type='text'
-            label='First Name'
-            isRequired
-          />
-
-          <CustomOutlinedInput
-            inputState={lastNameState}
-            setInputState={setLastNameState}
-            validation={validate(lastNameState.value)
-              .required()
-              .isAlphaWithSpecialCharacters()
-              .isLength({ min: 3, max: 30 })}
-            type='text'
-            label='Last Name'
-            isRequired
-          />
-        </TwoElementsGrid>
-
-        <CustomOutlinedInput
-          inputState={passwordState}
-          setInputState={setPasswordState}
-          validation={validate(passwordState.value).required().isLength({
-            min: 6,
-            max: 20,
-          })}
-          type='password'
-          label='Password'
-          customHelperText='Choose a strong password'
-          isRequired
-        />
-
-        <CustomOutlinedInput
-          inputState={confirmPasswordState}
-          setInputState={setConfirmPasswordState}
-          validation={validate(confirmPasswordState.value)
-            .required()
-            .isLength({
-              min: 6,
-              max: 20,
-            })
-            .custom(
-              'Passwords must match',
-              (value) => value === passwordState.value
-            )}
-          type='password'
-          label='Confirm password'
-          isRequired
-        />
-
-        <LoadingButton
-          sx={{ maxWidth: { sm: '10rem' } }}
-          variant='contained'
-          isDisabled={isButtonDisabled}
-          isLoading={loading}
-          type='submit'
-          text='Register'
-        />
-
+      <RegisterPaper elevation={3}>
         <Typography
-          color='text.primary'
-          sx={{ alignSelf: 'flex-start' }}
-          variant='body1'
+          variant='h4'
           align='center'
         >
-          Already have an account?{' '}
-          <StyledLink to={ROUTES.LOGIN}>Sign In</StyledLink>
+          Sign Up
         </Typography>
-      </StyledForm>
+
+        <StyledForm
+          noValidate
+          onSubmit={handleFormSubmit}
+        >
+          <TextWithIcon
+            text='Create Your Account'
+            icon={<PersonOutlineIcon color='action' />}
+          />
+
+          <CustomOutlinedInput
+            inputState={emailState}
+            setInputState={setEmailState}
+            validation={validate(emailState.value)
+              .required()
+              .isEmail()
+              .custom(
+                serverValidationErrors?.email?.msg || null,
+                (value) => value !== serverValidationErrors?.email?.value
+              )}
+            type='email'
+            label='Email'
+            isRequired
+          />
+
+          <TwoElementsGrid>
+            <CustomOutlinedInput
+              inputState={firstNameState}
+              setInputState={setFirstNameState}
+              validation={validate(firstNameState.value)
+                .required()
+                .isAlphaWithSpecialCharacters()
+                .isLength({ min: 3, max: 30 })}
+              type='text'
+              label='First Name'
+              isRequired
+            />
+
+            <CustomOutlinedInput
+              inputState={lastNameState}
+              setInputState={setLastNameState}
+              validation={validate(lastNameState.value)
+                .required()
+                .isAlphaWithSpecialCharacters()
+                .isLength({ min: 3, max: 30 })}
+              type='text'
+              label='Last Name'
+              isRequired
+            />
+          </TwoElementsGrid>
+
+          <CustomOutlinedInput
+            inputState={passwordState}
+            setInputState={setPasswordState}
+            validation={validate(passwordState.value).required().isLength({
+              min: 6,
+              max: 20,
+            })}
+            type='password'
+            label='Password'
+            customHelperText='Choose a strong password'
+            isRequired
+          />
+
+          <CustomOutlinedInput
+            inputState={confirmPasswordState}
+            setInputState={setConfirmPasswordState}
+            validation={validate(confirmPasswordState.value)
+              .required()
+              .isLength({
+                min: 6,
+                max: 20,
+              })
+              .custom(
+                'Passwords must match',
+                (value) => value === passwordState.value
+              )}
+            type='password'
+            label='Confirm password'
+            isRequired
+          />
+
+          <LoadingButton
+            sx={{ maxWidth: { sm: '10rem' }, mt: 5 }}
+            variant='contained'
+            isDisabled={isButtonDisabled}
+            isLoading={loading}
+            type='submit'
+            text='Register'
+          />
+
+          <Typography
+            color='text.primary'
+            sx={{ alignSelf: 'flex-start' }}
+            variant='body1'
+            align='center'
+          >
+            Already have an account?{' '}
+            <StyledLink to={ROUTES.LOGIN}>Sign In</StyledLink>
+          </Typography>
+        </StyledForm>
+      </RegisterPaper>
     </RegisterContainer>
   );
 };

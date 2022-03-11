@@ -1,21 +1,26 @@
 import { styled } from '@mui/system';
-import Container from '@mui/material/Container';
+import { Container, Paper } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 export const LoginContainer = styled(Container)(({ theme }) => ({
-  color: theme.palette.primary.main,
+  marginTop: theme.spacing(7),
+}));
+
+export const LoginPaper = styled(Paper)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   gap: theme.spacing(3),
-  marginTop: theme.spacing(4),
+  padding: theme.spacing(7),
+  maxWidth: '45rem',
+  margin: 'auto'
 }));
 
 export const StyledForm = styled('form')(({ theme }) => ({
   flexDirection: 'column',
   display: 'flex',
   width: '100%',
-  maxWidth: '40rem',
+  maxWidth: '35rem',
   gap: theme.spacing(3),
 }));
 

@@ -57,16 +57,16 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, exp
       noValidate
       onSubmit={handleFormSubmit}
     >
-        <CustomOutlinedInput
-          inputState={titleState}
-          setInputState={setTitleState}
-          validation={validate(titleState.value).required().isLength({ min: 3, max: 50 })}
-          type='text'
-          label='Job Title'
-          placeholder='Job Title'
-          isDisabled={loading}
-          isRequired
-        />
+      <CustomOutlinedInput
+        inputState={titleState}
+        setInputState={setTitleState}
+        validation={validate(titleState.value).required().isLength({ min: 3, max: 50 })}
+        type='text'
+        label='Job Title'
+        placeholder='Job Title'
+        isDisabled={loading}
+        isRequired
+      />
 
       <TwoElementsGrid>
         <CustomOutlinedInput
@@ -106,12 +106,13 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, exp
           label='From Date'
         />
 
-        <CustomDatePicker
-          inputState={toDateState}
-          setInputState={setToDateState}
-          label='To Date'
-          isDisabled={isCurrentJob}
-        />
+        {!isCurrentJob &&
+          <CustomDatePicker
+            inputState={toDateState}
+            setInputState={setToDateState}
+            label='To Date'
+          />
+        }
       </TwoElementsGrid>
 
       <CustomOutlinedInput

@@ -35,7 +35,7 @@ const ChipsInput: FC<Props> = ({
   isDisabled = false,
   isRequired = false,
   shouldShowCheckIcon = true,
-  variant = 'outlined'
+  variant = 'standard'
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [chips, setChips] = useState(inputState.value);
@@ -118,9 +118,13 @@ const ChipsInput: FC<Props> = ({
   const endAdornment = (
     <InputAdornment
       position='end'
-      sx={{ right: 15, position: 'absolute' }}
+      sx={{
+        right: variant === 'outlined' ? 15 : 0,
+        position: 'absolute',
+        color: 'success.main'
+      }}
     >
-      {shouldShowCheckIcon && !shouldShowError && <CheckCircleOutlineIcon color='success' />}
+      {shouldShowCheckIcon && !shouldShowError && <CheckCircleOutlineIcon />}
     </InputAdornment>
   );
 

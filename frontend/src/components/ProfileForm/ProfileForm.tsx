@@ -17,7 +17,6 @@ import LoadingButton from '@components/LoadingButton/LoadingButton';
 import ChipsInput from '@components/ChipsInput/ChipsInput';
 import { IProfile, Nullable } from '../../typings/types';
 import { ROUTES } from '@constants/routes';
-import TwoElementsGrid from '@components/TwoElementsGrid/TwoElementsGrid';
 import LinkButton from '@components/LinkButton/LinkButton';
 import SaveIcon from '@mui/icons-material/Save';
 
@@ -108,54 +107,50 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         text="Let's get some information to make your profile stand out."
       />
 
-      <TwoElementsGrid>
-        <CustomSelect
-          inputState={statusState}
-          setInputState={setStatusState}
-          label='Select Your Professional Status'
-          customHelperText='Give us an idea of where you are in your career.'
-          validation={validate(statusState.value).required()}
-          options={PROFESSIONAL_STATUS_OPTIONS}
-          isDisabled={loading}
-          isRequired
-        />
+      <CustomSelect
+        inputState={statusState}
+        setInputState={setStatusState}
+        label='Select Your Professional Status'
+        customHelperText='Give us an idea of where you are in your career.'
+        validation={validate(statusState.value).required()}
+        options={PROFESSIONAL_STATUS_OPTIONS}
+        isDisabled={loading}
+        isRequired
+      />
 
-        <CustomOutlinedInput
-          inputState={companyState}
-          setInputState={setCompanyState}
-          validation={validate(companyState.value).required().isLength({ min: 3, max: 50 })}
-          type='text'
-          label='Company'
-          placeholder='Company'
-          customHelperText='Could be your own company or one you work for.'
-          isDisabled={loading}
-          isRequired
-        />
-      </TwoElementsGrid>
+      <CustomOutlinedInput
+        inputState={companyState}
+        setInputState={setCompanyState}
+        validation={validate(companyState.value).required().isLength({ min: 3, max: 50 })}
+        type='text'
+        label='Company'
+        placeholder='Company'
+        customHelperText='Could be your own company or one you work for.'
+        isDisabled={loading}
+        isRequired
+      />
 
-      <TwoElementsGrid>
-         <CustomOutlinedInput
-           inputState={websiteState}
-           setInputState={setWebsiteState}
-           validation={validate(websiteState.value).isURL()}
-           type='text'
-           label='Website'
-           placeholder='Website'
-           customHelperText='Could be your own or a company website.'
-           isDisabled={loading}
-         />
+       <CustomOutlinedInput
+         inputState={websiteState}
+         setInputState={setWebsiteState}
+         validation={validate(websiteState.value).isURL()}
+         type='text'
+         label='Website'
+         placeholder='Website'
+         customHelperText='Could be your own or a company website.'
+         isDisabled={loading}
+       />
 
-         <CustomOutlinedInput
-           inputState={githubUsernameState}
-           setInputState={setGithubUsernameState}
-           validation={validate(githubUsernameState.value).isGithubUsername()}
-           type='text'
-           label='Github Username'
-           placeholder='Github Username'
-           customHelperText='If you want your latest repos and a Github link, include your username.'
-           isDisabled={loading}
-         />
-      </TwoElementsGrid>
+       <CustomOutlinedInput
+         inputState={githubUsernameState}
+         setInputState={setGithubUsernameState}
+         validation={validate(githubUsernameState.value).isGithubUsername()}
+         type='text'
+         label='Github Username'
+         placeholder='Github Username'
+         customHelperText='If you want your latest repos and a Github link, include your username.'
+         isDisabled={loading}
+       />
 
       <CustomOutlinedInput
         inputState={locationState}

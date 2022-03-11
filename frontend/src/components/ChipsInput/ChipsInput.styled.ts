@@ -18,6 +18,7 @@ export const StyledOutlinedInput = styled(OutlinedInput, {
     width: 'auto',
     marginLeft: theme.spacing(1),
     color: isValidInput ? '' : 'red',
+    paddingRight: theme.spacing(5)
   },
 }));
 
@@ -38,5 +39,6 @@ export const StyledInput = styled(Input, {
     width: 'auto',
     marginLeft: theme.spacing(1),
     color: isValidInput ? '' : 'red',
+    paddingRight: theme.spacing(5),
   },
 }));

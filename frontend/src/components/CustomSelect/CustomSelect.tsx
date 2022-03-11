@@ -46,7 +46,7 @@ const CustomSelect: FC<Props> = ({
   isDisabled = false,
   isRequired = false,
   defaultOption = 'Please choose one...',
-  variant = 'outlined'
+  variant = 'standard'
 }) => {
   const [isClose, setIsClose] = useState(false);
 

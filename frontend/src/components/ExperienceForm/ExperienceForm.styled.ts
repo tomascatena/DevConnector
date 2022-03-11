@@ -5,15 +5,14 @@ export const StyledForm = styled('form')(({ theme }) => ({
   flexDirection: 'column',
   display: 'flex',
   width: '100%',
-  maxWidth: '60rem',
+  maxWidth: '50rem',
   gap: theme.spacing(3),
-  marginBottom: theme.spacing(10),
 }));
 
 export const ButtonsBox = styled(Box)(({ theme }) => ({
   display: 'flex',
   gap: theme.spacing(4),
-  marginTop: theme.spacing(3),
+  marginTop: theme.spacing(5),
 }));
 
 export const SocialNetworkLinksBox = styled(Box)(({ theme }) => ({

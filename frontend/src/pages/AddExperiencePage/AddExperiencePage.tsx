@@ -7,7 +7,7 @@ import {
   addOrUpdateProfileExperience,
   getCurrentUserProfile
 } from '@store/features/profile/profile.thunk';
-import { AddExperienceProfile } from './AddExperiencePage.styled';
+import { AddExperienceContainer, AddExperiencePaper } from './AddExperiencePage.styled';
 import { Typography } from '@mui/material';
 import CustomBackdrop from '@components/CustomBackdrop/CustomBackdrop';
 import TextWithIcon from '@components/TextWithIcon/TextWithIcon';
@@ -37,31 +37,33 @@ const AddExperiencePage:FC<Props> = () => {
   }, [profile]);
 
   return (
-    <AddExperienceProfile>
-      <Typography
-        variant='h4'
-        align='center'
-      >
-        Add An Experience
-      </Typography>
+    <AddExperienceContainer>
+      <AddExperiencePaper elevation={3}>
+        <Typography
+          variant='h4'
+          align='center'
+        >
+          Add An Experience
+        </Typography>
 
-      <TextWithIcon
-        text='Add any developer/programming experience that you have had in the past.'
-        icon={<WorkOutlineIcon color='action' />}
-      />
+        <TextWithIcon
+          text='Add any developer/programming experience that you have had in the past.'
+          icon={<WorkOutlineIcon color='action' />}
+        />
 
-      {isFetchingProfile ? (
-        <CustomBackdrop
-          isOpen={isFetchingProfile}
-          message='Loading profile. Please wait.'
-        />
-      ) : (
-        <ExperienceForm
-          dispatchCreateOrUpdateProfile={dispatchCreateOrUpdateProfile}
-          loading={loading}
-        />
-      )}
-    </AddExperienceProfile>
+        {isFetchingProfile ? (
+          <CustomBackdrop
+            isOpen={isFetchingProfile}
+            message='Loading profile. Please wait.'
+          />
+        ) : (
+          <ExperienceForm
+            dispatchCreateOrUpdateProfile={dispatchCreateOrUpdateProfile}
+            loading={loading}
+          />
+        )}
+      </AddExperiencePaper>
+    </AddExperienceContainer>
   );
 };
 
