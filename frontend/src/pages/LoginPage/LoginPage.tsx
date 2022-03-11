@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 import { ROUTES } from '@constants/routes';
 import { validate } from '@utils/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import CustomOutlinedInput from '@components/CustomOutlinedInput/CustomOutlinedInput';
+import CustomInput from '@components/CustomInput/CustomInput';
 import { LoginContainer, LoginPaper, StyledForm, StyledLink } from './LoginPage.styled';
 import { useAppDispatch } from '@hooks/index';
 import { login } from '@store/features/auth/auth.thunk';
@@ -89,7 +89,7 @@ const RegisterPage: FC = () => {
             icon={<PersonOutlineIcon color='action' />}
           />
 
-          <CustomOutlinedInput
+          <CustomInput
             inputState={emailState}
             setInputState={setEmailState}
             validation={validate(emailState.value).required()}
@@ -99,7 +99,7 @@ const RegisterPage: FC = () => {
             isRequired
           />
 
-          <CustomOutlinedInput
+          <CustomInput
             inputState={passwordState}
             setInputState={setPasswordState}
             validation={validate(passwordState.value).required()}

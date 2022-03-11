@@ -1,7 +1,7 @@
 import { useState, FC, FormEvent } from 'react';
 import { StyledForm, ButtonsBox } from './ExperienceForm.styled';
 import { validate } from '../../utils/validator';
-import CustomOutlinedInput from '@components/CustomOutlinedInput/CustomOutlinedInput';
+import CustomInput from '@components/CustomInput/CustomInput';
 import LoadingButton from '@components/LoadingButton/LoadingButton';
 import { IExperience, Nullable } from '../../typings/types';
 import { ROUTES } from '@constants/routes';
@@ -57,7 +57,7 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, exp
       noValidate
       onSubmit={handleFormSubmit}
     >
-      <CustomOutlinedInput
+      <CustomInput
         inputState={titleState}
         setInputState={setTitleState}
         validation={validate(titleState.value).required().isLength({ min: 3, max: 50 })}
@@ -69,7 +69,7 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, exp
       />
 
       <TwoElementsGrid>
-        <CustomOutlinedInput
+        <CustomInput
           inputState={companyState}
           setInputState={setCompanyState}
           validation={validate(companyState.value).required().isLength({ min: 3, max: 50 })}
@@ -80,7 +80,7 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, exp
           isRequired
         />
 
-        <CustomOutlinedInput
+        <CustomInput
           inputState={locationState}
           setInputState={setLocationState}
           validation={validate(locationState.value).required().isLength({ min: 3, max: 50 })}
@@ -115,7 +115,7 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, exp
         }
       </TwoElementsGrid>
 
-      <CustomOutlinedInput
+      <CustomInput
         inputState={descriptionState}
         setInputState={setDescriptionState}
         validation={validate(descriptionState.value).isLength({ min: 1, max: 100 })}

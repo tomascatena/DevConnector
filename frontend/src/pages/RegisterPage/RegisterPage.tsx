@@ -9,7 +9,7 @@ import { Typography } from '@mui/material';
 import { ROUTES } from '@constants/routes';
 import { validate } from '@utils/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import CustomOutlinedInput from '@components/CustomOutlinedInput/CustomOutlinedInput';
+import CustomInput from '@components/CustomInput/CustomInput';
 import { useAppDispatch, useTypedSelector } from '@hooks/index';
 import { register } from '@store/features/auth/auth.thunk';
 import { useNavigate } from 'react-router';
@@ -101,7 +101,7 @@ const RegisterPage: FC = () => {
             icon={<PersonOutlineIcon color='action' />}
           />
 
-          <CustomOutlinedInput
+          <CustomInput
             inputState={emailState}
             setInputState={setEmailState}
             validation={validate(emailState.value)
@@ -117,7 +117,7 @@ const RegisterPage: FC = () => {
           />
 
           <TwoElementsGrid>
-            <CustomOutlinedInput
+            <CustomInput
               inputState={firstNameState}
               setInputState={setFirstNameState}
               validation={validate(firstNameState.value)
@@ -129,7 +129,7 @@ const RegisterPage: FC = () => {
               isRequired
             />
 
-            <CustomOutlinedInput
+            <CustomInput
               inputState={lastNameState}
               setInputState={setLastNameState}
               validation={validate(lastNameState.value)
@@ -142,7 +142,7 @@ const RegisterPage: FC = () => {
             />
           </TwoElementsGrid>
 
-          <CustomOutlinedInput
+          <CustomInput
             inputState={passwordState}
             setInputState={setPasswordState}
             validation={validate(passwordState.value).required().isLength({
@@ -155,7 +155,7 @@ const RegisterPage: FC = () => {
             isRequired
           />
 
-          <CustomOutlinedInput
+          <CustomInput
             inputState={confirmPasswordState}
             setInputState={setConfirmPasswordState}
             validation={validate(confirmPasswordState.value)

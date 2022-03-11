@@ -6,7 +6,7 @@ import TextWithIcon from '@components/TextWithIcon/TextWithIcon';
 import CustomSelect from '@components/CustomSelect/CustomSelect';
 import { validate } from '../../utils/validator';
 import { PROFESSIONAL_STATUS_OPTIONS } from '@constants/constants';
-import CustomOutlinedInput from '@components/CustomOutlinedInput/CustomOutlinedInput';
+import CustomInput from '@components/CustomInput/CustomInput';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import YouTubeIcon from '@mui/icons-material/YouTube';
@@ -118,7 +118,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         isRequired
       />
 
-      <CustomOutlinedInput
+      <CustomInput
         inputState={companyState}
         setInputState={setCompanyState}
         validation={validate(companyState.value).required().isLength({ min: 3, max: 50 })}
@@ -130,7 +130,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         isRequired
       />
 
-       <CustomOutlinedInput
+       <CustomInput
          inputState={websiteState}
          setInputState={setWebsiteState}
          validation={validate(websiteState.value).isURL()}
@@ -141,7 +141,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
          isDisabled={loading}
        />
 
-       <CustomOutlinedInput
+       <CustomInput
          inputState={githubUsernameState}
          setInputState={setGithubUsernameState}
          validation={validate(githubUsernameState.value).isGithubUsername()}
@@ -152,7 +152,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
          isDisabled={loading}
        />
 
-      <CustomOutlinedInput
+      <CustomInput
         inputState={locationState}
         setInputState={setLocationState}
         validation={validate(locationState.value).required().isLength({ min: 3, max: 50 })}
@@ -174,7 +174,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         isRequired
       />
 
-      <CustomOutlinedInput
+      <CustomInput
         inputState={bioState}
         setInputState={setBioState}
         validation={validate(bioState.value).isLength({ min: 1, max: 100 })}
@@ -208,7 +208,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
             icon={<TwitterIcon />}
             iconColor='#1DA1F2'
           >
-            <CustomOutlinedInput
+            <CustomInput
               inputState={twitterState}
               setInputState={setTwitterState}
               validation={validate(twitterState.value).isURL()}
@@ -223,7 +223,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
             icon={<FacebookIcon />}
             iconColor='#4267B2'
           >
-            <CustomOutlinedInput
+            <CustomInput
               inputState={facebookState}
               setInputState={setFacebookState}
               validation={validate(facebookState.value).isURL()}
@@ -238,7 +238,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
             icon={<YouTubeIcon />}
             iconColor='#FF0000'
           >
-            <CustomOutlinedInput
+            <CustomInput
               inputState={youtubeState}
               setInputState={setYoutubeState}
               validation={validate(youtubeState.value).isURL()}
@@ -253,7 +253,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
             icon={<LinkedInIcon />}
             iconColor='#0e76a8'
           >
-            <CustomOutlinedInput
+            <CustomInput
               inputState={linkedInState}
               setInputState={setLinkedInState}
               validation={validate(linkedInState.value).isURL()}
@@ -268,7 +268,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
             icon={<InstagramIcon />}
             iconColor='#405DE6'
           >
-            <CustomOutlinedInput
+            <CustomInput
               inputState={instagramState}
               setInputState={setInstagramState}
               validation={validate(instagramState.value).isURL()}

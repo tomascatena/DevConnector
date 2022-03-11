@@ -43,7 +43,7 @@ type Props = {
   successMessage?: string;
 };
 
-const CustomOutlinedInput: FC<Props> = ({
+const CustomInput: FC<Props> = ({
   inputState,
   setInputState,
   type,
@@ -219,4 +219,4 @@ const areEqualProps = (prevProps: Props, nextProps: Props): boolean => {
     prevProps.isDisabled === nextProps.isDisabled;
 };
 
-export default React.memo(CustomOutlinedInput, areEqualProps);
+export default React.memo(CustomInput, areEqualProps);
