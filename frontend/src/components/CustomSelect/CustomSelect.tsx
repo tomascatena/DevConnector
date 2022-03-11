@@ -8,7 +8,7 @@ import {
   MenuItem,
 } from '@mui/material';
 import { ValidatorResult } from '@utils/validator';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CheckIcon from '@mui/icons-material/Check';
 import { SelectChangeEvent } from '@mui/material/Select';
 
 type FormFieldState = {
@@ -109,7 +109,7 @@ const CustomSelect: FC<Props> = ({
         shouldShowCheckIcon &&
         !isEmpty &&
         hasChangedAndIsValid &&
-        <CheckCircleOutlineIcon color='success' />
+        <CheckIcon color='success' />
       }
     </InputAdornment>
   );
@@ -133,7 +133,7 @@ const CustomSelect: FC<Props> = ({
 
   return (
     <FormControl
-      sx={{ width: '100%', position: 'relative' }}
+      sx={{ width: '100%', position: 'relative', mt: 1 }}
       color={inputColor}
       error={shouldShowError}
     >

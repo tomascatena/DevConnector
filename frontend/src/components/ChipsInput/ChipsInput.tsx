@@ -1,7 +1,7 @@
 import React, { FC, ChangeEvent, useState, Dispatch, SetStateAction, useEffect } from 'react';
 import { InputLabel, FormHelperText, FormControl, Chip, Typography, InputAdornment, Box } from '@mui/material';
 import { StyledOutlinedInput, StyledInput } from './ChipsInput.styled';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CheckIcon from '@mui/icons-material/Check';
 
 interface FormFieldState {
   value: string[];
@@ -124,21 +124,22 @@ const ChipsInput: FC<Props> = ({
         color: 'success.main'
       }}
     >
-      {shouldShowCheckIcon && !shouldShowError && <CheckCircleOutlineIcon />}
+      {shouldShowCheckIcon && !shouldShowError && <CheckIcon />}
     </InputAdornment>
   );
 
   return (
     <FormControl
-      sx={{ width: '100%' }}
+      sx={{ width: '100%', mt: 1 }}
       color={inputColor}
       error={shouldShowError}
     >
-      <InputLabel>{isRequired ? `* ${label}` : label}</InputLabel>
+      <InputLabel htmlFor='custom-input'>{isRequired ? `* ${label}` : label}</InputLabel>
 
       {
         variant === 'outlined' &&
         <StyledOutlinedInput
+          id='custom-input'
           error={shouldShowError}
           color={inputColor}
           readOnly={hasMoreChipsThanAllowed}
@@ -156,6 +157,7 @@ const ChipsInput: FC<Props> = ({
       {
         variant === 'standard' &&
         <StyledInput
+          id='custom-input'
           error={shouldShowError}
           color={inputColor}
           readOnly={hasMoreChipsThanAllowed}

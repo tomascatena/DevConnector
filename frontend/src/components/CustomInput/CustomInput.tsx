@@ -20,7 +20,7 @@ import { useFormControl } from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { ValidatorResult } from '@utils/validator';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CheckIcon from '@mui/icons-material/Check';
 
 interface FormFieldState {
   value: string;
@@ -142,7 +142,7 @@ const CustomInput: FC<Props> = ({
         shouldShowCheckIcon &&
         !isEmpty &&
         hasChangedAndIsInputValid &&
-        <CheckCircleOutlineIcon color='success' />
+        <CheckIcon color='success' />
       }
 
       {type === 'password' && (
@@ -162,7 +162,7 @@ const CustomInput: FC<Props> = ({
 
   return (
     <FormControl
-      sx={{ width: '100%' }}
+      sx={{ width: '100%', mt: 1 }}
       color={inputColor}
       error={shouldShowError}
     >
