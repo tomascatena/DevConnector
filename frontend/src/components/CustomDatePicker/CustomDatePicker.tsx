@@ -1,7 +1,8 @@
 import React, { FC, Dispatch, SetStateAction, useState, useEffect } from 'react';
 import { DatePicker } from '@mui/lab';
-import { TextField } from '@mui/material';
+import { TextField, InputAdornment, Box } from '@mui/material';
 import { formatISO, isValid, subYears, parse, isBefore, isFuture } from 'date-fns';
+import CheckIcon from '@mui/icons-material/Check';
 
 interface FormFieldState {
   value: string | null;
@@ -14,7 +15,8 @@ type Props = {
   label:string;
   variant?: 'outlined' | 'standard' | 'filled';
   isDisabled?:boolean;
-  isRequired?: boolean
+  isRequired?: boolean;
+  shouldShowCheckIcon?: boolean
 }
 
 const CustomDatePicker:FC<Props> = ({
@@ -24,6 +26,7 @@ const CustomDatePicker:FC<Props> = ({
   variant = 'filled',
   isDisabled = false,
   isRequired = false,
+  shouldShowCheckIcon = true
 }) => {
   const TODAY_DATE = Date.now();
   const MIN_DATE = subYears(TODAY_DATE, 100);
@@ -37,25 +40,21 @@ const CustomDatePicker:FC<Props> = ({
     if (!isRequired) {
       setInputState({ ...inputState, isValid: true });
     }
-  }, [isRequired]);
+  }, []);
 
   const [hasError, setHasError] = useState(false);
   const [hasChanged, setHasChanged] = useState(false);
   const [helperText, setHelperText] = useState('');
 
   const handleDateChange = (newDate: Date | null) => {
-    const isValidDate = Boolean(newDate) && isValid(newDate);
-
-    setHasError(!isValidDate);
-
     setInputState({
-      value: isValidDate ? formatISO(newDate!) : null,
-      isValid: isValidDate
+      ...inputState,
+      value: newDate && isValid(newDate) ? formatISO(newDate) : null,
     });
   };
 
   const handleDateError = (
-    reason:'shouldDisableDate' | 'disablePast' | 'disableFuture' | 'minDate' | 'maxDate' | 'invalidDate' | null
+    reason:'shouldDisableDate' | 'disablePast' | 'disableFuture' | 'minDate' | 'maxDate' | 'invalidDate' | null,
   ) => {
     let text = INVALID_DATE_MESSAGE;
     if (reason === 'disableFuture') {
@@ -64,8 +63,15 @@ const CustomDatePicker:FC<Props> = ({
       text = INVALID_DATE_MESSAGE_PAST;
     }
 
+    const isValidDate = reason === null;
+
     setHelperText(reason ? text : '');
-    setHasError(Boolean(reason));
+    setHasError(!isValidDate);
+
+    setInputState({
+      ...inputState,
+      isValid: isValidDate
+    });
   };
 
   const handleInputChange = (event:any) => {
@@ -84,7 +90,7 @@ const CustomDatePicker:FC<Props> = ({
 
     setInputState({
       isValid: isValidDate,
-      value: isValidDate ? formatISO(parsedDate) : null,
+      value: isValid(parsedDate) ? formatISO(parsedDate) : null,
     });
   };
 
@@ -93,7 +99,18 @@ const CustomDatePicker:FC<Props> = ({
       setHasError(true);
       setHelperText(REQUIRED_MESSAGE);
     }
-  }, [hasChanged]);
+  }, [hasChanged, inputState.value]);
+
+  const showCheckIcon = shouldShowCheckIcon && inputState.value && inputState.isValid;
+
+  const endAdornment = (
+    <InputAdornment
+      position='start'
+      sx={{ position: 'absolute', top: 30, right: 40 }}
+    >
+      {showCheckIcon && <CheckIcon color='success' />}
+    </InputAdornment>
+  );
 
   return (
     <DatePicker
@@ -106,16 +123,20 @@ const CustomDatePicker:FC<Props> = ({
       disableFuture
       minDate={MIN_DATE}
       renderInput={(params) =>
-        <TextField
-          variant={variant}
-          fullWidth
-          disabled={isDisabled}
-          onBlur={() => setHasChanged(true)}
-          onChange={handleInputChange}
-          {...params}
-          error={isRequired && hasError}
-          helperText={hasError && helperText}
-        />
+        <Box sx={{ position: 'relative' }}>
+          <TextField
+            variant={variant}
+            fullWidth
+            disabled={isDisabled}
+            onBlur={() => setHasChanged(true)}
+            onChange={handleInputChange}
+            {...params}
+            error={isRequired && hasError}
+            helperText={helperText}
+          />
+
+          {endAdornment}
+        </Box>
       }
     />
   );

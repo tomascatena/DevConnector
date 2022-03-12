@@ -28,7 +28,9 @@ const DashboardPage: FC<Props> = () => {
   const { user } = useTypedSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(getCurrentUserProfile());
+    if (!profile) {
+      dispatch(getCurrentUserProfile());
+    }
 
     // eslint-disable-next-line
   }, []);
