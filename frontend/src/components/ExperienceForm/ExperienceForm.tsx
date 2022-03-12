@@ -12,12 +12,12 @@ import CustomDatePicker from '@components/CustomDatePicker/CustomDatePicker';
 import CustomCheckbox from '@components/CustomCheckbox/CustomCheckbox';
 
 type Props = {
-  dispatchCreateOrUpdateProfile: (profileForm: Partial<IExperience>[]) => void;
+  dispatchCreateOrUpdateExperience: (profileForm: Partial<IExperience>[]) => void;
   loading: boolean;
   experience?: Nullable<Partial<IExperience>>;
 };
 
-const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, experience }) => {
+const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateExperience, loading, experience }) => {
   const initialTitleState = { value: experience?.title || '', isValid: Boolean(experience?.title) };
   const initialCompanyState = { value: experience?.company || '', isValid: Boolean(experience?.company) };
   const initialLocationState = { value: experience?.location || '', isValid: Boolean(experience?.location) };
@@ -35,8 +35,12 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, exp
   const [isCurrentJob, setIsCurrentJob] = useState(experience?.current || false);
 
   const formData = [
+    titleState,
     companyState,
     locationState,
+    fromDateState,
+    toDateState,
+    descriptionState
   ];
 
   const isButtonDisabled = formData.some(({ isValid }) => !isValid);
@@ -49,7 +53,7 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, exp
       location: locationState.value,
     }];
 
-    dispatchCreateOrUpdateProfile(experienceForm);
+    dispatchCreateOrUpdateExperience(experienceForm);
   };
 
   return (
@@ -82,13 +86,12 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, exp
       <CustomInput
         inputState={locationState}
         setInputState={setLocationState}
-        validation={validate(locationState.value).required().isLength({ min: 3, max: 50 })}
+        validation={validate(locationState.value).isLength({ min: 3, max: 50 })}
         type='text'
         label='Location'
         placeholder='Location'
         customHelperText='City &amp; state suggested (eg. Austin, TX).'
         isDisabled={loading}
-        isRequired
       />
 
       <CustomCheckbox
@@ -102,6 +105,7 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, exp
           inputState={fromDateState}
           setInputState={setFromDateState}
           label='From Date'
+          isRequired
         />
 
         {!isCurrentJob &&

@@ -22,7 +22,7 @@ const AddExperiencePage:FC<Props> = () => {
 
   const navigate = useNavigate();
 
-  const dispatchCreateOrUpdateProfile = (
+  const dispatchCreateOrUpdateExperience = (
     experienceForm: Partial<IExperience>[]
   ) => {
     dispatch(addOrUpdateProfileExperience(experienceForm)).then(() => {
@@ -58,7 +58,7 @@ const AddExperiencePage:FC<Props> = () => {
           />
         ) : (
           <ExperienceForm
-            dispatchCreateOrUpdateProfile={dispatchCreateOrUpdateProfile}
+            dispatchCreateOrUpdateExperience={dispatchCreateOrUpdateExperience}
             loading={loading}
           />
         )}
