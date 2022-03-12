@@ -1,5 +1,5 @@
 import { styled } from '@mui/system';
-import { OutlinedInput, Input } from '@mui/material';
+import { OutlinedInput, Input, FilledInput } from '@mui/material';
 
 interface StyledOutlinedInputProps {
   isValidInput: boolean;
@@ -39,6 +39,28 @@ export const StyledInput = styled(Input, {
     width: 'auto',
     marginLeft: theme.spacing(1),
     color: isValidInput ? '' : 'red',
+    paddingRight: theme.spacing(5),
+  },
+}));
+
+interface StyledFilledInputProps {
+  isValidInput: boolean;
+}
+
+export const StyledFilledInput = styled(FilledInput, {
+  shouldForwardProp: (props) => {
+    return props !== 'isValidInput';
+  },
+})<StyledFilledInputProps>(({ theme, isValidInput }) => ({
+  display: 'flex',
+  flexWrap: 'wrap',
+  alignItems: 'center',
+
+  '& .MuiFilledInput-input': {
+    width: 'auto',
+    marginLeft: theme.spacing(1),
+    color: isValidInput ? '' : 'red',
+    padding: 0,
     paddingRight: theme.spacing(5),
   },
 }));

@@ -3,6 +3,7 @@ import { Container, Paper } from '@mui/material';
 
 export const AddExperienceContainer = styled(Container)(({ theme }) => ({
   marginTop: theme.spacing(7),
+  marginBottom: theme.spacing(7),
 }));
 
 export const AddExperiencePaper = styled(Paper)(({ theme }) => ({
@@ -11,6 +12,6 @@ export const AddExperiencePaper = styled(Paper)(({ theme }) => ({
   alignItems: 'center',
   gap: theme.spacing(3),
   padding: theme.spacing(7),
-  maxWidth: '50rem',
+  maxWidth: '45rem',
   margin: 'auto'
 }));

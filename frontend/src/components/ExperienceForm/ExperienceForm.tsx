@@ -68,30 +68,28 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, exp
         isRequired
       />
 
-      <TwoElementsGrid>
-        <CustomInput
-          inputState={companyState}
-          setInputState={setCompanyState}
-          validation={validate(companyState.value).required().isLength({ min: 3, max: 50 })}
-          type='text'
-          label='Company'
-          placeholder='Company'
-          isDisabled={loading}
-          isRequired
-        />
+      <CustomInput
+        inputState={companyState}
+        setInputState={setCompanyState}
+        validation={validate(companyState.value).required().isLength({ min: 3, max: 50 })}
+        type='text'
+        label='Company'
+        placeholder='Company'
+        isDisabled={loading}
+        isRequired
+      />
 
-        <CustomInput
-          inputState={locationState}
-          setInputState={setLocationState}
-          validation={validate(locationState.value).required().isLength({ min: 3, max: 50 })}
-          type='text'
-          label='Location'
-          placeholder='Location'
-          customHelperText='City &amp; state suggested (eg. Austin, TX).'
-          isDisabled={loading}
-          isRequired
-        />
-      </TwoElementsGrid>
+      <CustomInput
+        inputState={locationState}
+        setInputState={setLocationState}
+        validation={validate(locationState.value).required().isLength({ min: 3, max: 50 })}
+        type='text'
+        label='Location'
+        placeholder='Location'
+        customHelperText='City &amp; state suggested (eg. Austin, TX).'
+        isDisabled={loading}
+        isRequired
+      />
 
       <CustomCheckbox
         inputState={isCurrentJob}

@@ -20,7 +20,7 @@ const CustomDatePicker:FC<Props> = ({
   inputState,
   setInputState,
   label,
-  variant = 'standard',
+  variant = 'filled',
   isDisabled = false
 }) => {
   const handleChange = (newDate: Date | null) => {

@@ -1,6 +1,6 @@
 import React, { FC, ChangeEvent, useState, Dispatch, SetStateAction, useEffect } from 'react';
 import { InputLabel, FormHelperText, FormControl, Chip, Typography, InputAdornment, Box } from '@mui/material';
-import { StyledOutlinedInput, StyledInput } from './ChipsInput.styled';
+import { StyledOutlinedInput, StyledInput, StyledFilledInput } from './ChipsInput.styled';
 import CheckIcon from '@mui/icons-material/Check';
 
 interface FormFieldState {
@@ -20,7 +20,7 @@ type Props = {
   isDisabled?:boolean;
   isRequired?:boolean;
   shouldShowCheckIcon?: boolean;
-  variant?: 'standard' | 'outlined'
+  variant?: 'standard' | 'outlined' | 'filled'
 };
 
 const ChipsInput: FC<Props> = ({
@@ -35,7 +35,7 @@ const ChipsInput: FC<Props> = ({
   isDisabled = false,
   isRequired = false,
   shouldShowCheckIcon = true,
-  variant = 'standard'
+  variant = 'filled'
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [chips, setChips] = useState(inputState.value);
@@ -110,7 +110,9 @@ const ChipsInput: FC<Props> = ({
       : `You can add up to ${maxChips}.`
   );
 
-  const inputColor = isValidInput ? 'success' : undefined;
+  type InputColor = 'error' | 'primary' | 'secondary' | 'info' | 'success' | 'warning' | undefined;
+  const inputColor: InputColor = isValidInput ? 'success' : undefined;
+
   const shouldShowError = isRequired
     ? !isValidInput || isEmpty
     : !isValidInput;
@@ -119,7 +121,7 @@ const ChipsInput: FC<Props> = ({
     <InputAdornment
       position='end'
       sx={{
-        right: variant === 'outlined' ? 15 : 0,
+        right: variant !== 'standard' ? 15 : 0,
         position: 'absolute',
         color: 'success.main'
       }}
@@ -128,48 +130,40 @@ const ChipsInput: FC<Props> = ({
     </InputAdornment>
   );
 
+  const props = {
+    id: 'custom-chips-input',
+    error: shouldShowError,
+    ...((variant !== 'filled') && { color: inputColor }),
+    readOnly: hasMoreChipsThanAllowed,
+    value: inputValue,
+    onChange: handleInputChange,
+    startAdornment: startAdornment,
+    isValidInput: isValidInput,
+    placeholder: placeholderText,
+    disabled: isDisabled,
+    endAdornment: endAdornment,
+  };
+
+  let ElementType = StyledFilledInput;
+  if (variant === 'filled') {
+    ElementType = StyledFilledInput;
+  } else if (variant === 'standard') {
+    ElementType = StyledInput;
+  } else if (variant === 'outlined') {
+    ElementType = StyledOutlinedInput;
+  }
+
+  const InputElement = React.createElement(ElementType, props);
+
   return (
     <FormControl
       sx={{ width: '100%', mt: 1 }}
       color={inputColor}
       error={shouldShowError}
     >
-      <InputLabel htmlFor='custom-input'>{isRequired ? `* ${label}` : label}</InputLabel>
+      <InputLabel htmlFor='custom-chips-input'>{isRequired ? `* ${label}` : label}</InputLabel>
 
-      {
-        variant === 'outlined' &&
-        <StyledOutlinedInput
-          id='custom-input'
-          error={shouldShowError}
-          color={inputColor}
-          readOnly={hasMoreChipsThanAllowed}
-          value={inputValue}
-          onChange={handleInputChange}
-          startAdornment={startAdornment}
-          label={isRequired ? `* ${label}` : label}
-          isValidInput={isValidInput}
-          placeholder={placeholderText}
-          disabled={isDisabled}
-          endAdornment={endAdornment}
-        />
-      }
-
-      {
-        variant === 'standard' &&
-        <StyledInput
-          id='custom-input'
-          error={shouldShowError}
-          color={inputColor}
-          readOnly={hasMoreChipsThanAllowed}
-          value={inputValue}
-          onChange={handleInputChange}
-          startAdornment={startAdornment}
-          isValidInput={isValidInput}
-          placeholder={placeholderText}
-          disabled={isDisabled}
-          endAdornment={endAdornment}
-        />
-      }
+      {InputElement}
 
       <CustomFormHelperText />
     </FormControl>

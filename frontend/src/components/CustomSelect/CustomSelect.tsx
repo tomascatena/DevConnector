@@ -46,7 +46,7 @@ const CustomSelect: FC<Props> = ({
   isDisabled = false,
   isRequired = false,
   defaultOption = 'Please choose one...',
-  variant = 'standard'
+  variant = 'filled'
 }) => {
   const [isClose, setIsClose] = useState(false);
 
@@ -95,7 +95,8 @@ const CustomSelect: FC<Props> = ({
     return <FormHelperText>{helperText}</FormHelperText>;
   };
 
-  const inputColor = hasChangedAndIsValid && !isEmpty ? 'success' : undefined;
+  type InputColor = 'error' | 'primary' | 'secondary' | 'info' | 'success' | 'warning' | undefined
+  const inputColor: InputColor = hasChangedAndIsValid && !isEmpty ? 'success' : undefined;
   const shouldShowError = isRequired
     ? hasChangedAndIsNotValid || isEmpty
     : isEmpty ? false : hasChangedAndIsNotValid;
@@ -141,7 +142,7 @@ const CustomSelect: FC<Props> = ({
 
       <Select
         error={shouldShowError}
-        color={inputColor}
+        {...((variant !== 'filled') && { color: inputColor })}
         value={inputState.value}
         onChange={handleChange}
         endAdornment={endAdornment}

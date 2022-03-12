@@ -14,7 +14,8 @@ import {
   InputAdornment,
   FormHelperText,
   FormControl,
-  Input
+  Input,
+  FilledInput
 } from '@mui/material';
 import { useFormControl } from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
@@ -55,7 +56,7 @@ const CustomInput: FC<Props> = ({
   placeholder = '',
   isMultiline = false,
   isDisabled = false,
-  variant = 'standard',
+  variant = 'filled',
   successMessage = null,
 }) => {
   const [isBlur, setIsBlur] = useState(false);
@@ -100,10 +101,6 @@ const CustomInput: FC<Props> = ({
     // eslint-disable-next-line
   }, []);
 
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
   const CustomFormHelperText = () => {
     const { focused } = useFormControl() || {};
 
@@ -126,7 +123,9 @@ const CustomInput: FC<Props> = ({
     return <FormHelperText>{helperText}</FormHelperText>;
   };
 
-  const inputColor = hasChangedAndIsInputValid && !isEmpty ? 'success' : undefined;
+  type InputColor = 'error' | 'primary' | 'secondary' | 'info' | 'success' | 'warning' | undefined;
+  const inputColor: InputColor = hasChangedAndIsInputValid && !isEmpty ? 'success' : undefined;
+
   const shouldShowError = isRequired
     ? hasChangedAndIsNotInputValid
     : isEmpty ? false : hasChangedAndIsNotInputValid;
@@ -148,7 +147,7 @@ const CustomInput: FC<Props> = ({
       {type === 'password' && (
         <IconButton
           aria-label='toggle password visibility'
-          onClick={handleClickShowPassword}
+          onClick={() => setShowPassword(!showPassword)}
           edge='end'
         >
           {showPassword ? <VisibilityOff /> : <Visibility />}
@@ -160,6 +159,35 @@ const CustomInput: FC<Props> = ({
   const labelText = isRequired ? `* ${label}` : label;
   const placeholderText = isRequired ? `* ${placeholder}` : placeholder;
 
+  const props = {
+    id: 'custom-input',
+    required: isRequired,
+    error: shouldShowError,
+    ...((variant !== 'filled') && { color: inputColor }),
+    type: inputType,
+    placeholder: placeholderText,
+    value: inputState.value,
+    onChange: handleChange,
+    endAdornment: endAdornment,
+    label: labelText,
+    onBlur: () => setIsBlur(true),
+    multiline: isMultiline,
+    minRows: 4,
+    maxRows: 6,
+    disabled: isDisabled,
+  };
+
+  let ElementType = FilledInput;
+  if (variant === 'filled') {
+    ElementType = FilledInput;
+  } else if (variant === 'standard') {
+    ElementType = Input;
+  } else if (variant === 'outlined') {
+    ElementType = OutlinedInput;
+  }
+
+  const InputElement = React.createElement(ElementType, props);
+
   return (
     <FormControl
       sx={{ width: '100%', mt: 1 }}
@@ -168,46 +196,7 @@ const CustomInput: FC<Props> = ({
     >
       <InputLabel htmlFor='custom-input'>{labelText}</InputLabel>
 
-      {
-        variant === 'outlined' &&
-        <OutlinedInput
-          id='custom-input'
-          required={isRequired}
-          error={shouldShowError}
-          color={inputColor}
-          type={inputType}
-          placeholder={placeholderText}
-          value={inputState.value}
-          onChange={handleChange}
-          endAdornment={endAdornment}
-          label={labelText}
-          onBlur={() => setIsBlur(true)}
-          multiline={isMultiline}
-          minRows={2}
-          maxRows={4}
-          disabled={isDisabled}
-        />
-      }
-
-      {
-        variant === 'standard' &&
-        <Input
-          id='custom-input'
-          required={isRequired}
-          error={shouldShowError}
-          color={inputColor}
-          type={inputType}
-          placeholder={placeholderText}
-          value={inputState.value}
-          onChange={handleChange}
-          endAdornment={endAdornment}
-          onBlur={() => setIsBlur(true)}
-          multiline={isMultiline}
-          minRows={2}
-          maxRows={4}
-          disabled={isDisabled}
-        />
-      }
+      {InputElement}
 
       <CustomFormHelperText />
     </FormControl>
