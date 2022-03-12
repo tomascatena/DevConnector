@@ -42,6 +42,7 @@ type Props = {
   isDisabled?:boolean;
   variant?: 'standard' | 'outlined';
   successMessage?: string;
+  autofocus?:boolean
 };
 
 const CustomInput: FC<Props> = ({
@@ -58,6 +59,7 @@ const CustomInput: FC<Props> = ({
   isDisabled = false,
   variant = 'filled',
   successMessage = null,
+  autofocus = false
 }) => {
   const [isBlur, setIsBlur] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -160,7 +162,6 @@ const CustomInput: FC<Props> = ({
   const placeholderText = isRequired ? `* ${placeholder}` : placeholder;
 
   const props = {
-    id: 'custom-input',
     required: isRequired,
     error: shouldShowError,
     ...((variant !== 'filled') && { color: inputColor }),
@@ -175,6 +176,7 @@ const CustomInput: FC<Props> = ({
     minRows: 4,
     maxRows: 6,
     disabled: isDisabled,
+    autoFocus: autofocus
   };
 
   let ElementType = FilledInput;
@@ -194,7 +196,7 @@ const CustomInput: FC<Props> = ({
       color={inputColor}
       error={shouldShowError}
     >
-      <InputLabel htmlFor='custom-input'>{labelText}</InputLabel>
+      <InputLabel>{labelText}</InputLabel>
 
       {InputElement}
 

@@ -114,6 +114,7 @@ const RegisterPage: FC = () => {
             type='email'
             label='Email'
             isRequired
+            autofocus
           />
 
           <TwoElementsGrid>

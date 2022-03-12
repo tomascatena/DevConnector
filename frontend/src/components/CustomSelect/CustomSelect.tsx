@@ -32,7 +32,8 @@ type Props = {
   isDisabled?:boolean;
   isRequired?: boolean;
   defaultOption?: string;
-  variant?: 'outlined' | 'filled' | 'standard'
+  variant?: 'outlined' | 'filled' | 'standard',
+  autofocus?: boolean
 };
 
 const CustomSelect: FC<Props> = ({
@@ -46,7 +47,8 @@ const CustomSelect: FC<Props> = ({
   isDisabled = false,
   isRequired = false,
   defaultOption = 'Please choose one...',
-  variant = 'filled'
+  variant = 'filled',
+  autofocus = false
 }) => {
   const [isClose, setIsClose] = useState(false);
 
@@ -150,6 +152,7 @@ const CustomSelect: FC<Props> = ({
         onClose={() => setIsClose(true)}
         disabled={isDisabled}
         variant={variant}
+        autoFocus={autofocus}
       >
         {DefaultOption}
 

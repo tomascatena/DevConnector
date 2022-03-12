@@ -97,6 +97,7 @@ const RegisterPage: FC = () => {
             label='Email'
             shouldShowCheckIcon={false}
             isRequired
+            autofocus
           />
 
           <CustomInput

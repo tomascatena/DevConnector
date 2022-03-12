@@ -20,7 +20,8 @@ type Props = {
   isDisabled?:boolean;
   isRequired?:boolean;
   shouldShowCheckIcon?: boolean;
-  variant?: 'standard' | 'outlined' | 'filled'
+  variant?: 'standard' | 'outlined' | 'filled';
+  autofocus?: boolean
 };
 
 const ChipsInput: FC<Props> = ({
@@ -35,7 +36,8 @@ const ChipsInput: FC<Props> = ({
   isDisabled = false,
   isRequired = false,
   shouldShowCheckIcon = true,
-  variant = 'filled'
+  variant = 'filled',
+  autofocus = false
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [chips, setChips] = useState(inputState.value);
@@ -131,7 +133,6 @@ const ChipsInput: FC<Props> = ({
   );
 
   const props = {
-    id: 'custom-chips-input',
     error: shouldShowError,
     ...((variant !== 'filled') && { color: inputColor }),
     readOnly: hasMoreChipsThanAllowed,
@@ -142,6 +143,7 @@ const ChipsInput: FC<Props> = ({
     placeholder: placeholderText,
     disabled: isDisabled,
     endAdornment: endAdornment,
+    autoFocus: autofocus
   };
 
   let ElementType = StyledFilledInput;
@@ -161,7 +163,7 @@ const ChipsInput: FC<Props> = ({
       color={inputColor}
       error={shouldShowError}
     >
-      <InputLabel htmlFor='custom-chips-input'>{isRequired ? `* ${label}` : label}</InputLabel>
+      <InputLabel>{isRequired ? `* ${label}` : label}</InputLabel>
 
       {InputElement}
 

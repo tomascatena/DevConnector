@@ -24,9 +24,10 @@ type Props = {
   dispatchCreateOrUpdateProfile: (profileForm: Partial<IProfile>) => void;
   loading: boolean;
   profile?: Nullable<Partial<IProfile>>;
+  isEditing?: boolean;
 };
 
-const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profile }) => {
+const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profile, isEditing = false }) => {
   const [showSocialNetworkLinks, setShowSocialNetworkLinks] = useState(false);
 
   const initialCompanyState = { value: profile?.company || '', isValid: Boolean(profile?.company) };
@@ -116,6 +117,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         options={PROFESSIONAL_STATUS_OPTIONS}
         isDisabled={loading}
         isRequired
+        autofocus={!isEditing}
       />
 
       <CustomInput

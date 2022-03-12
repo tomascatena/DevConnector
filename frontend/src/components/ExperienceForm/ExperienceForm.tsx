@@ -70,6 +70,7 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateExperience, loading, 
         placeholder='Job Title'
         isDisabled={loading}
         isRequired
+        autofocus
       />
 
       <CustomInput
