@@ -10,6 +10,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import DashboardActions from '@components/DashboardActions/DashboardActions';
 import LinkButton from '@components/LinkButton/LinkButton';
 import CustomBackdrop from '@components/CustomBackdrop/CustomBackdrop';
+import ExperienceTimeline from '@components/ExperienceTimeline/ExperienceTimeline';
 
 export const DashboardContainer = styled(Container)(({ theme }) => ({
   color: theme.palette.primary.main,
@@ -80,6 +81,8 @@ const DashboardPage: FC<Props> = () => {
               </Typography>
 
               <DashboardActions isFetchingProfile={isFetchingProfile}/>
+
+              <ExperienceTimeline experience={profile.experience}/>
             </>
           )}
         </>

@@ -1,9 +1,9 @@
 import { useState, FC, FormEvent } from 'react';
-import { StyledForm, ButtonsBox } from './ExperienceForm.styled';
+import { StyledForm, ButtonsBox } from './EducationForm.styled';
 import { validate } from '../../utils/validator';
 import CustomInput from '@components/CustomInput/CustomInput';
 import LoadingButton from '@components/LoadingButton/LoadingButton';
-import { IExperience, Nullable } from '../../typings/types';
+import { IEducation, Nullable } from '../../typings/types';
 import { ROUTES } from '@constants/routes';
 import TwoElementsGrid from '@components/TwoElementsGrid/TwoElementsGrid';
 import LinkButton from '@components/LinkButton/LinkButton';
@@ -12,32 +12,32 @@ import CustomDatePicker from '@components/CustomDatePicker/CustomDatePicker';
 import CustomCheckbox from '@components/CustomCheckbox/CustomCheckbox';
 
 type Props = {
-  dispatchCreateOrUpdateExperience: (profileForm: Partial<IExperience>[]) => void;
+  dispatchCreateOrUpdateEducation: (profileForm: Partial<IEducation>[]) => void;
   loading: boolean;
-  experience?: Nullable<Partial<IExperience>>;
+  education?: Nullable<Partial<IEducation>>;
 };
 
-const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateExperience, loading, experience }) => {
-  const initialTitleState = { value: experience?.title || '', isValid: Boolean(experience?.title) };
-  const initialCompanyState = { value: experience?.company || '', isValid: Boolean(experience?.company) };
-  const initialLocationState = { value: experience?.location || '', isValid: Boolean(experience?.location) };
-  const initialFromDateState = { value: experience?.from || null, isValid: Boolean(experience?.from) };
-  const initialToDateState = { value: experience?.from || null, isValid: Boolean(experience?.from) };
-  const initialDescriptionState = { value: experience?.description || '', isValid: Boolean(experience?.description) };
+const EducationForm: FC<Props> = ({ dispatchCreateOrUpdateEducation, loading, education }) => {
+  const initialDegreeState = { value: education?.degree || '', isValid: Boolean(education?.degree) };
+  const initialSchoolState = { value: education?.school || '', isValid: Boolean(education?.school) };
+  const initialFieldOfStudyState = { value: education?.fieldOfStudy || '', isValid: Boolean(education?.fieldOfStudy) };
+  const initialFromDateState = { value: education?.from || null, isValid: Boolean(education?.from) };
+  const initialToDateState = { value: education?.from || null, isValid: Boolean(education?.from) };
+  const initialDescriptionState = { value: education?.description || '', isValid: Boolean(education?.description) };
 
-  const [titleState, setTitleState] = useState(initialTitleState);
-  const [companyState, setCompanyState] = useState(initialCompanyState);
-  const [locationState, setLocationState] = useState(initialLocationState);
+  const [degreeState, setDegreeState] = useState(initialDegreeState);
+  const [schoolState, setSchoolState] = useState(initialSchoolState);
+  const [fieldOfStudyState, setFieldOfStudyState] = useState(initialFieldOfStudyState);
   const [fromDateState, setFromDateState] = useState(initialFromDateState);
   const [toDateState, setToDateState] = useState(initialToDateState);
   const [descriptionState, setDescriptionState] = useState(initialDescriptionState);
 
-  const [isCurrentJob, setIsCurrentJob] = useState(experience?.current || false);
+  const [isCurrent, setIsCurrent] = useState(education?.current || false);
 
   const formData = [
-    titleState,
-    companyState,
-    locationState,
+    degreeState,
+    schoolState,
+    fieldOfStudyState,
     fromDateState,
     toDateState,
     descriptionState
@@ -48,17 +48,17 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateExperience, loading, 
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const experienceForm = [{
-      title: titleState.value,
-      company: companyState.value,
-      location: locationState.value,
+    const educationForm = [{
+      degree: degreeState.value,
+      school: schoolState.value,
+      fieldOfStudy: fieldOfStudyState.value,
       from: fromDateState.value,
       to: toDateState.value,
       description: descriptionState.value,
-      current: isCurrentJob
+      current: isCurrent
     }];
 
-    dispatchCreateOrUpdateExperience(experienceForm);
+    dispatchCreateOrUpdateEducation(educationForm);
   };
 
   return (
@@ -67,43 +67,42 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateExperience, loading, 
       onSubmit={handleFormSubmit}
     >
       <CustomInput
-        inputState={titleState}
-        setInputState={setTitleState}
-        validation={validate(titleState.value).required().isLength({ min: 3, max: 50 })}
+        inputState={degreeState}
+        setInputState={setDegreeState}
+        validation={validate(degreeState.value).required().isLength({ min: 3, max: 50 })}
         type='text'
-        label='Job Title'
-        placeholder='Job Title'
+        label='Degree Or Certificate'
+        placeholder='Degree Or Certificate'
         isDisabled={loading}
         isRequired
         autofocus
       />
 
       <CustomInput
-        inputState={companyState}
-        setInputState={setCompanyState}
-        validation={validate(companyState.value).required().isLength({ min: 3, max: 50 })}
+        inputState={schoolState}
+        setInputState={setSchoolState}
+        validation={validate(schoolState.value).required().isLength({ min: 3, max: 50 })}
         type='text'
-        label='Company'
-        placeholder='Company'
+        label='School'
+        placeholder='School'
         isDisabled={loading}
         isRequired
       />
 
       <CustomInput
-        inputState={locationState}
-        setInputState={setLocationState}
-        validation={validate(locationState.value).isLength({ min: 3, max: 50 })}
+        inputState={fieldOfStudyState}
+        setInputState={setFieldOfStudyState}
+        validation={validate(fieldOfStudyState.value).isLength({ min: 3, max: 50 })}
         type='text'
-        label='Location'
-        placeholder='Location'
-        customHelperText='City &amp; state suggested (eg. Austin, TX).'
+        label='Field Of Study'
+        placeholder='Field Of Study'
         isDisabled={loading}
       />
 
       <CustomCheckbox
-        inputState={isCurrentJob}
-        setInputState={setIsCurrentJob}
-        label='Current Job?'
+        inputState={isCurrent}
+        setInputState={setIsCurrent}
+        label='Current?'
       />
 
       <TwoElementsGrid>
@@ -114,7 +113,7 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateExperience, loading, 
           isRequired
         />
 
-        {!isCurrentJob &&
+        {!isCurrent &&
           <CustomDatePicker
             inputState={toDateState}
             setInputState={setToDateState}
@@ -128,8 +127,8 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateExperience, loading, 
         setInputState={setDescriptionState}
         validation={validate(descriptionState.value).isLength({ min: 1, max: 100 })}
         type='text'
-        label='Job Description'
-        placeholder='Job Description.'
+        label='Program Description'
+        placeholder='Program Description.'
         isMultiline
         isDisabled={loading}
       />
@@ -153,4 +152,4 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateExperience, loading, 
   );
 };
 
-export default ExperienceForm;
+export default EducationForm;

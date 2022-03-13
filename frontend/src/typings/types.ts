@@ -52,8 +52,8 @@ export interface IEducation {
   school: string;
   degree: string;
   fieldOfStudy: string;
-  from: Date;
-  to: Date;
+  from: string | null;
+  to: string | null;
   current: boolean;
   description: string;
 }

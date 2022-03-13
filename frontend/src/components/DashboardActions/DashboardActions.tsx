@@ -16,6 +16,7 @@ const DashboardActions:FC<Props> = ({ isFetchingProfile }) => {
       sx={{
         display: 'flex',
         gap: 3,
+        flexWrap: 'wrap'
       }}
     >
       <LinkButton

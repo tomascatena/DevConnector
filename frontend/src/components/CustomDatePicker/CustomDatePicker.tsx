@@ -1,7 +1,7 @@
-import React, { FC, Dispatch, SetStateAction, useState, useEffect } from 'react';
+import React, { FC, Dispatch, SetStateAction, useState, useEffect, ChangeEvent } from 'react';
 import { DatePicker } from '@mui/lab';
 import { TextField, InputAdornment, Box } from '@mui/material';
-import { formatISO, isValid, subYears, parse, isBefore, isFuture } from 'date-fns';
+import { formatISO, isValid, subYears, parse, isBefore, isAfter } from 'date-fns';
 import CheckIcon from '@mui/icons-material/Check';
 
 interface FormFieldState {
@@ -47,9 +47,16 @@ const CustomDatePicker:FC<Props> = ({
   const [helperText, setHelperText] = useState('');
 
   const handleDateChange = (newDate: Date | null) => {
+    const isValidDate = Boolean(newDate) && isValid(newDate);
+    setHasError(!isValidDate);
+
+    if (isValidDate) {
+      setHelperText('');
+    }
+
     setInputState({
-      ...inputState,
       value: newDate && isValid(newDate) ? formatISO(newDate) : null,
+      isValid: isValidDate
     });
   };
 
@@ -70,18 +77,18 @@ const CustomDatePicker:FC<Props> = ({
 
     setInputState({
       ...inputState,
-      isValid: isValidDate
+      isValid: isValidDate,
     });
   };
 
-  const handleInputChange = (event:any) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const parsedDate = parse(event.target.value, 'dd/MM/yyyy', new Date());
-    const isValidDate = isValid(parsedDate) && !isBefore(parsedDate, MIN_DATE) && !isFuture(parsedDate);
+    const isValidDate = isValid(parsedDate) && !isBefore(parsedDate, MIN_DATE) && !isAfter(parsedDate, TODAY_DATE);
 
     let text = INVALID_DATE_MESSAGE;
     if (isBefore(parsedDate, MIN_DATE)) {
       text = INVALID_DATE_MESSAGE_PAST;
-    } else if (isFuture(parsedDate)) {
+    } else if (isAfter(parsedDate, TODAY_DATE)) {
       text = INVALID_DATE_MESSAGE_FUTURE;
     }
 

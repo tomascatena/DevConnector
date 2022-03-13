@@ -31,7 +31,7 @@ const initialState: ProfileState = {
   currentRequestId: undefined,
   serverValidationErrors: null,
   error: null,
-  isFetchingProfile: false
+  isFetchingProfile: false,
 };
 
 export const profileSlice = createSlice({
@@ -63,6 +63,7 @@ export const profileSlice = createSlice({
           state.loading = false;
           state.isFetchingProfile = false;
           state.currentRequestId = undefined;
+
           if (!action.payload) {
             state.error = { message: 'Profile is empty' };
           }
@@ -108,6 +109,7 @@ export const profileSlice = createSlice({
             state.loading = false;
             state.isFetchingProfile = false;
             state.currentRequestId = undefined;
+
             if (!action.payload) {
               state.error = { message: 'Profile is empty' };
             }

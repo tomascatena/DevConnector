@@ -19,6 +19,7 @@ const LandingBox = styled(Box)(({ theme }) => ({
 const ButtonsContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   gap: theme.spacing(3),
+  color: theme.palette.common.white
 }));
 
 const LandingPage: FC = () => {
@@ -54,6 +55,7 @@ const LandingPage: FC = () => {
           component={Link}
           to={ROUTES.LOGIN}
           variant='outlined'
+          color='inherit'
         >
           Login
         </Button>
