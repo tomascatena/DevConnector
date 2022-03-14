@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, FormEvent } from 'react';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import { SxProps, Theme } from '@mui/material';
@@ -12,6 +12,7 @@ type Props = {
   loadingText?: string;
   sx?: SxProps<Theme> | undefined;
   startIcon?: JSX.Element
+  onSubmit?: (e: FormEvent<HTMLFormElement>) => void
 };
 
 const CustomButton: FC<Props> = ({
@@ -22,7 +23,8 @@ const CustomButton: FC<Props> = ({
   text,
   loadingText,
   sx,
-  startIcon
+  startIcon,
+  onSubmit
 }) => {
   const loadingState = (
     <>
@@ -41,6 +43,7 @@ const CustomButton: FC<Props> = ({
       type={type}
       startIcon={startIcon}
       disabled={isDisabled || isLoading}
+      {...(type === 'submit' ? onSubmit : undefined)}
     >
       {isLoading ? loadingState : <>{text}</>}
     </Button>

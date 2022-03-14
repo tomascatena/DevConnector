@@ -1,10 +1,10 @@
 import React,
 {
+  FC,
   useState,
   Dispatch,
   SetStateAction,
   useEffect,
-  forwardRef
 } from 'react';
 import {
   InputLabel,
@@ -44,7 +44,7 @@ type Props = {
   name?: string
 };
 
-const CustomSelect = forwardRef<any, Props>(({
+const CustomSelect:FC<Props> = ({
   inputState,
   setInputState,
   label,
@@ -58,7 +58,7 @@ const CustomSelect = forwardRef<any, Props>(({
   variant = 'filled',
   autofocus = false,
   name
-}, ref) => {
+}) => {
   const [isClose, setIsClose] = useState(false);
 
   const { isValid, validationErrors } = validation.exec();
@@ -153,7 +153,6 @@ const CustomSelect = forwardRef<any, Props>(({
 
       <Select
         name={name}
-        inputRef={ref}
         error={shouldShowError}
         {...((variant !== 'filled') && { color: inputColor })}
         value={inputState.value}
@@ -173,13 +172,11 @@ const CustomSelect = forwardRef<any, Props>(({
       <CustomFormHelperText />
     </FormControl>
   );
-});
+};
 
 const areEqualProps = (prevProps: Props, nextProps: Props): boolean => {
   return prevProps.inputState === nextProps.inputState &&
     prevProps.isDisabled === nextProps.isDisabled;
 };
-
-CustomSelect.displayName = 'CustomSelect';
 
 export default React.memo(CustomSelect, areEqualProps);

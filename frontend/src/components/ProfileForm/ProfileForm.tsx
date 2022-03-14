@@ -19,6 +19,7 @@ import { IProfile, Nullable } from '../../typings/types';
 import { ROUTES } from '@constants/routes';
 import LinkButton from '@components/LinkButton/LinkButton';
 import SaveIcon from '@mui/icons-material/Save';
+import useFocusOnEnter from '../../hooks/useFocusOnEnter';
 
 type Props = {
   dispatchCreateOrUpdateProfile: (profileForm: Partial<IProfile>) => void;
@@ -30,8 +31,8 @@ type Props = {
 const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profile, isEditing = false }) => {
   const [showSocialNetworkLinks, setShowSocialNetworkLinks] = useState(false);
 
-  const statusRef = useRef(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const { onEnterKey } = useFocusOnEnter(formRef);
 
   const initialCompanyState = { value: profile?.company || '', isValid: Boolean(profile?.company) };
   const initialWebsiteState = { value: profile?.website || '', isValid: Boolean(profile?.website) };
@@ -111,6 +112,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
     <StyledForm
       ref={formRef}
       noValidate
+      onKeyUp={onEnterKey}
       onSubmit={handleFormSubmit}
     >
       <TextWithIcon
@@ -120,7 +122,6 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
 
       <CustomSelect
         name='status'
-        ref={statusRef}
         inputState={statusState}
         setInputState={setStatusState}
         label='Select Your Professional Status'
@@ -301,7 +302,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
           variant='contained'
           isDisabled={isButtonDisabled}
           isLoading={loading}
-          type='submit'
+          type='button'
           text='Save'
           startIcon={<SaveIcon/>}
         />
