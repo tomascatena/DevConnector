@@ -11,6 +11,7 @@ import DashboardActions from '@components/DashboardActions/DashboardActions';
 import LinkButton from '@components/LinkButton/LinkButton';
 import CustomBackdrop from '@components/CustomBackdrop/CustomBackdrop';
 import ExperienceTimeline from '@components/ExperienceTimeline/ExperienceTimeline';
+import EducationList from '@components/EducationList/EducationList';
 
 export const DashboardContainer = styled(Container)(({ theme }) => ({
   color: theme.palette.primary.main,
@@ -19,6 +20,7 @@ export const DashboardContainer = styled(Container)(({ theme }) => ({
   alignItems: 'flex-start',
   gap: theme.spacing(3),
   marginTop: theme.spacing(4),
+  marginBottom: theme.spacing(7),
 }));
 
 type Props = {};
@@ -83,6 +85,8 @@ const DashboardPage: FC<Props> = () => {
               <DashboardActions isFetchingProfile={isFetchingProfile}/>
 
               <ExperienceTimeline experience={profile.experience}/>
+
+              <EducationList education={profile.education}/>
             </>
           )}
         </>

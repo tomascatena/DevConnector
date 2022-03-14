@@ -123,3 +123,55 @@ export const addOrUpdateProfileEducation = createAsyncThunk<
     }
   }
 );
+
+export const deleteProfileExperience = createAsyncThunk<
+  IProfile,
+  string,
+  { state: RootState; rejectValue: RejectValue }
+>(
+  'profile/deleteProfileExperience',
+  async (experienceId, { getState, requestId, rejectWithValue }) => {
+    const { loading, currentRequestId } = getState().profile;
+
+    if (!loading || requestId !== currentRequestId) {
+      return;
+    }
+
+    try {
+      const URL = `${API_ENDPOINTS.CREATE_OR_UPDATE_PROFILE_EXPERIENCE}/${experienceId}`;
+      const response = await axios.delete(URL);
+
+      return response.data.profile;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data);
+      }
+    }
+  }
+);
+
+export const deleteProfileEducation = createAsyncThunk<
+  IProfile,
+  string,
+  { state: RootState; rejectValue: RejectValue }
+>(
+  'profile/deleteProfileEducation',
+  async (educationId, { getState, requestId, rejectWithValue }) => {
+    const { loading, currentRequestId } = getState().profile;
+
+    if (!loading || requestId !== currentRequestId) {
+      return;
+    }
+
+    try {
+      const URL = `${API_ENDPOINTS.CREATE_OR_UPDATE_PROFILE_EDUCATION}/${educationId}`;
+      const response = await axios.delete(URL);
+
+      return response.data.profile;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data);
+      }
+    }
+  }
+);

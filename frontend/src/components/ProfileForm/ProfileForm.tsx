@@ -1,4 +1,4 @@
-import { useState, FC, FormEvent } from 'react';
+import { useState, FC, FormEvent, useRef, useEffect } from 'react';
 import { Typography, Button, Collapse } from '@mui/material';
 import { StyledForm, ButtonsBox, SocialNetworkLinksBox, ShowSocialNetworkLinksBox } from './ProfileForm.styled';
 import PersonIcon from '@mui/icons-material/Person';
@@ -29,6 +29,9 @@ type Props = {
 
 const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profile, isEditing = false }) => {
   const [showSocialNetworkLinks, setShowSocialNetworkLinks] = useState(false);
+
+  const statusRef = useRef(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const initialCompanyState = { value: profile?.company || '', isValid: Boolean(profile?.company) };
   const initialWebsiteState = { value: profile?.website || '', isValid: Boolean(profile?.website) };
@@ -98,8 +101,15 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
     dispatchCreateOrUpdateProfile(profileForm);
   };
 
+  useEffect(() => {
+    if (formRef.current && formRef.current[1]) {
+      (formRef.current[1] as HTMLInputElement).focus();
+    }
+  }, []);
+
   return (
     <StyledForm
+      ref={formRef}
       noValidate
       onSubmit={handleFormSubmit}
     >
@@ -109,6 +119,8 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
       />
 
       <CustomSelect
+        name='status'
+        ref={statusRef}
         inputState={statusState}
         setInputState={setStatusState}
         label='Select Your Professional Status'

@@ -3,8 +3,8 @@ import { Container, Paper } from '@mui/material';
 
 export const EditProfileContainer = styled(Container)(({ theme }) => ({
   color: theme.palette.primary.main,
-  marginTop: theme.spacing(4),
-  marginBottom: theme.spacing(8),
+  marginTop: theme.spacing(7),
+  marginBottom: theme.spacing(7),
 }));
 
 export const EditProfilePaper = styled(Paper)(({ theme }) => ({

@@ -9,7 +9,9 @@ import {
   getCurrentUserProfile,
   createOrUpdateProfile,
   addOrUpdateProfileEducation,
-  addOrUpdateProfileExperience
+  addOrUpdateProfileExperience,
+  deleteProfileEducation,
+  deleteProfileExperience
 } from './profile.thunk';
 
 export interface ProfileState {
@@ -84,7 +86,9 @@ export const profileSlice = createSlice({
         isAnyOf(
           createOrUpdateProfile.pending,
           addOrUpdateProfileExperience.pending,
-          addOrUpdateProfileEducation.pending
+          addOrUpdateProfileEducation.pending,
+          deleteProfileExperience.pending,
+          deleteProfileEducation.pending
         ),
         (state, action) => {
           if (!state.loading) {
@@ -100,7 +104,9 @@ export const profileSlice = createSlice({
         isAnyOf(
           createOrUpdateProfile.fulfilled,
           addOrUpdateProfileExperience.fulfilled,
-          addOrUpdateProfileEducation.fulfilled
+          addOrUpdateProfileEducation.fulfilled,
+          deleteProfileExperience.fulfilled,
+          deleteProfileEducation.fulfilled
         ),
         (state, action) => {
           const { requestId } = action.meta;
@@ -119,7 +125,9 @@ export const profileSlice = createSlice({
         isAnyOf(
           createOrUpdateProfile.rejected,
           addOrUpdateProfileExperience.rejected,
-          addOrUpdateProfileEducation.rejected
+          addOrUpdateProfileEducation.rejected,
+          deleteProfileExperience.rejected,
+          deleteProfileEducation.rejected
         ),
         (state, action) => {
           const { requestId } = action.meta;

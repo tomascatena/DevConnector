@@ -1,4 +1,11 @@
-import React, { FC, useState, Dispatch, SetStateAction, useEffect } from 'react';
+import React,
+{
+  useState,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  forwardRef
+} from 'react';
 import {
   InputLabel,
   InputAdornment,
@@ -33,10 +40,11 @@ type Props = {
   isRequired?: boolean;
   defaultOption?: string;
   variant?: 'outlined' | 'filled' | 'standard',
-  autofocus?: boolean
+  autofocus?: boolean;
+  name?: string
 };
 
-const CustomSelect: FC<Props> = ({
+const CustomSelect = forwardRef<any, Props>(({
   inputState,
   setInputState,
   label,
@@ -48,8 +56,9 @@ const CustomSelect: FC<Props> = ({
   isRequired = false,
   defaultOption = 'Please choose one...',
   variant = 'filled',
-  autofocus = false
-}) => {
+  autofocus = false,
+  name
+}, ref) => {
   const [isClose, setIsClose] = useState(false);
 
   const { isValid, validationErrors } = validation.exec();
@@ -143,6 +152,8 @@ const CustomSelect: FC<Props> = ({
       <InputLabel>{isRequired ? `* ${label}` : label}</InputLabel>
 
       <Select
+        name={name}
+        inputRef={ref}
         error={shouldShowError}
         {...((variant !== 'filled') && { color: inputColor })}
         value={inputState.value}
@@ -162,11 +173,13 @@ const CustomSelect: FC<Props> = ({
       <CustomFormHelperText />
     </FormControl>
   );
-};
+});
 
 const areEqualProps = (prevProps: Props, nextProps: Props): boolean => {
   return prevProps.inputState === nextProps.inputState &&
     prevProps.isDisabled === nextProps.isDisabled;
 };
+
+CustomSelect.displayName = 'CustomSelect';
 
 export default React.memo(CustomSelect, areEqualProps);

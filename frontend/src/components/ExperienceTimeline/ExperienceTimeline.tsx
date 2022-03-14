@@ -1,4 +1,4 @@
-import Experience from '@components/Experience/Experience';
+import ExperienceItem from '@components/ExperienceItem/ExperienceItem';
 import React, { FC } from 'react';
 import { IExperience } from '../../typings/types';
 import { Typography, Grid } from '@mui/material';
@@ -12,7 +12,7 @@ const ExperienceTimeline:FC<Props> = ({ experience }) => {
   return (
     <>
       <Typography variant='h5'>
-        Experience
+        Experience Credentials
       </Typography>
 
       <Grid container>
@@ -22,10 +22,10 @@ const ExperienceTimeline:FC<Props> = ({ experience }) => {
           md={8}
         >
           <Timeline sx={{ width: '100%' }}>
-            {experience.map((experience, index) =>
-              <Experience
+            {experience.map((experienceItem, index) =>
+              <ExperienceItem
                 key={index}
-                experience={experience}
+                experience={experienceItem}
               />
             )}
           </Timeline>

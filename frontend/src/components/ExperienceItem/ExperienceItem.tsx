@@ -18,7 +18,7 @@ type Props = {
   experience: IExperience
 }
 
-const Experience:FC<Props> = ({ experience }) => {
+const ExperienceItem:FC<Props> = ({ experience }) => {
   return (
     <TimelineItem>
       <TimelineOppositeContent
@@ -54,7 +54,7 @@ const Experience:FC<Props> = ({ experience }) => {
             </Box>
 
             <Box sx={{ display: 'flex', gap: 2, alignItems: 'baseline' }}>
-              <Tooltip title="Edit Experience">
+              <Tooltip title="Edit Item">
                 <IconButton aria-label="edit">
                   <EditIcon />
                 </IconButton>
@@ -84,4 +84,4 @@ const Experience:FC<Props> = ({ experience }) => {
   );
 };
 
-export default Experience;
+export default ExperienceItem;
