@@ -17,9 +17,26 @@ import {
 type Props = {
   experience: IExperience;
   setSelectedExperience: Dispatch<SetStateAction<Nullable<Partial<IExperience>>>>
+  setOpenEditDialog: Dispatch<SetStateAction<boolean>>
+  setOpenDeleteDialog: Dispatch<SetStateAction<boolean>>
 }
 
-const ExperienceItem:FC<Props> = ({ experience, setSelectedExperience }) => {
+const ExperienceItem:FC<Props> = ({
+  experience,
+  setSelectedExperience,
+  setOpenEditDialog,
+  setOpenDeleteDialog
+}) => {
+  const handleEditExperience = () => {
+    setSelectedExperience(experience);
+    setOpenEditDialog(true);
+  };
+
+  const handleDeleteExperience = () => {
+    setSelectedExperience(experience);
+    setOpenDeleteDialog(true);
+  };
+
   return (
     <TimelineItem>
       <TimelineOppositeContent
@@ -57,7 +74,7 @@ const ExperienceItem:FC<Props> = ({ experience, setSelectedExperience }) => {
             <Box sx={{ display: 'flex', gap: 2, alignItems: 'baseline' }}>
               <Tooltip title="Edit Item">
                 <IconButton
-                  onClick={() => setSelectedExperience(experience)}
+                  onClick={handleEditExperience}
                   aria-label="edit"
                 >
                   <EditIcon />
@@ -66,7 +83,7 @@ const ExperienceItem:FC<Props> = ({ experience, setSelectedExperience }) => {
 
               <Tooltip title="Delete Experience">
                 <IconButton
-                  onClick={() => setSelectedExperience(experience)}
+                  onClick={handleDeleteExperience}
                   aria-label="delete"
                 >
                   <DeleteIcon />

@@ -17,7 +17,7 @@ type Props = {
   loading: boolean;
   experience?: Nullable<Partial<IExperience>>;
   isDialog?: boolean;
-  setOpen?: Dispatch<SetStateAction<boolean>>;
+  setOpenDialog?: Dispatch<SetStateAction<boolean>>;
 };
 
 const ExperienceForm: FC<Props> = ({
@@ -25,7 +25,7 @@ const ExperienceForm: FC<Props> = ({
   loading,
   experience,
   isDialog = false,
-  setOpen
+  setOpenDialog
 }) => {
   const initialTitleState = { value: experience?.title || '', isValid: Boolean(experience?.title) };
   const initialCompanyState = { value: experience?.company || '', isValid: Boolean(experience?.company) };
@@ -67,8 +67,6 @@ const ExperienceForm: FC<Props> = ({
       description: descriptionState.value,
       current: isCurrentJob
     };
-
-    console.log(experienceForm);
 
     dispatchCreateOrUpdateExperience(experienceForm);
   };
@@ -157,8 +155,8 @@ const ExperienceForm: FC<Props> = ({
         />
 
         {
-          isDialog && setOpen ? (
-            <Button onClick={() => setOpen(false)}>Cancel</Button>
+          isDialog && setOpenDialog ? (
+            <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
           ) : (
             <LinkButton to={ROUTES.DASHBOARD}>
               Go To Dashboard

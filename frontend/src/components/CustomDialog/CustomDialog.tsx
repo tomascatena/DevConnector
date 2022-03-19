@@ -2,20 +2,20 @@ import React, { FC, Dispatch, SetStateAction, ReactNode } from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 
 type Props = {
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  isDialogOpen: boolean;
+  setOpenDialog: Dispatch<SetStateAction<boolean>>;
   children: ReactNode;
   title: string;
 }
 
-const CustomDialog:FC<Props> = ({ open, setOpen, children, title }) => {
+const CustomDialog:FC<Props> = ({ isDialogOpen, setOpenDialog, children, title }) => {
   const handleClose = () => {
-    setOpen(false);
+    setOpenDialog(false);
   };
 
   return (
     <Dialog
-      open={open}
+      open={isDialogOpen}
       onClose={handleClose}
       scroll='body'
       PaperProps={{
