@@ -1,6 +1,10 @@
 import { styled } from '@mui/system';
 import { Box } from '@mui/material';
 
+interface ButtonsBoxProps {
+  isDialog?: boolean;
+}
+
 export const StyledForm = styled('form')(({ theme }) => ({
   flexDirection: 'column',
   display: 'flex',
@@ -9,8 +13,13 @@ export const StyledForm = styled('form')(({ theme }) => ({
   gap: theme.spacing(3),
 }));
 
-export const ButtonsBox = styled(Box)(({ theme }) => ({
+export const ButtonsBox = styled(Box, {
+  shouldForwardProp: (props) => {
+    return props !== 'isDialog';
+  },
+})<ButtonsBoxProps>(({ theme, isDialog }) => ({
   display: 'flex',
+  flexDirection: isDialog ? 'row-reverse' : 'row',
   gap: theme.spacing(4),
   marginTop: theme.spacing(5),
 }));

@@ -140,7 +140,7 @@ export const addProfileEducation = createAsyncThunk<
     try {
       const response = await axios.post(
         API_ENDPOINTS.CREATE_OR_UPDATE_PROFILE_EDUCATION,
-        { profile: { education: userProfileEducation } }
+        { education: userProfileEducation }
       );
 
       return response.data.profile;
@@ -168,7 +168,7 @@ export const updateProfileEducation = createAsyncThunk<
     try {
       const response = await axios.put(
         API_ENDPOINTS.CREATE_OR_UPDATE_PROFILE_EDUCATION,
-        { profile: { education: userProfileEducation } }
+        { education: userProfileEducation }
       );
 
       return response.data.profile;

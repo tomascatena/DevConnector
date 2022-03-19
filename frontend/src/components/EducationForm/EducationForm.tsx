@@ -1,4 +1,4 @@
-import { useState, FC, FormEvent } from 'react';
+import { useState, FC, FormEvent, Dispatch, SetStateAction } from 'react';
 import { StyledForm, ButtonsBox } from './EducationForm.styled';
 import { validate } from '../../utils/validator';
 import CustomInput from '@components/CustomInput/CustomInput';
@@ -10,14 +10,23 @@ import LinkButton from '@components/LinkButton/LinkButton';
 import SaveIcon from '@mui/icons-material/Save';
 import CustomDatePicker from '@components/CustomDatePicker/CustomDatePicker';
 import CustomCheckbox from '@components/CustomCheckbox/CustomCheckbox';
+import { Button } from '@mui/material';
 
 type Props = {
-  dispatchCreateOrUpdateEducation: (profileForm: Partial<IEducation>) => void;
+  dispatchCreateOrUpdateEducation: (educationForm: Partial<IEducation>) => void;
   loading: boolean;
   education?: Nullable<Partial<IEducation>>;
+  isDialog?: boolean;
+  setOpenDialog?: Dispatch<SetStateAction<boolean>>;
 };
 
-const EducationForm: FC<Props> = ({ dispatchCreateOrUpdateEducation, loading, education }) => {
+const EducationForm: FC<Props> = ({
+  dispatchCreateOrUpdateEducation,
+  loading,
+  education,
+  isDialog = false,
+  setOpenDialog
+}) => {
   const initialDegreeState = { value: education?.degree || '', isValid: Boolean(education?.degree) };
   const initialSchoolState = { value: education?.school || '', isValid: Boolean(education?.school) };
   const initialFieldOfStudyState = { value: education?.fieldOfStudy || '', isValid: Boolean(education?.fieldOfStudy) };
@@ -49,6 +58,7 @@ const EducationForm: FC<Props> = ({ dispatchCreateOrUpdateEducation, loading, ed
     event.preventDefault();
 
     const educationForm = {
+      _id: education?._id,
       degree: degreeState.value,
       school: schoolState.value,
       fieldOfStudy: fieldOfStudyState.value,
@@ -75,7 +85,6 @@ const EducationForm: FC<Props> = ({ dispatchCreateOrUpdateEducation, loading, ed
         placeholder='Degree Or Certificate'
         isDisabled={loading}
         isRequired
-        autofocus
       />
 
       <CustomInput
@@ -133,7 +142,7 @@ const EducationForm: FC<Props> = ({ dispatchCreateOrUpdateEducation, loading, ed
         isDisabled={loading}
       />
 
-      <ButtonsBox>
+      <ButtonsBox isDialog={isDialog}>
         <LoadingButton
           sx={{ maxWidth: { sm: '10rem' } }}
           variant='contained'
@@ -144,9 +153,15 @@ const EducationForm: FC<Props> = ({ dispatchCreateOrUpdateEducation, loading, ed
           startIcon={<SaveIcon/>}
         />
 
-        <LinkButton to={ROUTES.DASHBOARD}>
-          Go To Dashboard
-        </LinkButton>
+        {
+          isDialog && setOpenDialog ? (
+            <Button onClick={() => setOpenDialog(false)}>Cancel</Button>
+          ) : (
+            <LinkButton to={ROUTES.DASHBOARD}>
+              Go To Dashboard
+            </LinkButton>
+          )
+        }
       </ButtonsBox>
     </StyledForm>
   );

@@ -24,20 +24,14 @@ const ExperienceTimeline:FC<Props> = ({ experience }) => {
   const dispatchCreateOrUpdateExperience = (
     experienceForm: Partial<IExperience>
   ) => {
-    dispatch(updateProfileExperience(experienceForm)).then(() => {
-      setOpenEditDialog(false);
-      setSelectedExperience(null);
-    });
+    dispatch(updateProfileExperience(experienceForm));
   };
 
   const dispatchDeleteExperience = (
     experienceId: string | undefined
   ) => {
     if (experienceId) {
-      dispatch(deleteProfileExperience(experienceId)).then(() => {
-        setOpenDeleteDialog(false);
-        setSelectedExperience(null);
-      });
+      dispatch(deleteProfileExperience(experienceId));
     }
   };
 
@@ -53,47 +47,53 @@ const ExperienceTimeline:FC<Props> = ({ experience }) => {
           xs={12}
           md={8}
         >
-          <Timeline sx={{ width: '100%' }}>
-            {experience.map((experienceItem, index) =>
-              <ExperienceItem
-                key={index}
-                experience={experienceItem}
-                setSelectedExperience={setSelectedExperience}
-                setOpenEditDialog={setOpenEditDialog}
-                setOpenDeleteDialog={setOpenDeleteDialog}
-              />
-            )}
-          </Timeline>
+          {
+          experience.length
+            ? (
+              <Timeline sx={{ width: '100%' }}>
+                {experience.map((experienceItem) =>
+                  <ExperienceItem
+                    key={experienceItem._id}
+                    experience={experienceItem}
+                    setSelectedExperience={setSelectedExperience}
+                    setOpenEditDialog={setOpenEditDialog}
+                    setOpenDeleteDialog={setOpenDeleteDialog}
+                  />
+                )}
+              </Timeline>
+              )
+            : <Typography color='text.primary'>No experience credentials to show.</Typography>
+          }
         </Grid>
-
-        <CustomDialog
-          isDialogOpen={openEditDialog}
-          setOpenDialog={setOpenEditDialog}
-          title='Edit Experience'
-        >
-          <ExperienceForm
-            dispatchCreateOrUpdateExperience={dispatchCreateOrUpdateExperience}
-            loading={loading}
-            isDialog
-            setOpenDialog={setOpenEditDialog}
-            experience={selectedExperience}
-          />
-        </CustomDialog>
-
-        <CustomModalDialog
-          isDialogOpen={openDeleteDialog}
-          dialogTitle='Delete Experience'
-          setOpenDialog={setOpenDeleteDialog}
-          buttonText='Delete'
-          onButtonClick={() => dispatchDeleteExperience(selectedExperience?._id)}
-          buttonColor='error'
-        >
-          <div>
-            Confirm delete experience from profile?<br/>
-            This operation cannot be undone.
-          </div>
-        </CustomModalDialog>
       </Grid>
+
+      <CustomDialog
+        isDialogOpen={openEditDialog}
+        setOpenDialog={setOpenEditDialog}
+        title='Edit Experience'
+      >
+        <ExperienceForm
+          dispatchCreateOrUpdateExperience={dispatchCreateOrUpdateExperience}
+          loading={loading}
+          isDialog
+          setOpenDialog={setOpenEditDialog}
+          experience={selectedExperience}
+        />
+      </CustomDialog>
+
+      <CustomModalDialog
+        isDialogOpen={openDeleteDialog}
+        dialogTitle='Delete Experience'
+        setOpenDialog={setOpenDeleteDialog}
+        buttonText='Delete'
+        onButtonClick={() => dispatchDeleteExperience(selectedExperience?._id)}
+        buttonColor='error'
+      >
+        <div>
+          Confirm delete experience from profile?<br/>
+          This operation cannot be undone.
+        </div>
+      </CustomModalDialog>
     </>
   );
 };

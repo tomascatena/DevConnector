@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { IEducation } from '../../typings/types';
+import React, { FC, Dispatch, SetStateAction } from 'react';
+import { IEducation, Nullable } from '../../typings/types';
 import { Typography, Box, Tooltip } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -7,10 +7,28 @@ import EditIcon from '@mui/icons-material/Edit';
 import { duration, formatDate } from '@utils/dateTime';
 
 type Props = {
-  education: IEducation
+  education: IEducation;
+  setSelectedEducation: Dispatch<SetStateAction<Nullable<Partial<IEducation>>>>
+  setOpenEditDialog: Dispatch<SetStateAction<boolean>>
+  setOpenDeleteDialog: Dispatch<SetStateAction<boolean>>
 }
 
-const EducationItem:FC<Props> = ({ education }) => {
+const EducationItem:FC<Props> = ({
+  education,
+  setSelectedEducation,
+  setOpenEditDialog,
+  setOpenDeleteDialog
+}) => {
+  const handleEditExperience = () => {
+    setSelectedEducation(education);
+    setOpenEditDialog(true);
+  };
+
+  const handleDeleteExperience = () => {
+    setSelectedEducation(education);
+    setOpenDeleteDialog(true);
+  };
+
   return (
     <Box sx={{ color: 'text.primary', mb: 3, flex: 1 }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -26,12 +44,18 @@ const EducationItem:FC<Props> = ({ education }) => {
 
         <Box sx={{ display: 'flex', gap: 2, alignItems: 'baseline' }}>
           <Tooltip title="Edit Education">
-            <IconButton aria-label="edit">
+            <IconButton
+              onClick={handleEditExperience}
+              aria-label="edit"
+            >
               <EditIcon />
             </IconButton>
           </Tooltip>
 
-          <Tooltip title="Delete Education">
+          <Tooltip
+            onClick={handleDeleteExperience}
+            title="Delete Education"
+          >
             <IconButton aria-label="delete">
               <DeleteIcon />
             </IconButton>

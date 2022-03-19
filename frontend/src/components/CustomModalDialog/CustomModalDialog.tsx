@@ -1,23 +1,13 @@
 import React, { FC, ReactNode, Dispatch, SetStateAction } from 'react';
 import {
   Button,
-  Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
   IconButton
 } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
-
-const CustomDialog = styled(Dialog)(({ theme }) => ({
-  '& .MuiDialogContent-root': {
-    padding: theme.spacing(2),
-  },
-  '& .MuiDialogActions-root': {
-    padding: theme.spacing(1),
-  },
-}));
+import { StyledDialog } from './CustomModalDialog.styled';
 
 export interface Props {
   children: ReactNode;
@@ -36,16 +26,15 @@ const CustomModalDialog:FC<Props> = ({
   setOpenDialog,
   isDialogOpen,
   onButtonClick,
-  buttonColor = 'primary'
+  buttonColor = 'inherit'
 }) => {
   const handleClose = () => {
     setOpenDialog(false);
   };
 
   return (
-    <CustomDialog
+    <StyledDialog
       onClose={handleClose}
-      aria-labelledby="customized-dialog-title"
       open={isDialogOpen}
     >
       <DialogTitle
@@ -79,7 +68,7 @@ const CustomModalDialog:FC<Props> = ({
           {buttonText}
         </Button>
       </DialogActions>
-    </CustomDialog>
+    </StyledDialog>
   );
 };
 
