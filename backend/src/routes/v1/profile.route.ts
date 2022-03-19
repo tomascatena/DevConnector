@@ -50,14 +50,24 @@ router.delete(
   profileControllers.deleteProfile
 );
 
+// @route     POST api/v1/profile/experience
+// @desc      Add profile experience
+// @access    Private
+router.post(
+  '/experience',
+  profileValidation.addProfileExperience,
+  requireAuth,
+  profileControllers.addProfileExperience
+);
+
 // @route     PUT api/v1/profile/experience
-// @desc      Add/Update profile experience
+// @desc      Update profile experience
 // @access    Private
 router.put(
   '/experience',
-  profileValidation.profileExperience,
+  profileValidation.updateProfileExperience,
   requireAuth,
-  profileControllers.profileExperience
+  profileControllers.updateProfileExperience
 );
 
 // @route     DELETE api/v1/profile/experience/:experienceId
@@ -70,14 +80,24 @@ router.delete(
   profileControllers.deleteProfileExperience
 );
 
+// @route     POST api/v1/profile/education
+// @desc      Add profile education
+// @access    Private
+router.post(
+  '/education',
+  profileValidation.addProfileEducation,
+  requireAuth,
+  profileControllers.addProfileEducation
+);
+
 // @route     PUT api/v1/profile/education
-// @desc      Add/Update profile education
+// @desc      Update profile education
 // @access    Private
 router.put(
   '/education',
-  profileValidation.profileEducation,
+  profileValidation.updateProfileEducation,
   requireAuth,
-  profileControllers.profileEducation
+  profileControllers.updateProfileEducation
 );
 
 // @route     DELETE api/v1/profile/education/:educationId

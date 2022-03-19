@@ -1,6 +1,7 @@
-import { Schema } from 'mongoose';
+import { ObjectId, Schema } from 'mongoose';
 
 export interface IExperience {
+  _id: ObjectId;
   title: string;
   company: string;
   location: string;

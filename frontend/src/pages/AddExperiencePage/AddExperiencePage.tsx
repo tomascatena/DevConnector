@@ -4,7 +4,7 @@ import { ROUTES } from '@constants/routes';
 import { useNavigate } from 'react-router';
 import { IExperience } from '../../typings/types';
 import {
-  addOrUpdateProfileExperience,
+  addProfileExperience,
   getCurrentUserProfile
 } from '@store/features/profile/profile.thunk';
 import { AddExperienceContainer, AddExperiencePaper } from './AddExperiencePage.styled';
@@ -23,9 +23,9 @@ const AddExperiencePage:FC<Props> = () => {
   const navigate = useNavigate();
 
   const dispatchCreateOrUpdateExperience = (
-    experienceForm: Partial<IExperience>[]
+    experienceForm: Partial<IExperience>
   ) => {
-    dispatch(addOrUpdateProfileExperience(experienceForm)).then(() => {
+    dispatch(addProfileExperience(experienceForm)).then(() => {
       navigate(ROUTES.DASHBOARD);
     });
   };

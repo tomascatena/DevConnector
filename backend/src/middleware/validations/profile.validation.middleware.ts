@@ -17,8 +17,14 @@ export const userProfile = [
   validationsResults(),
 ];
 
-export const profileExperience = [
+export const addProfileExperience = [
   ...validators.experience,
+  validationsResults(),
+];
+
+export const updateProfileExperience = [
+  ...validators.experience,
+  validators.experienceId,
   validationsResults(),
 ];
 
@@ -27,8 +33,14 @@ export const deleteProfileExperience = [
   validationsResults(),
 ];
 
-export const profileEducation = [
+export const addProfileEducation = [
   ...validators.education, //
+  validationsResults(),
+];
+
+export const updateProfileEducation = [
+  ...validators.education, //
+  validators.educationId,
   validationsResults(),
 ];
 

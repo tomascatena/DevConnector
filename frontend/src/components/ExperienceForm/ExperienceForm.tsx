@@ -1,4 +1,4 @@
-import { useState, FC, FormEvent } from 'react';
+import { useState, FC, FormEvent, Dispatch, SetStateAction } from 'react';
 import { StyledForm, ButtonsBox } from './ExperienceForm.styled';
 import { validate } from '../../utils/validator';
 import CustomInput from '@components/CustomInput/CustomInput';
@@ -10,14 +10,23 @@ import LinkButton from '@components/LinkButton/LinkButton';
 import SaveIcon from '@mui/icons-material/Save';
 import CustomDatePicker from '@components/CustomDatePicker/CustomDatePicker';
 import CustomCheckbox from '@components/CustomCheckbox/CustomCheckbox';
+import { Button } from '@mui/material';
 
 type Props = {
-  dispatchCreateOrUpdateExperience: (profileForm: Partial<IExperience>[]) => void;
+  dispatchCreateOrUpdateExperience: (profileForm: Partial<IExperience>) => void;
   loading: boolean;
   experience?: Nullable<Partial<IExperience>>;
+  isDialog?: boolean;
+  setOpen?: Dispatch<SetStateAction<boolean>>;
 };
 
-const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateExperience, loading, experience }) => {
+const ExperienceForm: FC<Props> = ({
+  dispatchCreateOrUpdateExperience,
+  loading,
+  experience,
+  isDialog = false,
+  setOpen
+}) => {
   const initialTitleState = { value: experience?.title || '', isValid: Boolean(experience?.title) };
   const initialCompanyState = { value: experience?.company || '', isValid: Boolean(experience?.company) };
   const initialLocationState = { value: experience?.location || '', isValid: Boolean(experience?.location) };
@@ -48,7 +57,8 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateExperience, loading, 
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const experienceForm = [{
+    const experienceForm = {
+      _id: experience?._id,
       title: titleState.value,
       company: companyState.value,
       location: locationState.value,
@@ -56,7 +66,9 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateExperience, loading, 
       to: toDateState.value,
       description: descriptionState.value,
       current: isCurrentJob
-    }];
+    };
+
+    console.log(experienceForm);
 
     dispatchCreateOrUpdateExperience(experienceForm);
   };
@@ -75,7 +87,6 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateExperience, loading, 
         placeholder='Job Title'
         isDisabled={loading}
         isRequired
-        autofocus
       />
 
       <CustomInput
@@ -134,7 +145,7 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateExperience, loading, 
         isDisabled={loading}
       />
 
-      <ButtonsBox>
+      <ButtonsBox isDialog={isDialog}>
         <LoadingButton
           sx={{ maxWidth: { sm: '10rem' } }}
           variant='contained'
@@ -145,9 +156,15 @@ const ExperienceForm: FC<Props> = ({ dispatchCreateOrUpdateExperience, loading, 
           startIcon={<SaveIcon/>}
         />
 
-        <LinkButton to={ROUTES.DASHBOARD}>
-          Go To Dashboard
-        </LinkButton>
+        {
+          isDialog && setOpen ? (
+            <Button onClick={() => setOpen(false)}>Cancel</Button>
+          ) : (
+            <LinkButton to={ROUTES.DASHBOARD}>
+              Go To Dashboard
+            </LinkButton>
+          )
+        }
       </ButtonsBox>
     </StyledForm>
   );

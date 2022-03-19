@@ -138,14 +138,14 @@ export const deleteProfile = catchAsync(
   }
 );
 
-// @route     PUT api/v1/profile/experience
-// @desc      Add/Update profile experience
+// @route     POST api/v1/profile/experience
+// @desc      Add profile experience
 // @access    Private
-export const profileExperience = catchAsync(
+export const addProfileExperience = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const { experience } = req.body.profile!;
+    const experience = req.body.experience!;
 
-    const profile = await profileService.addOrUpdateProfileExperience(
+    const profile = await profileService.addProfileExperience(
       req.userId!,
       experience
     );
@@ -159,7 +159,34 @@ export const profileExperience = catchAsync(
     }
 
     return res.status(httpStatus.CREATED).json({
-      message: 'Successfully added/updated user profile experience',
+      message: 'Successfully added user profile experience',
+      profile,
+    });
+  }
+);
+
+// @route     PUT api/v1/profile/experience
+// @desc      Update profile experience
+// @access    Private
+export const updateProfileExperience = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
+    const experience = req.body.experience!;
+
+    const profile = await profileService.updateProfileExperience(
+      req.userId!,
+      experience
+    );
+
+    if (!profile) {
+      throw new ApiError({
+        statusCode: httpStatus.BAD_REQUEST,
+        message: 'Cannot find user profile',
+        isOperational: false,
+      });
+    }
+
+    return res.status(httpStatus.CREATED).json({
+      message: 'Successfully updated user profile experience',
       profile,
     });
   }
@@ -189,14 +216,41 @@ export const deleteProfileExperience = catchAsync(
   }
 );
 
-// @route     PUT api/v1/profile/education
-// @desc      Add/Update profile education
+// @route     POST api/v1/profile/education
+// @desc      Add profile education
 // @access    Private
-export const profileEducation = catchAsync(
+export const addProfileEducation = catchAsync(
   async (req: RequestWithBody, res: Response) => {
-    const { education } = req.body.profile!;
+    const education = req.body.education!;
 
-    const profile = await profileService.addOrUpdateProfileEducation(
+    const profile = await profileService.addProfileEducation(
+      req.userId!,
+      education
+    );
+
+    if (!profile) {
+      throw new ApiError({
+        statusCode: httpStatus.BAD_REQUEST,
+        message: 'Cannot find user profile',
+        isOperational: false,
+      });
+    }
+
+    return res.status(httpStatus.CREATED).json({
+      message: 'Successfully added/updated user profile education',
+      profile,
+    });
+  }
+);
+
+// @route     PUT api/v1/profile/education
+// @desc      Update profile education
+// @access    Private
+export const updateProfileEducation = catchAsync(
+  async (req: RequestWithBody, res: Response) => {
+    const education = req.body.education!;
+
+    const profile = await profileService.updateProfileEducation(
       req.userId!,
       education
     );

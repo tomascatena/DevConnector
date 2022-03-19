@@ -4,7 +4,7 @@ import { ROUTES } from '@constants/routes';
 import { useNavigate } from 'react-router';
 import { IEducation } from '../../typings/types';
 import {
-  addOrUpdateProfileEducation,
+  addProfileEducation,
   getCurrentUserProfile
 } from '@store/features/profile/profile.thunk';
 import { AddEducationContainer, AddEducationPaper } from './AddEducationPage.styled';
@@ -23,9 +23,9 @@ const AddExperiencePage:FC<Props> = () => {
   const navigate = useNavigate();
 
   const dispatchCreateOrUpdateEducation = (
-    educationForm: Partial<IEducation>[]
+    educationForm: Partial<IEducation>
   ) => {
-    dispatch(addOrUpdateProfileEducation(educationForm)).then(() => {
+    dispatch(addProfileEducation(educationForm)).then(() => {
       navigate(ROUTES.DASHBOARD);
     });
   };

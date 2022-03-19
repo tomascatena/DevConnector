@@ -104,78 +104,88 @@ export const social = [
 ];
 
 export const experience = [
-  check('profile.experience', 'user profile experience is required')
-    .isArray()
-    .custom((value) => value.length)
+  check('experience', 'user profile experience is required')
+    .isObject()
     .withMessage('Invalid user profile experience'),
-  check('profile.experience.*.title', 'title is required')
+  check('experience.title', 'title is required')
     .isString()
     .isLength({ min: 3, max: 100 })
     .withMessage('Invalid user profile experience: title'),
-  check('profile.experience.*.company', 'company is required')
+  check('experience.company', 'company is required')
     .isString()
     .isLength({ min: 3, max: 100 })
     .withMessage('Invalid user profile experience: company'),
-  check('profile.experience.*.location')
+  check('experience.location')
     .optional({ nullable: true, checkFalsy: true })
     .isString()
     .isLength({ min: 3, max: 100 })
     .withMessage('Invalid user profile experience: location'),
-  check('profile.experience.*.from', 'from date is required')
+  check('experience.from', 'from date is required')
     .notEmpty()
     .isISO8601()
     .withMessage('Invalid user profile experience: from'),
-  check('profile.experience.*.to')
+  check('experience.to')
     .optional({ nullable: true, checkFalsy: true })
     .isISO8601()
     .withMessage('Invalid user profile experience: to'),
-  check('profile.experience.*.current')
+  check('experience.current')
     .optional({ nullable: true, checkFalsy: true })
     .isBoolean()
     .withMessage('Invalid user profile experience: current'),
-  check('profile.experience.*.description')
+  check('experience.description')
     .optional({ nullable: true, checkFalsy: true })
     .isString()
     .isLength({ min: 3, max: 500 })
     .withMessage('Invalid user profile experience: description'),
 ];
 
+export const experienceId = check('experience._id', '_id is required')
+  .isMongoId()
+  .withMessage('Invalid profileId')
+  .escape()
+  .withMessage('Invalid user profile experience: id');
+
 export const education = [
-  check('profile.education', 'user profile education is required')
-    .isArray()
-    .custom((value) => value.length)
+  check('education', 'user profile education is required')
+    .isObject()
     .withMessage('Invalid user profile education'),
-  check('profile.education.*.school', 'school is required')
+  check('education.school', 'school is required')
     .isString()
     .trim()
     .isLength({ min: 3, max: 100 })
     .withMessage('Invalid user profile education: school'),
-  check('profile.education.*.degree', 'degree is required')
+  check('education.degree', 'degree is required')
     .isString()
     .trim()
     .isLength({ min: 3, max: 100 })
     .withMessage('Invalid user profile education: degree'),
-  check('profile.education.*.fieldOfStudy')
+  check('education.fieldOfStudy')
     .optional({ nullable: true, checkFalsy: true })
     .isString()
     .trim()
     .isLength({ min: 3, max: 200 })
     .withMessage('Invalid user profile education: fieldOfStudy'),
-  check('profile.education.*.from', 'from date is required')
+  check('education.from', 'from date is required')
     .notEmpty()
     .isISO8601()
     .withMessage('Invalid user profile education: from'),
-  check('profile.education.*.to')
+  check('education.to')
     .optional({ nullable: true, checkFalsy: true })
     .isISO8601()
     .withMessage('Invalid user profile education: to'),
-  check('profile.education.*.current')
+  check('education.current')
     .optional({ nullable: true, checkFalsy: true })
     .isBoolean()
     .withMessage('Invalid user profile education: current'),
-  check('profile.education.*.description')
+  check('education.description')
     .optional({ nullable: true, checkFalsy: true })
     .isString()
     .isLength({ min: 3, max: 500 })
     .withMessage('Invalid user profile education: description'),
 ];
+
+export const educationId = check('education._id', '_id is required')
+  .isMongoId()
+  .withMessage('Invalid profileId')
+  .escape()
+  .withMessage('Invalid user profile education: id');

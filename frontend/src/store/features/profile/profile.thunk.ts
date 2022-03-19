@@ -68,12 +68,12 @@ export const createOrUpdateProfile = createAsyncThunk<
   }
 );
 
-export const addOrUpdateProfileExperience = createAsyncThunk<
+export const addProfileExperience = createAsyncThunk<
   IProfile,
-  Partial<IExperience>[],
+  Partial<IExperience>,
   { state: RootState; rejectValue: RejectValue }
 >(
-  'profile/addOrUpdateProfileExperience',
+  'profile/addProfileExperience',
   async (userProfileExperience, { getState, requestId, rejectWithValue }) => {
     const { loading, currentRequestId } = getState().profile;
 
@@ -82,9 +82,9 @@ export const addOrUpdateProfileExperience = createAsyncThunk<
     }
 
     try {
-      const response = await axios.put(
+      const response = await axios.post(
         API_ENDPOINTS.CREATE_OR_UPDATE_PROFILE_EXPERIENCE,
-        { profile: { experience: userProfileExperience } }
+        { experience: userProfileExperience }
       );
 
       return response.data.profile;
@@ -96,12 +96,68 @@ export const addOrUpdateProfileExperience = createAsyncThunk<
   }
 );
 
-export const addOrUpdateProfileEducation = createAsyncThunk<
+export const updateProfileExperience = createAsyncThunk<
   IProfile,
-  Partial<IEducation>[],
+  Partial<IExperience>,
   { state: RootState; rejectValue: RejectValue }
 >(
-  'profile/addOrUpdateProfileEducation',
+  'profile/updateProfileExperience',
+  async (userProfileExperience, { getState, requestId, rejectWithValue }) => {
+    const { loading, currentRequestId } = getState().profile;
+
+    if (!loading || requestId !== currentRequestId) {
+      return;
+    }
+
+    try {
+      const response = await axios.put(
+        API_ENDPOINTS.CREATE_OR_UPDATE_PROFILE_EXPERIENCE,
+        { experience: userProfileExperience }
+      );
+
+      return response.data.profile;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data);
+      }
+    }
+  }
+);
+
+export const addProfileEducation = createAsyncThunk<
+  IProfile,
+  Partial<IEducation>,
+  { state: RootState; rejectValue: RejectValue }
+>(
+  'profile/addProfileEducation',
+  async (userProfileEducation, { getState, requestId, rejectWithValue }) => {
+    const { loading, currentRequestId } = getState().profile;
+
+    if (!loading || requestId !== currentRequestId) {
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        API_ENDPOINTS.CREATE_OR_UPDATE_PROFILE_EDUCATION,
+        { profile: { education: userProfileEducation } }
+      );
+
+      return response.data.profile;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data);
+      }
+    }
+  }
+);
+
+export const updateProfileEducation = createAsyncThunk<
+  IProfile,
+  Partial<IEducation>,
+  { state: RootState; rejectValue: RejectValue }
+>(
+  'profile/updateProfileEducation',
   async (userProfileEducation, { getState, requestId, rejectWithValue }) => {
     const { loading, currentRequestId } = getState().profile;
 

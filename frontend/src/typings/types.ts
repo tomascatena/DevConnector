@@ -49,6 +49,7 @@ export interface AuthData {
 }
 
 export interface IEducation {
+  _id: string;
   school: string;
   degree: string;
   fieldOfStudy: string;
@@ -59,6 +60,7 @@ export interface IEducation {
 }
 
 export interface IExperience {
+  _id: string;
   title: string;
   company: string;
   location: string;

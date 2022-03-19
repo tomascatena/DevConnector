@@ -12,7 +12,7 @@ import CustomDatePicker from '@components/CustomDatePicker/CustomDatePicker';
 import CustomCheckbox from '@components/CustomCheckbox/CustomCheckbox';
 
 type Props = {
-  dispatchCreateOrUpdateEducation: (profileForm: Partial<IEducation>[]) => void;
+  dispatchCreateOrUpdateEducation: (profileForm: Partial<IEducation>) => void;
   loading: boolean;
   education?: Nullable<Partial<IEducation>>;
 };
@@ -48,7 +48,7 @@ const EducationForm: FC<Props> = ({ dispatchCreateOrUpdateEducation, loading, ed
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const educationForm = [{
+    const educationForm = {
       degree: degreeState.value,
       school: schoolState.value,
       fieldOfStudy: fieldOfStudyState.value,
@@ -56,7 +56,7 @@ const EducationForm: FC<Props> = ({ dispatchCreateOrUpdateEducation, loading, ed
       to: toDateState.value,
       description: descriptionState.value,
       current: isCurrent
-    }];
+    };
 
     dispatchCreateOrUpdateEducation(educationForm);
   };

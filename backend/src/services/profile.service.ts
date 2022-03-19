@@ -42,18 +42,38 @@ export const removeProfileByUserId = async (userId: string) => {
   return profile;
 };
 
-export const addOrUpdateProfileExperience = async (
+export const addProfileExperience = async (
   userId: string,
-  experience: IExperience[]
+  experienceToAdd: Partial<IExperience>
 ) => {
   const profile = await Profile.findOneAndUpdate(
     { user: userId },
     {
       $push: {
-        experience: {
-          $each: [...experience!],
-          $position: 0,
-        },
+        experience: experienceToAdd,
+      },
+    },
+    { new: true }
+  );
+
+  return profile;
+};
+
+export const updateProfileExperience = async (
+  userId: string,
+  experience: Partial<IExperience>
+) => {
+  const profile = await Profile.findOneAndUpdate(
+    { user: userId, 'experience._id': experience._id },
+    {
+      $set: {
+        'experience.$.title': experience.title,
+        'experience.$.company': experience.company,
+        'experience.$.location': experience.location,
+        'experience.$.from': experience.from,
+        'experience.$.to': experience.to,
+        'experience.$.current': experience.current,
+        'experience.$.description': experience.description,
       },
     },
     { new: true }
@@ -79,18 +99,38 @@ export const removeExperienceFromProfile = async (
   return profile;
 };
 
-export const addOrUpdateProfileEducation = async (
+export const addProfileEducation = async (
   userId: string,
-  education: IEducation[]
+  educationToAdd: Partial<IEducation>
 ) => {
   const profile = await Profile.findOneAndUpdate(
     { user: userId },
     {
       $push: {
-        education: {
-          $each: [...education!],
-          $position: 0,
-        },
+        education: educationToAdd,
+      },
+    },
+    { new: true }
+  );
+
+  return profile;
+};
+
+export const updateProfileEducation = async (
+  userId: string,
+  education: Partial<IEducation>
+) => {
+  const profile = await Profile.findOneAndUpdate(
+    { user: userId, 'education._id': education._id },
+    {
+      $set: {
+        'education.$.school': education.school,
+        'education.$.degree': education.degree,
+        'education.$.fieldOfStudy': education.fieldOfStudy,
+        'education.$.from': education.from,
+        'education.$.to': education.to,
+        'education.$.current': education.current,
+        'education.$.description': education.description,
       },
     },
     { new: true }

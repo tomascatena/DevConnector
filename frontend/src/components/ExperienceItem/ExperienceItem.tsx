@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { IExperience } from '../../typings/types';
+import React, { FC, Dispatch, SetStateAction } from 'react';
+import { IExperience, Nullable } from '../../typings/types';
 import { Typography, Box, Tooltip } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -15,10 +15,11 @@ import {
 } from '@mui/lab';
 
 type Props = {
-  experience: IExperience
+  experience: IExperience;
+  setSelectedExperience: Dispatch<SetStateAction<Nullable<Partial<IExperience>>>>
 }
 
-const ExperienceItem:FC<Props> = ({ experience }) => {
+const ExperienceItem:FC<Props> = ({ experience, setSelectedExperience }) => {
   return (
     <TimelineItem>
       <TimelineOppositeContent
@@ -55,13 +56,19 @@ const ExperienceItem:FC<Props> = ({ experience }) => {
 
             <Box sx={{ display: 'flex', gap: 2, alignItems: 'baseline' }}>
               <Tooltip title="Edit Item">
-                <IconButton aria-label="edit">
+                <IconButton
+                  onClick={() => setSelectedExperience(experience)}
+                  aria-label="edit"
+                >
                   <EditIcon />
                 </IconButton>
               </Tooltip>
 
               <Tooltip title="Delete Experience">
-                <IconButton aria-label="delete">
+                <IconButton
+                  onClick={() => setSelectedExperience(experience)}
+                  aria-label="delete"
+                >
                   <DeleteIcon />
                 </IconButton>
               </Tooltip>

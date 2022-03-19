@@ -8,8 +8,10 @@ import {
 import {
   getCurrentUserProfile,
   createOrUpdateProfile,
-  addOrUpdateProfileEducation,
-  addOrUpdateProfileExperience,
+  addProfileEducation,
+  updateProfileEducation,
+  addProfileExperience,
+  updateProfileExperience,
   deleteProfileEducation,
   deleteProfileExperience
 } from './profile.thunk';
@@ -85,8 +87,11 @@ export const profileSlice = createSlice({
       .addMatcher(
         isAnyOf(
           createOrUpdateProfile.pending,
-          addOrUpdateProfileExperience.pending,
-          addOrUpdateProfileEducation.pending,
+          createOrUpdateProfile.pending,
+          addProfileExperience.pending,
+          updateProfileExperience.pending,
+          addProfileEducation.pending,
+          updateProfileEducation.pending,
           deleteProfileExperience.pending,
           deleteProfileEducation.pending
         ),
@@ -103,8 +108,11 @@ export const profileSlice = createSlice({
       .addMatcher(
         isAnyOf(
           createOrUpdateProfile.fulfilled,
-          addOrUpdateProfileExperience.fulfilled,
-          addOrUpdateProfileEducation.fulfilled,
+          createOrUpdateProfile.fulfilled,
+          addProfileExperience.fulfilled,
+          updateProfileExperience.fulfilled,
+          addProfileEducation.fulfilled,
+          updateProfileEducation.fulfilled,
           deleteProfileExperience.fulfilled,
           deleteProfileEducation.fulfilled
         ),
@@ -124,8 +132,11 @@ export const profileSlice = createSlice({
       .addMatcher(
         isAnyOf(
           createOrUpdateProfile.rejected,
-          addOrUpdateProfileExperience.rejected,
-          addOrUpdateProfileEducation.rejected,
+          createOrUpdateProfile.rejected,
+          addProfileExperience.rejected,
+          updateProfileExperience.rejected,
+          addProfileEducation.rejected,
+          updateProfileEducation.rejected,
           deleteProfileExperience.rejected,
           deleteProfileEducation.rejected
         ),

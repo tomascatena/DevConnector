@@ -1,6 +1,7 @@
-import { Schema } from 'mongoose';
+import { Schema, ObjectId } from 'mongoose';
 
 export interface IEducation {
+  _id: ObjectId;
   school: string;
   degree: string;
   fieldOfStudy: string;
