@@ -1,8 +1,7 @@
-import React, { useEffect, FC } from 'react';
-import { Container, Typography } from '@mui/material';
-import { useAppDispatch } from '@hooks/useAppDispatch';
-import { useTypedSelector } from '@hooks/useTypedSelector';
-import { getCurrentUserProfile } from '../../store/features/profile/profile.thunk';
+import React, { useEffect, FC, useState } from 'react';
+import { Container, Typography, Box, Button } from '@mui/material';
+import { useTypedSelector, useActions, useAppDispatch } from '@hooks/index';
+import { getCurrentUserProfile, deleteAccount } from '../../store/features/profile/profile.thunk';
 import { styled } from '@mui/system';
 import { ROUTES } from '@constants/routes';
 import TextWithIcon from '@components/TextWithIcon/TextWithIcon';
@@ -12,6 +11,9 @@ import LinkButton from '@components/LinkButton/LinkButton';
 import CustomBackdrop from '@components/CustomBackdrop/CustomBackdrop';
 import ExperienceTimeline from '@components/ExperienceTimeline/ExperienceTimeline';
 import EducationList from '@components/EducationList/EducationList';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import CustomModalDialog from '@components/CustomModalDialog/CustomModalDialog';
+import WarningIcon from '@mui/icons-material/Warning';
 
 export const DashboardContainer = styled(Container)(({ theme }) => ({
   color: theme.palette.primary.main,
@@ -26,9 +28,13 @@ export const DashboardContainer = styled(Container)(({ theme }) => ({
 type Props = {};
 
 const DashboardPage: FC<Props> = () => {
+  const { setAlert } = useActions();
   const dispatch = useAppDispatch();
+
   const { loading, profile, isFetchingProfile } = useTypedSelector((state) => state.profile);
   const { user } = useTypedSelector((state) => state.auth);
+
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   useEffect(() => {
     if (!profile) {
@@ -37,6 +43,16 @@ const DashboardPage: FC<Props> = () => {
 
     // eslint-disable-next-line
   }, []);
+
+  const dispatchDeleteAccount = () => {
+    dispatch(deleteAccount()).then(() => {
+      setAlert({
+        showAlert: true,
+        message: 'Your account has been permanently deleted.',
+        severity: 'info'
+      });
+    });
+  };
 
   return (
     <DashboardContainer>
@@ -87,10 +103,41 @@ const DashboardPage: FC<Props> = () => {
               <ExperienceTimeline experience={profile.experience}/>
 
               <EducationList education={profile.education}/>
+
+              <Box sx={{ my: 2 }}>
+                <Button
+                  startIcon={<PersonRemoveIcon/>}
+                  variant='contained'
+                  color='error'
+                  onClick={() => setOpenDeleteDialog(true)}
+                >
+                  Delete my account
+                </Button>
+              </Box>
             </>
           )}
         </>
       )}
+
+      <CustomModalDialog
+        isDialogOpen={openDeleteDialog}
+        dialogTitle='Permanently Delete Account'
+        setOpenDialog={setOpenDeleteDialog}
+        buttonText='Delete'
+        onButtonClick={() => dispatchDeleteAccount()}
+        buttonColor='error'
+      >
+        <div>
+          <Typography>
+            Are you sure you want to delete your account?
+            This includes your profile, posts and comments.
+          </Typography>
+
+          <Typography sx={{ display: 'flex', gap: 1, mt: 2 }}>
+            <WarningIcon color='warning'/> This operation cannot be undone.
+          </Typography>
+        </div>
+      </CustomModalDialog>
     </DashboardContainer>
   );
 };

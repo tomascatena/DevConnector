@@ -132,8 +132,7 @@ export const deleteProfile = catchAsync(
     }
 
     return res.status(httpStatus.CREATED).json({
-      message: 'Successfully deleted user profile',
-      profile,
+      message: 'Successfully deleted user account',
     });
   }
 );

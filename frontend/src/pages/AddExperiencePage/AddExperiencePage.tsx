@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { useAppDispatch, useTypedSelector } from '@hooks/index';
+import { useAppDispatch, useTypedSelector, useActions } from '@hooks/index';
 import { ROUTES } from '@constants/routes';
 import { useNavigate } from 'react-router';
 import { IExperience } from '../../typings/types';
@@ -13,12 +13,14 @@ import CustomBackdrop from '@components/CustomBackdrop/CustomBackdrop';
 import TextWithIcon from '@components/TextWithIcon/TextWithIcon';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import ExperienceForm from '@components/ExperienceForm/ExperienceForm';
+import CustomAlert from '@components/CustomAlert/CustomAlert';
 
-type Props = {};
-
-const AddExperiencePage:FC<Props> = () => {
+const AddExperiencePage:FC = () => {
+  const { setAlert } = useActions();
   const dispatch = useAppDispatch();
+
   const { profile, isFetchingProfile, loading } = useTypedSelector((state) => state.profile);
+  const { showAlert, message, severity } = useTypedSelector((state) => state.alert);
 
   const navigate = useNavigate();
 
@@ -27,6 +29,11 @@ const AddExperiencePage:FC<Props> = () => {
   ) => {
     dispatch(addProfileExperience(experienceForm)).then(() => {
       navigate(ROUTES.DASHBOARD);
+      setAlert({
+        showAlert: true,
+        message: 'Experience added',
+        severity: 'success'
+      });
     });
   };
 
@@ -63,6 +70,12 @@ const AddExperiencePage:FC<Props> = () => {
           />
         )}
       </AddExperiencePaper>
+
+      <CustomAlert
+        shouldShowAlert={showAlert}
+        message={message}
+        severity={severity}
+      />
     </AddExperienceContainer>
   );
 };

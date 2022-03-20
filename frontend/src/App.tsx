@@ -22,7 +22,7 @@ const AddEducationPage = lazy(() => import('@pages/AddEducationPage/AddEducation
 const AddExperiencePage = lazy(() => import('@pages/AddExperiencePage/AddExperiencePage'));
 
 const App: FC = () => {
-  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(true);
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
 
   const SuspenseFallback = (
     <CustomBackdrop

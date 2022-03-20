@@ -7,8 +7,9 @@ import { Timeline } from '@mui/lab';
 import { deleteProfileExperience, updateProfileExperience } from '../../store/features/profile/profile.thunk';
 import CustomDialog from '@components/CustomDialog/CustomDialog';
 import ExperienceForm from '@components/ExperienceForm/ExperienceForm';
-import CustomModalDialog from '../CustomModalDialog/CustomModalDialog';
+import CustomModalDialog from '@components/CustomModalDialog/CustomModalDialog';
 import CustomAlert from '@components/CustomAlert/CustomAlert';
+import { sortISODates } from '@utils/dateTime';
 
 type Props = {
   experience: IExperience[]
@@ -29,6 +30,7 @@ const ExperienceTimeline:FC<Props> = ({ experience }) => {
       setAlert({
         showAlert: true,
         message: 'Experience updated',
+        severity: 'success'
       });
     });
   };
@@ -39,6 +41,7 @@ const ExperienceTimeline:FC<Props> = ({ experience }) => {
         setAlert({
           showAlert: true,
           message: 'Experience deleted',
+          severity: 'info'
         });
       });
     }
@@ -60,7 +63,9 @@ const ExperienceTimeline:FC<Props> = ({ experience }) => {
           experience.length
             ? (
               <Timeline sx={{ width: '100%' }}>
-                {experience.map((experienceItem) =>
+                {[...experience]
+                  .sort(sortISODates)
+                  .map((experienceItem) =>
                   <ExperienceItem
                     key={experienceItem._id}
                     experience={experienceItem}
@@ -68,7 +73,7 @@ const ExperienceTimeline:FC<Props> = ({ experience }) => {
                     setOpenEditDialog={setOpenEditDialog}
                     setOpenDeleteDialog={setOpenDeleteDialog}
                   />
-                )}
+                  )}
               </Timeline>
               )
             : <Typography color='text.primary'>No experience credentials to show.</Typography>

@@ -8,6 +8,7 @@ import CustomDialog from '@components/CustomDialog/CustomDialog';
 import EducationForm from '@components/EducationForm/EducationForm';
 import CustomModalDialog from '../CustomModalDialog/CustomModalDialog';
 import CustomAlert from '@components/CustomAlert/CustomAlert';
+import { sortISODates } from '@utils/dateTime';
 
 type Props = {
   education: IEducation[]
@@ -28,6 +29,7 @@ const EducationList:FC<Props> = ({ education }) => {
       setAlert({
         showAlert: true,
         message: 'Education updated',
+        severity: 'success'
       });
     });
   };
@@ -38,6 +40,7 @@ const EducationList:FC<Props> = ({ education }) => {
         setAlert({
           showAlert: true,
           message: 'Education deleted',
+          severity: 'info'
         });
       });
     }
@@ -57,15 +60,17 @@ const EducationList:FC<Props> = ({ education }) => {
         >
           {
           education.length
-            ? education.map((educationItem) =>
-            <EducationItem
-              key={educationItem._id}
-              education={educationItem}
-              setOpenEditDialog={setOpenEditDialog}
-              setOpenDeleteDialog={setOpenDeleteDialog}
-              setSelectedEducation={setSelectedEducation}
-            />
-            )
+            ? [...education]
+                .sort(sortISODates)
+                .map((educationItem) =>
+                  <EducationItem
+                    key={educationItem._id}
+                    education={educationItem}
+                    setOpenEditDialog={setOpenEditDialog}
+                    setOpenDeleteDialog={setOpenDeleteDialog}
+                    setSelectedEducation={setSelectedEducation}
+                  />
+                )
             : <Typography color='text.primary'>No education credentials to show.</Typography>
           }
         </Grid>

@@ -6,4 +6,5 @@ export const API_ENDPOINTS = {
   CREATE_OR_UPDATE_PROFILE: '/api/v1/profile',
   CREATE_OR_UPDATE_PROFILE_EXPERIENCE: '/api/v1/profile/experience',
   CREATE_OR_UPDATE_PROFILE_EDUCATION: '/api/v1/profile/education',
+  DELETE_PROFILE: '/api/v1/profile',
 } as const;

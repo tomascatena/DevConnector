@@ -9,6 +9,7 @@ import {
 } from '../../../typings/types';
 import { RootState } from '@store/store';
 import { API_ENDPOINTS } from '@constants/APIEndpoints';
+import { authActions } from '@store/features/auth/authSlice';
 
 type RejectValue = {
   message?: string;
@@ -222,6 +223,33 @@ export const deleteProfileEducation = createAsyncThunk<
     try {
       const URL = `${API_ENDPOINTS.CREATE_OR_UPDATE_PROFILE_EDUCATION}/${educationId}`;
       const response = await axios.delete(URL);
+
+      return response.data.profile;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data);
+      }
+    }
+  }
+);
+
+export const deleteAccount = createAsyncThunk<
+  IProfile,
+  void,
+  { state: RootState; rejectValue: RejectValue }
+>(
+  'profile/deleteAccount',
+  async (_, { getState, requestId, rejectWithValue, dispatch }) => {
+    const { loading, currentRequestId } = getState().profile;
+
+    if (!loading || requestId !== currentRequestId) {
+      return;
+    }
+
+    try {
+      const response = await axios.delete(API_ENDPOINTS.DELETE_PROFILE);
+
+      dispatch(authActions.logout());
 
       return response.data.profile;
     } catch (error) {

@@ -1,4 +1,5 @@
 import { format, parseISO, intervalToDuration, formatDuration } from 'date-fns';
+import { IExperience, IEducation } from '../typings/types';
 
 export const formatDate = (date: string | null) => {
   return date && format(parseISO(date), 'LLL yyyy');
@@ -18,4 +19,22 @@ export const duration = (from: string | null, to: string | null): string | null 
   }
 
   return null;
+};
+
+type ExperienceOrEducation = Partial<IExperience> | Partial<IEducation>
+
+export const sortISODates = (
+  firstDate: ExperienceOrEducation,
+  secondDate: ExperienceOrEducation
+) => {
+  if (firstDate.from && secondDate.from) {
+    const firstDateUnix = parseISO(firstDate.from).getTime();
+    const secondDateUnix = parseISO(secondDate.from).getTime();
+
+    if (firstDateUnix && secondDateUnix) {
+      return firstDateUnix - secondDateUnix;
+    }
+  }
+
+  return 0;
 };

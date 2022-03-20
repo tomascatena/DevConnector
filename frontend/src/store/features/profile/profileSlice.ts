@@ -13,7 +13,8 @@ import {
   addProfileExperience,
   updateProfileExperience,
   deleteProfileEducation,
-  deleteProfileExperience
+  deleteProfileExperience,
+  deleteAccount
 } from './profile.thunk';
 
 export interface ProfileState {
@@ -84,6 +85,38 @@ export const profileSlice = createSlice({
           state.currentRequestId = undefined;
         }
       })
+      .addCase(deleteAccount.pending, (state, action) => {
+        if (!state.loading) {
+          state.profile = null;
+          state.loading = true;
+          state.isFetchingProfile = true;
+          state.serverValidationErrors = null;
+          state.error = null;
+          state.currentRequestId = action.meta.requestId;
+        }
+      })
+      .addCase(deleteAccount.fulfilled, (state, action) => {
+        const { requestId } = action.meta;
+        if (state.loading && state.currentRequestId === requestId) {
+          state.profile = null;
+          state.profiles = null;
+          state.repos = null;
+          state.loading = false;
+          state.isFetchingProfile = false;
+          state.currentRequestId = undefined;
+        }
+      })
+      .addCase(deleteAccount.rejected, (state, action) => {
+        const { requestId } = action.meta;
+        if (state.loading && state.currentRequestId === requestId) {
+          state.profile = null;
+          state.loading = false;
+          state.isFetchingProfile = false;
+          state.serverValidationErrors = action.payload?.errors ?? null;
+          state.error = action.payload ?? null;
+          state.currentRequestId = undefined;
+        }
+      })
       .addMatcher(
         isAnyOf(
           createOrUpdateProfile.pending,
@@ -104,7 +137,8 @@ export const profileSlice = createSlice({
             state.error = null;
             state.currentRequestId = action.meta.requestId;
           }
-        })
+        }
+      )
       .addMatcher(
         isAnyOf(
           createOrUpdateProfile.fulfilled,
@@ -128,7 +162,8 @@ export const profileSlice = createSlice({
               state.error = { message: 'Profile is empty' };
             }
           }
-        })
+        }
+      )
       .addMatcher(
         isAnyOf(
           createOrUpdateProfile.rejected,
@@ -150,7 +185,8 @@ export const profileSlice = createSlice({
             state.error = action.payload ?? null;
             state.currentRequestId = undefined;
           }
-        });
+        }
+      );
   },
 });
 

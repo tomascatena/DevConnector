@@ -42,7 +42,7 @@ router.get(
 );
 
 // @route     DELETE api/v1/profile
-// @desc      Delete profile, users & posts
+// @desc      Delete profile, user & posts
 // @access    Private
 router.delete(
   '/', //

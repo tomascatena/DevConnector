@@ -10,7 +10,7 @@ export const StyledAlert = styled(Alert)(({ theme }) => ({
   top: theme.spacing(5),
   left: '50%',
   transform: 'translateX(-50%)',
-  minWidth: '40%',
+  minWidth: '20rem',
 }));
 
 type Props = {
