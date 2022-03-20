@@ -4,6 +4,8 @@ import { Box, Button, Typography } from '@mui/material';
 import showCaseImage from '../../assets/showCaseImage.png';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@constants/routes';
+import CustomAlert from '@components/CustomAlert/CustomAlert';
+import { useTypedSelector } from '@hooks/index';
 
 const LandingBox = styled(Box)(({ theme }) => ({
   flex: 1,
@@ -23,6 +25,8 @@ const ButtonsContainer = styled(Box)(({ theme }) => ({
 }));
 
 const LandingPage: FC = () => {
+  const { showAlert, message, severity } = useTypedSelector((state) => state.alert);
+
   return (
     <LandingBox>
       <Typography
@@ -60,6 +64,12 @@ const LandingPage: FC = () => {
           Login
         </Button>
       </ButtonsContainer>
+
+      <CustomAlert
+        shouldShowAlert={showAlert}
+        message={message}
+        severity={severity}
+      />
     </LandingBox>
   );
 };

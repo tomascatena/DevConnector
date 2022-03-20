@@ -15,7 +15,6 @@ import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import CustomModalDialog from '@components/CustomModalDialog/CustomModalDialog';
 import WarningIcon from '@mui/icons-material/Warning';
 import { useNavigate } from 'react-router';
-import CustomAlert from '@components/CustomAlert/CustomAlert';
 
 export const DashboardContainer = styled(Container)(({ theme }) => ({
   color: theme.palette.primary.main,
@@ -36,7 +35,6 @@ const DashboardPage: FC<Props> = () => {
 
   const { loading, profile, isFetchingProfile } = useTypedSelector((state) => state.profile);
   const { user } = useTypedSelector((state) => state.auth);
-  const { showAlert, message, severity } = useTypedSelector((state) => state.alert);
 
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
@@ -143,12 +141,6 @@ const DashboardPage: FC<Props> = () => {
           </Typography>
         </div>
       </CustomModalDialog>
-
-      <CustomAlert
-        shouldShowAlert={showAlert}
-        message={message}
-        severity={severity}
-      />
     </DashboardContainer>
   );
 };
