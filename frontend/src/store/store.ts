@@ -1,12 +1,14 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import authReducer from './features/auth/authSlice';
 import profileReducer from './features/profile/profileSlice';
+import alertReducer from './features/alert/alertSlice';
 import { getAccessToken } from './getInitialState';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     profile: profileReducer,
+    alert: alertReducer
   },
   devTools: process.env.NODE_ENV !== 'production',
 });

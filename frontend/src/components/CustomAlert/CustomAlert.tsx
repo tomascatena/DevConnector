@@ -3,6 +3,7 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Fade from '@mui/material/Fade';
 import { styled } from '@mui/system';
+import { useActions } from '@hooks/index';
 
 export const StyledAlert = styled(Alert)(({ theme }) => ({
   position: 'absolute',
@@ -27,18 +28,22 @@ const CustomAlert: FC<Props> = ({
   timeout = 1000,
   message,
 }) => {
+  const { resetAlert } = useActions();
+
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {
     if (shouldShowAlert) {
       setShowError(true);
 
-      const timeout = setTimeout(() => {
+      const timerId = setTimeout(() => {
         setShowError(false);
+
+        setTimeout(() => resetAlert(), timeout); // wait for the fade to complete
       }, 5000);
 
       return () => {
-        clearTimeout(timeout);
+        clearTimeout(timerId);
       };
     }
   }, [shouldShowAlert]);

@@ -1,4 +1,4 @@
-import { useState, FC, FormEvent, useRef, useEffect } from 'react';
+import { useState, FC, FormEvent, useRef } from 'react';
 import { Typography, Button, Collapse } from '@mui/material';
 import { StyledForm, ButtonsBox, SocialNetworkLinksBox, ShowSocialNetworkLinksBox } from './ProfileForm.styled';
 import PersonIcon from '@mui/icons-material/Person';
@@ -25,10 +25,9 @@ type Props = {
   dispatchCreateOrUpdateProfile: (profileForm: Partial<IProfile>) => void;
   loading: boolean;
   profile?: Nullable<Partial<IProfile>>;
-  isEditing?: boolean;
 };
 
-const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profile, isEditing = false }) => {
+const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profile }) => {
   const [showSocialNetworkLinks, setShowSocialNetworkLinks] = useState(false);
 
   const formRef = useRef<HTMLFormElement>(null);
@@ -102,12 +101,6 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
     dispatchCreateOrUpdateProfile(profileForm);
   };
 
-  useEffect(() => {
-    if (formRef.current && formRef.current[1]) {
-      (formRef.current[1] as HTMLInputElement).focus();
-    }
-  }, []);
-
   return (
     <StyledForm
       ref={formRef}
@@ -130,7 +123,6 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         options={PROFESSIONAL_STATUS_OPTIONS}
         isDisabled={loading}
         isRequired
-        autofocus={!isEditing}
       />
 
       <CustomInput

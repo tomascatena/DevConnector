@@ -2,36 +2,45 @@ import ExperienceItem from '@components/ExperienceItem/ExperienceItem';
 import React, { FC, useState } from 'react';
 import { IExperience, Nullable } from '../../typings/types';
 import { Typography, Grid } from '@mui/material';
-import { useTypedSelector, useAppDispatch } from '@hooks/index';
+import { useTypedSelector, useAppDispatch, useActions } from '@hooks/index';
 import { Timeline } from '@mui/lab';
 import { deleteProfileExperience, updateProfileExperience } from '../../store/features/profile/profile.thunk';
 import CustomDialog from '@components/CustomDialog/CustomDialog';
 import ExperienceForm from '@components/ExperienceForm/ExperienceForm';
 import CustomModalDialog from '../CustomModalDialog/CustomModalDialog';
+import CustomAlert from '@components/CustomAlert/CustomAlert';
 
 type Props = {
   experience: IExperience[]
 }
 
 const ExperienceTimeline:FC<Props> = ({ experience }) => {
+  const { setAlert } = useActions();
   const dispatch = useAppDispatch();
   const { loading } = useTypedSelector((state) => state.profile);
+  const { showAlert, message, severity } = useTypedSelector((state) => state.alert);
 
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [selectedExperience, setSelectedExperience] = useState<Nullable<Partial<IExperience>>>(null);
 
-  const dispatchCreateOrUpdateExperience = (
-    experienceForm: Partial<IExperience>
-  ) => {
-    dispatch(updateProfileExperience(experienceForm));
+  const dispatchCreateOrUpdateExperience = (experienceForm: Partial<IExperience>) => {
+    dispatch(updateProfileExperience(experienceForm)).then(() => {
+      setAlert({
+        showAlert: true,
+        message: 'Experience updated',
+      });
+    });
   };
 
-  const dispatchDeleteExperience = (
-    experienceId: string | undefined
-  ) => {
+  const dispatchDeleteExperience = (experienceId: string | undefined) => {
     if (experienceId) {
-      dispatch(deleteProfileExperience(experienceId));
+      dispatch(deleteProfileExperience(experienceId)).then(() => {
+        setAlert({
+          showAlert: true,
+          message: 'Experience deleted',
+        });
+      });
     }
   };
 
@@ -94,6 +103,12 @@ const ExperienceTimeline:FC<Props> = ({ experience }) => {
           This operation cannot be undone.
         </div>
       </CustomModalDialog>
+
+      <CustomAlert
+        shouldShowAlert={showAlert}
+        message={message}
+        severity={severity}
+      />
     </>
   );
 };

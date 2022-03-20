@@ -49,7 +49,6 @@ const EditProfilePage: FC = () => {
             dispatchCreateOrUpdateProfile={dispatchCreateOrUpdateProfile}
             loading={loading}
             profile={profile}
-            isEditing
           />
         )}
       </EditProfilePaper>

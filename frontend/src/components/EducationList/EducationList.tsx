@@ -3,36 +3,46 @@ import React, { FC, useState } from 'react';
 import { IEducation, Nullable } from '../../typings/types';
 import { Typography, Grid } from '@mui/material';
 import { deleteProfileEducation, updateProfileEducation } from '../../store/features/profile/profile.thunk';
-import { useTypedSelector, useAppDispatch } from '@hooks/index';
+import { useTypedSelector, useAppDispatch, useActions } from '@hooks/index';
 import CustomDialog from '@components/CustomDialog/CustomDialog';
 import EducationForm from '@components/EducationForm/EducationForm';
 import CustomModalDialog from '../CustomModalDialog/CustomModalDialog';
+import CustomAlert from '@components/CustomAlert/CustomAlert';
 
 type Props = {
   education: IEducation[]
 }
 
 const EducationList:FC<Props> = ({ education }) => {
+  const { setAlert } = useActions();
   const dispatch = useAppDispatch();
   const { loading } = useTypedSelector((state) => state.profile);
+  const { showAlert, message, severity } = useTypedSelector((state) => state.alert);
 
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [selectedEducation, setSelectedEducation] = useState<Nullable<Partial<IEducation>>>(null);
 
-  const dispatchUpdateEducation = (
-    educationForm: Partial<IEducation>
-  ) => {
-    dispatch(updateProfileEducation(educationForm));
+  const dispatchUpdateEducation = (educationForm: Partial<IEducation>) => {
+    dispatch(updateProfileEducation(educationForm)).then(() => {
+      setAlert({
+        showAlert: true,
+        message: 'Education updated',
+      });
+    });
   };
 
-  const dispatchDeleteEducation = (
-    experienceId: string | undefined
-  ) => {
+  const dispatchDeleteEducation = (experienceId: string | undefined) => {
     if (experienceId) {
-      dispatch(deleteProfileEducation(experienceId));
+      dispatch(deleteProfileEducation(experienceId)).then(() => {
+        setAlert({
+          showAlert: true,
+          message: 'Education deleted',
+        });
+      });
     }
   };
+
   return (
     <>
       <Typography variant='h5'>
@@ -88,6 +98,12 @@ const EducationList:FC<Props> = ({ education }) => {
           This operation cannot be undone.
         </div>
       </CustomModalDialog>
+
+      <CustomAlert
+        shouldShowAlert={showAlert}
+        message={message}
+        severity={severity}
+      />
     </>
   );
 };
