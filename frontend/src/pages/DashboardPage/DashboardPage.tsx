@@ -1,7 +1,7 @@
 import React, { useEffect, FC, useState } from 'react';
 import { Container, Typography, Box, Button } from '@mui/material';
 import { useTypedSelector, useActions, useAppDispatch } from '@hooks/index';
-import { getCurrentUserProfile, deleteAccount } from '../../store/features/profile/profile.thunk';
+import { getCurrentUserProfile, deleteAccount } from '@store/features/profile/profile.thunk';
 import { styled } from '@mui/system';
 import { ROUTES } from '@constants/routes';
 import TextWithIcon from '@components/TextWithIcon/TextWithIcon';
@@ -14,6 +14,8 @@ import EducationList from '@components/EducationList/EducationList';
 import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import CustomModalDialog from '@components/CustomModalDialog/CustomModalDialog';
 import WarningIcon from '@mui/icons-material/Warning';
+import { useNavigate } from 'react-router';
+import CustomAlert from '@components/CustomAlert/CustomAlert';
 
 export const DashboardContainer = styled(Container)(({ theme }) => ({
   color: theme.palette.primary.main,
@@ -30,9 +32,11 @@ type Props = {};
 const DashboardPage: FC<Props> = () => {
   const { setAlert } = useActions();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const { loading, profile, isFetchingProfile } = useTypedSelector((state) => state.profile);
   const { user } = useTypedSelector((state) => state.auth);
+  const { showAlert, message, severity } = useTypedSelector((state) => state.alert);
 
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
@@ -51,6 +55,7 @@ const DashboardPage: FC<Props> = () => {
         message: 'Your account has been permanently deleted.',
         severity: 'info'
       });
+      navigate('/');
     });
   };
 
@@ -138,6 +143,12 @@ const DashboardPage: FC<Props> = () => {
           </Typography>
         </div>
       </CustomModalDialog>
+
+      <CustomAlert
+        shouldShowAlert={showAlert}
+        message={message}
+        severity={severity}
+      />
     </DashboardContainer>
   );
 };

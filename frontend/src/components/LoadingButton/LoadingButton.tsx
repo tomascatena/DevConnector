@@ -24,7 +24,7 @@ const CustomButton: FC<Props> = ({
   loadingText,
   sx,
   startIcon,
-  onSubmit
+  onSubmit,
 }) => {
   const loadingState = (
     <>

@@ -107,3 +107,7 @@ export const removeCommentFromPost = async (
 
   return post;
 };
+
+export const removeAllPostsFromUser = async (userId: string) => {
+  await Post.deleteMany({ user: userId });
+};

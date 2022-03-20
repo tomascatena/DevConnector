@@ -2,7 +2,12 @@ import httpStatus from 'http-status-codes';
 import { Response } from 'express';
 import { catchAsync } from 'utils/catchAsync';
 import { ApiError } from 'utils/ApiError';
-import { githubService, profileService, userService } from 'services';
+import {
+  githubService,
+  profileService,
+  userService,
+  postService,
+} from 'services';
 import { RequestWithBody } from '../types/types';
 
 // @route     GET api/v1/profile/me
@@ -120,6 +125,8 @@ export const createUserProfile = catchAsync(
 export const deleteProfile = catchAsync(
   async (req: RequestWithBody, res: Response) => {
     const profile = await profileService.removeProfileByUserId(req.userId!);
+
+    await postService.removeAllPostsFromUser(req.userId!);
 
     await userService.removeUserById(req.userId!);
 

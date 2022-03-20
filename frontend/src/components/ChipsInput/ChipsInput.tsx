@@ -51,12 +51,6 @@ const ChipsInput: FC<Props> = ({
 
   const [isValidInput, setIsValidInput] = useState(isInitialInputValid);
 
-  useEffect(() => {
-    setInputState({ ...inputState, value: chips, });
-
-    // eslint-disable-next-line
-  }, [chips]);
-
   const handleDelete = (index: number) => {
     setChips((chips) => chips.filter((_, i) => i !== index));
   };
@@ -118,6 +112,12 @@ const ChipsInput: FC<Props> = ({
   const shouldShowError = isRequired
     ? !isValidInput || isEmpty
     : !isValidInput;
+
+  useEffect(() => {
+    setInputState({ isValid: !shouldShowError, value: chips });
+
+    // eslint-disable-next-line
+  }, [chips, shouldShowError]);
 
   const endAdornment = (
     <InputAdornment

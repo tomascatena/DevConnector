@@ -4,7 +4,9 @@ import { Box } from '@mui/material';
 export const StyledForm = styled('form')(({ theme }) => ({
   flexDirection: 'column',
   display: 'flex',
-  gap: theme.spacing(3)
+  width: '100%',
+  maxWidth: '50rem',
+  gap: theme.spacing(3),
 }));
 
 export const ButtonsBox = styled(Box)(({ theme }) => ({

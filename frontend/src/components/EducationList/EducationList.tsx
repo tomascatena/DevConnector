@@ -2,7 +2,7 @@ import EducationItem from '@components/EducationItem/EducationItem';
 import React, { FC, useState } from 'react';
 import { IEducation, Nullable } from '../../typings/types';
 import { Typography, Grid } from '@mui/material';
-import { deleteProfileEducation, updateProfileEducation } from '../../store/features/profile/profile.thunk';
+import { deleteProfileEducation, updateProfileEducation } from '@store/features/profile/profile.thunk';
 import { useTypedSelector, useAppDispatch, useActions } from '@hooks/index';
 import CustomDialog from '@components/CustomDialog/CustomDialog';
 import EducationForm from '@components/EducationForm/EducationForm';

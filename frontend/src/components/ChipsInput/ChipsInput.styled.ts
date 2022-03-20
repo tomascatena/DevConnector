@@ -62,5 +62,6 @@ export const StyledFilledInput = styled(FilledInput, {
     color: isValidInput ? '' : 'red',
     padding: 0,
     paddingRight: theme.spacing(5),
+    minHeight: '3.5rem'
   },
 }));

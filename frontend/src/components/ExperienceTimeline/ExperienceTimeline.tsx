@@ -4,7 +4,7 @@ import { IExperience, Nullable } from '../../typings/types';
 import { Typography, Grid } from '@mui/material';
 import { useTypedSelector, useAppDispatch, useActions } from '@hooks/index';
 import { Timeline } from '@mui/lab';
-import { deleteProfileExperience, updateProfileExperience } from '../../store/features/profile/profile.thunk';
+import { deleteProfileExperience, updateProfileExperience } from '@store/features/profile/profile.thunk';
 import CustomDialog from '@components/CustomDialog/CustomDialog';
 import ExperienceForm from '@components/ExperienceForm/ExperienceForm';
 import CustomModalDialog from '@components/CustomModalDialog/CustomModalDialog';

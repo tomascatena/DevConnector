@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Typography } from '@mui/material';
-import { CreateProfileContainer } from './CreateProfilePage.styled';
+import { CreateProfileContainer, CreateProfilePaper } from './CreateProfilePage.styled';
 import { useAppDispatch, useTypedSelector } from '@hooks/index';
 import { createOrUpdateProfile } from '@store/features/profile/profile.thunk';
 import { ROUTES } from '@constants/routes';
@@ -24,17 +24,19 @@ const CreateProfilePage: FC = () => {
 
   return (
     <CreateProfileContainer>
-      <Typography
-        variant='h4'
-        align='center'
-      >
-        Create Your Profile
-      </Typography>
+      <CreateProfilePaper>
+        <Typography
+          variant='h4'
+          align='center'
+        >
+          Create Your Profile
+        </Typography>
 
-      <ProfileForm
-        dispatchCreateOrUpdateProfile={dispatchCreateOrUpdateProfile}
-        loading={loading}
-      />
+        <ProfileForm
+          dispatchCreateOrUpdateProfile={dispatchCreateOrUpdateProfile}
+          loading={loading}
+        />
+        </CreateProfilePaper>
     </CreateProfileContainer>
   );
 };
