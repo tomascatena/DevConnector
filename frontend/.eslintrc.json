@@ -16,6 +16,7 @@
     "multiline-ternary": "off",
     "no-use-before-define": "off",
     "semi": [2, "always"],
+    "camelcase": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
     "react/jsx-first-prop-new-line": [2, "multiline"],
     "react/jsx-max-props-per-line": [2, { "maximum": 1, "when": "always" }],

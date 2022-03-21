@@ -107,6 +107,7 @@ const UserMenu: FC<Props> = ({
                 marginBottom: 0.5,
                 width: 175,
                 justifyContent: 'flex-start',
+                color: 'text.primary'
               }}
             >
               {title}
@@ -123,6 +124,7 @@ const UserMenu: FC<Props> = ({
               marginTop: 1,
               width: 175,
               justifyContent: 'flex-start',
+              color: 'text.primary'
             }}
           >
             Logout

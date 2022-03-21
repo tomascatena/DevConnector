@@ -7,6 +7,9 @@ import {
 } from '../../../typings/types';
 import {
   getCurrentUserProfile,
+  getProfileById,
+  getAllProfiles,
+  getGithubRepos,
   createOrUpdateProfile,
   addProfileEducation,
   updateProfileEducation,
@@ -85,6 +88,70 @@ export const profileSlice = createSlice({
           state.currentRequestId = undefined;
         }
       })
+      .addCase(getProfileById.pending, (state, action) => {
+        if (!state.loading) {
+          state.profile = null;
+          state.loading = true;
+          state.isFetchingProfile = true;
+          state.serverValidationErrors = null;
+          state.error = null;
+          state.currentRequestId = action.meta.requestId;
+        }
+      })
+      .addCase(getProfileById.fulfilled, (state, action) => {
+        const { requestId } = action.meta;
+        if (state.loading && state.currentRequestId === requestId) {
+          state.profile = action.payload;
+          state.loading = false;
+          state.isFetchingProfile = false;
+          state.currentRequestId = undefined;
+
+          if (!action.payload) {
+            state.error = { message: 'Profile is empty' };
+          }
+        }
+      })
+      .addCase(getProfileById.rejected, (state, action) => {
+        const { requestId } = action.meta;
+        if (state.loading && state.currentRequestId === requestId) {
+          state.profile = null;
+          state.loading = false;
+          state.isFetchingProfile = false;
+          state.serverValidationErrors = action.payload?.errors ?? null;
+          state.error = action.payload ?? null;
+          state.currentRequestId = undefined;
+        }
+      })
+      .addCase(getGithubRepos.pending, (state, action) => {
+        if (!state.loading) {
+          state.repos = null;
+          state.loading = true;
+          state.isFetchingProfile = true;
+          state.serverValidationErrors = null;
+          state.error = null;
+          state.currentRequestId = action.meta.requestId;
+        }
+      })
+      .addCase(getGithubRepos.fulfilled, (state, action) => {
+        const { requestId } = action.meta;
+        if (state.loading && state.currentRequestId === requestId) {
+          state.repos = action.payload;
+          state.loading = false;
+          state.isFetchingProfile = false;
+          state.currentRequestId = undefined;
+        }
+      })
+      .addCase(getGithubRepos.rejected, (state, action) => {
+        const { requestId } = action.meta;
+        if (state.loading && state.currentRequestId === requestId) {
+          state.repos = null;
+          state.loading = false;
+          state.isFetchingProfile = false;
+          state.serverValidationErrors = action.payload?.errors ?? null;
+          state.error = action.payload ?? null;
+          state.currentRequestId = undefined;
+        }
+      })
       .addCase(deleteAccount.pending, (state, action) => {
         if (!state.loading) {
           state.profile = null;
@@ -110,6 +177,35 @@ export const profileSlice = createSlice({
         const { requestId } = action.meta;
         if (state.loading && state.currentRequestId === requestId) {
           state.profile = null;
+          state.loading = false;
+          state.isFetchingProfile = false;
+          state.serverValidationErrors = action.payload?.errors ?? null;
+          state.error = action.payload ?? null;
+          state.currentRequestId = undefined;
+        }
+      })
+      .addCase(getAllProfiles.pending, (state, action) => {
+        if (!state.loading) {
+          state.loading = true;
+          state.isFetchingProfile = true;
+          state.serverValidationErrors = null;
+          state.error = null;
+          state.currentRequestId = action.meta.requestId;
+          state.profiles = null;
+        }
+      })
+      .addCase(getAllProfiles.fulfilled, (state, action) => {
+        const { requestId } = action.meta;
+        if (state.loading && state.currentRequestId === requestId) {
+          state.profiles = action.payload;
+          state.loading = false;
+          state.isFetchingProfile = false;
+          state.currentRequestId = undefined;
+        }
+      })
+      .addCase(getAllProfiles.rejected, (state, action) => {
+        const { requestId } = action.meta;
+        if (state.loading && state.currentRequestId === requestId) {
           state.loading = false;
           state.isFetchingProfile = false;
           state.serverValidationErrors = action.payload?.errors ?? null;

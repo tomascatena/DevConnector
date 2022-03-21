@@ -6,6 +6,7 @@ import {
   IEducation,
   Nullable,
   ServerValidationError,
+  IGithubRepo,
 } from '../../../typings/types';
 import { RootState } from '@store/store';
 import { API_ENDPOINTS } from '@constants/APIEndpoints';
@@ -41,6 +42,83 @@ export const getCurrentUserProfile = createAsyncThunk<
   }
 );
 
+export const getProfileById = createAsyncThunk<
+  IProfile,
+  string,
+  { state: RootState; rejectValue: RejectValue }
+>(
+  'profile/getProfileById',
+  async (userId, { getState, requestId, rejectWithValue }) => {
+    const { loading, currentRequestId } = getState().profile;
+
+    if (!loading || requestId !== currentRequestId) {
+      return;
+    }
+
+    try {
+      const URL = `${API_ENDPOINTS.LOGGED_IN_USER_PROFILE}/${userId}`;
+      const response = await axios.get(URL);
+
+      return response.data.profile;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data);
+      }
+    }
+  }
+);
+
+export const getAllProfiles = createAsyncThunk<
+  IProfile[],
+  void,
+  { state: RootState; rejectValue: RejectValue }
+>(
+  'profile/getAllProfiles',
+  async (_, { getState, requestId, rejectWithValue }) => {
+    const { loading, currentRequestId } = getState().profile;
+
+    if (!loading || requestId !== currentRequestId) {
+      return;
+    }
+
+    try {
+      const response = await axios.get(API_ENDPOINTS.PROFILE);
+
+      return response.data.profiles;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data);
+      }
+    }
+  }
+);
+
+export const getGithubRepos = createAsyncThunk<
+  IGithubRepo[],
+  string,
+  { state: RootState; rejectValue: RejectValue }
+>(
+  'profile/getGithubRepos',
+  async (githubUsername, { getState, requestId, rejectWithValue }) => {
+    const { loading, currentRequestId } = getState().profile;
+
+    if (!loading || requestId !== currentRequestId) {
+      return;
+    }
+
+    try {
+      const URL = `${API_ENDPOINTS.GITHUB_REPOS}/${githubUsername}`;
+      const response = await axios.get(URL);
+
+      return response.data.repos;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return rejectWithValue(error.response?.data);
+      }
+    }
+  }
+);
+
 export const createOrUpdateProfile = createAsyncThunk<
   IProfile,
   Partial<IProfile>,
@@ -56,7 +134,7 @@ export const createOrUpdateProfile = createAsyncThunk<
 
     try {
       const response = await axios.post(
-        API_ENDPOINTS.CREATE_OR_UPDATE_PROFILE,
+        API_ENDPOINTS.PROFILE,
         { profile: userProfile }
       );
 
@@ -84,7 +162,7 @@ export const addProfileExperience = createAsyncThunk<
 
     try {
       const response = await axios.post(
-        API_ENDPOINTS.CREATE_OR_UPDATE_PROFILE_EXPERIENCE,
+        API_ENDPOINTS.PROFILE_EXPERIENCE,
         { experience: userProfileExperience }
       );
 
@@ -112,7 +190,7 @@ export const updateProfileExperience = createAsyncThunk<
 
     try {
       const response = await axios.put(
-        API_ENDPOINTS.CREATE_OR_UPDATE_PROFILE_EXPERIENCE,
+        API_ENDPOINTS.PROFILE_EXPERIENCE,
         { experience: userProfileExperience }
       );
 
@@ -140,7 +218,7 @@ export const addProfileEducation = createAsyncThunk<
 
     try {
       const response = await axios.post(
-        API_ENDPOINTS.CREATE_OR_UPDATE_PROFILE_EDUCATION,
+        API_ENDPOINTS.PROFILE_EDUCATION,
         { education: userProfileEducation }
       );
 
@@ -168,7 +246,7 @@ export const updateProfileEducation = createAsyncThunk<
 
     try {
       const response = await axios.put(
-        API_ENDPOINTS.CREATE_OR_UPDATE_PROFILE_EDUCATION,
+        API_ENDPOINTS.PROFILE_EDUCATION,
         { education: userProfileEducation }
       );
 
@@ -195,7 +273,7 @@ export const deleteProfileExperience = createAsyncThunk<
     }
 
     try {
-      const URL = `${API_ENDPOINTS.CREATE_OR_UPDATE_PROFILE_EXPERIENCE}/${experienceId}`;
+      const URL = `${API_ENDPOINTS.PROFILE_EXPERIENCE}/${experienceId}`;
       const response = await axios.delete(URL);
 
       return response.data.profile;
@@ -221,7 +299,7 @@ export const deleteProfileEducation = createAsyncThunk<
     }
 
     try {
-      const URL = `${API_ENDPOINTS.CREATE_OR_UPDATE_PROFILE_EDUCATION}/${educationId}`;
+      const URL = `${API_ENDPOINTS.PROFILE_EDUCATION}/${educationId}`;
       const response = await axios.delete(URL);
 
       return response.data.profile;
@@ -247,7 +325,7 @@ export const deleteAccount = createAsyncThunk<
     }
 
     try {
-      const response = await axios.delete(API_ENDPOINTS.DELETE_PROFILE);
+      const response = await axios.delete(API_ENDPOINTS.PROFILE);
 
       dispatch(authActions.logout());
 

@@ -76,8 +76,6 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
     instagramState,
   ];
 
-  console.log(formData);
-
   const isButtonDisabled = formData.some(({ isValid }) => !isValid);
 
   const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {

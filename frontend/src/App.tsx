@@ -20,6 +20,7 @@ const CreateProfilePage = lazy(() => import('@pages/CreateProfilePage/CreateProf
 const EditProfilePage = lazy(() => import('@pages/EditProfilePage/EditProfilePage'));
 const AddEducationPage = lazy(() => import('@pages/AddEducationPage/AddEducationPage'));
 const AddExperiencePage = lazy(() => import('@pages/AddExperiencePage/AddExperiencePage'));
+const ProfilesPage = lazy(() => import('@pages/ProfilesPage/ProfilesPage'));
 
 const App: FC = () => {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
@@ -58,6 +59,11 @@ const App: FC = () => {
                   <Route
                     path={ROUTES.REGISTER}
                     element={<RegisterPage />}
+                  />
+
+                  <Route
+                    path={ROUTES.PROFILES}
+                    element={<ProfilesPage />}
                   />
 
                   <Route

@@ -8,11 +8,12 @@ import HeaderBrand from './HeaderBrand';
 import MobileMenu from './MobileMenu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import GroupIcon from '@mui/icons-material/Group';
 
 export const pages = [
   {
     title: 'Developers',
-    route: ROUTES.DEVELOPERS,
+    route: ROUTES.PROFILES,
   },
   {
     title: 'Register',
@@ -34,6 +35,11 @@ export const settings = [
     title: 'Dashboard',
     route: ROUTES.DASHBOARD,
     icon: <DashboardIcon />,
+  },
+  {
+    title: 'Developers',
+    route: ROUTES.PROFILES,
+    icon: <GroupIcon />,
   },
 ];
 
