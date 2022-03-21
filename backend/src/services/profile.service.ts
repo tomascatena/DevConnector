@@ -4,8 +4,10 @@ import { IExperience } from '@models/schemas/experience.schema';
 
 export const getProfileByUserId = async (userId: string) => {
   const profile = await Profile.findOne({ user: userId }).populate('user', [
-    'name',
+    'firstName',
+    'lastName',
     'avatar',
+    '_id',
   ]);
 
   return profile;

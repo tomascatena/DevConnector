@@ -21,6 +21,7 @@ const EditProfilePage = lazy(() => import('@pages/EditProfilePage/EditProfilePag
 const AddEducationPage = lazy(() => import('@pages/AddEducationPage/AddEducationPage'));
 const AddExperiencePage = lazy(() => import('@pages/AddExperiencePage/AddExperiencePage'));
 const ProfilesPage = lazy(() => import('@pages/ProfilesPage/ProfilesPage'));
+const ProfilePage = lazy(() => import('@pages/ProfilePage/ProfilePage'));
 
 const App: FC = () => {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
@@ -65,6 +66,13 @@ const App: FC = () => {
                     path={ROUTES.PROFILES}
                     element={<ProfilesPage />}
                   />
+
+                  <Route path={ROUTES.PROFILE}>
+                    <Route
+                      path=':userId'
+                      element={<ProfilePage />}
+                    />
+                    </Route>
 
                   <Route
                     path={ROUTES.DASHBOARD}

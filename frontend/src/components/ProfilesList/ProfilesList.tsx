@@ -3,7 +3,7 @@ import { useAppDispatch, useTypedSelector } from '@hooks/index';
 import { getAllProfiles } from '@store/features/profile/profile.thunk';
 import CustomBackdrop from '@components/CustomBackdrop/CustomBackdrop';
 import { Typography, Grid } from '@mui/material';
-import ProfileItem from '@components/ProfileItem/ProfileItem';
+import ProfilesListItem from '@components/ProfilesListItem/ProfilesListItem';
 
 type Props = {}
 
@@ -14,8 +14,6 @@ const ProfilesList:FC<Props> = () => {
   useEffect(() => {
     dispatch(getAllProfiles());
   }, []);
-
-  console.log(profiles);
 
   return (
     <>
@@ -41,7 +39,7 @@ const ProfilesList:FC<Props> = () => {
                 xs={12}
                 md={6}
               >
-                <ProfileItem profile={profile}/>
+                <ProfilesListItem profile={profile}/>
               </Grid>
             )
             : <Typography>No profiles found</Typography>

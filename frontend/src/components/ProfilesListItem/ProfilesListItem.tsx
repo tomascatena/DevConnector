@@ -39,7 +39,7 @@ const ProfileItem:FC<Props> = ({ profile }) => {
           <CardContent sx={{ flex: '1 0 auto' }}>
             <TypographyLink
               variant="h5"
-              onClick={() => navigate(`${ROUTES.PROFILES}/${user._id}`)}
+              onClick={() => navigate(`${ROUTES.PROFILE}/${user._id}`)}
               color='primary'
             >
               {fullName}

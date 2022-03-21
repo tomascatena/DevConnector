@@ -56,7 +56,7 @@ export const getProfileById = createAsyncThunk<
     }
 
     try {
-      const URL = `${API_ENDPOINTS.LOGGED_IN_USER_PROFILE}/${userId}`;
+      const URL = `${API_ENDPOINTS.PROFILE_USER}/${userId}`;
       const response = await axios.get(URL);
 
       return response.data.profile;

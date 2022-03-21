@@ -17,6 +17,7 @@ export const getUser = catchAsync(
         firstName: user?.firstName,
         lastName: user?.lastName,
         avatar: user?.avatar,
+        _id: user?._id,
       },
     });
   }
@@ -40,6 +41,7 @@ export const loginUser = catchAsync(
         firstName: user?.firstName,
         lastName: user?.lastName,
         avatar: user?.avatar,
+        _id: user?._id,
       },
     });
   }
