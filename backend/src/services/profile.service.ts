@@ -12,7 +12,12 @@ export const getProfileByUserId = async (userId: string) => {
 };
 
 export const getAllProfiles = async () => {
-  const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+  const profiles = await Profile.find().populate('user', [
+    'firstName',
+    'lastName',
+    'avatar',
+    '_id',
+  ]);
 
   return profiles;
 };

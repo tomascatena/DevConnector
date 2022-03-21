@@ -2,6 +2,7 @@ import React, { FC, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
+import { SxProps } from '@mui/system';
 
 type Props = {
   to:string;
@@ -12,6 +13,7 @@ type Props = {
   isLoading?: boolean;
   loadingText?: string;
   hasFinishedLoading?: boolean
+  sx?: SxProps
 }
 
 const LinkButton:FC<Props> = ({
@@ -22,6 +24,7 @@ const LinkButton:FC<Props> = ({
   isDisabled = false,
   isLoading = false,
   loadingText,
+  sx
 }) => {
   const loadingState = (
     <>
@@ -37,6 +40,7 @@ const LinkButton:FC<Props> = ({
   return (
     <Button
       to={to}
+      sx={sx}
       component={Link}
       variant={variant}
       startIcon={startIcon}
