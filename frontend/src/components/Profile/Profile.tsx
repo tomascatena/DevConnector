@@ -1,75 +1,146 @@
-import React, { FC, useEffect } from 'react';
-import { useAppDispatch, useTypedSelector } from '@hooks/index';
-import { getProfileById } from '@store/features/profile/profile.thunk';
-import CustomBackdrop from '@components/CustomBackdrop/CustomBackdrop';
-import { Typography, Box } from '@mui/material';
-import { useParams } from 'react-router';
-import LinkButton from '@components/LinkButton/LinkButton';
-import { ROUTES } from '@constants/routes';
+import React, { FC } from 'react';
+import { Typography, Box, Avatar, Card, Chip, Divider } from '@mui/material';
+import { IProfile } from '../../typings/types';
+import LanguageIcon from '@mui/icons-material/Language';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import IconWithLink from '../IconWithLink/IconWithLink';
+import DoneIcon from '@mui/icons-material/Done';
 
-type Props = {}
+type Props = {
+  profile: IProfile
+}
 
-const Profile:FC<Props> = () => {
-  const dispatch = useAppDispatch();
-  const { loading, profile } = useTypedSelector(state => state.profile);
-  const { isAuthenticated, user } = useTypedSelector(state => state.auth);
+const Profile:FC<Props> = ({ profile }) => {
+  const {
+    user,
+    status,
+    company,
+    location,
+    skills,
+    social,
+    experience,
+    education,
+    website,
+    bio
+  } = profile;
+  const { firstName, lastName, avatar } = user;
 
-  const params = useParams();
-
-  useEffect(() => {
-    if (params.userId) {
-      dispatch(getProfileById(params.userId));
-    }
-  }, []);
-
-  console.log(user);
-  console.log(profile);
+  const fullName = `${firstName} ${lastName}`;
 
   return (
     <>
-      <Box sx={{ display: 'flex', gap: 2 }}>
-        <LinkButton
-          sx={{ textTransform: 'capitalize' }}
-          variant='outlined'
-          to={ROUTES.PROFILES}
-        >
-          Back To Profiles
-        </LinkButton>
+      <Box sx={{ display: 'inline-block', width: '100%' }}>
+        <Card sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <Avatar
+            sx={{ height: '10rem', width: '10rem', m: 1.5 }}
+            src={avatar}
+            alt={fullName}
+          />
 
-        {
-          isAuthenticated && user && profile &&
-          user._id === profile.user._id &&
-          <LinkButton
-            sx={{ textTransform: 'capitalize' }}
-            to={ROUTES.EDIT_PROFILE}
+          <Typography
+            variant='h4'
+            sx={{ my: 1 }}
           >
-            Edit Profile
-          </LinkButton>
-        }
-    </Box>
+            {fullName}
+          </Typography>
 
-    <Typography
-      variant='h4'
-      align='center'
-    >
-      User Profile
-    </Typography>
-    {
-      loading ? (
-        <CustomBackdrop
-          isOpen={loading}
-          message='Loading user profile. Please wait.'
-        />
-      ) : (
-        <>
+          <Typography variant='h6'>
+            {status} {company && <span>at {company}</span>}
+          </Typography>
+
+          <Typography variant='body1' >
+            {location}
+          </Typography>
+
+          <Box sx={{ my: 3, display: ' flex', gap: 2 }}>
+            <IconWithLink
+              href={website}
+              icon={<LanguageIcon fontSize='medium'/>}
+            />
+
+            <IconWithLink
+              href={social?.twitter}
+              icon={<TwitterIcon fontSize='medium'/>}
+            />
+
+            <IconWithLink
+              href={social?.facebook}
+              icon={<FacebookIcon fontSize='medium'/>}
+            />
+
+            <IconWithLink
+              href={social?.linkedin}
+              icon={<LinkedInIcon fontSize='medium'/>}
+            />
+
+            <IconWithLink
+              href={social?.youtube}
+              icon={<YouTubeIcon fontSize='medium'/>}
+            />
+
+            <IconWithLink
+              href={social?.instagram}
+              icon={<InstagramIcon fontSize='medium'/>}
+            />
+          </Box>
+        </Card>
+      </Box>
+
+      <Box sx={{ display: 'inline-block', width: '100%' }}>
+        <Card sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', p: 3 }}>
           {
-          profile
-            ? <Typography>{profile.user.firstName}</Typography>
-            : <Typography>No profile found</Typography>
+            bio &&
+            <>
+              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+                <Typography
+                  variant='h5'
+                  color='primary'
+                >
+                  {firstName}{firstName?.slice(-1) === 's' ? "'" : 's'} Bio
+                </Typography>
+
+                {
+                  bio &&
+                  <Typography variant='body1'>
+                    {bio}
+                  </Typography>
+                }
+              </Box>
+
+              <Divider
+                flexItem
+                sx={{ my: 3 }}
+              />
+            </>
           }
-        </>
-      )
-    }
+
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+            <Typography
+              variant='h5'
+              color='primary'
+            >
+              Skill Set
+            </Typography>
+
+            <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+              {skills.map(skill =>
+                <Chip
+                  key={skill}
+                  label={skill}
+                  variant="outlined"
+                  onDelete={() => {}}
+                  onClick={() => {}}
+                  deleteIcon={<DoneIcon />}
+                />
+              )}
+            </Box>
+          </Box>
+        </Card>
+      </Box>
     </>
   );
 };
