@@ -11,13 +11,15 @@ type Props = {
   setSelectedEducation: Dispatch<SetStateAction<Nullable<Partial<IEducation>>>>
   setOpenEditDialog: Dispatch<SetStateAction<boolean>>
   setOpenDeleteDialog: Dispatch<SetStateAction<boolean>>
+  allowEditAndDelete?: boolean
 }
 
 const EducationItem:FC<Props> = ({
   education,
   setSelectedEducation,
   setOpenEditDialog,
-  setOpenDeleteDialog
+  setOpenDeleteDialog,
+  allowEditAndDelete = true
 }) => {
   const handleEditExperience = () => {
     setSelectedEducation(education);
@@ -42,25 +44,28 @@ const EducationItem:FC<Props> = ({
           </Typography>
         </Box>
 
-        <Box sx={{ display: 'flex', gap: 2, alignItems: 'baseline' }}>
-          <Tooltip title="Edit Education">
-            <IconButton
-              onClick={handleEditExperience}
-              aria-label="edit"
-            >
-              <EditIcon />
-            </IconButton>
-          </Tooltip>
+        {
+          allowEditAndDelete &&
+          <Box sx={{ display: 'flex', gap: 2, alignItems: 'baseline' }}>
+            <Tooltip title="Edit Education">
+              <IconButton
+                onClick={handleEditExperience}
+                aria-label="edit"
+              >
+                <EditIcon />
+              </IconButton>
+            </Tooltip>
 
-          <Tooltip
-            onClick={handleDeleteExperience}
-            title="Delete Education"
-          >
-            <IconButton aria-label="delete">
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        </Box>
+            <Tooltip
+              onClick={handleDeleteExperience}
+              title="Delete Education"
+            >
+              <IconButton aria-label="delete">
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
+          </Box>
+        }
       </Box>
 
       <Typography

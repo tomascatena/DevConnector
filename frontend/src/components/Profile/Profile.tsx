@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Typography, Box, Avatar, Card, Chip, Divider } from '@mui/material';
+import { Typography, Box, Avatar, Card, Chip, Divider, Grid } from '@mui/material';
 import { IProfile } from '../../typings/types';
 import LanguageIcon from '@mui/icons-material/Language';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -9,6 +9,8 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import IconWithLink from '../IconWithLink/IconWithLink';
 import DoneIcon from '@mui/icons-material/Done';
+import ExperienceTimeline from '@components/ExperienceTimeline/ExperienceTimeline';
+import EducationList from '@components/EducationList/EducationList';
 
 type Props = {
   profile: IProfile
@@ -96,10 +98,7 @@ const Profile:FC<Props> = ({ profile }) => {
             bio &&
             <>
               <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-                <Typography
-                  variant='h5'
-                  color='primary'
-                >
+                <Typography variant='h5'>
                   {firstName}{firstName?.slice(-1) === 's' ? "'" : 's'} Bio
                 </Typography>
 
@@ -119,10 +118,7 @@ const Profile:FC<Props> = ({ profile }) => {
           }
 
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
-            <Typography
-              variant='h5'
-              color='primary'
-            >
+            <Typography variant='h5'>
               Skill Set
             </Typography>
 
@@ -140,6 +136,58 @@ const Profile:FC<Props> = ({ profile }) => {
             </Box>
           </Box>
         </Card>
+      </Box>
+
+      <Box sx={{ display: 'inline-block', width: '100%' }}>
+        <Grid
+          container
+          spacing={2}
+        >
+          <Grid
+            item
+            xs={12}
+            md={6}
+          >
+            <Card
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                p: 3,
+                flex: 1
+              }}
+            >
+              <ExperienceTimeline
+                experience={experience}
+                allowEditAndDelete={false}
+              />
+            </Card>
+          </Grid>
+
+          <Grid
+            item
+            xs={12}
+            md={6}
+            sx={{ display: 'flex', flexDirection: 'column' }}
+          >
+            <Card
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                p: 3,
+                flex: 1
+              }}
+            >
+              <EducationList
+                allowEditAndDelete={false}
+                education={education}
+              />
+            </Card>
+          </Grid>
+        </Grid>
       </Box>
     </>
   );

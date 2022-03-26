@@ -13,9 +13,10 @@ import { sortISODates } from '@utils/dateTime';
 
 type Props = {
   experience: IExperience[]
+  allowEditAndDelete?: boolean
 }
 
-const ExperienceTimeline:FC<Props> = ({ experience }) => {
+const ExperienceTimeline:FC<Props> = ({ experience, allowEditAndDelete = true }) => {
   const { setAlert } = useActions();
   const dispatch = useAppDispatch();
   const { loading } = useTypedSelector((state) => state.profile);
@@ -57,7 +58,7 @@ const ExperienceTimeline:FC<Props> = ({ experience }) => {
         <Grid
           item
           xs={12}
-          md={8}
+          md={allowEditAndDelete ? 8 : 12}
         >
           {
           experience.length
@@ -72,6 +73,7 @@ const ExperienceTimeline:FC<Props> = ({ experience }) => {
                     setSelectedExperience={setSelectedExperience}
                     setOpenEditDialog={setOpenEditDialog}
                     setOpenDeleteDialog={setOpenDeleteDialog}
+                    allowEditAndDelete={allowEditAndDelete}
                   />
                   )}
               </Timeline>

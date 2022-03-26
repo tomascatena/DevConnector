@@ -19,13 +19,15 @@ type Props = {
   setSelectedExperience: Dispatch<SetStateAction<Nullable<Partial<IExperience>>>>
   setOpenEditDialog: Dispatch<SetStateAction<boolean>>
   setOpenDeleteDialog: Dispatch<SetStateAction<boolean>>
+  allowEditAndDelete?: boolean
 }
 
 const ExperienceItem:FC<Props> = ({
   experience,
   setSelectedExperience,
   setOpenEditDialog,
-  setOpenDeleteDialog
+  setOpenDeleteDialog,
+  allowEditAndDelete = true
 }) => {
   const handleEditExperience = () => {
     setSelectedExperience(experience);
@@ -71,25 +73,28 @@ const ExperienceItem:FC<Props> = ({
               </Typography>
             </Box>
 
-            <Box sx={{ display: 'flex', gap: 2, alignItems: 'baseline' }}>
-              <Tooltip title="Edit Item">
-                <IconButton
-                  onClick={handleEditExperience}
-                  aria-label="edit"
-                >
-                  <EditIcon />
-                </IconButton>
-              </Tooltip>
+            {
+              allowEditAndDelete &&
+              <Box sx={{ display: 'flex', gap: 2, alignItems: 'baseline' }}>
+                <Tooltip title="Edit Item">
+                  <IconButton
+                    onClick={handleEditExperience}
+                    aria-label="edit"
+                  >
+                    <EditIcon />
+                  </IconButton>
+                </Tooltip>
 
-              <Tooltip title="Delete Experience">
-                <IconButton
-                  onClick={handleDeleteExperience}
-                  aria-label="delete"
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </Tooltip>
-            </Box>
+                <Tooltip title="Delete Experience">
+                  <IconButton
+                    onClick={handleDeleteExperience}
+                    aria-label="delete"
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                </Tooltip>
+              </Box>
+            }
           </Box>
 
           <Typography

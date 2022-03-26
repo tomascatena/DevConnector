@@ -12,9 +12,10 @@ import { sortISODates } from '@utils/dateTime';
 
 type Props = {
   education: IEducation[]
+  allowEditAndDelete?: boolean
 }
 
-const EducationList:FC<Props> = ({ education }) => {
+const EducationList:FC<Props> = ({ education, allowEditAndDelete = true }) => {
   const { setAlert } = useActions();
   const dispatch = useAppDispatch();
   const { loading } = useTypedSelector((state) => state.profile);
@@ -56,7 +57,8 @@ const EducationList:FC<Props> = ({ education }) => {
         <Grid
           item
           xs={12}
-          md={6}
+          md={allowEditAndDelete ? 6 : 9}
+          sx={{ margin: 'auto', mt: 2 }}
         >
           {
           education.length
@@ -69,6 +71,7 @@ const EducationList:FC<Props> = ({ education }) => {
                     setOpenEditDialog={setOpenEditDialog}
                     setOpenDeleteDialog={setOpenDeleteDialog}
                     setSelectedEducation={setSelectedEducation}
+                    allowEditAndDelete={allowEditAndDelete}
                   />
                 )
             : <Typography color='text.primary'>No education credentials to show.</Typography>
