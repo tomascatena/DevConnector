@@ -168,8 +168,8 @@ export interface IGithubRepo {
   topics: string[];
   visibility: string;
   forks: number;
-  open_issues: 0;
-  watchers: 0;
+  open_issues: number;
+  watchers: number;
   default_branch: string;
   languages: { [key: string]: number };
 }
