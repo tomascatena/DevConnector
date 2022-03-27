@@ -3,17 +3,17 @@ import { Typography } from '@mui/material';
 import { ROUTES } from '@constants/routes';
 import { validate } from '@utils/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import CustomInput from '@components/CustomInput/CustomInput';
+import CustomInput from '@ui-elements/CustomInput/CustomInput';
 import { LoginContainer, LoginPaper, StyledForm, StyledLink } from './LoginPage.styled';
 import { useAppDispatch } from '@hooks/index';
 import { login } from '@store/features/auth/auth.thunk';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
-import CustomAlert from '@components/CustomAlert/CustomAlert';
+import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
 import { useNavigate } from 'react-router';
 import { useLocation } from 'react-router-dom';
-import LoadingButton from '@components/LoadingButton/LoadingButton';
+import LoadingButton from '@components/ui-elements/LoadingButton/LoadingButton';
 import { LocationState } from '@components/routing/ProtectedRoute/ProtectedRoute';
-import TextWithIcon from '@components/TextWithIcon/TextWithIcon';
+import TextWithIcon from '@ui-elements/TextWithIcon/TextWithIcon';
 
 const RegisterPage: FC = () => {
   const [emailState, setEmailState] = useState({

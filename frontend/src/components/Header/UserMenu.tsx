@@ -1,5 +1,5 @@
 import { FC, Dispatch, SetStateAction, MouseEvent } from 'react';
-import MaterialUISwitch from '@components/MUISwitch/MUISwitch';
+import MaterialUISwitch from '@ui-elements/MUISwitch/MUISwitch';
 import {
   Avatar,
   Tooltip,

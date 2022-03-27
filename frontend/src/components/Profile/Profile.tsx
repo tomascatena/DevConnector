@@ -7,28 +7,11 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import IconWithLink from '../IconWithLink/IconWithLink';
+import IconWithLink from '@ui-elements/IconWithLink/IconWithLink';
 import DoneIcon from '@mui/icons-material/Done';
 import ExperienceTimeline from '@components/ExperienceTimeline/ExperienceTimeline';
 import EducationList from '@components/EducationList/EducationList';
-import { styled } from '@mui/system';
-
-interface CustomBadgeProps {
-  badgeColor?: 'primary' | 'secondary' | 'error' | 'warning' | 'info' | 'success'
-}
-
-export const CustomBadge = styled(Typography, {
-  shouldForwardProp: (props) => {
-    return props !== 'badgeColor';
-  },
-})<CustomBadgeProps>(({ theme, badgeColor = 'primary' }) => ({
-  background: theme.palette[badgeColor].main,
-  color: theme.palette.mode === 'light' ? theme.palette.common.white : theme.palette.common.black,
-  borderRadius: theme.spacing(2),
-  padding: '0.1rem 0.8rem',
-  display: 'inline-block',
-  fontSize: '0.9rem'
-}));
+import { CustomBadge } from '@ui-elements/CustomBadge/CustomBadge';
 
 type Props = {
   selectedUserProfile: IProfile;

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Backdrop from '@mui/material/Backdrop';
-import CircularLoader from '@components/CircularLoader/CircularLoader';
+import CircularLoader from '@ui-elements/CircularLoader/CircularLoader';
 import { Typography } from '@mui/material';
 
 type Props = {

@@ -2,7 +2,7 @@ import ProfilesList from '@components/ProfilesList/ProfilesList';
 import React, { FC } from 'react';
 import { styled } from '@mui/system';
 import { Container, Typography } from '@mui/material';
-import TextWithIcon from '@components/TextWithIcon/TextWithIcon';
+import TextWithIcon from '@ui-elements/TextWithIcon/TextWithIcon';
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 
 type Props = {}

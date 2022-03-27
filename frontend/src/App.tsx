@@ -8,7 +8,7 @@ import Footer from './components/Footer/Footer';
 import { MainLayout, MainBox } from './App.styled';
 import { ROUTES } from '@constants/routes';
 import ProtectedRoute from '@components/routing/ProtectedRoute/ProtectedRoute';
-import CustomBackdrop from '@components/CustomBackdrop/CustomBackdrop';
+import CustomBackdrop from '@ui-elements/CustomBackdrop/CustomBackdrop';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 

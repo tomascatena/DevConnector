@@ -5,10 +5,10 @@ import { Typography, Grid } from '@mui/material';
 import { useTypedSelector, useAppDispatch, useActions } from '@hooks/index';
 import { Timeline } from '@mui/lab';
 import { deleteProfileExperience, updateProfileExperience } from '@store/features/profile/profile.thunk';
-import CustomDialog from '@components/CustomDialog/CustomDialog';
+import CustomDialog from '@ui-elements/CustomDialog/CustomDialog';
 import ExperienceForm from '@components/ExperienceForm/ExperienceForm';
-import CustomModalDialog from '@components/CustomModalDialog/CustomModalDialog';
-import CustomAlert from '@components/CustomAlert/CustomAlert';
+import CustomModalDialog from '@ui-elements/CustomModalDialog/CustomModalDialog';
+import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
 import { sortISODates } from '@utils/dateTime';
 
 type Props = {

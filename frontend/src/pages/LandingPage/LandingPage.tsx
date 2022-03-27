@@ -4,7 +4,7 @@ import { Box, Button, Typography } from '@mui/material';
 import showCaseImage from '../../assets/showCaseImage.png';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@constants/routes';
-import CustomAlert from '@components/CustomAlert/CustomAlert';
+import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
 import { useTypedSelector } from '@hooks/index';
 
 const LandingBox = styled(Box)(({ theme }) => ({

@@ -7,7 +7,7 @@ import { ROUTES } from '@constants/routes';
 import { useNavigate } from 'react-router';
 import { IProfile } from '../../typings/types';
 import ProfileForm from '@components/ProfileForm/ProfileForm';
-import CustomBackdrop from '@components/CustomBackdrop/CustomBackdrop';
+import CustomBackdrop from '@ui-elements/CustomBackdrop/CustomBackdrop';
 
 const EditProfilePage: FC = () => {
   const dispatch = useAppDispatch();

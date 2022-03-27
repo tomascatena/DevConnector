@@ -1,15 +1,15 @@
 import { useState, FC, FormEvent, Dispatch, SetStateAction } from 'react';
 import { StyledForm, ButtonsBox } from './EducationForm.styled';
 import { validate } from '../../utils/validator';
-import CustomInput from '@components/CustomInput/CustomInput';
-import LoadingButton from '@components/LoadingButton/LoadingButton';
+import CustomInput from '@ui-elements/CustomInput/CustomInput';
+import LoadingButton from '@ui-elements/LoadingButton/LoadingButton';
 import { IEducation, Nullable } from '../../typings/types';
 import { ROUTES } from '@constants/routes';
-import TwoElementsGrid from '@components/TwoElementsGrid/TwoElementsGrid';
-import LinkButton from '@components/LinkButton/LinkButton';
+import TwoElementsGrid from '@components/ui-elements/TwoElementsGrid/TwoElementsGrid';
+import LinkButton from '@ui-elements/LinkButton/LinkButton';
 import SaveIcon from '@mui/icons-material/Save';
-import CustomDatePicker from '@components/CustomDatePicker/CustomDatePicker';
-import CustomCheckbox from '@components/CustomCheckbox/CustomCheckbox';
+import CustomDatePicker from '@ui-elements/CustomDatePicker/CustomDatePicker';
+import CustomCheckbox from '@ui-elements/CustomCheckbox/CustomCheckbox';
 import { Button } from '@mui/material';
 
 type Props = {

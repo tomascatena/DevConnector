@@ -4,7 +4,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import SchoolIcon from '@mui/icons-material/School';
 import WorkIcon from '@mui/icons-material/Work';
 import { ROUTES } from '@constants/routes';
-import LinkButton from '@components/LinkButton/LinkButton';
+import LinkButton from '@ui-elements/LinkButton/LinkButton';
 
 type Props = {
   isFetchingProfile: boolean;

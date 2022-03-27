@@ -9,7 +9,7 @@ import { IconButton, Menu, Box, Button, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { pages, settings } from './Header';
 import HeaderBrand from './HeaderBrand';
-import MaterialUISwitch from '@components/MUISwitch/MUISwitch';
+import MaterialUISwitch from '@ui-elements/MUISwitch/MUISwitch';
 import { Link } from 'react-router-dom';
 import { useActions } from '@hooks/index';
 

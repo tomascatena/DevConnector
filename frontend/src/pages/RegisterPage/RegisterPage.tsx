@@ -9,13 +9,13 @@ import { Typography } from '@mui/material';
 import { ROUTES } from '@constants/routes';
 import { validate } from '@utils/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import CustomInput from '@components/CustomInput/CustomInput';
+import CustomInput from '@ui-elements/CustomInput/CustomInput';
 import { useAppDispatch, useTypedSelector } from '@hooks/index';
 import { register } from '@store/features/auth/auth.thunk';
 import { useNavigate } from 'react-router';
-import LoadingButton from '@components/LoadingButton/LoadingButton';
-import TextWithIcon from '@components/TextWithIcon/TextWithIcon';
-import TwoElementsGrid from '@components/TwoElementsGrid/TwoElementsGrid';
+import LoadingButton from '@components/ui-elements/LoadingButton/LoadingButton';
+import TextWithIcon from '@ui-elements/TextWithIcon/TextWithIcon';
+import TwoElementsGrid from '@components/ui-elements/TwoElementsGrid/TwoElementsGrid';
 
 const RegisterPage: FC = () => {
   const dispatch = useAppDispatch();

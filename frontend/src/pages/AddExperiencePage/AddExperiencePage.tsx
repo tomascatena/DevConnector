@@ -9,11 +9,11 @@ import {
 } from '@store/features/profile/profile.thunk';
 import { AddExperienceContainer, AddExperiencePaper } from './AddExperiencePage.styled';
 import { Typography } from '@mui/material';
-import CustomBackdrop from '@components/CustomBackdrop/CustomBackdrop';
-import TextWithIcon from '@components/TextWithIcon/TextWithIcon';
+import CustomBackdrop from '@ui-elements/CustomBackdrop/CustomBackdrop';
+import TextWithIcon from '@ui-elements/TextWithIcon/TextWithIcon';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import ExperienceForm from '@components/ExperienceForm/ExperienceForm';
-import CustomAlert from '@components/CustomAlert/CustomAlert';
+import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
 
 const AddExperiencePage:FC = () => {
   const { setAlert } = useActions();

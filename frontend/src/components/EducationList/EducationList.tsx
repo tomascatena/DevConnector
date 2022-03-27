@@ -4,10 +4,10 @@ import { IEducation, Nullable } from '../../typings/types';
 import { Typography, Grid } from '@mui/material';
 import { deleteProfileEducation, updateProfileEducation } from '@store/features/profile/profile.thunk';
 import { useTypedSelector, useAppDispatch, useActions } from '@hooks/index';
-import CustomDialog from '@components/CustomDialog/CustomDialog';
+import CustomDialog from '@ui-elements/CustomDialog/CustomDialog';
 import EducationForm from '@components/EducationForm/EducationForm';
-import CustomModalDialog from '../CustomModalDialog/CustomModalDialog';
-import CustomAlert from '@components/CustomAlert/CustomAlert';
+import CustomModalDialog from '@ui-elements/CustomModalDialog/CustomModalDialog';
+import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
 import { sortISODates } from '@utils/dateTime';
 
 type Props = {

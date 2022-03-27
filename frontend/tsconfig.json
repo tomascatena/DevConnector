@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -19,43 +15,20 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "typeRoots": [
-      "node_modules/@types",
-      "src/typings"
-    ],
+    "typeRoots": ["node_modules/@types", "src/typings"],
     "baseUrl": "./src",
     "paths": {
-      "@constants/*": [
-        "constants/*"
-      ],
-      "@hooks/*": [
-        "hooks/*"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@pages/*": [
-        "pages/*"
-      ],
-      "@themes/*": [
-        "themes/*"
-      ],
-      "@store/*": [
-        "store/*"
-      ],
-      "@utils/*": [
-        "utils/*"
-      ],
-      "@typings": [
-        "typings/*"
-      ],
-      "@utils": [
-        "utils/*"
-      ],
-    },
+      "@constants/*": ["constants/*"],
+      "@hooks/*": ["hooks/*"],
+      "@components/*": ["components/*"],
+      "@ui-elements/*": ["components/ui-elements/*"],
+      "@pages/*": ["pages/*"],
+      "@themes/*": ["themes/*"],
+      "@store/*": ["store/*"],
+      "@utils/*": ["utils/*"],
+      "@typings": ["typings/*"],
+      "@utils": ["utils/*"]
+    }
   },
-  "include": [
-    "src",
-    "src/typings"
-  ],
+  "include": ["src", "src/typings"]
 }

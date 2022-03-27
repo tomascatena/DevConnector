@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { useAppDispatch, useTypedSelector } from '@hooks/index';
 import { getAllProfiles } from '@store/features/profile/profile.thunk';
-import CustomBackdrop from '@components/CustomBackdrop/CustomBackdrop';
+import CustomBackdrop from '@ui-elements/CustomBackdrop/CustomBackdrop';
 import { Typography, Grid } from '@mui/material';
 import ProfilesListItem from '@components/ProfilesListItem/ProfilesListItem';
 
