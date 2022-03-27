@@ -58,7 +58,7 @@ const EducationList:FC<Props> = ({ education, allowEditAndDelete = true }) => {
           item
           xs={12}
           md={allowEditAndDelete ? 6 : 9}
-          sx={{ margin: 'auto', mt: 2 }}
+          sx={{ margin: allowEditAndDelete ? 0 : 'auto', mt: 2 }}
         >
           {
           education.length

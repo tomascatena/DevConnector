@@ -25,7 +25,7 @@ type Props = {}
 
 const ProfilePage:FC<Props> = () => {
   const dispatch = useAppDispatch();
-  const { loading, profile, repos } = useTypedSelector(state => state.profile);
+  const { loading, selectedUserProfile, repos } = useTypedSelector(state => state.profile);
   const { isAuthenticated, user } = useTypedSelector(state => state.auth);
 
   const params = useParams();
@@ -53,8 +53,8 @@ const ProfilePage:FC<Props> = () => {
           </LinkButton>
 
           {
-            isAuthenticated && user && profile &&
-            user._id === profile.user._id &&
+            isAuthenticated && user && selectedUserProfile &&
+            user._id === selectedUserProfile.user._id &&
             <LinkButton to={ROUTES.EDIT_PROFILE} >
               Edit Profile
             </LinkButton>
@@ -65,14 +65,14 @@ const ProfilePage:FC<Props> = () => {
         loading ? (
           <CustomBackdrop
             isOpen={loading}
-            message='Loading user profile. Please wait.'
+            message={`Loading ${!selectedUserProfile ? 'user profile' : 'user Github repos'}. Please wait.`}
           />
         ) : (
           <>
             {
-              profile
+              selectedUserProfile
                 ? <Profile
-                    profile={profile}
+                    selectedUserProfile={selectedUserProfile}
                     repos={repos}
                   />
                 : <Typography>No profile found</Typography>

@@ -22,6 +22,7 @@ import {
 
 export interface ProfileState {
   profile: Nullable<IProfile>;
+  selectedUserProfile: Nullable<IProfile>;
   profiles: Nullable<IProfile[]>;
   repos: Nullable<IGithubRepo[]>;
   loading: boolean;
@@ -33,6 +34,7 @@ export interface ProfileState {
 
 const initialState: ProfileState = {
   profile: null,
+  selectedUserProfile: null,
   profiles: null,
   repos: null,
   loading: false,
@@ -90,7 +92,7 @@ export const profileSlice = createSlice({
       })
       .addCase(getProfileById.pending, (state, action) => {
         if (!state.loading) {
-          state.profile = null;
+          state.selectedUserProfile = null;
           state.loading = true;
           state.isFetchingProfile = true;
           state.serverValidationErrors = null;
@@ -101,7 +103,7 @@ export const profileSlice = createSlice({
       .addCase(getProfileById.fulfilled, (state, action) => {
         const { requestId } = action.meta;
         if (state.loading && state.currentRequestId === requestId) {
-          state.profile = action.payload;
+          state.selectedUserProfile = action.payload;
           state.loading = false;
           state.isFetchingProfile = false;
           state.currentRequestId = undefined;
@@ -114,7 +116,7 @@ export const profileSlice = createSlice({
       .addCase(getProfileById.rejected, (state, action) => {
         const { requestId } = action.meta;
         if (state.loading && state.currentRequestId === requestId) {
-          state.profile = null;
+          state.selectedUserProfile = null;
           state.loading = false;
           state.isFetchingProfile = false;
           state.serverValidationErrors = action.payload?.errors ?? null;

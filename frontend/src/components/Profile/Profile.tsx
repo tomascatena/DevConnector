@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Typography, Box, Avatar, Card, Chip, Divider, Grid, Link, Badge } from '@mui/material';
+import { Typography, Box, Avatar, Card, Chip, Divider, Grid, Link } from '@mui/material';
 import { IGithubRepo, IProfile, Nullable } from '../../typings/types';
 import LanguageIcon from '@mui/icons-material/Language';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -31,11 +31,11 @@ export const CustomBadge = styled(Typography, {
 }));
 
 type Props = {
-  profile: IProfile;
+  selectedUserProfile: IProfile;
   repos: Nullable<IGithubRepo[]>
 }
 
-const Profile:FC<Props> = ({ profile, repos }) => {
+const Profile:FC<Props> = ({ selectedUserProfile, repos }) => {
   const {
     user,
     status,
@@ -48,7 +48,7 @@ const Profile:FC<Props> = ({ profile, repos }) => {
     website,
     bio,
     githubUsername
-  } = profile;
+  } = selectedUserProfile;
   const { firstName, lastName, avatar } = user;
 
   const fullName = `${firstName} ${lastName}`;
@@ -219,6 +219,8 @@ const Profile:FC<Props> = ({ profile, repos }) => {
         </Grid>
       </Box>
 
+      {
+      githubUsername && repos &&
       <Box sx={{ display: 'inline-block', width: '100%' }}>
         <Card sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', p: 3 }}>
           {
@@ -281,6 +283,7 @@ const Profile:FC<Props> = ({ profile, repos }) => {
           }
         </Card>
       </Box>
+      }
     </>
   );
 };
