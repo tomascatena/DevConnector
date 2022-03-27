@@ -99,26 +99,7 @@ export interface IGithubRepo {
   name: string;
   full_name: string;
   private: boolean;
-  owner: {
-      login: string;
-      id: number;
-      node_id: string;
-      avatar_url: string;
-      gravatar_id: string;
-      url: string;
-      html_url: string;
-      followers_url: string;
-      following_url: string;
-      gists_url: string;
-      starred_url: string;
-      subscriptions_url: string;
-      organizations_url: string;
-      repos_url: string;
-      events_url: string;
-      received_events_url: string;
-      type: string;
-      site_admin: boolean
-  };
+  owner: IOwner;
   html_url: string;
   description: string;
   fork: boolean;
@@ -181,7 +162,7 @@ export interface IGithubRepo {
   archived: boolean;
   disabled: boolean;
   open_issues_count: number;
-  license: Nullable<string>;
+  license: Nullable<ILicense>;
   allow_forking: boolean;
   is_template: boolean;
   topics: string[];
@@ -189,5 +170,35 @@ export interface IGithubRepo {
   forks: number;
   open_issues: 0;
   watchers: 0;
-  default_branch: string
+  default_branch: string;
+  languages: { [key: string]: number };
+}
+
+interface IOwner {
+    login: string;
+    id: number;
+    node_id: string;
+    avatar_url: string;
+    gravatar_id: string;
+    url: string;
+    html_url: string;
+    followers_url: string;
+    following_url: string;
+    gists_url: string;
+    starred_url: string;
+    subscriptions_url: string;
+    organizations_url: string;
+    repos_url: string;
+    events_url: string;
+    received_events_url: string;
+    type: string;
+    site_admin: boolean
+}
+
+interface ILicense {
+  key: string;
+  name: string;
+  spdx_id: string;
+  url: string;
+  node_id: string
 }

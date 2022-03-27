@@ -4,7 +4,7 @@ export const API_ENDPOINTS = {
   LOGGED_IN_USER_PROFILE: '/api/v1/profile/me',
   PROFILE_USER: '/api/v1/profile/user/',
   PROFILE: '/api/v1/profile',
-  GITHUB_REPOS: '/api/v1/profile/repos',
+  GITHUB_REPOS: '/api/v1/profile/github',
   PROFILE_EXPERIENCE: '/api/v1/profile/experience',
   PROFILE_EDUCATION: '/api/v1/profile/education',
 } as const;

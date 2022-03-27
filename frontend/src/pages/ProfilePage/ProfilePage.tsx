@@ -8,6 +8,8 @@ import { useAppDispatch, useTypedSelector } from '@hooks/index';
 import { getProfileById } from '@store/features/profile/profile.thunk';
 import CustomBackdrop from '@components/CustomBackdrop/CustomBackdrop';
 import { useParams } from 'react-router';
+import { getGithubRepos } from '../../store/features/profile/profile.thunk';
+import { IProfile } from '../../typings/types';
 
 export const ProfilePageContainer = styled(Container)(({ theme }) => ({
   color: theme.palette.primary.main,
@@ -23,14 +25,20 @@ type Props = {}
 
 const ProfilePage:FC<Props> = () => {
   const dispatch = useAppDispatch();
-  const { loading, profile } = useTypedSelector(state => state.profile);
+  const { loading, profile, repos } = useTypedSelector(state => state.profile);
   const { isAuthenticated, user } = useTypedSelector(state => state.auth);
 
   const params = useParams();
 
   useEffect(() => {
     if (params.userId) {
-      dispatch(getProfileById(params.userId));
+      dispatch(getProfileById(params.userId)).then(({ payload }) => {
+        const userProfile = payload as IProfile;
+
+        if (userProfile?.githubUsername) {
+          dispatch(getGithubRepos(userProfile.githubUsername));
+        }
+      });
     }
   }, []);
 
@@ -63,7 +71,10 @@ const ProfilePage:FC<Props> = () => {
           <>
             {
               profile
-                ? <Profile profile={profile} />
+                ? <Profile
+                    profile={profile}
+                    repos={repos}
+                  />
                 : <Typography>No profile found</Typography>
             }
           </>

@@ -1,5 +1,6 @@
 import { env } from '@config/config';
 import axios from 'axios';
+import { IGithubRepo } from '../types/types';
 
 enum Sort {
   Created = 'created',
@@ -35,5 +36,31 @@ export const fetchRepos = async (
     config
   );
 
-  return data;
+  const languagesURLs: string[] = [];
+  data.forEach((repo: IGithubRepo) => {
+    languagesURLs.push(repo.languages_url);
+  });
+
+  const reposLanguages: { [key: string]: number }[] = await Promise.all(
+    languagesURLs.map(async (url) => {
+      const resp = await axios.get(url);
+
+      const total = (Object.values(resp.data) as number[]).reduce(
+        (prev, current) => prev + current,
+        0
+      );
+
+      resp.data.total = total;
+
+      return resp.data;
+    })
+  );
+
+  const repos = data.map((repo: IGithubRepo, index: number) => {
+    repo.languages = reposLanguages[index];
+
+    return repo;
+  });
+
+  return repos;
 };

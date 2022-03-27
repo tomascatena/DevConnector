@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { Typography, Box, Avatar, Card, Chip, Divider, Grid } from '@mui/material';
-import { IProfile } from '../../typings/types';
+import { Typography, Box, Avatar, Card, Chip, Divider, Grid, Link, Badge } from '@mui/material';
+import { IGithubRepo, IProfile, Nullable } from '../../typings/types';
 import LanguageIcon from '@mui/icons-material/Language';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -11,12 +11,31 @@ import IconWithLink from '../IconWithLink/IconWithLink';
 import DoneIcon from '@mui/icons-material/Done';
 import ExperienceTimeline from '@components/ExperienceTimeline/ExperienceTimeline';
 import EducationList from '@components/EducationList/EducationList';
+import { styled } from '@mui/system';
 
-type Props = {
-  profile: IProfile
+interface CustomBadgeProps {
+  badgeColor?: 'primary' | 'secondary' | 'error' | 'warning' | 'info' | 'success'
 }
 
-const Profile:FC<Props> = ({ profile }) => {
+export const CustomBadge = styled(Typography, {
+  shouldForwardProp: (props) => {
+    return props !== 'badgeColor';
+  },
+})<CustomBadgeProps>(({ theme, badgeColor = 'primary' }) => ({
+  background: theme.palette[badgeColor].main,
+  color: theme.palette.mode === 'light' ? theme.palette.common.white : theme.palette.common.black,
+  borderRadius: theme.spacing(2),
+  padding: '0.1rem 0.8rem',
+  display: 'inline-block',
+  fontSize: '0.9rem'
+}));
+
+type Props = {
+  profile: IProfile;
+  repos: Nullable<IGithubRepo[]>
+}
+
+const Profile:FC<Props> = ({ profile, repos }) => {
   const {
     user,
     status,
@@ -27,11 +46,21 @@ const Profile:FC<Props> = ({ profile }) => {
     experience,
     education,
     website,
-    bio
+    bio,
+    githubUsername
   } = profile;
   const { firstName, lastName, avatar } = user;
 
   const fullName = `${firstName} ${lastName}`;
+
+  const renderRepoLanguages = (languages: { [key: string]: number }) => {
+    return Object.entries(languages).map(([key, value], index) => {
+      const totalLanguages = Object.values(languages).length - 1;
+      const languagePercentage = <span key={key}>{key} {(value / languages.total * 100).toFixed(2)}%{index < totalLanguages - 1 && ', '}</span>;
+
+      return key !== 'total' && languagePercentage;
+    });
+  };
 
   return (
     <>
@@ -188,6 +217,69 @@ const Profile:FC<Props> = ({ profile }) => {
             </Card>
           </Grid>
         </Grid>
+      </Box>
+
+      <Box sx={{ display: 'inline-block', width: '100%' }}>
+        <Card sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', p: 3 }}>
+          {
+            githubUsername &&
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, width: '100%' }}>
+              <Typography variant='h5'>
+                Github Repos
+              </Typography>
+
+              {
+                repos &&
+                repos.map(repo =>
+                  <Card
+                    sx={{ display: 'flex', width: '100%', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', p: 3 }}
+                    key={repo.id}
+                  >
+                    <Box>
+                      <Link
+                        href={repo.html_url}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      >
+                        {repo.full_name}
+                      </Link>
+
+                      <Typography variant='body1'>
+                        {repo.description}
+                      </Typography>
+
+                      <Typography variant='body2'>
+                        Languages:{' '}
+                        {renderRepoLanguages(repo.languages)}
+                      </Typography>
+
+                      {
+                        repo.license &&
+                        <Typography variant='body1'>
+                          {repo.license.name}
+                        </Typography>
+                      }
+                    </Box>
+
+                    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                      <CustomBadge badgeColor='success'>
+                        Stars: {repo.stargazers_count}
+                      </CustomBadge>
+
+                      <CustomBadge badgeColor='primary'>
+                        Watchers: {repo.watchers_count}
+                      </CustomBadge>
+
+                      <CustomBadge badgeColor='info'>
+                        Forks: {repo.forks_count}
+                      </CustomBadge>
+                    </Box>
+                  </Card>
+                )
+              }
+            </Box>
+          }
+        </Card>
       </Box>
     </>
   );
