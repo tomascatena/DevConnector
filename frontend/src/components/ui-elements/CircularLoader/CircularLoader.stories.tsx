@@ -15,6 +15,6 @@ const Template: ComponentStory<typeof CircularLoader> = (args) => <CircularLoade
 export const Standard = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Standard.args = {
-  size: 40,
+  size: 80,
   thickness: 4
 };
