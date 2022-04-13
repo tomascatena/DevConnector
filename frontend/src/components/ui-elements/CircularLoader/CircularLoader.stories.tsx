@@ -2,11 +2,15 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import CircularLoader from './CircularLoader';
+import { UIElementBox } from '../UIElementBox.styled';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'UI-Elements/CircularLoader',
   component: CircularLoader,
+  decorators: [
+    (Story, context) => <UIElementBox><Story {...context}/></UIElementBox>
+  ]
 } as ComponentMeta<typeof CircularLoader>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args

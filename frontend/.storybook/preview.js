@@ -6,8 +6,6 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider as Emotion10ThemeProvider } from 'emotion-theming';
-import Box from '@mui/material/Box';
-import { styled } from '@mui/system';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -34,14 +32,6 @@ export const globalTypes = {
   },
 };
 
-const MainBox = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
-  height: '100vh',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
 export const decorators = [
   (Story, context) => {
     const theme = context.globals.theme === 'light' ? lightTheme : darkTheme;
@@ -53,9 +43,7 @@ export const decorators = [
         <Emotion10ThemeProvider theme={theme}>
           <ThemeProvider theme={theme}>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <MainBox>
-                <Story {...context} />
-              </MainBox>
+              <Story {...context} />
             </LocalizationProvider>
           </ThemeProvider>
         </Emotion10ThemeProvider>
