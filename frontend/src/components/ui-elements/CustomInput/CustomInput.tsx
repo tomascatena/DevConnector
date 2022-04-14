@@ -31,7 +31,7 @@ interface FormFieldState {
 type Props = {
   inputState: FormFieldState;
   setInputState: Dispatch<SetStateAction<FormFieldState>>;
-  type: string;
+  type: 'text' | 'password' | 'email';
   label: string;
   validation: ValidatorResult;
   customHelperText?: string;

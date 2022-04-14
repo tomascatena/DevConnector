@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import CircularLoader from './CircularLoader';
-import { UIElementBox } from '../UIElementBox.styled';
+import { UIElementBox } from '../UIElementStoriesHelpers.styled';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
