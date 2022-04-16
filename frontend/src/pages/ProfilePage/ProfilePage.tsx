@@ -1,7 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import Profile from '@components/Profile/Profile';
-import { Container, Box, Typography } from '@mui/material';
-import { styled } from '@mui/system';
+import { Box, Typography } from '@mui/material';
 import LinkButton from '@ui-elements/LinkButton/LinkButton';
 import { ROUTES } from '@constants/routes';
 import { useAppDispatch, useTypedSelector } from '@hooks/index';
@@ -10,16 +9,7 @@ import CustomBackdrop from '@ui-elements/CustomBackdrop/CustomBackdrop';
 import { useParams } from 'react-router';
 import { getGithubRepos } from '../../store/features/profile/profile.thunk';
 import { IProfile } from '../../typings/types';
-
-export const ProfilePageContainer = styled(Container)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  gap: theme.spacing(3),
-  marginTop: theme.spacing(4),
-  marginBottom: theme.spacing(7),
-}));
+import { ProfilePageContainer } from './ProfilePage.styled';
 
 type Props = {}
 
