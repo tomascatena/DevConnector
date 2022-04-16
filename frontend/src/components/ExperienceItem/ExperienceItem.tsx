@@ -5,6 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { duration, formatDate } from '@utils/dateTime';
+import { EditAndDeleteBox, ExperienceItemBox, ExperienceItemHeaderBox } from './ExperienceItem.styled';
 
 type Props = {
   experience: IExperience;
@@ -32,8 +33,8 @@ const ExperienceItem:FC<Props> = ({
   };
 
   return (
-    <Box sx={{ color: 'text.primary', mb: 3, flex: 1 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+    <ExperienceItemBox>
+      <ExperienceItemHeaderBox>
         <Box>
           <Typography variant='body1'>
             <strong>{experience.title}</strong>
@@ -46,7 +47,7 @@ const ExperienceItem:FC<Props> = ({
 
         {
           allowEditAndDelete &&
-          <Box sx={{ display: 'flex', gap: 2, alignItems: 'baseline' }}>
+          <EditAndDeleteBox>
             <Tooltip title="Edit Experience">
               <IconButton
                 onClick={handleEditExperience}
@@ -64,9 +65,9 @@ const ExperienceItem:FC<Props> = ({
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
-          </Box>
+          </EditAndDeleteBox>
         }
-      </Box>
+      </ExperienceItemHeaderBox>
 
       <Typography
         variant='body2'
@@ -79,7 +80,7 @@ const ExperienceItem:FC<Props> = ({
       <Typography variant='body2'>
         {experience.description}
       </Typography>
-    </Box>
+    </ExperienceItemBox>
   );
 };
 
