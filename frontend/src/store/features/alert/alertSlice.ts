@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-export interface ProfileState {
+export interface AlertState {
   showAlert: boolean;
   message: string;
   variant: 'outlined' | 'filled';
@@ -8,7 +8,7 @@ export interface ProfileState {
   timeout: number;
 }
 
-const initialState: ProfileState = {
+const initialState: AlertState = {
   showAlert: false,
   message: '',
   variant: 'filled',
@@ -17,7 +17,7 @@ const initialState: ProfileState = {
 };
 
 export const alertSlice = createSlice({
-  name: 'profile',
+  name: 'alert',
   initialState,
   reducers: {
     setAlert(

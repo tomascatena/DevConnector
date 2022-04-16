@@ -3,7 +3,7 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Fade from '@mui/material/Fade';
 import { styled } from '@mui/system';
-import { useActions } from '@hooks/index';
+import { useActions } from '../../../hooks/index';
 
 export const StyledAlert = styled(Alert)(({ theme }) => ({
   position: 'absolute',
@@ -17,6 +17,7 @@ type Props = {
   shouldShowAlert: Boolean;
   variant?: 'outlined' | 'filled';
   severity?: 'error' | 'warning' | 'info' | 'success';
+  fadeTimeout?: number;
   timeout?: number;
   message: string;
 };
@@ -25,22 +26,23 @@ const CustomAlert: FC<Props> = ({
   shouldShowAlert,
   variant = 'filled',
   severity = 'error',
-  timeout = 1000,
+  fadeTimeout = 1000,
+  timeout = 5000,
   message,
 }) => {
   const { resetAlert } = useActions();
 
-  const [showError, setShowError] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     if (shouldShowAlert) {
-      setShowError(true);
+      setShowAlert(true);
 
       const timerId = setTimeout(() => {
-        setShowError(false);
+        setShowAlert(false);
 
-        setTimeout(() => resetAlert(), timeout); // wait for the fade to complete
-      }, 5000);
+        setTimeout(() => resetAlert(), fadeTimeout); // wait for the fade to complete
+      }, timeout);
 
       return () => {
         clearTimeout(timerId);
@@ -50,15 +52,15 @@ const CustomAlert: FC<Props> = ({
 
   return (
     <Fade
-      appear={showError}
-      in={showError}
-      timeout={timeout}
+      appear={showAlert}
+      in={showAlert}
+      timeout={fadeTimeout}
       unmountOnExit={true}
     >
       <StyledAlert
         severity={severity}
         variant={variant}
-        onClose={() => setShowError(false)}
+        onClose={() => setShowAlert(false)}
       >
         <AlertTitle>{message}</AlertTitle>
       </StyledAlert>

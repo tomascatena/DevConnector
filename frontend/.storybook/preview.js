@@ -6,6 +6,8 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider as Emotion10ThemeProvider } from 'emotion-theming';
+import { Provider } from 'react-redux';
+import { store } from '../src/store/store';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -50,4 +52,9 @@ export const decorators = [
       </React.StrictMode>
     );
   },
+  (Story, context) => (
+    <Provider store={store}>
+      <Story {...context} />
+    </Provider>
+  ),
 ];
