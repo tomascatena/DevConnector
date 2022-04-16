@@ -12,7 +12,7 @@ export const StyledDialog = styled(Dialog)(({ theme }) => ({
 
 export const StyledIconButton = styled(IconButton)(({ theme }) => ({
   position: 'absolute',
-  right: theme.spacing(8),
-  top: theme.spacing(8),
+  right: theme.spacing(2),
+  top: theme.spacing(1.5),
   color: theme.palette.grey[500],
 }));
