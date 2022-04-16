@@ -1,10 +1,9 @@
-import ExperienceTimelineItem from '@components/ExperienceTimelineItem/ExperienceTimelineItem';
+import ExperienceItem from '@components/ExperienceItem/ExperienceItem';
 import React, { FC, useState } from 'react';
 import { IExperience, Nullable } from '../../typings/types';
 import { Typography, Grid } from '@mui/material';
+import { deleteProfileEducation, updateProfileExperience } from '@store/features/profile/profile.thunk';
 import { useTypedSelector, useAppDispatch, useActions } from '@hooks/index';
-import { Timeline } from '@mui/lab';
-import { deleteProfileExperience, updateProfileExperience } from '@store/features/profile/profile.thunk';
 import CustomDialog from '@ui-elements/CustomDialog/CustomDialog';
 import ExperienceForm from '@components/ExperienceForm/ExperienceForm';
 import CustomModalDialog from '@ui-elements/CustomModalDialog/CustomModalDialog';
@@ -16,7 +15,7 @@ type Props = {
   allowEditAndDelete?: boolean
 }
 
-const ExperienceTimeline:FC<Props> = ({ experience, allowEditAndDelete = true }) => {
+const EducationList:FC<Props> = ({ experience, allowEditAndDelete = true }) => {
   const { setAlert } = useActions();
   const dispatch = useAppDispatch();
   const { loading } = useTypedSelector((state) => state.profile);
@@ -24,13 +23,13 @@ const ExperienceTimeline:FC<Props> = ({ experience, allowEditAndDelete = true })
 
   const [openEditDialog, setOpenEditDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-  const [selectedExperience, setSelectedExperience] = useState<Nullable<Partial<IExperience>>>(null);
+  const [selectedEducation, setSelectedExperience] = useState<Nullable<Partial<IExperience>>>(null);
 
-  const dispatchCreateOrUpdateExperience = (experienceForm: Partial<IExperience>) => {
+  const dispatchUpdateExperience = (experienceForm: Partial<IExperience>) => {
     dispatch(updateProfileExperience(experienceForm)).then(() => {
       setAlert({
         showAlert: true,
-        message: 'Experience updated',
+        message: 'Education updated',
         severity: 'success'
       });
     });
@@ -38,10 +37,10 @@ const ExperienceTimeline:FC<Props> = ({ experience, allowEditAndDelete = true })
 
   const dispatchDeleteExperience = (experienceId: string | undefined) => {
     if (experienceId) {
-      dispatch(deleteProfileExperience(experienceId)).then(() => {
+      dispatch(deleteProfileEducation(experienceId)).then(() => {
         setAlert({
           showAlert: true,
-          message: 'Experience deleted',
+          message: 'Education deleted',
           severity: 'info'
         });
       });
@@ -58,26 +57,23 @@ const ExperienceTimeline:FC<Props> = ({ experience, allowEditAndDelete = true })
         <Grid
           item
           xs={12}
-          md={allowEditAndDelete ? 8 : 12}
+          md={allowEditAndDelete ? 6 : 9}
+          sx={{ margin: allowEditAndDelete ? 0 : 'auto', mt: 2 }}
         >
           {
           experience.length
-            ? (
-              <Timeline sx={{ width: '100%' }}>
-                {[...experience]
-                  .sort(sortISODates)
-                  .map((experienceItem) =>
-                  <ExperienceTimelineItem
+            ? [...experience]
+                .sort(sortISODates)
+                .map((experienceItem) =>
+                  <ExperienceItem
                     key={experienceItem._id}
                     experience={experienceItem}
-                    setSelectedExperience={setSelectedExperience}
                     setOpenEditDialog={setOpenEditDialog}
                     setOpenDeleteDialog={setOpenDeleteDialog}
+                    setSelectedExperience={setSelectedExperience}
                     allowEditAndDelete={allowEditAndDelete}
                   />
-                  )}
-              </Timeline>
-              )
+                )
             : <Typography color='text.primary'>No experience credentials to show.</Typography>
           }
         </Grid>
@@ -86,23 +82,23 @@ const ExperienceTimeline:FC<Props> = ({ experience, allowEditAndDelete = true })
       <CustomDialog
         isDialogOpen={openEditDialog}
         setOpenDialog={setOpenEditDialog}
-        title='Edit Experience'
+        title='Edit Education'
       >
         <ExperienceForm
-          dispatchCreateOrUpdateExperience={dispatchCreateOrUpdateExperience}
+          dispatchCreateOrUpdateExperience={dispatchUpdateExperience}
           loading={loading}
           isDialog
           setOpenDialog={setOpenEditDialog}
-          experience={selectedExperience}
+          experience={selectedEducation}
         />
       </CustomDialog>
 
       <CustomModalDialog
         isDialogOpen={openDeleteDialog}
-        dialogTitle='Delete Experience'
+        dialogTitle='Delete Education'
         setOpenDialog={setOpenDeleteDialog}
         buttonText='Delete'
-        onButtonClick={() => dispatchDeleteExperience(selectedExperience?._id)}
+        onButtonClick={() => dispatchDeleteExperience(selectedEducation?._id)}
         buttonColor='error'
       >
         <div>
@@ -120,4 +116,4 @@ const ExperienceTimeline:FC<Props> = ({ experience, allowEditAndDelete = true })
   );
 };
 
-export default ExperienceTimeline;
+export default EducationList;

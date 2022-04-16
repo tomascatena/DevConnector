@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
-import { Box, Card, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { IProfile } from '../../../typings/types';
-import ExperienceTimeline from '@components/ExperienceTimeline/ExperienceTimeline';
+import ExperienceList from '@components/ExperienceList/ExperienceList';
 import EducationList from '@components/EducationList/EducationList';
+import { StyledBox, StyledCard } from './ExperienceAndEducation.styled';
 
 type Props = {
   selectedUserProfile: IProfile;
@@ -15,57 +16,39 @@ const ExperienceAndEducation:FC<Props> = ({ selectedUserProfile }) => {
   } = selectedUserProfile;
 
   return (
-  <Box sx={{ display: 'inline-block', width: '100%' }}>
-    <Grid
-      container
-      spacing={2}
-    >
+    <StyledBox>
       <Grid
-        item
-        xs={12}
-        md={6}
+        container
+        spacing={2}
       >
-        <Card
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            p: 3,
-            flex: 1
-          }}
+        <Grid
+          item
+          xs={12}
+          md={6}
         >
-          <ExperienceTimeline
-            experience={experience}
-            allowEditAndDelete={false}
-          />
-        </Card>
-      </Grid>
+          <StyledCard>
+            <ExperienceList
+              experience={experience}
+              allowEditAndDelete={false}
+            />
+          </StyledCard>
+        </Grid>
 
-      <Grid
-        item
-        xs={12}
-        md={6}
-        sx={{ display: 'flex', flexDirection: 'column' }}
-      >
-        <Card
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            p: 3,
-            flex: 1
-          }}
+        <Grid
+          item
+          xs={12}
+          md={6}
+          sx={{ display: 'flex', flexDirection: 'column' }}
         >
-          <EducationList
-            allowEditAndDelete={false}
-            education={education}
-          />
-        </Card>
+          <StyledCard>
+            <EducationList
+              allowEditAndDelete={false}
+              education={education}
+            />
+          </StyledCard>
+        </Grid>
       </Grid>
-    </Grid>
-  </Box>
+    </StyledBox>
   );
 };
 
