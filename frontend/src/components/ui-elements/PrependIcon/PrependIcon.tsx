@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { Box } from '@mui/material';
+import { PrependIconBox, IconBox } from './PrependIcon.styled';
 
 type Props = {
   icon: JSX.Element;
@@ -9,27 +9,13 @@ type Props = {
 
 const PrependIcon: FC<Props> = ({ icon, children, iconColor = 'text.main' }) => {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 2,
-        color: iconColor,
-      }}
-    >
-      <Box
-        sx={{
-          backgroundColor: '#eee',
-          display: 'flex',
-          padding: 0.5,
-          borderRadius: 1,
-        }}
-      >
+    <PrependIconBox iconColor={iconColor} >
+      <IconBox>
         {icon}
-      </Box>
+      </IconBox>
 
       {children}
-    </Box>
+    </PrependIconBox>
   );
 };
 

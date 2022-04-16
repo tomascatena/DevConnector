@@ -7,7 +7,7 @@ import {
   IconButton
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import { StyledDialog } from './CustomModalDialog.styled';
+import { StyledDialog, StyledIconButton } from './CustomModalDialog.styled';
 
 export interface Props {
   children: ReactNode;
@@ -42,18 +42,12 @@ const CustomModalDialog:FC<Props> = ({
       >
         {dialogTitle}
 
-        <IconButton
+        <StyledIconButton
           aria-label="close"
           onClick={handleClose}
-          sx={{
-            position: 'absolute',
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
         >
           <CloseIcon />
-        </IconButton>
+        </StyledIconButton>
       </DialogTitle>
 
       <DialogContent dividers>

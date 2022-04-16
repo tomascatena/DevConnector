@@ -9,6 +9,7 @@ import ExperienceForm from '@components/ExperienceForm/ExperienceForm';
 import CustomModalDialog from '@ui-elements/CustomModalDialog/CustomModalDialog';
 import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
 import { sortISODates } from '@utils/dateTime';
+import { ExperienceGridItem } from './ExperienceList.styled';
 
 type Props = {
   experience: IExperience[]
@@ -54,11 +55,11 @@ const EducationList:FC<Props> = ({ experience, allowEditAndDelete = true }) => {
       </Typography>
 
       <Grid container>
-        <Grid
+        <ExperienceGridItem
           item
           xs={12}
           md={allowEditAndDelete ? 6 : 9}
-          sx={{ margin: allowEditAndDelete ? 0 : 'auto', mt: 2 }}
+          allowEditAndDelete={allowEditAndDelete}
         >
           {
           experience.length
@@ -76,7 +77,7 @@ const EducationList:FC<Props> = ({ experience, allowEditAndDelete = true }) => {
                 )
             : <Typography color='text.primary'>No experience credentials to show.</Typography>
           }
-        </Grid>
+        </ExperienceGridItem>
       </Grid>
 
       <CustomDialog

@@ -1,8 +1,9 @@
 import { FC, Dispatch, SetStateAction } from 'react';
 import MaterialUISwitch from '@ui-elements/MUISwitch/MUISwitch';
-import { Box, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { pages } from './Header';
+import { GuestMenuBox } from './GuestMenu.styled';
 
 interface Props {
   isDarkTheme: boolean;
@@ -16,14 +17,7 @@ const GuestMenu: FC<Props> = ({
   setIsDarkTheme,
 }) => {
   return (
-    <Box
-      sx={{
-        justifyContent: 'flex-end',
-        flexGrow: 1,
-        gap: '1rem',
-        display: { xs: 'none', md: 'flex' },
-      }}
-    >
+    <GuestMenuBox >
       <MaterialUISwitch
         sx={{ my: 2, display: { xs: 'none', md: 'flex' } }}
         checked={isDarkTheme}
@@ -36,12 +30,16 @@ const GuestMenu: FC<Props> = ({
           onClick={handleCloseNavMenu}
           component={Link}
           to={route}
-          sx={{ my: 2, color: 'white', display: 'block' }}
+          sx={{
+            my: 2,
+            color: 'white',
+            display: 'block'
+          }}
         >
           {title}
         </Button>
       ))}
-    </Box>
+    </GuestMenuBox>
   );
 };
 

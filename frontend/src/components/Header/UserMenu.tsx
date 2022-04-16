@@ -11,26 +11,9 @@ import {
 } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { settings } from './Header';
-import { styled } from '@mui/system';
 import { Link } from 'react-router-dom';
 import { useActions, useTypedSelector } from '@hooks/index';
-
-const StyledBox = styled(Box)(({ theme }) => ({
-  display: 'none',
-
-  [theme.breakpoints.up('md')]: {
-    display: 'flex',
-  },
-
-  [theme.breakpoints.down('sm')]: {
-    display: 'none',
-  },
-
-  alignItems: 'center',
-  justifyContent: 'end',
-  flex: 1,
-  gap: theme.spacing(3),
-}));
+import { UserMenuBox } from './UserMenu.styled';
 
 interface Props {
   isDarkTheme: boolean;
@@ -58,7 +41,7 @@ const UserMenu: FC<Props> = ({
   };
 
   return (
-    <StyledBox>
+    <UserMenuBox>
       <MaterialUISwitch
         sx={{ display: { xs: 'none', md: 'flex' } }}
         checked={isDarkTheme}
@@ -131,7 +114,7 @@ const UserMenu: FC<Props> = ({
           </Button>
         </Box>
       </Menu>
-    </StyledBox>
+    </UserMenuBox>
   );
 };
 

@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { Typography, Box } from '@mui/material';
+import { Typography } from '@mui/material';
+import { TextWithIconBox } from './TextWithIcon.styled';
 
 type Props = {
   icon: JSX.Element;
@@ -8,11 +9,11 @@ type Props = {
 
 const TextWithIcon: FC<Props> = ({ icon, text }) => {
   return (
-    <Box sx={{ display: 'flex', gap: 1, mb: 3 }}>
+    <TextWithIconBox>
       {icon}
 
       <Typography color='text.primary'>{text}</Typography>
-    </Box>
+    </TextWithIconBox>
   );
 };
 

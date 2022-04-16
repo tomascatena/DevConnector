@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import Backdrop from '@mui/material/Backdrop';
 import CircularLoader from '@ui-elements/CircularLoader/CircularLoader';
 import { Typography } from '@mui/material';
+import { StyledBackdrop } from './CustomBackdrop.styled';
 
 type Props = {
   isOpen: boolean;
@@ -19,16 +19,7 @@ const CustomBackdrop:FC<Props> = ({
   textVariant = 'h4'
 }) => {
   return (
-    <Backdrop
-      sx={{
-        color: '#fff',
-        zIndex: (theme) => theme.zIndex.drawer + 1,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 4,
-      }}
-      open={isOpen}
-    >
+    <StyledBackdrop open={isOpen}>
       <CircularLoader
         size={loaderSize}
         thickness={loaderThickness}
@@ -41,7 +32,7 @@ const CustomBackdrop:FC<Props> = ({
       >
         {message}
       </Typography>
-    </Backdrop>
+    </StyledBackdrop>
   );
 };
 

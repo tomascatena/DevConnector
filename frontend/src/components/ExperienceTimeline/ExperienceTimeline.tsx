@@ -3,13 +3,13 @@ import React, { FC, useState } from 'react';
 import { IExperience, Nullable } from '../../typings/types';
 import { Typography, Grid } from '@mui/material';
 import { useTypedSelector, useAppDispatch, useActions } from '@hooks/index';
-import { Timeline } from '@mui/lab';
 import { deleteProfileExperience, updateProfileExperience } from '@store/features/profile/profile.thunk';
 import CustomDialog from '@ui-elements/CustomDialog/CustomDialog';
 import ExperienceForm from '@components/ExperienceForm/ExperienceForm';
 import CustomModalDialog from '@ui-elements/CustomModalDialog/CustomModalDialog';
 import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
 import { sortISODates } from '@utils/dateTime';
+import { StyledExperienceTimeline } from './ExperienceTimeline.styled';
 
 type Props = {
   experience: IExperience[]
@@ -63,20 +63,20 @@ const ExperienceTimeline:FC<Props> = ({ experience, allowEditAndDelete = true })
           {
           experience.length
             ? (
-              <Timeline sx={{ width: '100%' }}>
-                {[...experience]
-                  .sort(sortISODates)
-                  .map((experienceItem) =>
-                  <ExperienceTimelineItem
-                    key={experienceItem._id}
-                    experience={experienceItem}
-                    setSelectedExperience={setSelectedExperience}
-                    setOpenEditDialog={setOpenEditDialog}
-                    setOpenDeleteDialog={setOpenDeleteDialog}
-                    allowEditAndDelete={allowEditAndDelete}
-                  />
-                  )}
-              </Timeline>
+                <StyledExperienceTimeline>
+                  {[...experience]
+                    .sort(sortISODates)
+                    .map((experienceItem) =>
+                    <ExperienceTimelineItem
+                      key={experienceItem._id}
+                      experience={experienceItem}
+                      setSelectedExperience={setSelectedExperience}
+                      setOpenEditDialog={setOpenEditDialog}
+                      setOpenDeleteDialog={setOpenDeleteDialog}
+                      allowEditAndDelete={allowEditAndDelete}
+                    />
+                    )}
+                </StyledExperienceTimeline>
               )
             : <Typography color='text.primary'>No experience credentials to show.</Typography>
           }

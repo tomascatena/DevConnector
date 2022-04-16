@@ -1,9 +1,10 @@
 import { IProfile } from '../../typings/types';
 import React, { FC } from 'react';
-import { Typography, Avatar, Box, Card, CardContent, Divider, Chip } from '@mui/material';
+import { Typography, Divider, Chip } from '@mui/material';
 import { ROUTES } from '@constants/routes';
 import { useNavigate } from 'react-router';
 import { styled } from '@mui/system';
+import { ContentBox, ProfilesListItemBox, ProfilesListItemCard, SkillsBox, StyledAvatar, StyledCardContent } from './ProfilesListItem.styled';
 
 export const TypographyLink = styled(Typography)(({ theme }) => ({
   display: 'inline-block',
@@ -27,16 +28,15 @@ const ProfileItem:FC<Props> = ({ profile }) => {
   const fullName = `${firstName} ${lastName}`;
 
   return (
-    <Box sx={{ display: 'inline-block', width: '100%' }}>
-      <Card sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'flex-start', my: 3, minHeight: '10rem' }}>
-        <Avatar
-          sx={{ height: '6rem', width: '6rem', m: 1.5 }}
+    <ProfilesListItemBox>
+      <ProfilesListItemCard>
+        <StyledAvatar
           src={avatar}
           alt={fullName}
         />
 
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-          <CardContent sx={{ flex: '1 0 auto' }}>
+        <ContentBox>
+          <StyledCardContent>
             <TypographyLink
               variant="h5"
               onClick={() => navigate(`${ROUTES.PROFILE}/${user._id}`)}
@@ -66,7 +66,7 @@ const ProfileItem:FC<Props> = ({ profile }) => {
               sx={{ my: 2 }}
             />
 
-            <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+            <SkillsBox>
               {skills.map(skill =>
                 <Chip
                   key={skill}
@@ -75,11 +75,11 @@ const ProfileItem:FC<Props> = ({ profile }) => {
                   color='primary'
                 />
               )}
-            </Box>
-          </CardContent>
-        </Box>
-      </Card>
-    </Box>
+            </SkillsBox>
+          </StyledCardContent>
+        </ContentBox>
+      </ProfilesListItemCard>
+    </ProfilesListItemBox>
   );
 };
 
