@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import { Box } from '@mui/material';
 import PersonIcon from '@mui/icons-material/Person';
 import SchoolIcon from '@mui/icons-material/School';
 import WorkIcon from '@mui/icons-material/Work';
 import { ROUTES } from '@constants/routes';
 import LinkButton from '@ui-elements/LinkButton/LinkButton';
+import { DashboardActionsBox } from './DashboardActions.styled';
 
 type Props = {
   isFetchingProfile: boolean;
@@ -12,13 +12,7 @@ type Props = {
 
 const DashboardActions:FC<Props> = ({ isFetchingProfile }) => {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        gap: 3,
-        flexWrap: 'wrap'
-      }}
-    >
+    <DashboardActionsBox>
       <LinkButton
         to={ROUTES.EDIT_PROFILE}
         startIcon={<PersonIcon />}
@@ -40,7 +34,7 @@ const DashboardActions:FC<Props> = ({ isFetchingProfile }) => {
       >
         Add Education
       </LinkButton>
-    </Box>
+    </DashboardActionsBox>
   );
 };
 

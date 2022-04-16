@@ -9,6 +9,7 @@ import EducationForm from '@components/EducationForm/EducationForm';
 import CustomModalDialog from '@ui-elements/CustomModalDialog/CustomModalDialog';
 import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
 import { sortISODates } from '@utils/dateTime';
+import { EducationGridItem } from './EducationList.styled';
 
 type Props = {
   education: IEducation[]
@@ -54,11 +55,11 @@ const EducationList:FC<Props> = ({ education, allowEditAndDelete = true }) => {
       </Typography>
 
       <Grid container>
-        <Grid
+        <EducationGridItem
           item
           xs={12}
           md={allowEditAndDelete ? 6 : 9}
-          sx={{ margin: allowEditAndDelete ? 0 : 'auto', mt: 2 }}
+          allowEditAndDelete={allowEditAndDelete}
         >
           {
           education.length
@@ -76,7 +77,7 @@ const EducationList:FC<Props> = ({ education, allowEditAndDelete = true }) => {
                 )
             : <Typography color='text.primary'>No education credentials to show.</Typography>
           }
-        </Grid>
+        </EducationGridItem>
       </Grid>
 
       <CustomDialog

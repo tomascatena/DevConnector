@@ -5,6 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { duration, formatDate } from '@utils/dateTime';
+import { EditAndDeleteBox, EducationItemBox, HeadingBox } from './EducationItem.styled';
 
 type Props = {
   education: IEducation;
@@ -32,8 +33,8 @@ const EducationItem:FC<Props> = ({
   };
 
   return (
-    <Box sx={{ color: 'text.primary', mb: 3, flex: 1 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+    <EducationItemBox>
+      <HeadingBox>
         <Box>
           <Typography variant='body1'>
             <strong>{education.degree}</strong>
@@ -46,7 +47,7 @@ const EducationItem:FC<Props> = ({
 
         {
           allowEditAndDelete &&
-          <Box sx={{ display: 'flex', gap: 2, alignItems: 'baseline' }}>
+          <EditAndDeleteBox>
             <Tooltip title="Edit Education">
               <IconButton
                 onClick={handleEditExperience}
@@ -64,9 +65,9 @@ const EducationItem:FC<Props> = ({
                 <DeleteIcon />
               </IconButton>
             </Tooltip>
-          </Box>
+          </EditAndDeleteBox>
         }
-      </Box>
+      </HeadingBox>
 
       <Typography
         variant='body2'
@@ -86,7 +87,7 @@ const EducationItem:FC<Props> = ({
       <Typography variant='body2'>
         {education.description}
       </Typography>
-    </Box>
+    </EducationItemBox>
   );
 };
 
