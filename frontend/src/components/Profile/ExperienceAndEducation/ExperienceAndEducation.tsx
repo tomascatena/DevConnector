@@ -3,7 +3,7 @@ import { Grid } from '@mui/material';
 import { IProfile } from '../../../typings/types';
 import ExperienceList from '@components/ExperienceList/ExperienceList';
 import EducationList from '@components/EducationList/EducationList';
-import { StyledBox, StyledCard } from './ExperienceAndEducation.styled';
+import { StyledBox, StyledCard, ExperienceOrEducationGrid } from './ExperienceAndEducation.styled';
 
 type Props = {
   selectedUserProfile: IProfile;
@@ -21,7 +21,7 @@ const ExperienceAndEducation:FC<Props> = ({ selectedUserProfile }) => {
         container
         spacing={2}
       >
-        <Grid
+        <ExperienceOrEducationGrid
           item
           xs={12}
           md={6}
@@ -32,13 +32,12 @@ const ExperienceAndEducation:FC<Props> = ({ selectedUserProfile }) => {
               allowEditAndDelete={false}
             />
           </StyledCard>
-        </Grid>
+        </ExperienceOrEducationGrid>
 
-        <Grid
+        <ExperienceOrEducationGrid
           item
           xs={12}
           md={6}
-          sx={{ display: 'flex', flexDirection: 'column' }}
         >
           <StyledCard>
             <EducationList
@@ -46,7 +45,7 @@ const ExperienceAndEducation:FC<Props> = ({ selectedUserProfile }) => {
               education={education}
             />
           </StyledCard>
-        </Grid>
+        </ExperienceOrEducationGrid>
       </Grid>
     </StyledBox>
   );

@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { Typography, Box, Card, Chip, Divider } from '@mui/material';
+import { Typography, Chip, Divider } from '@mui/material';
 import DoneIcon from '@mui/icons-material/Done';
 import { IProfile } from '../../../typings/types';
+import { BioAndSkillsBox, StyledCard, SubsectionBox, SkillsBox } from './BioAndSkills.styled';
 
 type Props = {
   selectedUserProfile: IProfile;
@@ -17,12 +18,12 @@ const BioAndSkills:FC<Props> = ({ selectedUserProfile }) => {
   const { firstName } = user;
 
   return (
-  <Box sx={{ display: 'inline-block', width: '100%' }}>
-    <Card sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', p: 3 }}>
+  <BioAndSkillsBox>
+    <StyledCard>
       {
         bio &&
         <>
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+          <SubsectionBox>
             <Typography variant='h5'>
               {firstName}{firstName?.slice(-1) === 's' ? "'" : 's'} Bio
             </Typography>
@@ -33,7 +34,7 @@ const BioAndSkills:FC<Props> = ({ selectedUserProfile }) => {
                 {bio}
               </Typography>
             }
-          </Box>
+          </SubsectionBox>
 
           <Divider
             flexItem
@@ -42,12 +43,12 @@ const BioAndSkills:FC<Props> = ({ selectedUserProfile }) => {
         </>
       }
 
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+      <SubsectionBox>
         <Typography variant='h5'>
           Skill Set
         </Typography>
 
-        <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+        <SkillsBox>
           {skills.map(skill =>
             <Chip
               key={skill}
@@ -58,10 +59,10 @@ const BioAndSkills:FC<Props> = ({ selectedUserProfile }) => {
               deleteIcon={<DoneIcon />}
             />
           )}
-        </Box>
-      </Box>
-    </Card>
-  </Box>
+        </SkillsBox>
+      </SubsectionBox>
+    </StyledCard>
+  </BioAndSkillsBox>
   );
 };
 

@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { Typography, Box, Card, Link } from '@mui/material';
+import { Typography, Box, Link } from '@mui/material';
 import { IGithubRepo, Nullable } from '../../../typings/types';
 import { CustomBadge } from '@ui-elements/CustomBadge/CustomBadge';
+import { GithubRepoCard, GithubReposBox, GithubReposCard, SectionBox, StatsBox } from './GithubRepos.styled';
 
 type Props = {
   githubUsername: string;
@@ -19,11 +20,11 @@ const GithubRepos:FC<Props> = ({ githubUsername, repos }) => {
   };
 
   return (
-    <Box sx={{ display: 'inline-block', width: '100%' }}>
-      <Card sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', p: 3 }}>
+    <GithubReposBox>
+      <GithubReposCard>
         {
           githubUsername &&
-          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, width: '100%' }}>
+          <SectionBox>
             <Typography variant='h5'>
               Github Repos
             </Typography>
@@ -31,10 +32,7 @@ const GithubRepos:FC<Props> = ({ githubUsername, repos }) => {
             {
               repos &&
               repos.map(repo =>
-                <Card
-                  sx={{ display: 'flex', width: '100%', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between', p: 3 }}
-                  key={repo.id}
-                >
+                <GithubRepoCard key={repo.id}>
                   <Box>
                     <Link
                       href={repo.html_url}
@@ -61,7 +59,7 @@ const GithubRepos:FC<Props> = ({ githubUsername, repos }) => {
                     }
                   </Box>
 
-                  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
+                  <StatsBox>
                     <CustomBadge badgeColor='success'>
                       Stars: {repo.stargazers_count}
                     </CustomBadge>
@@ -73,14 +71,14 @@ const GithubRepos:FC<Props> = ({ githubUsername, repos }) => {
                     <CustomBadge badgeColor='info'>
                       Forks: {repo.forks_count}
                     </CustomBadge>
-                  </Box>
-                </Card>
+                  </StatsBox>
+                </GithubRepoCard>
               )
             }
-          </Box>
+          </SectionBox>
         }
-      </Card>
-    </Box>
+      </GithubReposCard>
+    </GithubReposBox>
   );
 };
 
