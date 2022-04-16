@@ -4,7 +4,6 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  IconButton
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { StyledDialog, StyledIconButton } from './CustomModalDialog.styled';
