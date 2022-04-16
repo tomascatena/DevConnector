@@ -17,47 +17,18 @@ export default {
 const Template: ComponentStory<typeof CustomBadge> = (args) => {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-      <CustomBadge
-        {...args}
-        badgeColor='primary'
-      >
-        Custom Badge Primary
-      </CustomBadge>
 
-      <CustomBadge
-        {...args}
-        badgeColor='secondary'
-      >
-        Custom Badge Secondary
-      </CustomBadge>
-
-      <CustomBadge
-        {...args}
-        badgeColor='error'
-      >
-        Custom Badge Error
-      </CustomBadge>
-
-      <CustomBadge
-        {...args}
-        badgeColor='warning'
-      >
-        Custom Badge Warning
-        </CustomBadge>
-
-      <CustomBadge
-        {...args}
-        badgeColor='info'
-      >
-        Custom Badge Info
-        </CustomBadge>
-
-      <CustomBadge
-        {...args}
-        badgeColor='success'
-      >
-        Custom Badge Success
-        </CustomBadge>
+      {
+        ['primary', 'secondary', 'error', 'warning', 'info', 'success'].map((badge, index) =>
+          <CustomBadge
+            key={index}
+            {...args}
+            badgeColor={(badge as 'primary' | 'secondary' | 'error' | 'warning' | 'info' | 'success')}
+          >
+            Custom Badge {badge.replace(/^\w/, (c) => c.toUpperCase())}
+          </CustomBadge>
+        )
+      }
     </Box>
   );
 };
