@@ -171,7 +171,7 @@ export interface IGithubRepo {
   open_issues: number;
   watchers: number;
   default_branch: string;
-  languages: { [key: string]: number } | unknown;
+  languages: { [key: string]: number };
 }
 
 interface IOwner {

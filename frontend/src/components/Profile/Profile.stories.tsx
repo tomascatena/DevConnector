@@ -22,5 +22,6 @@ export const Standard = Template.bind({});
 
 Standard.args = {
   selectedUserProfile: MOCK_USER_PROFILE,
+  // @ts-ignore
   repos: MOCK_GITHUB_REPOS
 };
