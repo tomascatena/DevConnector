@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
-import { setAuthToken } from '@utils/setAuthToken';
+import { setAuthToken } from '@utils/setAuthToken/setAuthToken';
 import { IUser, Nullable, ServerValidationError } from '../../../typings/types';
 import { login, register, getUser } from './auth.thunk';
 

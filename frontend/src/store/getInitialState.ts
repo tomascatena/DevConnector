@@ -3,7 +3,7 @@ import { profileActions } from './features/profile/profileSlice';
 import { store } from './store';
 import validator from 'validator';
 import { getUser } from './features/auth/auth.thunk';
-import { setAuthToken } from '../utils/setAuthToken';
+import { setAuthToken } from '../utils/setAuthToken/setAuthToken';
 
 export const getAccessToken = () => {
   try {

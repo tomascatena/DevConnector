@@ -11,8 +11,6 @@ export const authorizationHeader = header(
   .custom((value) => {
     const jwt = value.split(' ')[1];
 
-    console.log(value);
-
     return Boolean(jwt && validator.isJWT(jwt));
   })
   .withMessage('Invalid JWT')

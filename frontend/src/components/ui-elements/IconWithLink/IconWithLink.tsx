@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Link, Tooltip } from '@mui/material';
-import { addProtocolIfMissing } from '@utils/URLs';
+import { addProtocolIfMissing } from '@utils/URLs/URLs';
 
 type Props = {
   icon: JSX.Element;

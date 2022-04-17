@@ -4,7 +4,7 @@ import { StyledForm, ButtonsBox, SocialNetworkLinksBox, ShowSocialNetworkLinksBo
 import PersonIcon from '@mui/icons-material/Person';
 import TextWithIcon from '@ui-elements/TextWithIcon/TextWithIcon';
 import CustomSelect from '@ui-elements/CustomSelect/CustomSelect';
-import { validate } from '../../utils/validator';
+import { validate } from '../../utils/validator/validator';
 import { PROFESSIONAL_STATUS_OPTIONS } from '@constants/constants';
 import CustomInput from '@ui-elements/CustomInput/CustomInput';
 import TwitterIcon from '@mui/icons-material/Twitter';

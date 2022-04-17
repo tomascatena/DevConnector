@@ -1,7 +1,7 @@
 import { FC, useState, FormEvent, useEffect } from 'react';
 import { Typography } from '@mui/material';
 import { ROUTES } from '@constants/routes';
-import { validate } from '@utils/validator';
+import { validate } from '@utils/validator/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import CustomInput from '@ui-elements/CustomInput/CustomInput';
 import { LoginContainer, LoginPaper, StyledForm, StyledLink } from './LoginPage.styled';

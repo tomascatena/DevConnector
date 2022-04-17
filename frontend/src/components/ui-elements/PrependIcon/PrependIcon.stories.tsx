@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import PrependIcon from './PrependIcon';
 import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
 import CustomInput from '@ui-elements/CustomInput/CustomInput';
-import { validate } from '../../../utils/validator';
+import { validate } from '../../../utils/validator/validator';
 import TwitterIcon from '@mui/icons-material/Twitter';
 
 export default {

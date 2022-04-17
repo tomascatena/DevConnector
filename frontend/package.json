@@ -33,6 +33,7 @@
     "start": "BROWSER=none craco start",
     "build": "craco build",
     "test": "craco test",
+    "test:coverage": "craco test --coverage",
     "eject": "craco eject",
     "lint": "eslint src/**/*.ts src/**/*.tsx",
     "lint:fix": "eslint src/**/*.ts src/**/*.tsx --fix",
@@ -90,6 +91,7 @@
     "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^26.1.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.29.3",
@@ -98,5 +100,10 @@
     "webpack": "^5.72.0"
   },
   "proxy": "http://localhost:5000",
-  "cracoConfig": "config/craco.config.ts"
+  "cracoConfig": "config/craco.config.ts",
+  "jest": {
+    "moduleNameMapper": {
+      "^@helpers/(.+)": "<rootDir>/src/helpers/$1"
+    }
+  }
 }

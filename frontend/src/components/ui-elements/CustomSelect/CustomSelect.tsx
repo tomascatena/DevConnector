@@ -14,7 +14,7 @@ import {
   Select,
   MenuItem,
 } from '@mui/material';
-import { ValidatorResult } from '@utils/validator';
+import { ValidatorResult } from '@utils/validator/validator';
 import CheckIcon from '@mui/icons-material/Check';
 import { SelectChangeEvent } from '@mui/material/Select';
 

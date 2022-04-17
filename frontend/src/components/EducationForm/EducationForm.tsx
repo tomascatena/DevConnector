@@ -1,6 +1,6 @@
 import { useState, FC, FormEvent, Dispatch, SetStateAction } from 'react';
 import { StyledForm, ButtonsBox } from './EducationForm.styled';
-import { validate } from '../../utils/validator';
+import { validate } from '../../utils/validator/validator';
 import CustomInput from '@ui-elements/CustomInput/CustomInput';
 import LoadingButton from '@ui-elements/LoadingButton/LoadingButton';
 import { IEducation, Nullable } from '../../typings/types';

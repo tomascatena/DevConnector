@@ -20,7 +20,7 @@ import {
 import { useFormControl } from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { ValidatorResult } from '@utils/validator';
+import { ValidatorResult } from '@utils/validator/validator';
 import CheckIcon from '@mui/icons-material/Check';
 
 interface FormFieldState {

@@ -7,7 +7,7 @@ import {
 } from './RegisterPage.styled';
 import { Typography } from '@mui/material';
 import { ROUTES } from '@constants/routes';
-import { validate } from '@utils/validator';
+import { validate } from '@utils/validator/validator';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import CustomInput from '@ui-elements/CustomInput/CustomInput';
 import { useAppDispatch, useTypedSelector } from '@hooks/index';

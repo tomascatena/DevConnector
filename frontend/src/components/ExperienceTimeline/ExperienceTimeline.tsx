@@ -8,7 +8,7 @@ import CustomDialog from '@ui-elements/CustomDialog/CustomDialog';
 import ExperienceForm from '@components/ExperienceForm/ExperienceForm';
 import CustomModalDialog from '@ui-elements/CustomModalDialog/CustomModalDialog';
 import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
-import { sortISODates } from '@utils/dateTime';
+import { sortISODates } from '@utils/dateTime/dateTime';
 import { StyledExperienceTimeline } from './ExperienceTimeline.styled';
 
 type Props = {

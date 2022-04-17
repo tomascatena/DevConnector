@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { validate } from '../../../utils/validator';
+import { validate } from '../../../utils/validator/validator';
 import CustomInput from './CustomInput';
 import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
 

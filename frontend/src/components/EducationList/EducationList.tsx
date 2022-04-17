@@ -8,7 +8,7 @@ import CustomDialog from '@ui-elements/CustomDialog/CustomDialog';
 import EducationForm from '@components/EducationForm/EducationForm';
 import CustomModalDialog from '@ui-elements/CustomModalDialog/CustomModalDialog';
 import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
-import { sortISODates } from '@utils/dateTime';
+import { sortISODates } from '@utils/dateTime/dateTime';
 import { EducationGridItem } from './EducationList.styled';
 
 type Props = {

@@ -4,7 +4,7 @@ import { Typography, Box, Tooltip } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { duration, formatDate } from '@utils/dateTime';
+import { duration, formatDate } from '@utils/dateTime/dateTime';
 import { EditAndDeleteBox, HeadlineBox, TimelineContentBox } from './ExperienceTimelineItem.styled';
 import {
   TimelineItem,
