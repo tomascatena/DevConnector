@@ -8,9 +8,6 @@ import WarningIcon from '@mui/icons-material/Warning';
 export default {
   title: 'UI-Elements/CustomModalDialog',
   component: CustomModalDialog,
-  argTypes: {
-    type: { control: 'select', options: ['text', 'password'], defaultValue: 'text' },
-  },
   decorators: [
     (Story, context) => (
     <UIElementBox>

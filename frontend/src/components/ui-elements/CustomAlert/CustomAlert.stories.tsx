@@ -29,30 +29,17 @@ const Template: ComponentStory<typeof CustomAlert> = (args) => {
         </Button>
       </Box>
 
-      {
-        [
-          { top: 0, severity: 'error', message: 'This Is An Error Alert' },
-          { top: '5rem', severity: 'warning', message: 'This Is A Warning Alert' },
-          { top: '10rem', severity: 'info', message: 'This Is An Info Alert' },
-          { top: '15rem', severity: 'success', message: 'This Is A Success Alert' },
-        ].map((alert, index) => {
-          return (
-            <Box
-              key={index}
-              sx={{ position: 'absolute', top: alert.top, width: '100%' }}
-            >
-                <CustomAlert
-                  {...args}
-                  shouldShowAlert={showAlert}
-                  severity={(alert.severity as 'error' | 'warning' | 'info' | 'success')}
-                  message={alert.message}
-                />
-            </Box>
-          );
-        })
-      }
+      <CustomAlert
+        {...args}
+        shouldShowAlert={showAlert}
+      />
     </Box>
   );
 };
 
 export const Default = Template.bind({});
+
+Default.args = {
+  severity: 'error',
+  message: 'Alert message'
+};

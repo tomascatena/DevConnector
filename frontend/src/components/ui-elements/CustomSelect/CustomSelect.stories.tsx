@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { validate } from '../../../utils/validator';
-import CustomInput from './CustomInput';
+import CustomSelect from './CustomSelect';
 import { UIElementBox, InputContainer } from '../UIElementStoriesHelpers.styled';
+import { PROFESSIONAL_STATUS_OPTIONS } from '@constants/constants';
 
 export default {
-  title: 'UI-Elements/CustomInput',
-  component: CustomInput,
+  title: 'UI-Elements/CustomSelect',
+  component: CustomSelect,
   decorators: [
     (Story, context) => (
     <UIElementBox>
@@ -16,32 +17,30 @@ export default {
     </UIElementBox>
     ),
   ]
-} as ComponentMeta<typeof CustomInput>;
+} as ComponentMeta<typeof CustomSelect>;
 
-const Template: ComponentStory<typeof CustomInput> = (args) => {
+const Template: ComponentStory<typeof CustomSelect> = (args) => {
   const [localInputState, setLocalInputState] = useState(args.inputState);
 
   return (
-    <CustomInput
+    <CustomSelect
       {...args}
       inputState={localInputState}
       setInputState={setLocalInputState}
-      validation={validate(localInputState.value).required().isLength({ min: 3, max: 20 })}
-      isRequired
+      validation={validate(localInputState.value).required()}
     />
   );
 };
 
-export const InteractiveCustomInput = Template.bind({});
+export const InteractiveCustomSelect = Template.bind({});
 
-InteractiveCustomInput.args = {
+InteractiveCustomSelect.args = {
   setInputState: () => {},
-  type: 'text',
-  label: 'Location',
-  placeholder: 'Location',
-  customHelperText: 'City & state suggested (eg. Austin, TX).',
   inputState: {
     value: '',
     isValid: true
-  }
+  },
+  label: 'Select Your Professional Status',
+  customHelperText: 'Give us an idea of where you are in your career.',
+  options: PROFESSIONAL_STATUS_OPTIONS,
 };

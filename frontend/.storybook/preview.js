@@ -8,6 +8,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider as Emotion10ThemeProvider } from 'emotion-theming';
 import { Provider } from 'react-redux';
 import { store } from '../src/store/store';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -35,6 +36,7 @@ export const globalTypes = {
 };
 
 export const decorators = [
+  // MUI theme
   (Story, context) => {
     const theme = context.globals.theme === 'light' ? lightTheme : darkTheme;
 
@@ -52,9 +54,18 @@ export const decorators = [
       </React.StrictMode>
     );
   },
+  // Redux toolkit
   (Story, context) => (
     <Provider store={store}>
       <Story {...context} />
     </Provider>
+  ),
+  // React router
+  (Story, context) => (
+    <BrowserRouter>
+      <Routes>
+        <Route path='*' element={<Story {...context} />} />
+      </Routes>
+    </BrowserRouter>
   ),
 ];

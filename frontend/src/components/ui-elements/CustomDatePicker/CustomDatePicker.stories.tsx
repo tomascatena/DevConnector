@@ -7,9 +7,6 @@ import { UIElementBox, InputContainer } from '../UIElementStoriesHelpers.styled'
 export default {
   title: 'UI-Elements/CustomDatePicker',
   component: CustomDatePicker,
-  argTypes: {
-    type: { control: 'select', options: ['text', 'password'], defaultValue: 'text' },
-  },
   decorators: [
     (Story, context) => (
     <UIElementBox sx={{ alignItems: 'flex-start', pt: '4rem' }}>
