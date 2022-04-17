@@ -3,7 +3,7 @@ import { formatDate, duration, sortISODates } from './dateTime';
 
 describe('dateTime', () => {
   describe('formatDate', () => {
-    it.each([
+    test.each([
       ['Dec 2021', '2021-12-28T20:49:16Z'],
       ['Dec 2021', '2021-12-28'],
       ['Dec 2021', '2021-12'],
@@ -26,7 +26,7 @@ describe('dateTime', () => {
       jest.useRealTimers();
     });
 
-    it.each([
+    test.each([
       ['1 year', '2020-12-28', '2021-12-28'],
       ['4 years 9 months', '2017-03-28', '2021-12-28'],
       ['2 years', '2020-12-28', null],
@@ -41,7 +41,7 @@ describe('dateTime', () => {
   });
 
   describe('sortISODates', () => {
-    it('should return a negative number when the second date is greater than the first date', () => {
+    test('should return a negative number when the second date is greater than the first date', () => {
       const sortedDates = sortISODates(
         { ...MOCK_EDUCATION, from: '2021-01-01' },
         { ...MOCK_EDUCATION, from: '2022-01-01' }
@@ -50,7 +50,7 @@ describe('dateTime', () => {
       expect(sortedDates).toBeLessThan(0);
     });
 
-    it('should return a positive number when the second date is less than the first date', () => {
+    test('should return a positive number when the second date is less than the first date', () => {
       const sortedDates = sortISODates(
         { ...MOCK_EDUCATION, from: '2022-01-01' },
         { ...MOCK_EDUCATION, from: '2021-01-01' }
@@ -59,7 +59,7 @@ describe('dateTime', () => {
       expect(sortedDates).toBeGreaterThan(0);
     });
 
-    it('should return zero when both dates are equal', () => {
+    test('should return zero when both dates are equal', () => {
       const sortedDates = sortISODates(
         { ...MOCK_EDUCATION, from: '2021-01-01' },
         { ...MOCK_EDUCATION, from: '2021-01-01' }
@@ -68,7 +68,7 @@ describe('dateTime', () => {
       expect(sortedDates).toBe(0);
     });
 
-    it('should return zero when both dates are null', () => {
+    test('should return zero when both dates are null', () => {
       const sortedDates = sortISODates(
         { ...MOCK_EDUCATION, from: null },
         { ...MOCK_EDUCATION, from: null }

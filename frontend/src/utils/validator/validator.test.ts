@@ -2,14 +2,14 @@ import { validate, DEFAULT_ERROR_MESSAGES } from './validator';
 
 describe('validator', () => {
   describe('required', () => {
-    it('should validate required value when input is ""', () => {
+    test('should validate required value when input is ""', () => {
       const validationResults = validate('').required().exec();
 
       expect(validationResults.isValid).toBe(false);
       expect(validationResults.validationErrors).toStrictEqual([DEFAULT_ERROR_MESSAGES.required]);
     });
 
-    it('should validate required value when input is "input string"', () => {
+    test('should validate required value when input is "input string"', () => {
       const validationResults = validate('input string').required().exec();
 
       expect(validationResults.isValid).toBe(true);
@@ -18,14 +18,14 @@ describe('validator', () => {
   });
 
   describe('isNumeric', () => {
-    it('should validate non numeric input', () => {
+    test('should validate non numeric input', () => {
       const validationResults = validate('123abc').isNumeric().exec();
 
       expect(validationResults.isValid).toBe(false);
       expect(validationResults.validationErrors).toStrictEqual([DEFAULT_ERROR_MESSAGES.isNumeric]);
     });
 
-    it('should validate numeric input', () => {
+    test('should validate numeric input', () => {
       const validationResults = validate('123').isNumeric().exec();
 
       expect(validationResults.isValid).toBe(true);
@@ -34,21 +34,21 @@ describe('validator', () => {
   });
 
   describe('isEmail', () => {
-    it('should validate invalid email', () => {
+    test('should validate invalid email', () => {
       const validationResults = validate('emailexample.com').isEmail().exec();
 
       expect(validationResults.isValid).toBe(false);
       expect(validationResults.validationErrors).toStrictEqual([DEFAULT_ERROR_MESSAGES.isEmail]);
     });
 
-    it('should validate correct email', () => {
+    test('should validate correct email', () => {
       const validationResults = validate('email@example.com').isEmail().exec();
 
       expect(validationResults.isValid).toBe(true);
       expect(validationResults.validationErrors).toStrictEqual([]);
     });
 
-    it('should validate and normalize correct email', () => {
+    test('should validate and normalize correct email', () => {
       const validationResults = validate('EMAIL@EXAMPLE.COM').isEmail().exec();
 
       expect(validationResults.isValid).toBe(true);
@@ -58,7 +58,7 @@ describe('validator', () => {
   });
 
   describe('isLength', () => {
-    it.each([
+    test.each([
       ['a', 2, 10],
       ['too long input', 2, 10],
       ['', 2, 10],
@@ -69,7 +69,7 @@ describe('validator', () => {
       expect(validationResults.validationErrors).toStrictEqual([`Must be between ${min} and ${max} characters long.`]);
     });
 
-    it('should validate input of correct length', () => {
+    test('should validate input of correct length', () => {
       const validationResults = validate('example').isLength({ min: 2, max: 10 }).exec();
 
       expect(validationResults.isValid).toBe(true);
@@ -78,7 +78,7 @@ describe('validator', () => {
   });
 
   describe('isAlphaWithSpecialCharacters', () => {
-    it.each([
+    test.each([
       [''],
       [' '],
       [' some string'],
@@ -97,7 +97,7 @@ describe('validator', () => {
       expect(validationResults.validationErrors).toStrictEqual([DEFAULT_ERROR_MESSAGES.isAlphaWithSpecialCharacters]);
     });
 
-    it.each([
+    test.each([
       ['tomas'],
       ['mañana'],
     ])('should validate %s', (input) => {
@@ -109,14 +109,14 @@ describe('validator', () => {
   });
 
   describe('isURL', () => {
-    it('should validate invalid URL', () => {
+    test('should validate invalid URL', () => {
       const validationResults = validate('googlecom').isURL().exec();
 
       expect(validationResults.isValid).toBe(false);
       expect(validationResults.validationErrors).toStrictEqual([DEFAULT_ERROR_MESSAGES.isURL]);
     });
 
-    it('should validate correct URL', () => {
+    test('should validate correct URL', () => {
       const validationResults = validate('http://www.google.com').isURL().exec();
 
       expect(validationResults.isValid).toBe(true);
@@ -125,14 +125,14 @@ describe('validator', () => {
   });
 
   describe('isAlpha', () => {
-    it('should validate invalid alpha input', () => {
+    test('should validate invalid alpha input', () => {
       const validationResults = validate('abc123').isAlpha().exec();
 
       expect(validationResults.isValid).toBe(false);
       expect(validationResults.validationErrors).toStrictEqual([DEFAULT_ERROR_MESSAGES.isAlpha]);
     });
 
-    it('should validate correct alpha input', () => {
+    test('should validate correct alpha input', () => {
       const validationResults = validate('correct').isAlpha().exec();
 
       expect(validationResults.isValid).toBe(true);
@@ -141,7 +141,7 @@ describe('validator', () => {
   });
 
   describe('isGithubUsername', () => {
-    it.each([
+    test.each([
       [''],
       [' github-username'],
       ['github-username '],
@@ -156,7 +156,7 @@ describe('validator', () => {
       expect(validationResults.validationErrors).toStrictEqual([DEFAULT_ERROR_MESSAGES.isGithubUsername]);
     });
 
-    it('should validate correct Github username', () => {
+    test('should validate correct Github username', () => {
       const validationResults = validate('github-username').isGithubUsername().exec();
 
       expect(validationResults.isValid).toBe(true);
@@ -165,7 +165,7 @@ describe('validator', () => {
   });
 
   describe('custom', () => {
-    it('should validate a wrong input for a custom validation passed as a callback', () => {
+    test('should validate a wrong input for a custom validation passed as a callback', () => {
       const validationResults = validate('some input').custom('Custom error message',
         value => {
           return value === 'I was expecting something else';
@@ -176,7 +176,7 @@ describe('validator', () => {
       expect(validationResults.validationErrors).toStrictEqual(['Custom error message']);
     });
 
-    it('should validate a correct input for a custom validation passed as a callback', () => {
+    test('should validate a correct input for a custom validation passed as a callback', () => {
       const validationResults = validate('correct input').custom('Custom error message',
         value => {
           return value === 'correct input';

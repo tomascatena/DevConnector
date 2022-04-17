@@ -8,7 +8,7 @@ export interface AlertState {
   timeout: number;
 }
 
-const initialState: AlertState = {
+export const initialState: AlertState = {
   showAlert: false,
   message: '',
   variant: 'filled',
