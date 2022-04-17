@@ -77,7 +77,7 @@ const ExperienceItem:FC<Props> = ({
             {
               allowEditAndDelete &&
               <EditAndDeleteBox>
-                <Tooltip title="Edit Item">
+                <Tooltip title="Edit Experience">
                   <IconButton
                     onClick={handleEditExperience}
                     aria-label="edit"

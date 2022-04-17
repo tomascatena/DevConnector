@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { validate } from '../../../utils/validator';
 import CustomSelect from './CustomSelect';
-import { UIElementBox, InputContainer } from '../UIElementStoriesHelpers.styled';
+import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
 import { PROFESSIONAL_STATUS_OPTIONS } from '@constants/constants';
 
 export default {

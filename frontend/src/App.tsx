@@ -11,6 +11,7 @@ import ProtectedRoute from '@components/routing/ProtectedRoute/ProtectedRoute';
 import CustomBackdrop from '@ui-elements/CustomBackdrop/CustomBackdrop';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { useTypedSelector } from './hooks';
 
 const LandingPage = lazy(() => import('@pages/LandingPage/LandingPage'));
 const LoginPage = lazy(() => import('@pages/LoginPage/LoginPage'));
@@ -24,6 +25,8 @@ const ProfilesPage = lazy(() => import('@pages/ProfilesPage/ProfilesPage'));
 const ProfilePage = lazy(() => import('@pages/ProfilePage/ProfilePage'));
 
 const App: FC = () => {
+  const { isAuthenticated, user } = useTypedSelector((state) => state.auth);
+
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(false);
 
   const SuspenseFallback = (
@@ -42,6 +45,8 @@ const App: FC = () => {
             <Header
               setIsDarkTheme={setIsDarkTheme}
               isDarkTheme={isDarkTheme}
+              isAuthenticated={isAuthenticated}
+              user={user}
             />
 
             <MainBox>

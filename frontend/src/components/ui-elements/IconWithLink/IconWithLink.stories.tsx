@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import IconWithLink from './IconWithLink';
-import { UIElementBox, InputContainer } from '../UIElementStoriesHelpers.styled';
+import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
 import LanguageIcon from '@mui/icons-material/Language';
 
 export default {

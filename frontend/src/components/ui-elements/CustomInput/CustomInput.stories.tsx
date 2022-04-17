@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { validate } from '../../../utils/validator';
 import CustomInput from './CustomInput';
-import { UIElementBox, InputContainer } from '../UIElementStoriesHelpers.styled';
+import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
 
 export default {
   title: 'UI-Elements/CustomInput',

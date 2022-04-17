@@ -2,7 +2,7 @@ import { styled } from '@mui/system';
 import { Box } from '@mui/material';
 
 export const EducationItemBox = styled(Box)(({ theme }) => ({
-  color: 'text.primary',
+  color: theme.palette.text.primary,
   marginBottom: theme.spacing(3),
   flex: 1
 }));

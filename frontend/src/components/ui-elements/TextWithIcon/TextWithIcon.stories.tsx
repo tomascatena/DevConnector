@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import TextWithIcon from './TextWithIcon';
-import { UIElementBox, InputContainer } from '../UIElementStoriesHelpers.styled';
+import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
 import PersonIcon from '@mui/icons-material/Person';
 
 export default {

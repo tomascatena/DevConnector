@@ -26,6 +26,7 @@
       "@themes/*": ["themes/*"],
       "@store/*": ["store/*"],
       "@utils/*": ["utils/*"],
+      "@helpers/*": ["helpers/*"],
       "@typings": ["typings/*"],
       "@utils": ["utils/*"]
     }

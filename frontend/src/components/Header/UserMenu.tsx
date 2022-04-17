@@ -12,8 +12,9 @@ import {
 import LogoutIcon from '@mui/icons-material/Logout';
 import { settings } from './Header';
 import { Link } from 'react-router-dom';
-import { useActions, useTypedSelector } from '@hooks/index';
+import { useActions } from '@hooks/index';
 import { UserMenuBox } from './UserMenu.styled';
+import { IUser, Nullable } from '../../typings/types';
 
 interface Props {
   isDarkTheme: boolean;
@@ -21,6 +22,7 @@ interface Props {
   handleCloseUserMenu: () => void;
   setIsDarkTheme: Dispatch<SetStateAction<boolean>>;
   handleOpenUserMenu: (event: MouseEvent<HTMLElement>) => void;
+  user: Nullable<Partial<IUser>>
 }
 
 const UserMenu: FC<Props> = ({
@@ -29,9 +31,9 @@ const UserMenu: FC<Props> = ({
   handleCloseUserMenu,
   setIsDarkTheme,
   handleOpenUserMenu,
+  user
 }) => {
   const { logout, clearProfile } = useActions();
-  const { user } = useTypedSelector((state) => state.auth);
 
   const handleLogout = () => {
     handleCloseUserMenu();

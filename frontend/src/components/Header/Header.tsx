@@ -1,7 +1,6 @@
 import { FC, useState, Dispatch, SetStateAction, MouseEvent } from 'react';
 import { AppBar, Toolbar, Container } from '@mui/material';
 import { ROUTES } from '@constants/routes';
-import { useTypedSelector } from '@hooks/useTypedSelector';
 import UserMenu from './UserMenu';
 import GuestMenu from './GuestMenu';
 import HeaderBrand from './HeaderBrand';
@@ -9,6 +8,7 @@ import MobileMenu from './MobileMenu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import GroupIcon from '@mui/icons-material/Group';
+import { IUser, Nullable } from '../../typings/types';
 
 export const pages = [
   {
@@ -46,11 +46,11 @@ export const settings = [
 interface Props {
   setIsDarkTheme: Dispatch<SetStateAction<boolean>>;
   isDarkTheme: boolean;
+  isAuthenticated: boolean,
+  user: Nullable<Partial<IUser>>
 }
 
-const ResponsiveAppBar: FC<Props> = ({ setIsDarkTheme, isDarkTheme }) => {
-  const { isAuthenticated } = useTypedSelector((state) => state.auth);
-
+const ResponsiveAppBar: FC<Props> = ({ setIsDarkTheme, isDarkTheme, isAuthenticated, user }) => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -88,6 +88,7 @@ const ResponsiveAppBar: FC<Props> = ({ setIsDarkTheme, isDarkTheme }) => {
 
           {isAuthenticated ? (
             <UserMenu
+              user={user}
               setIsDarkTheme={setIsDarkTheme}
               isDarkTheme={isDarkTheme}
               handleCloseUserMenu={handleCloseUserMenu}

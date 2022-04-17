@@ -19,6 +19,10 @@ export const parameters = {
     },
   },
   layout: 'fullscreen',
+  options: {
+    storySort: (a, b) =>
+      a[1].kind === b[1].kind ? 0 : a[1].id.localeCompare(b[1].id, undefined, { numeric: true }),
+  },
 };
 
 // https://github.com/nemrosim/storybook-decorators-examples
@@ -36,7 +40,7 @@ export const globalTypes = {
 };
 
 export const decorators = [
-  // MUI theme
+  // MUI Theme
   (Story, context) => {
     const theme = context.globals.theme === 'light' ? lightTheme : darkTheme;
 
@@ -54,13 +58,13 @@ export const decorators = [
       </React.StrictMode>
     );
   },
-  // Redux toolkit
+  // Redux Toolkit
   (Story, context) => (
     <Provider store={store}>
       <Story {...context} />
     </Provider>
   ),
-  // React router
+  // React Router
   (Story, context) => (
     <BrowserRouter>
       <Routes>

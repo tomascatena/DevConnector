@@ -18,6 +18,7 @@ type Props = {
   experience?: Nullable<Partial<IExperience>>;
   isDialog?: boolean;
   setOpenDialog?: Dispatch<SetStateAction<boolean>>;
+  inputsVariant?: 'outlined' | 'standard' | 'filled' | undefined
 };
 
 const ExperienceForm: FC<Props> = ({
@@ -25,7 +26,8 @@ const ExperienceForm: FC<Props> = ({
   loading,
   experience,
   isDialog = false,
-  setOpenDialog
+  setOpenDialog,
+  inputsVariant = 'outlined'
 }) => {
   const initialTitleState = { value: experience?.title || '', isValid: Boolean(experience?.title) };
   const initialCompanyState = { value: experience?.company || '', isValid: Boolean(experience?.company) };
@@ -85,6 +87,7 @@ const ExperienceForm: FC<Props> = ({
         placeholder='Job Title'
         isDisabled={loading}
         isRequired
+        variant={inputsVariant}
       />
 
       <CustomInput
@@ -96,6 +99,7 @@ const ExperienceForm: FC<Props> = ({
         placeholder='Company'
         isDisabled={loading}
         isRequired
+        variant={inputsVariant}
       />
 
       <CustomInput
@@ -107,12 +111,14 @@ const ExperienceForm: FC<Props> = ({
         placeholder='Location'
         customHelperText='City &amp; state suggested (eg. Austin, TX).'
         isDisabled={loading}
+        variant={inputsVariant}
       />
 
       <CustomCheckbox
         inputState={isCurrentJob}
         setInputState={setIsCurrentJob}
         label='Current Job?'
+        isDisabled={loading}
       />
 
       <TwoElementsGrid>
@@ -121,6 +127,8 @@ const ExperienceForm: FC<Props> = ({
           setInputState={setFromDateState}
           label='From Date'
           isRequired
+          isDisabled={loading}
+          variant={inputsVariant}
         />
 
         {!isCurrentJob &&
@@ -128,6 +136,8 @@ const ExperienceForm: FC<Props> = ({
             inputState={toDateState}
             setInputState={setToDateState}
             label='To Date'
+            isDisabled={loading}
+            variant={inputsVariant}
           />
         }
       </TwoElementsGrid>
@@ -141,6 +151,7 @@ const ExperienceForm: FC<Props> = ({
         placeholder='Job Description.'
         isMultiline
         isDisabled={loading}
+        variant={inputsVariant}
       />
 
       <ButtonsBox isDialog={isDialog}>

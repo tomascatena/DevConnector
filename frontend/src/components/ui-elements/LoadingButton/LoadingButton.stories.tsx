@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import LoadingButton from './LoadingButton';
-import { UIElementBox, InputContainer } from '../UIElementStoriesHelpers.styled';
+import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
 import SaveIcon from '@mui/icons-material/Save';
 
 export default {

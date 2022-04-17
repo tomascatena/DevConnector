@@ -1,9 +1,8 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import CustomDialog from './CustomDialog';
-import { UIElementBox, InputContainer } from '../UIElementStoriesHelpers.styled';
+import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'UI-Elements/CustomDialog',
   component: CustomDialog,
@@ -18,7 +17,6 @@ export default {
   ]
 } as ComponentMeta<typeof CustomDialog>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof CustomDialog> = (args) => {
   return (
     <CustomDialog
@@ -33,7 +31,7 @@ const Template: ComponentStory<typeof CustomDialog> = (args) => {
 };
 
 export const InteractiveCustomDialog = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
+
 InteractiveCustomDialog.args = {
   setOpenDialog: () => {},
   isDialogOpen: true

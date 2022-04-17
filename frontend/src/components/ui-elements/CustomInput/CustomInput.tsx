@@ -40,7 +40,7 @@ type Props = {
   placeholder?: string;
   isMultiline?: boolean;
   isDisabled?:boolean;
-  variant?: 'standard' | 'outlined';
+  variant?: 'standard' | 'outlined' | 'filled';
   successMessage?: string;
   autofocus?:boolean
 };

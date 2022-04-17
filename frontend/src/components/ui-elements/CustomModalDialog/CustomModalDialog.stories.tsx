@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import CustomModalDialog from './CustomModalDialog';
-import { UIElementBox, InputContainer } from '../UIElementStoriesHelpers.styled';
+import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
 import { Typography } from '@mui/material';
 import WarningIcon from '@mui/icons-material/Warning';
 

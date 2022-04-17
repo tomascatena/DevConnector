@@ -18,6 +18,7 @@ type Props = {
   education?: Nullable<Partial<IEducation>>;
   isDialog?: boolean;
   setOpenDialog?: Dispatch<SetStateAction<boolean>>;
+  inputsVariant?: 'outlined' | 'standard' | 'filled' | undefined
 };
 
 const EducationForm: FC<Props> = ({
@@ -25,7 +26,8 @@ const EducationForm: FC<Props> = ({
   loading,
   education,
   isDialog = false,
-  setOpenDialog
+  setOpenDialog,
+  inputsVariant = 'outlined'
 }) => {
   const initialDegreeState = { value: education?.degree || '', isValid: Boolean(education?.degree) };
   const initialSchoolState = { value: education?.school || '', isValid: Boolean(education?.school) };
@@ -85,6 +87,7 @@ const EducationForm: FC<Props> = ({
         placeholder='Degree Or Certificate'
         isDisabled={loading}
         isRequired
+        variant={inputsVariant}
       />
 
       <CustomInput
@@ -96,6 +99,7 @@ const EducationForm: FC<Props> = ({
         placeholder='School'
         isDisabled={loading}
         isRequired
+        variant={inputsVariant}
       />
 
       <CustomInput
@@ -106,12 +110,14 @@ const EducationForm: FC<Props> = ({
         label='Field Of Study'
         placeholder='Field Of Study'
         isDisabled={loading}
+        variant={inputsVariant}
       />
 
       <CustomCheckbox
         inputState={isCurrent}
         setInputState={setIsCurrent}
         label='Current?'
+        isDisabled={loading}
       />
 
       <TwoElementsGrid>
@@ -120,6 +126,8 @@ const EducationForm: FC<Props> = ({
           setInputState={setFromDateState}
           label='From Date'
           isRequired
+          isDisabled={loading}
+          variant={inputsVariant}
         />
 
         {!isCurrent &&
@@ -127,6 +135,8 @@ const EducationForm: FC<Props> = ({
             inputState={toDateState}
             setInputState={setToDateState}
             label='To Date'
+            isDisabled={loading}
+            variant={inputsVariant}
           />
         }
       </TwoElementsGrid>
@@ -140,6 +150,7 @@ const EducationForm: FC<Props> = ({
         placeholder='Program Description.'
         isMultiline
         isDisabled={loading}
+        variant={inputsVariant}
       />
 
       <ButtonsBox isDialog={isDialog}>

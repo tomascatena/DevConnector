@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import CustomAlert from './CustomAlert';
-import { UIElementBox } from '../UIElementStoriesHelpers.styled';
+import { UIElementBox } from '@helpers/StoriesStyledComponents.styled';
 import { Button, Box } from '@mui/material';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'UI-Elements/CustomAlert',
   component: CustomAlert,
@@ -13,7 +12,6 @@ export default {
   ]
 } as ComponentMeta<typeof CustomAlert>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof CustomAlert> = (args) => {
   const [showAlert, setShowAlert] = useState(true);
 

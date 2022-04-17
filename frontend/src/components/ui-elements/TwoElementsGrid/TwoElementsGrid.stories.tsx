@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import TwoElementsGrid from './TwoElementsGrid';
-import { UIElementBox, InputContainer } from '../UIElementStoriesHelpers.styled';
+import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
 import CustomInput from '@ui-elements/CustomInput/CustomInput';
 import { validate } from '../../../utils/validator';
 

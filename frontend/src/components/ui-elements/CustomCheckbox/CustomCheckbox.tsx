@@ -5,9 +5,10 @@ type Props = {
   inputState: boolean;
   setInputState: Dispatch<SetStateAction<boolean>>;
   label: string;
+  isDisabled?: boolean
 }
 
-const CustomCheckbox:FC<Props> = ({ inputState, setInputState, label }) => {
+const CustomCheckbox:FC<Props> = ({ inputState, setInputState, label, isDisabled }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputState(e.target.checked);
   };
@@ -24,6 +25,7 @@ const CustomCheckbox:FC<Props> = ({ inputState, setInputState, label }) => {
           <Checkbox
             onChange={handleChange}
             checked={inputState}
+            disabled={isDisabled}
           />
         }
       />
