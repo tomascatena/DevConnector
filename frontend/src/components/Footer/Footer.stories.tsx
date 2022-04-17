@@ -2,6 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Footer from './Footer';
 import { ComponentBox } from '@helpers/StoriesStyledComponents.styled';
+import { Box } from '@mui/material';
 
 export default {
   title: 'Components/Footer',
@@ -15,6 +16,9 @@ export default {
   ]
 } as ComponentMeta<typeof Footer>;
 
-const Template: ComponentStory<typeof Footer> = (args) => <Footer {...args} />;
+const Template: ComponentStory<typeof Footer> = (args) =>
+  <Box sx={{ width: '100%' }}>
+    <Footer {...args} />
+  </Box>;
 
 export const Standard = Template.bind({});

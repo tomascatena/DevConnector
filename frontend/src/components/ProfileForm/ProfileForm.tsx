@@ -25,9 +25,15 @@ type Props = {
   dispatchCreateOrUpdateProfile: (profileForm: Partial<IProfile>) => void;
   loading: boolean;
   profile?: Nullable<Partial<IProfile>>;
+  inputsVariant?: 'outlined' | 'standard' | 'filled' | undefined
 };
 
-const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profile }) => {
+const ProfileForm: FC<Props> = ({
+  dispatchCreateOrUpdateProfile,
+  loading,
+  profile,
+  inputsVariant = 'outlined'
+}) => {
   const [showSocialNetworkLinks, setShowSocialNetworkLinks] = useState(false);
 
   const formRef = useRef<HTMLFormElement>(null);
@@ -123,6 +129,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         options={PROFESSIONAL_STATUS_OPTIONS}
         isDisabled={loading}
         isRequired
+        variant={inputsVariant}
       />
 
       <CustomInput
@@ -135,6 +142,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         customHelperText='Could be your own company or one you work for.'
         isDisabled={loading}
         isRequired
+        variant={inputsVariant}
       />
 
        <CustomInput
@@ -146,6 +154,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
          placeholder='Website'
          customHelperText='Could be your own or a company website.'
          isDisabled={loading}
+         variant={inputsVariant}
        />
 
        <CustomInput
@@ -157,6 +166,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
          placeholder='Github Username'
          customHelperText='If you want your latest repos and a Github link, include your username.'
          isDisabled={loading}
+         variant={inputsVariant}
        />
 
       <CustomInput
@@ -169,6 +179,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         customHelperText='City &amp; state suggested (eg. Austin, TX).'
         isDisabled={loading}
         isRequired
+        variant={inputsVariant}
       />
 
       <ChipsInput
@@ -179,6 +190,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         customHelperText='Add your skills separated by commas (eg. Javascript, PHP, Java, SQL, etc).'
         isDisabled={loading}
         isRequired
+        variant={inputsVariant}
       />
 
       <CustomInput
@@ -191,6 +203,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
         customHelperText='Tell us a little about yourself.'
         isMultiline
         isDisabled={loading}
+        variant={inputsVariant}
       />
 
       <ShowSocialNetworkLinksBox>
@@ -223,6 +236,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
               label='Twitter URL'
               placeholder='Twitter URL'
               isDisabled={loading}
+              variant={inputsVariant}
             />
           </PrependIcon>
 
@@ -238,6 +252,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
               label='Facebook URL'
               placeholder='Facebook URL'
               isDisabled={loading}
+              variant={inputsVariant}
             />
           </PrependIcon>
 
@@ -253,6 +268,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
               label='Youtube URL'
               placeholder='Youtube URL'
               isDisabled={loading}
+              variant={inputsVariant}
             />
           </PrependIcon>
 
@@ -268,6 +284,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
               label='LinkedIn URL'
               placeholder='LinkedIn URL'
               isDisabled={loading}
+              variant={inputsVariant}
             />
           </PrependIcon>
 
@@ -283,6 +300,7 @@ const ProfileForm: FC<Props> = ({ dispatchCreateOrUpdateProfile, loading, profil
               label='Instagram URL'
               placeholder='Instagram URL'
               isDisabled={loading}
+              variant={inputsVariant}
             />
           </PrependIcon>
         </SocialNetworkLinksBox>

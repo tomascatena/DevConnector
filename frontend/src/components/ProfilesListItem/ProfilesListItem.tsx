@@ -1,19 +1,9 @@
-import { IProfile } from '../../typings/types';
 import React, { FC } from 'react';
+import { IProfile } from '../../typings/types';
 import { Typography, Divider, Chip } from '@mui/material';
 import { ROUTES } from '@constants/routes';
 import { useNavigate } from 'react-router';
-import { styled } from '@mui/system';
-import { ContentBox, ProfilesListItemBox, ProfilesListItemCard, SkillsBox, StyledAvatar, StyledCardContent } from './ProfilesListItem.styled';
-
-export const TypographyLink = styled(Typography)(({ theme }) => ({
-  display: 'inline-block',
-
-  '&:hover': {
-    textDecoration: 'underline',
-    cursor: 'pointer'
-  }
-}));
+import { ContentBox, ProfilesListItemBox, ProfilesListItemCard, SkillsBox, StyledAvatar, StyledCardContent, TypographyLink } from './ProfilesListItem.styled';
 
 type Props = {
   profile: IProfile
