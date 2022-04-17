@@ -35,20 +35,20 @@ const ProfilePage:FC<Props> = () => {
   return (
     <ProfilePageContainer>
       <Box sx={{ display: 'flex', gap: 2 }}>
-          <LinkButton
-            variant='outlined'
-            to={ROUTES.PROFILES}
-          >
-            Back To Profiles
-          </LinkButton>
+        <LinkButton
+          variant='outlined'
+          to={ROUTES.PROFILES}
+        >
+          Back To Profiles
+        </LinkButton>
 
-          {
-            isAuthenticated && user && selectedUserProfile &&
-            user._id === selectedUserProfile.user._id &&
-            <LinkButton to={ROUTES.EDIT_PROFILE} >
-              Edit Profile
-            </LinkButton>
-          }
+        {
+          isAuthenticated && user && selectedUserProfile &&
+          user._id === selectedUserProfile.user._id &&
+          <LinkButton to={ROUTES.EDIT_PROFILE} >
+            Edit Profile
+          </LinkButton>
+        }
       </Box>
 
       {

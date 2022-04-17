@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
+import { Container } from '@mui/material';
 import { styled } from '@mui/system';
 
 export const UIElementBox = styled(Box)(({ theme }) => ({
@@ -24,4 +24,15 @@ export const ComponentBox = styled(Box)(({ theme }) => ({
 
 export const InputContainer = styled(Container)(({ theme }) => ({
   maxWidth: '45rem'
+}));
+
+export const PageContainer = styled(Container)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  backgroundColor: theme.palette.background.paper,
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  gap: theme.spacing(3),
+  paddingTop: theme.spacing(4),
+  paddingBottom: theme.spacing(7),
 }));

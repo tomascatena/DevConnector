@@ -2,6 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Header from './Header';
 import { ComponentBox } from '@helpers/StoriesStyledComponents.styled';
+import { MOCK_USER } from '@helpers/mocks/mocks';
 
 export default {
   title: 'Components/Header',
@@ -23,10 +24,5 @@ Standard.args = {
   setIsDarkTheme: () => {},
   isDarkTheme: true,
   isAuthenticated: false,
-  user: {
-    firstName: 'John',
-    lastName: 'Doe',
-    avatar: 'https://s.gravatar.com/avatar/7909a0b37d81a8e276bd319f1f84c1f6?s=200&r=pg&d=retro',
-    _id: 'abc123',
-  }
+  user: MOCK_USER
 };

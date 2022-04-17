@@ -3,6 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import EducationItem from './EducationItem';
 import { ComponentBox } from '@helpers/StoriesStyledComponents.styled';
 import { Grid } from '@mui/material';
+import { MOCK_EDUCATION } from '@helpers/mocks/mocks';
 
 export default {
   title: 'Components/EducationItem',
@@ -40,16 +41,7 @@ const Template: ComponentStory<typeof EducationItem> = (args) => {
 export const Standard = Template.bind({});
 
 Standard.args = {
-  education: {
-    _id: 'abc123',
-    school: 'University of Somewhere',
-    degree: 'Informatics Engineer',
-    fieldOfStudy: 'Computer Science',
-    from: '2005-02-01',
-    to: '2011-04-01',
-    current: false,
-    description: 'Computer science degree focused on web development'
-  },
+  education: MOCK_EDUCATION,
   setSelectedEducation: () => {},
   setOpenEditDialog: () => {},
   setOpenDeleteDialog: () => {},

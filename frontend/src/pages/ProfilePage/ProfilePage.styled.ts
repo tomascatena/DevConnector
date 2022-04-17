@@ -1,5 +1,5 @@
 import { styled } from '@mui/system';
-import { Container, } from '@mui/material';
+import { Container } from '@mui/material';
 
 export const ProfilePageContainer = styled(Container)(({ theme }) => ({
   color: theme.palette.primary.main,

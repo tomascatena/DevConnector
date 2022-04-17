@@ -3,6 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ExperienceTimelineItem from './ExperienceTimelineItem';
 import { ComponentBox } from '@helpers/StoriesStyledComponents.styled';
 import { Box } from '@mui/material';
+import { MOCK_EXPERIENCE } from '@helpers/mocks/mocks';
 
 export default {
   title: 'Components/ExperienceTimelineItem',
@@ -27,16 +28,7 @@ const Template: ComponentStory<typeof ExperienceTimelineItem> = (args) => {
 export const Standard = Template.bind({});
 
 Standard.args = {
-  experience: {
-    _id: 'abc123',
-    company: 'Acme Software Inc.',
-    title: 'Principal Engineer',
-    location: 'Austin, TX',
-    from: '2017-02-01',
-    to: null,
-    current: true,
-    description: 'In charge of developing high quality software'
-  },
+  experience: MOCK_EXPERIENCE,
   setSelectedExperience: () => {},
   setOpenEditDialog: () => {},
   setOpenDeleteDialog: () => {},
