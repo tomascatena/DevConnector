@@ -67,6 +67,7 @@
     ]
   },
   "devDependencies": {
+    "@ngneat/falso": "^5.0.0",
     "@storybook/addon-actions": "^6.4.21",
     "@storybook/addon-docs": "^6.4.21",
     "@storybook/addon-essentials": "^6.4.21",

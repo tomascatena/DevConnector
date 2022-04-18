@@ -11,9 +11,6 @@ const ProfilesList:FC<Props> = () => {
   const dispatch = useAppDispatch();
   const { loading, profiles } = useTypedSelector(state => state.profile);
 
-  console.log(loading);
-  console.log(profiles);
-
   useEffect(() => {
     dispatch(getAllProfiles());
   }, []);
