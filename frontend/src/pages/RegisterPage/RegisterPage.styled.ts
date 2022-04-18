@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 export const RegisterContainer = styled(Container)(({ theme }) => ({
   marginTop: theme.spacing(7),
+  marginBottom: theme.spacing(7),
 }));
 
 export const RegisterPaper = styled(Paper)(({ theme }) => ({

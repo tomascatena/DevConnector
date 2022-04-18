@@ -1,3 +1,4 @@
+import { PROFESSIONAL_STATUS_OPTIONS } from '@constants/constants';
 import {
   randEmail,
   randLastName,
@@ -83,13 +84,17 @@ export const createRandomSkills = (): string[] => {
   return Array.from(new Set(randomArrayOfNonUniqueSkills));
 };
 
+const randomStatus = PROFESSIONAL_STATUS_OPTIONS[
+  Math.floor(Math.random() * PROFESSIONAL_STATUS_OPTIONS.length)
+].value;
+
 export const createRandomUserProfile = ():IProfile => ({
   _id: randUuid(),
   user: createRandomUser(),
   company: randCompanyName(),
   website: randUrl(),
   location: `${randCity()}, ${randState()}`,
-  status: randJobTitle(),
+  status: randomStatus,
   skills: createRandomSkills(),
   bio: randTextRange({ min: 50, max: 500 }),
   githubUsername: 'tomascatena',
