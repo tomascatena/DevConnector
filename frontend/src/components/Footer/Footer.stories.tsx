@@ -10,15 +10,14 @@ export default {
   decorators: [
     (Story, context) => (
       <ComponentBox>
+        <Box sx={{ width: '100%' }}>
           <Story {...context}/>
+        </Box>
       </ComponentBox>
     ),
   ]
 } as ComponentMeta<typeof Footer>;
 
-const Template: ComponentStory<typeof Footer> = (args) =>
-  <Box sx={{ width: '100%' }}>
-    <Footer {...args} />
-  </Box>;
+const Template: ComponentStory<typeof Footer> = (args) => <Footer {...args} />;
 
 export const Standard = Template.bind({});

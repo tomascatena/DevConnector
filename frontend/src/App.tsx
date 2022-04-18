@@ -12,6 +12,7 @@ import CustomBackdrop from '@ui-elements/CustomBackdrop/CustomBackdrop';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { useTypedSelector } from './hooks';
+// import { InputsVariant } from './typings/types';
 
 const LandingPage = lazy(() => import('@pages/LandingPage/LandingPage'));
 const LoginPage = lazy(() => import('@pages/LoginPage/LoginPage'));
@@ -23,6 +24,8 @@ const AddEducationPage = lazy(() => import('@pages/AddEducationPage/AddEducation
 const AddExperiencePage = lazy(() => import('@pages/AddExperiencePage/AddExperiencePage'));
 const ProfilesPage = lazy(() => import('@pages/ProfilesPage/ProfilesPage'));
 const ProfilePage = lazy(() => import('@pages/ProfilePage/ProfilePage'));
+
+// const INPUTS_VARIANT: InputsVariant = 'filled';
 
 const App: FC = () => {
   const { isAuthenticated, user } = useTypedSelector((state) => state.auth);
@@ -59,7 +62,7 @@ const App: FC = () => {
 
                   <Route
                     path={ROUTES.LOGIN}
-                    element={<LoginPage />}
+                    element={<LoginPage/>}
                   />
 
                   <Route

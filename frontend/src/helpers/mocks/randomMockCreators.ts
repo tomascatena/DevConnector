@@ -50,10 +50,10 @@ export const createRandomExperience = (): IExperience => ({
   company: randCompanyName(),
   title: randJobTitle(),
   location: `${randCity()}, ${randState()}`,
-  from: randPastDate().toISOString(),
-  to: randRecentDate().toISOString(),
+  from: randPastDate({ years: 5 }).toISOString(),
+  to: randRecentDate({ days: 30 }).toISOString(),
   current: false,
-  description: randTextRange({ min: 10, max: 100 })
+  description: randTextRange({ min: 50, max: 500 })
 });
 
 export const createRandomEducation = (): IEducation => ({
@@ -61,10 +61,10 @@ export const createRandomEducation = (): IEducation => ({
   school: `University of ${randCity()}`,
   degree: randJobArea(),
   fieldOfStudy: randJobArea(),
-  from: randPastDate().toISOString(),
-  to: randRecentDate().toISOString(),
+  from: randPastDate({ years: 5 }).toISOString(),
+  to: randRecentDate({ days: 30 }).toISOString(),
   current: false,
-  description: randTextRange({ min: 10, max: 100 })
+  description: randTextRange({ min: 50, max: 500 })
 });
 
 export const createRandomSocialLinks = ():ISocial => ({
@@ -91,7 +91,7 @@ export const createRandomUserProfile = ():IProfile => ({
   location: `${randCity()}, ${randState()}`,
   status: randJobTitle(),
   skills: createRandomSkills(),
-  bio: randTextRange({ min: 50, max: 100 }),
+  bio: randTextRange({ min: 50, max: 500 }),
   githubUsername: 'tomascatena',
   experience: [
     createRandomExperience(),

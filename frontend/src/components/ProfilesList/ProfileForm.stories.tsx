@@ -8,7 +8,7 @@ export default {
   component: ProfilesList,
   decorators: [
     (Story, context) => (
-      <ComponentBox>
+      <ComponentBox sx={{ px: 3 }}>
           <Story {...context}/>
       </ComponentBox>
     ),

@@ -33,7 +33,7 @@ const ExperienceForm: FC<Props> = ({
   const initialCompanyState = { value: experience?.company || '', isValid: Boolean(experience?.company) };
   const initialLocationState = { value: experience?.location || '', isValid: Boolean(experience?.location) };
   const initialFromDateState = { value: experience?.from || null, isValid: Boolean(experience?.from) };
-  const initialToDateState = { value: experience?.from || null, isValid: Boolean(experience?.from) };
+  const initialToDateState = { value: experience?.to || null, isValid: Boolean(experience?.to) };
   const initialDescriptionState = { value: experience?.description || '', isValid: Boolean(experience?.description) };
 
   const [titleState, setTitleState] = useState(initialTitleState);
@@ -81,7 +81,7 @@ const ExperienceForm: FC<Props> = ({
       <CustomInput
         inputState={titleState}
         setInputState={setTitleState}
-        validation={validate(titleState.value).required().isLength({ min: 3, max: 50 })}
+        validation={validate(titleState.value).required().isLength({ min: 3, max: 100 })}
         type='text'
         label='Job Title'
         placeholder='Job Title'
@@ -93,7 +93,7 @@ const ExperienceForm: FC<Props> = ({
       <CustomInput
         inputState={companyState}
         setInputState={setCompanyState}
-        validation={validate(companyState.value).required().isLength({ min: 3, max: 50 })}
+        validation={validate(companyState.value).required().isLength({ min: 3, max: 100 })}
         type='text'
         label='Company'
         placeholder='Company'
@@ -105,7 +105,7 @@ const ExperienceForm: FC<Props> = ({
       <CustomInput
         inputState={locationState}
         setInputState={setLocationState}
-        validation={validate(locationState.value).isLength({ min: 3, max: 50 })}
+        validation={validate(locationState.value).isLength({ min: 3, max: 100 })}
         type='text'
         label='Location'
         placeholder='Location'
@@ -145,7 +145,7 @@ const ExperienceForm: FC<Props> = ({
       <CustomInput
         inputState={descriptionState}
         setInputState={setDescriptionState}
-        validation={validate(descriptionState.value).isLength({ min: 1, max: 100 })}
+        validation={validate(descriptionState.value).isLength({ min: 0, max: 500 })}
         type='text'
         label='Job Description'
         placeholder='Job Description.'

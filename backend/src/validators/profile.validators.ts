@@ -46,17 +46,17 @@ export const profile = [
   check('profile.company')
     .optional({ nullable: true, checkFalsy: true })
     .isString()
-    .isLength({ min: 3, max: 50 })
+    .isLength({ min: 3, max: 100 })
     .withMessage('Invalid user profile.company'),
   check('profile.website')
     .optional({ nullable: true, checkFalsy: true })
     .isString()
-    .isLength({ min: 3, max: 50 })
+    .isLength({ min: 3, max: 100 })
     .withMessage('Invalid user profile.website'),
   check('profile.location')
     .optional({ nullable: true, checkFalsy: true })
     .isString()
-    .isLength({ min: 3, max: 100 })
+    .isLength({ min: 3, max: 500 })
     .withMessage('Invalid user profile.location'),
   check('profile.bio')
     .optional({ nullable: true, checkFalsy: true })

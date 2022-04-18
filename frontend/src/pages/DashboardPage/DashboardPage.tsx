@@ -1,8 +1,7 @@
 import React, { useEffect, FC, useState } from 'react';
-import { Container, Typography, Box, Button } from '@mui/material';
+import { Typography, Box, Button } from '@mui/material';
 import { useTypedSelector, useActions, useAppDispatch } from '@hooks/index';
 import { getCurrentUserProfile, deleteAccount } from '@store/features/profile/profile.thunk';
-import { styled } from '@mui/system';
 import { ROUTES } from '@constants/routes';
 import TextWithIcon from '@ui-elements/TextWithIcon/TextWithIcon';
 import PersonIcon from '@mui/icons-material/Person';
@@ -15,16 +14,7 @@ import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import CustomModalDialog from '@ui-elements/CustomModalDialog/CustomModalDialog';
 import WarningIcon from '@mui/icons-material/Warning';
 import { useNavigate } from 'react-router';
-
-export const DashboardContainer = styled(Container)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  gap: theme.spacing(3),
-  marginTop: theme.spacing(4),
-  marginBottom: theme.spacing(7),
-}));
+import { DashboardContainer } from './DashboardPage.styled';
 
 type Props = {};
 

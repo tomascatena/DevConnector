@@ -115,6 +115,7 @@ const RegisterPage: FC = () => {
             label='Email'
             isRequired
             autofocus
+            isDisabled={loading}
           />
 
           <TwoElementsGrid>
@@ -128,6 +129,7 @@ const RegisterPage: FC = () => {
               type='text'
               label='First Name'
               isRequired
+              isDisabled={loading}
             />
 
             <CustomInput
@@ -140,6 +142,7 @@ const RegisterPage: FC = () => {
               type='text'
               label='Last Name'
               isRequired
+              isDisabled={loading}
             />
           </TwoElementsGrid>
 
@@ -154,6 +157,7 @@ const RegisterPage: FC = () => {
             label='Password'
             customHelperText='Choose a strong password'
             isRequired
+            isDisabled={loading}
           />
 
           <CustomInput
@@ -172,6 +176,7 @@ const RegisterPage: FC = () => {
             type='password'
             label='Confirm password'
             isRequired
+            isDisabled={loading}
           />
 
           <LoadingButton

@@ -1,30 +1,14 @@
 import { FC } from 'react';
-import { styled } from '@mui/system';
-import { Box, Button, Typography } from '@mui/material';
-import showCaseImage from '../../assets/showCaseImage.png';
+import { Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@constants/routes';
 import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
 import { useTypedSelector } from '@hooks/index';
+import { LandingBox, ButtonsContainer } from './LandingPage.styled';
 
-const LandingBox = styled(Box)(({ theme }) => ({
-  flex: 1,
-  color: theme.palette.primary.main,
-  backgroundImage: `linear-gradient(rgba(39,39,39,0.6), rgba(39,39,39,0.6)), url(${showCaseImage})`,
-  display: 'flex',
-  justifyContent: 'center',
-  flexDirection: 'column',
-  alignItems: 'center',
-  gap: theme.spacing(3),
-}));
+interface Props {}
 
-const ButtonsContainer = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  gap: theme.spacing(3),
-  color: theme.palette.common.white
-}));
-
-const LandingPage: FC = () => {
+const LandingPage: FC<Props> = () => {
   const { showAlert, message, severity } = useTypedSelector((state) => state.alert);
 
   return (

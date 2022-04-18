@@ -1,5 +1,7 @@
 export type Nullable<T> = T | null;
 
+export type InputsVariant = 'outlined' | 'standard' | 'filled' | undefined
+
 export interface IUserRegisterForm {
   firstName: string;
   lastName: string;

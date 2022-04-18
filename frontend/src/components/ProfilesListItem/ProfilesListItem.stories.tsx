@@ -1,13 +1,13 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import EducationItem from './EducationItem';
+import ProfilesListItem from './ProfilesListItem';
 import { ComponentBox } from '@helpers/StoriesStyledComponents.styled';
+import { createRandomUserProfile } from '@helpers/mocks/randomMockCreators';
 import { Grid } from '@mui/material';
-import { createRandomEducation } from '@helpers/mocks/randomMockCreators';
 
 export default {
-  title: 'Components/EducationItem',
-  component: EducationItem,
+  title: 'Components/ProfilesListItem',
+  component: ProfilesListItem,
   decorators: [
     (Story, context) => (
       <ComponentBox>
@@ -19,10 +19,7 @@ export default {
             item
             xs={12}
             md={6}
-            sx={{
-              margin: 'auto',
-              marginTop: 2
-            }}
+            lg={4}
           >
             <Story {...context}/>
           </Grid>
@@ -30,16 +27,12 @@ export default {
       </ComponentBox>
     ),
   ]
-} as ComponentMeta<typeof EducationItem>;
+} as ComponentMeta<typeof ProfilesListItem>;
 
-const Template: ComponentStory<typeof EducationItem> = (args) => <EducationItem {...args} />;
+const Template: ComponentStory<typeof ProfilesListItem> = (args) => <ProfilesListItem {...args} />;
 
 export const Standard = Template.bind({});
 
 Standard.args = {
-  education: createRandomEducation(),
-  setSelectedEducation: () => {},
-  setOpenEditDialog: () => {},
-  setOpenDeleteDialog: () => {},
-  allowEditAndDelete: true
+  profile: createRandomUserProfile()
 };

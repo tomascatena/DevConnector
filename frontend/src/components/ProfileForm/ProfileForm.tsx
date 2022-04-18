@@ -196,7 +196,7 @@ const ProfileForm: FC<Props> = ({
       <CustomInput
         inputState={bioState}
         setInputState={setBioState}
-        validation={validate(bioState.value).isLength({ min: 1, max: 100 })}
+        validation={validate(bioState.value).isLength({ min: 1, max: 500 })}
         type='text'
         label='Bio'
         placeholder='A short bio of yourself.'

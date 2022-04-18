@@ -2,6 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import EducationForm from './EducationForm';
 import { ComponentBox } from '@helpers/StoriesStyledComponents.styled';
+import { createRandomEducation } from '@helpers/mocks/randomMockCreators';
 
 export default {
   title: 'Components/EducationForm',
@@ -22,7 +23,8 @@ export const EducationFormFilled = Template.bind({});
 EducationFormFilled.args = {
   loading: false,
   dispatchCreateOrUpdateEducation: () => {},
-  inputsVariant: 'filled'
+  inputsVariant: 'filled',
+  education: createRandomEducation()
 };
 
 export const EducationFormOutlined = Template.bind({});
@@ -30,7 +32,8 @@ export const EducationFormOutlined = Template.bind({});
 EducationFormOutlined.args = {
   loading: false,
   dispatchCreateOrUpdateEducation: () => {},
-  inputsVariant: 'outlined'
+  inputsVariant: 'outlined',
+  education: createRandomEducation()
 };
 
 export const EducationFormStandard = Template.bind({});
@@ -38,5 +41,6 @@ export const EducationFormStandard = Template.bind({});
 EducationFormStandard.args = {
   loading: false,
   dispatchCreateOrUpdateEducation: () => {},
-  inputsVariant: 'standard'
+  inputsVariant: 'standard',
+  education: createRandomEducation()
 };

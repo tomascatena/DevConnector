@@ -33,7 +33,7 @@ const EducationForm: FC<Props> = ({
   const initialSchoolState = { value: education?.school || '', isValid: Boolean(education?.school) };
   const initialFieldOfStudyState = { value: education?.fieldOfStudy || '', isValid: Boolean(education?.fieldOfStudy) };
   const initialFromDateState = { value: education?.from || null, isValid: Boolean(education?.from) };
-  const initialToDateState = { value: education?.from || null, isValid: Boolean(education?.from) };
+  const initialToDateState = { value: education?.to || null, isValid: Boolean(education?.to) };
   const initialDescriptionState = { value: education?.description || '', isValid: Boolean(education?.description) };
 
   const [degreeState, setDegreeState] = useState(initialDegreeState);
@@ -81,7 +81,7 @@ const EducationForm: FC<Props> = ({
       <CustomInput
         inputState={degreeState}
         setInputState={setDegreeState}
-        validation={validate(degreeState.value).required().isLength({ min: 3, max: 50 })}
+        validation={validate(degreeState.value).required().isLength({ min: 3, max: 100 })}
         type='text'
         label='Degree Or Certificate'
         placeholder='Degree Or Certificate'
@@ -93,7 +93,7 @@ const EducationForm: FC<Props> = ({
       <CustomInput
         inputState={schoolState}
         setInputState={setSchoolState}
-        validation={validate(schoolState.value).required().isLength({ min: 3, max: 50 })}
+        validation={validate(schoolState.value).required().isLength({ min: 3, max: 100 })}
         type='text'
         label='School'
         placeholder='School'
@@ -105,7 +105,7 @@ const EducationForm: FC<Props> = ({
       <CustomInput
         inputState={fieldOfStudyState}
         setInputState={setFieldOfStudyState}
-        validation={validate(fieldOfStudyState.value).isLength({ min: 3, max: 50 })}
+        validation={validate(fieldOfStudyState.value).isLength({ min: 3, max: 100 })}
         type='text'
         label='Field Of Study'
         placeholder='Field Of Study'
@@ -144,7 +144,7 @@ const EducationForm: FC<Props> = ({
       <CustomInput
         inputState={descriptionState}
         setInputState={setDescriptionState}
-        validation={validate(descriptionState.value).isLength({ min: 1, max: 100 })}
+        validation={validate(descriptionState.value).isLength({ min: 0, max: 500 })}
         type='text'
         label='Program Description'
         placeholder='Program Description.'

@@ -8,13 +8,12 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider as Emotion10ThemeProvider } from 'emotion-theming';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { MOCK_INITIAL_REDUX_STATE } from '../src/helpers/mocks/mocks';
 import { MOCK_RANDOM_INITIAL_REDUX_STATE } from '../src/helpers/mocks/reduxState.mock';
 import configureStore from 'redux-mock-store';
 
 const createMockStore = () => {
-  const mockStore = configureStore([]);
-
+  const middlewares = [];
+  const mockStore = configureStore(middlewares);
   const store = mockStore(MOCK_RANDOM_INITIAL_REDUX_STATE);
 
   store.dispatch = () => {};

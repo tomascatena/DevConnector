@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Header from './Header';
 import { ComponentBox } from '@helpers/StoriesStyledComponents.styled';
-import { MOCK_USER } from '@helpers/mocks/mocks';
+import { createRandomUser } from '@helpers/mocks/randomMockCreators';
 
 export default {
   title: 'Components/Header',
@@ -24,5 +24,5 @@ Standard.args = {
   setIsDarkTheme: () => {},
   isDarkTheme: true,
   isAuthenticated: false,
-  user: MOCK_USER
+  user: createRandomUser()
 };
