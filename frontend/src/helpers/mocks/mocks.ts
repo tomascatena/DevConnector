@@ -1,3 +1,29 @@
+export const MOCK_USER = {
+  _id: 'abc123',
+  firstName: 'John',
+  lastName: 'Doe',
+  avatar: 'https://s.gravatar.com/avatar/7909a0b37d81a8e276bd319f1f84c1f6?s=200&r=pg&d=retro',
+  email: 'john.doe@gmail.com'
+};
+
+export const MOCK_TOKENS = {
+  access: { token: 'accessToken', expires: '2022-04-18' },
+  refresh: { token: 'refreshToken', expires: '2022-04-18' },
+};
+
+export const MOCK_LOGIN_FORM = {
+  email: 'user@example.com',
+  password: 'P4ssWord',
+};
+
+export const MOCK_REGISTER_FORM = {
+  firstName: 'John',
+  lastName: 'Doe',
+  email: 'user@example.com',
+  password: 'P4ssWord',
+  confirmPassword: 'P4ssWord',
+};
+
 export const MOCK_EDUCATION = {
   _id: 'abc123',
   school: 'University of Somewhere',
@@ -85,14 +111,6 @@ export const MOCK_EXPERIENCE_LIST = [
     description: 'In charge of developing high quality software'
   },
 ];
-
-export const MOCK_USER = {
-  _id: 'abc123',
-  firstName: 'John',
-  lastName: 'Doe',
-  avatar: 'https://s.gravatar.com/avatar/7909a0b37d81a8e276bd319f1f84c1f6?s=200&r=pg&d=retro',
-  email: 'john.doe@gmail.com'
-};
 
 export const MOCK_SOCIAL = {
   youtube: 'https://www.youtube.com',

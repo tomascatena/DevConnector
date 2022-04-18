@@ -4,7 +4,7 @@ import { IUser, Nullable, ServerValidationError } from '../../../typings/types';
 import { login, register, getUser } from './auth.thunk';
 
 export interface AuthState {
-  user: Nullable<IUser>;
+  user: Nullable<Partial<IUser>>;
   loading: boolean;
   currentRequestId: string | undefined;
   serverValidationErrors: Nullable<ServerValidationError>;
@@ -13,7 +13,7 @@ export interface AuthState {
   accessToken: Nullable<string>;
 }
 
-const initialState: AuthState = {
+export const initialState: AuthState = {
   user: null,
   loading: false,
   currentRequestId: undefined,

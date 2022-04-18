@@ -32,7 +32,7 @@ export interface ProfileState {
   isFetchingProfile: boolean;
 }
 
-const initialState: ProfileState = {
+export const initialState: ProfileState = {
   profile: null,
   selectedUserProfile: null,
   profiles: null,
