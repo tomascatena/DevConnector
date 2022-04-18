@@ -11,7 +11,7 @@ export default {
     (Story, context) => (
       <ComponentBox>
         <Box sx={{ width: '100%' }}>
-          <Story {...context}/>
+          {Story(context)}
         </Box>
       </ComponentBox>
     ),

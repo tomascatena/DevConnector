@@ -10,7 +10,7 @@ export default {
   decorators: [
     (Story, context) => (
       <ComponentBox>
-          <Story {...context}/>
+          {Story(context)}
       </ComponentBox>
     ),
   ]

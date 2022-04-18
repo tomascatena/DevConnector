@@ -5,10 +5,12 @@ import { styled } from '@mui/system';
 export const UIElementBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   color: theme.palette.primary.main,
-  height: '100vh',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  height: '100%',
+  marginTop: theme.spacing(4),
+  marginBottom: theme.spacing(4),
 }));
 
 export const ComponentBox = styled(Box)(({ theme }) => ({

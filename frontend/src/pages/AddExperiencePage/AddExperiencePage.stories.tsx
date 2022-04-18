@@ -19,7 +19,7 @@ export default {
           user={createRandomUser()}
         />
           <MainBox>
-            <Story {...context}/>
+            {Story(context)}
           </MainBox>
         <Footer />
       </MainLayout>

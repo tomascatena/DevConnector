@@ -8,7 +8,7 @@ export default {
   title: 'UI-Elements/CustomAlert',
   component: CustomAlert,
   decorators: [
-    (Story, context) => <UIElementBox><Story {...context}/></UIElementBox>
+    (Story, context) => <UIElementBox>{Story(context)}</UIElementBox>
   ]
 } as ComponentMeta<typeof CustomAlert>;
 

@@ -11,7 +11,7 @@ export default {
   decorators: [
     (Story, context) => (
       <PageContainer>
-          <Story {...context}/>
+          {Story(context)}
       </PageContainer>
     ),
   ]

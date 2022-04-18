@@ -21,7 +21,7 @@ export default {
             md={6}
             lg={4}
           >
-            <Story {...context}/>
+            {Story(context)}
           </Grid>
         </Grid>
       </ComponentBox>

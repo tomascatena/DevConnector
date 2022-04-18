@@ -10,11 +10,11 @@ export default {
     (Story, context) => (
     <UIElementBox>
       <InputContainer>
-        <Story {...context}/>
+        {Story(context)}
       </InputContainer>
     </UIElementBox>
     )
-  ]
+  ],
 } as ComponentMeta<typeof ChipsInput>;
 
 const Template: ComponentStory<typeof ChipsInput> = (args) => {

@@ -12,7 +12,7 @@ export default {
     (Story, context) => (
       <ComponentBox sx={{ px: 5 }}>
         <Box sx={{ width: '100%' }}>
-          <Story {...context}/>
+          {Story(context)}
         </Box>
       </ComponentBox>
     ),

@@ -9,7 +9,7 @@ export default {
   decorators: [
     (Story, context) => (
       <ComponentBox sx={{ px: 3 }}>
-          <Story {...context}/>
+          {Story(context)}
       </ComponentBox>
     ),
   ]

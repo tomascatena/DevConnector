@@ -10,7 +10,7 @@ export default {
     (Story, context) => (
     <UIElementBox sx={{ alignItems: 'flex-start', pt: '4rem' }}>
       <InputContainer>
-        <Story {...context}/>
+        {Story(context)}
       </InputContainer>
     </UIElementBox>
     ),

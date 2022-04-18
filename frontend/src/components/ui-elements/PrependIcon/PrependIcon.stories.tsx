@@ -13,7 +13,7 @@ export default {
     (Story, context) => (
     <UIElementBox>
       <InputContainer>
-        <Story {...context}/>
+        {Story(context)}
       </InputContainer>
     </UIElementBox>
     ),

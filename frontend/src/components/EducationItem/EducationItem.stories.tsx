@@ -24,7 +24,7 @@ export default {
               marginTop: 2
             }}
           >
-            <Story {...context}/>
+            {Story(context)}
           </Grid>
         </Grid>
       </ComponentBox>

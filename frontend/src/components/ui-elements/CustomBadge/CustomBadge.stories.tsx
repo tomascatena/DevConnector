@@ -8,7 +8,7 @@ export default {
   title: 'UI-Elements/CustomBadge',
   component: CustomBadge,
   decorators: [
-    (Story, context) => <UIElementBox><Story {...context}/></UIElementBox>
+    (Story, context) => <UIElementBox>{Story(context)}</UIElementBox>
   ]
 } as ComponentMeta<typeof CustomBadge>;
 

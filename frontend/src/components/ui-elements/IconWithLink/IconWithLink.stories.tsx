@@ -11,7 +11,7 @@ export default {
     (Story, context) => (
     <UIElementBox >
       <InputContainer sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Story {...context}/>
+        {Story(context)}
       </InputContainer>
     </UIElementBox>
     ),

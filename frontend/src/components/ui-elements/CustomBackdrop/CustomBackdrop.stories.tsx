@@ -7,7 +7,7 @@ export default {
   title: 'UI-Elements/CustomBackdrop',
   component: CustomBackdrop,
   decorators: [
-    (Story, context) => <UIElementBox><Story {...context}/></UIElementBox>
+    (Story, context) => <UIElementBox>{Story(context)}</UIElementBox>
   ]
 } as ComponentMeta<typeof CustomBackdrop>;
 

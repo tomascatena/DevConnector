@@ -8,7 +8,7 @@ export default {
   title: 'UI-Elements/CircularLoader',
   component: CircularLoader,
   decorators: [
-    (Story, context) => <UIElementBox><Story {...context}/></UIElementBox>
+    (Story, context) => <UIElementBox>{Story(context)}</UIElementBox>
   ]
 } as ComponentMeta<typeof CircularLoader>;
 
