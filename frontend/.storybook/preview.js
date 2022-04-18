@@ -7,8 +7,19 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider as Emotion10ThemeProvider } from 'emotion-theming';
 import { Provider } from 'react-redux';
-import { store } from '../src/store/store';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { MOCK_INITIAL_REDUX_STATE } from '../src/helpers/mocks/mocks';
+import configureStore from 'redux-mock-store';
+
+const createMockStore = () => {
+  const mockStore = configureStore([]);
+
+  const store = mockStore(MOCK_INITIAL_REDUX_STATE);
+
+  store.dispatch = () => {};
+
+  return store;
+};
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -60,7 +71,7 @@ export const decorators = [
   },
   // Redux Toolkit
   (Story, context) => (
-    <Provider store={store}>
+    <Provider store={createMockStore()}>
       <Story {...context} />
     </Provider>
   ),

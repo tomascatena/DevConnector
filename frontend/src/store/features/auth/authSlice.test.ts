@@ -22,9 +22,7 @@ describe('authSlice', () => {
 
   beforeEach(() => {
     store = createTestStore();
-  });
 
-  test('should return the initial state', () => {
     expect(reducer(undefined, { type: '' })).toEqual(initialState);
   });
 
@@ -103,83 +101,87 @@ describe('authSlice', () => {
       });
     });
 
-    test('register successful', async () => {
-      const MOCK_RESOLVED_VALUE = { data: { user: MOCK_USER, tokens: MOCK_TOKENS } };
+    describe('register', () => {
+      test('register successful', async () => {
+        const MOCK_RESOLVED_VALUE = { data: { user: MOCK_USER, tokens: MOCK_TOKENS } };
 
-      const postSpy = jest.spyOn(axios, 'post').mockResolvedValueOnce(MOCK_RESOLVED_VALUE);
+        const postSpy = jest.spyOn(axios, 'post').mockResolvedValueOnce(MOCK_RESOLVED_VALUE);
 
-      await store.dispatch(register(MOCK_REGISTER_FORM));
+        await store.dispatch(register(MOCK_REGISTER_FORM));
 
-      const state = store.getState();
+        const state = store.getState();
 
-      expect(postSpy).toBeCalledWith(API_ENDPOINTS.USERS, MOCK_REGISTER_FORM);
-      expect(state.auth).toEqual({
-        user: MOCK_USER,
-        loading: false,
-        currentRequestId: undefined,
-        serverValidationErrors: null,
-        error: null,
-        isAuthenticated: true,
-        accessToken: MOCK_TOKENS.access.token
+        expect(postSpy).toBeCalledWith(API_ENDPOINTS.USERS, MOCK_REGISTER_FORM);
+        expect(state.auth).toEqual({
+          user: MOCK_USER,
+          loading: false,
+          currentRequestId: undefined,
+          serverValidationErrors: null,
+          error: null,
+          isAuthenticated: true,
+          accessToken: MOCK_TOKENS.access.token
+        });
+      });
+
+      test('register rejected', async () => {
+        const postSpy = jest.spyOn(axios, 'post').mockRejectedValueOnce(MOCK_REJECTED_VALUE);
+
+        await store.dispatch(register(MOCK_REGISTER_FORM));
+
+        const state = store.getState();
+
+        expect(postSpy).toBeCalledWith(API_ENDPOINTS.USERS, MOCK_REGISTER_FORM);
+        expect(state.auth).toEqual({
+          user: null,
+          loading: false,
+          currentRequestId: undefined,
+          serverValidationErrors: MOCK_REJECTED_VALUE.response.data.errors,
+          error: MOCK_REJECTED_VALUE.response.data,
+          isAuthenticated: false,
+          accessToken: null
+        });
       });
     });
 
-    test('register rejected', async () => {
-      const postSpy = jest.spyOn(axios, 'post').mockRejectedValueOnce(MOCK_REJECTED_VALUE);
+    describe('getUser', () => {
+      test('getUser successful', async () => {
+        const MOCK_RESOLVED_VALUE = { data: { user: MOCK_USER, tokens: MOCK_TOKENS } };
 
-      await store.dispatch(register(MOCK_REGISTER_FORM));
+        const postSpy = jest.spyOn(axios, 'get').mockResolvedValueOnce(MOCK_RESOLVED_VALUE);
 
-      const state = store.getState();
+        await store.dispatch(getUser());
 
-      expect(postSpy).toBeCalledWith(API_ENDPOINTS.USERS, MOCK_REGISTER_FORM);
-      expect(state.auth).toEqual({
-        user: null,
-        loading: false,
-        currentRequestId: undefined,
-        serverValidationErrors: MOCK_REJECTED_VALUE.response.data.errors,
-        error: MOCK_REJECTED_VALUE.response.data,
-        isAuthenticated: false,
-        accessToken: null
+        const state = store.getState();
+
+        expect(postSpy).toBeCalledWith(API_ENDPOINTS.AUTH);
+        expect(state.auth).toEqual({
+          user: MOCK_USER,
+          loading: false,
+          currentRequestId: undefined,
+          serverValidationErrors: null,
+          error: null,
+          isAuthenticated: true,
+          accessToken: MOCK_TOKENS.access.token
+        });
       });
-    });
 
-    test('getUser successful', async () => {
-      const MOCK_RESOLVED_VALUE = { data: { user: MOCK_USER, tokens: MOCK_TOKENS } };
+      test('getUser rejected', async () => {
+        const postSpy = jest.spyOn(axios, 'get').mockRejectedValueOnce(MOCK_REJECTED_VALUE);
 
-      const postSpy = jest.spyOn(axios, 'get').mockResolvedValueOnce(MOCK_RESOLVED_VALUE);
+        await store.dispatch(getUser());
 
-      await store.dispatch(getUser());
+        const state = store.getState();
 
-      const state = store.getState();
-
-      expect(postSpy).toBeCalledWith(API_ENDPOINTS.AUTH);
-      expect(state.auth).toEqual({
-        user: MOCK_USER,
-        loading: false,
-        currentRequestId: undefined,
-        serverValidationErrors: null,
-        error: null,
-        isAuthenticated: true,
-        accessToken: MOCK_TOKENS.access.token
-      });
-    });
-
-    test('getUser rejected', async () => {
-      const postSpy = jest.spyOn(axios, 'get').mockRejectedValueOnce(MOCK_REJECTED_VALUE);
-
-      await store.dispatch(getUser());
-
-      const state = store.getState();
-
-      expect(postSpy).toBeCalledWith(API_ENDPOINTS.AUTH);
-      expect(state.auth).toEqual({
-        user: null,
-        loading: false,
-        currentRequestId: undefined,
-        serverValidationErrors: MOCK_REJECTED_VALUE.response.data.errors,
-        error: MOCK_REJECTED_VALUE.response.data,
-        isAuthenticated: false,
-        accessToken: null
+        expect(postSpy).toBeCalledWith(API_ENDPOINTS.AUTH);
+        expect(state.auth).toEqual({
+          user: null,
+          loading: false,
+          currentRequestId: undefined,
+          serverValidationErrors: MOCK_REJECTED_VALUE.response.data.errors,
+          error: MOCK_REJECTED_VALUE.response.data,
+          isAuthenticated: false,
+          accessToken: null
+        });
       });
     });
   });

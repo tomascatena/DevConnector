@@ -2,7 +2,8 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Profile from './Profile';
 import { PageContainer } from '@helpers/StoriesStyledComponents.styled';
-import { MOCK_GITHUB_REPOS, MOCK_USER_PROFILE } from '@helpers/mocks/mocks';
+import { MOCK_USER_PROFILE } from '@helpers/mocks/mocks';
+import { MOCK_GITHUB_REPOS } from '@helpers/mocks/githubRepos.mock';
 
 export default {
   title: 'Components/Profile',
