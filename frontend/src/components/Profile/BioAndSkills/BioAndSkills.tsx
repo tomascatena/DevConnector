@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
-import { Typography, Chip, Divider } from '@mui/material';
-import DoneIcon from '@mui/icons-material/Done';
+import { BioAndSkillsBox, SkillsBox, StyledCard, SubsectionBox } from './BioAndSkills.styled';
+import { Chip, Divider, Typography } from '@mui/material';
 import { IProfile } from '../../../typings/types';
-import { BioAndSkillsBox, StyledCard, SubsectionBox, SkillsBox } from './BioAndSkills.styled';
+import DoneIcon from '@mui/icons-material/Done';
+import React, { FC } from 'react';
 
 type Props = {
   selectedUserProfile: IProfile;
@@ -18,10 +18,10 @@ const BioAndSkills:FC<Props> = ({ selectedUserProfile }) => {
   const { firstName } = user;
 
   return (
-  <BioAndSkillsBox>
-    <StyledCard>
-      {
-        bio &&
+    <BioAndSkillsBox>
+      <StyledCard>
+        {
+          bio &&
         <>
           <SubsectionBox>
             <Typography variant='h5'>
@@ -41,28 +41,28 @@ const BioAndSkills:FC<Props> = ({ selectedUserProfile }) => {
             sx={{ my: 3 }}
           />
         </>
-      }
+        }
 
-      <SubsectionBox>
-        <Typography variant='h5'>
+        <SubsectionBox>
+          <Typography variant='h5'>
           Skill Set
-        </Typography>
+          </Typography>
 
-        <SkillsBox>
-          {skills.map(skill =>
-            <Chip
-              key={skill}
-              label={skill}
-              variant="outlined"
-              onDelete={() => {}}
-              onClick={() => {}}
-              deleteIcon={<DoneIcon />}
-            />
-          )}
-        </SkillsBox>
-      </SubsectionBox>
-    </StyledCard>
-  </BioAndSkillsBox>
+          <SkillsBox>
+            {skills.map(skill =>
+              <Chip
+                key={skill}
+                label={skill}
+                variant="outlined"
+                onDelete={() => {}}
+                onClick={() => {}}
+                deleteIcon={<DoneIcon />}
+              />
+            )}
+          </SkillsBox>
+        </SubsectionBox>
+      </StyledCard>
+    </BioAndSkillsBox>
   );
 };
 

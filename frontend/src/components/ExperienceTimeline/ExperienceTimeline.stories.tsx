@@ -1,9 +1,9 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import ExperienceTimeline from './ExperienceTimeline';
-import { ComponentBox } from '@helpers/StoriesStyledComponents.styled';
 import { Box } from '@mui/material';
+import { ComponentBox } from '@helpers/StoriesStyledComponents.styled';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { createRandomExperience } from '@helpers/mocks/randomMockCreators';
+import ExperienceTimeline from './ExperienceTimeline';
+import React from 'react';
 
 export default {
   title: 'Components/ExperienceTimeline',

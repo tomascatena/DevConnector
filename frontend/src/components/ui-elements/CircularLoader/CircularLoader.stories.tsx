@@ -1,8 +1,8 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import CircularLoader from './CircularLoader';
 import { UIElementBox } from '@helpers/StoriesStyledComponents.styled';
+import CircularLoader from './CircularLoader';
 
 export default {
   title: 'UI-Elements/CircularLoader',

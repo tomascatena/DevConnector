@@ -11,22 +11,22 @@ const TwoElementsGrid:FC<Props> = ({ children }) => {
       container
       spacing={3}
     >
-    <Grid
-      item
-      xs={12}
-      md={6}
-    >
-      {children && children[0]}
-    </Grid>
+      <Grid
+        item
+        xs={12}
+        md={6}
+      >
+        {children && children[0]}
+      </Grid>
 
-    <Grid
-      item
-      xs={12}
-      md={6}
-    >
-      {children && children[1]}
+      <Grid
+        item
+        xs={12}
+        md={6}
+      >
+        {children && children[1]}
+      </Grid>
     </Grid>
-  </Grid>
   );
 };
 

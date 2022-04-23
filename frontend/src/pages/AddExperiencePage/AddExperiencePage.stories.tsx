@@ -1,10 +1,10 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import AddExperiencePage from './AddExperiencePage';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { MainBox, MainLayout } from 'App.styled';
-import Header from '@components/Header/Header';
-import Footer from '@components/Footer/Footer';
 import { createRandomUser } from '../../helpers/mocks/randomMockCreators';
+import AddExperiencePage from './AddExperiencePage';
+import Footer from '@components/Footer/Footer';
+import Header from '@components/Header/Header';
+import React from 'react';
 
 export default {
   title: 'Pages/AddExperiencePage',
@@ -18,9 +18,9 @@ export default {
           isAuthenticated={true}
           user={createRandomUser()}
         />
-          <MainBox>
-            {Story(context)}
-          </MainBox>
+        <MainBox>
+          {Story(context)}
+        </MainBox>
         <Footer />
       </MainLayout>
     ),

@@ -1,10 +1,10 @@
+import { DashboardActionsBox } from './DashboardActions.styled';
 import { FC } from 'react';
+import { ROUTES } from '@constants/routes';
+import LinkButton from '@ui-elements/LinkButton/LinkButton';
 import PersonIcon from '@mui/icons-material/Person';
 import SchoolIcon from '@mui/icons-material/School';
 import WorkIcon from '@mui/icons-material/Work';
-import { ROUTES } from '@constants/routes';
-import LinkButton from '@ui-elements/LinkButton/LinkButton';
-import { DashboardActionsBox } from './DashboardActions.styled';
 
 type Props = {
   isFetchingProfile: boolean;

@@ -1,13 +1,13 @@
-import React, { FC } from 'react';
-import { Typography, Box, Avatar, Card } from '@mui/material';
-import LanguageIcon from '@mui/icons-material/Language';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import IconWithLink from '@ui-elements/IconWithLink/IconWithLink';
+import { Avatar, Box, Card, Typography } from '@mui/material';
 import { IProfile } from '../../../typings/types';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import IconWithLink from '@ui-elements/IconWithLink/IconWithLink';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import LanguageIcon from '@mui/icons-material/Language';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import React, { FC } from 'react';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 
 type Props = {
   selectedUserProfile: IProfile;

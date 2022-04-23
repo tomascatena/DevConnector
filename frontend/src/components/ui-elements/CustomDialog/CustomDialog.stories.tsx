@@ -1,18 +1,18 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { InputContainer, UIElementBox } from '@helpers/StoriesStyledComponents.styled';
 import CustomDialog from './CustomDialog';
-import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
+import React from 'react';
 
 export default {
   title: 'UI-Elements/CustomDialog',
   component: CustomDialog,
   decorators: [
     (Story, context) => (
-    <UIElementBox>
-      <InputContainer>
-        {Story(context)}
-      </InputContainer>
-    </UIElementBox>
+      <UIElementBox>
+        <InputContainer>
+          {Story(context)}
+        </InputContainer>
+      </UIElementBox>
     ),
   ]
 } as ComponentMeta<typeof CustomDialog>;

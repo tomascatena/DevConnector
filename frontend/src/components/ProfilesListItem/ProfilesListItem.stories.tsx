@@ -1,9 +1,9 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import ProfilesListItem from './ProfilesListItem';
 import { ComponentBox } from '@helpers/StoriesStyledComponents.styled';
-import { createRandomUserProfile } from '@helpers/mocks/randomMockCreators';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Grid } from '@mui/material';
+import { createRandomUserProfile } from '@helpers/mocks/randomMockCreators';
+import ProfilesListItem from './ProfilesListItem';
+import React from 'react';
 
 export default {
   title: 'Components/ProfilesListItem',

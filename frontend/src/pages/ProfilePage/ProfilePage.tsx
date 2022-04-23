@@ -1,15 +1,15 @@
-import React, { FC, useEffect } from 'react';
-import Profile from '@components/Profile/Profile';
 import { Box, Typography } from '@mui/material';
-import LinkButton from '@ui-elements/LinkButton/LinkButton';
-import { ROUTES } from '@constants/routes';
-import { useAppDispatch, useTypedSelector } from '@hooks/index';
-import { getProfileById } from '@store/features/profile/profile.thunk';
-import CustomBackdrop from '@ui-elements/CustomBackdrop/CustomBackdrop';
-import { useParams } from 'react-router';
-import { getGithubRepos } from '../../store/features/profile/profile.thunk';
 import { IProfile } from '../../typings/types';
 import { ProfilePageContainer } from './ProfilePage.styled';
+import { ROUTES } from '@constants/routes';
+import { getGithubRepos } from '../../store/features/profile/profile.thunk';
+import { getProfileById } from '@store/features/profile/profile.thunk';
+import { useAppDispatch, useTypedSelector } from '@hooks/index';
+import { useParams } from 'react-router';
+import CustomBackdrop from '@ui-elements/CustomBackdrop/CustomBackdrop';
+import LinkButton from '@ui-elements/LinkButton/LinkButton';
+import Profile from '@components/Profile/Profile';
+import React, { FC, useEffect } from 'react';
 
 type Props = {}
 

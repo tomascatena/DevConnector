@@ -1,19 +1,19 @@
-import React, { FC, Dispatch, SetStateAction } from 'react';
-import { IExperience, Nullable } from '../../typings/types';
-import { Typography, Box, Tooltip } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import { duration, formatDate } from '@utils/dateTime/dateTime';
+import { Box, Tooltip, Typography } from '@mui/material';
 import { EditAndDeleteBox, HeadlineBox, TimelineContentBox } from './ExperienceTimelineItem.styled';
+import { IExperience, Nullable } from '../../typings/types';
 import {
-  TimelineItem,
-  TimelineOppositeContent,
-  TimelineSeparator,
+  TimelineConnector,
   TimelineContent,
   TimelineDot,
-  TimelineConnector
+  TimelineItem,
+  TimelineOppositeContent,
+  TimelineSeparator
 } from '@mui/lab';
+import { duration, formatDate } from '@utils/dateTime/dateTime';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import IconButton from '@mui/material/IconButton';
+import React, { Dispatch, FC, SetStateAction } from 'react';
 
 type Props = {
   experience: IExperience;

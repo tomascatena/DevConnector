@@ -1,12 +1,12 @@
-import React, { FC, ReactNode, Dispatch, SetStateAction } from 'react';
 import {
   Button,
-  DialogTitle,
-  DialogContent,
   DialogActions,
+  DialogContent,
+  DialogTitle,
 } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
 import { StyledDialog, StyledIconButton } from './CustomModalDialog.styled';
+import CloseIcon from '@mui/icons-material/Close';
+import React, { Dispatch, FC, ReactNode, SetStateAction } from 'react';
 
 export interface Props {
   children: ReactNode;

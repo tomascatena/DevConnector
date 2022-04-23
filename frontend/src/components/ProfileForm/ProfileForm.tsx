@@ -1,24 +1,24 @@
-import { useState, FC, FormEvent, useRef } from 'react';
-import { Typography, Button, Collapse } from '@mui/material';
-import { StyledForm, ButtonsBox, SocialNetworkLinksBox, ShowSocialNetworkLinksBox } from './ProfileForm.styled';
-import PersonIcon from '@mui/icons-material/Person';
-import TextWithIcon from '@ui-elements/TextWithIcon/TextWithIcon';
-import CustomSelect from '@ui-elements/CustomSelect/CustomSelect';
-import { validate } from '../../utils/validator/validator';
-import { PROFESSIONAL_STATUS_OPTIONS } from '@constants/constants';
-import CustomInput from '@ui-elements/CustomInput/CustomInput';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import PrependIcon from '@ui-elements/PrependIcon/PrependIcon';
-import LoadingButton from '@ui-elements/LoadingButton/LoadingButton';
-import ChipsInput from '@ui-elements/ChipsInput/ChipsInput';
+import { Button, Collapse, Typography } from '@mui/material';
+import { ButtonsBox, ShowSocialNetworkLinksBox, SocialNetworkLinksBox, StyledForm } from './ProfileForm.styled';
+import { FC, FormEvent, useRef, useState } from 'react';
 import { IProfile, Nullable } from '../../typings/types';
+import { PROFESSIONAL_STATUS_OPTIONS } from '@constants/constants';
 import { ROUTES } from '@constants/routes';
+import { validate } from '../../utils/validator/validator';
+import ChipsInput from '@ui-elements/ChipsInput/ChipsInput';
+import CustomInput from '@ui-elements/CustomInput/CustomInput';
+import CustomSelect from '@ui-elements/CustomSelect/CustomSelect';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkButton from '@ui-elements/LinkButton/LinkButton';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import LoadingButton from '@ui-elements/LoadingButton/LoadingButton';
+import PersonIcon from '@mui/icons-material/Person';
+import PrependIcon from '@ui-elements/PrependIcon/PrependIcon';
 import SaveIcon from '@mui/icons-material/Save';
+import TextWithIcon from '@ui-elements/TextWithIcon/TextWithIcon';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 import useFocusOnEnter from '../../hooks/useFocusOnEnter';
 
 type Props = {
@@ -145,29 +145,29 @@ const ProfileForm: FC<Props> = ({
         variant={inputsVariant}
       />
 
-       <CustomInput
-         inputState={websiteState}
-         setInputState={setWebsiteState}
-         validation={validate(websiteState.value).isURL()}
-         type='text'
-         label='Website'
-         placeholder='Website'
-         customHelperText='Could be your own or a company website.'
-         isDisabled={loading}
-         variant={inputsVariant}
-       />
+      <CustomInput
+        inputState={websiteState}
+        setInputState={setWebsiteState}
+        validation={validate(websiteState.value).isURL()}
+        type='text'
+        label='Website'
+        placeholder='Website'
+        customHelperText='Could be your own or a company website.'
+        isDisabled={loading}
+        variant={inputsVariant}
+      />
 
-       <CustomInput
-         inputState={githubUsernameState}
-         setInputState={setGithubUsernameState}
-         validation={validate(githubUsernameState.value).isGithubUsername()}
-         type='text'
-         label='Github Username'
-         placeholder='Github Username'
-         customHelperText='If you want your latest repos and a Github link, include your username.'
-         isDisabled={loading}
-         variant={inputsVariant}
-       />
+      <CustomInput
+        inputState={githubUsernameState}
+        setInputState={setGithubUsernameState}
+        validation={validate(githubUsernameState.value).isGithubUsername()}
+        type='text'
+        label='Github Username'
+        placeholder='Github Username'
+        customHelperText='If you want your latest repos and a Github link, include your username.'
+        isDisabled={loading}
+        variant={inputsVariant}
+      />
 
       <CustomInput
         inputState={locationState}

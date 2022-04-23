@@ -7,11 +7,16 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "@typescript-eslint", "jest"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "jest",
+    "sort-imports-es6-autofix"
+  ],
   "globals": { "React": true, "JSX": true },
   "rules": {
-    "no-unused-vars": "warn",
-    "comma-dangle": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],    "comma-dangle": "off",
     "space-before-function-paren": "off",
     "multiline-ternary": "off",
     "no-use-before-define": "off",
@@ -21,7 +26,16 @@
     "react/jsx-first-prop-new-line": [2, "multiline"],
     "react/jsx-max-props-per-line": [2, { "maximum": 1, "when": "always" }],
     "react/jsx-indent-props": [2, 2],
-    "react/jsx-closing-bracket-location": [2, "tag-aligned"]
+    "react/jsx-closing-bracket-location": [2, "tag-aligned"],
+    "@typescript-eslint/indent": ["error", 2, { 
+      "ignoredNodes": ["JSXAttribute"],
+      "offsetTernaryExpressions": true
+    }],
+    "sort-imports-es6-autofix/sort-imports-es6": [2, {
+      "ignoreCase": false,
+      "ignoreMemberSort": false,
+      "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+    }]
   },
   "settings": { "react": { "version": "detect" } }
 }

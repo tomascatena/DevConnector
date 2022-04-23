@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import CircularProgress, { circularProgressClasses } from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
 import { SxProps, Theme } from '@mui/material';
+import Box from '@mui/material/Box';
+import CircularProgress, { circularProgressClasses } from '@mui/material/CircularProgress';
 
 interface Props {
   size?: number;

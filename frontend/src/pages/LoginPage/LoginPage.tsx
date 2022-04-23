@@ -1,18 +1,18 @@
-import { FC, useState, FormEvent, useEffect } from 'react';
-import { Typography } from '@mui/material';
-import { ROUTES } from '@constants/routes';
-import { validate } from '@utils/validator/validator';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import CustomInput from '@ui-elements/CustomInput/CustomInput';
-import { LoginContainer, LoginPaper, StyledForm, StyledLink } from './LoginPage.styled';
-import { useAppDispatch } from '@hooks/index';
-import { login } from '@store/features/auth/auth.thunk';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
-import { useNavigate } from 'react-router';
-import { useLocation } from 'react-router-dom';
-import LoadingButton from '@components/ui-elements/LoadingButton/LoadingButton';
+import { FC, FormEvent, useEffect, useState } from 'react';
 import { LocationState } from '@components/routing/ProtectedRoute/ProtectedRoute';
+import { LoginContainer, LoginPaper, StyledForm, StyledLink } from './LoginPage.styled';
+import { ROUTES } from '@constants/routes';
+import { Typography } from '@mui/material';
+import { login } from '@store/features/auth/auth.thunk';
+import { useAppDispatch } from '@hooks/index';
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { validate } from '@utils/validator/validator';
+import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
+import CustomInput from '@ui-elements/CustomInput/CustomInput';
+import LoadingButton from '@components/ui-elements/LoadingButton/LoadingButton';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import TextWithIcon from '@ui-elements/TextWithIcon/TextWithIcon';
 
 const RegisterPage: FC = () => {

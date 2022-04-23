@@ -1,15 +1,15 @@
+import { EducationGridItem } from './EducationList.styled';
+import { Grid, Typography } from '@mui/material';
+import { IEducation, Nullable } from '../../typings/types';
+import { deleteProfileEducation, updateProfileEducation } from '@store/features/profile/profile.thunk';
+import { sortISODates } from '@utils/dateTime/dateTime';
+import { useActions, useAppDispatch, useTypedSelector } from '@hooks/index';
+import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
+import CustomDialog from '@ui-elements/CustomDialog/CustomDialog';
+import CustomModalDialog from '@ui-elements/CustomModalDialog/CustomModalDialog';
+import EducationForm from '@components/EducationForm/EducationForm';
 import EducationItem from '@components/EducationItem/EducationItem';
 import React, { FC, useState } from 'react';
-import { IEducation, Nullable } from '../../typings/types';
-import { Typography, Grid } from '@mui/material';
-import { deleteProfileEducation, updateProfileEducation } from '@store/features/profile/profile.thunk';
-import { useTypedSelector, useAppDispatch, useActions } from '@hooks/index';
-import CustomDialog from '@ui-elements/CustomDialog/CustomDialog';
-import EducationForm from '@components/EducationForm/EducationForm';
-import CustomModalDialog from '@ui-elements/CustomModalDialog/CustomModalDialog';
-import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
-import { sortISODates } from '@utils/dateTime/dateTime';
-import { EducationGridItem } from './EducationList.styled';
 
 type Props = {
   education: IEducation[]
@@ -62,20 +62,20 @@ const EducationList:FC<Props> = ({ education, allowEditAndDelete = true }) => {
           allowEditAndDelete={allowEditAndDelete}
         >
           {
-          education.length
-            ? [...education]
-                .sort(sortISODates)
-                .map((educationItem) =>
-                  <EducationItem
-                    key={educationItem._id}
-                    education={educationItem}
-                    setOpenEditDialog={setOpenEditDialog}
-                    setOpenDeleteDialog={setOpenDeleteDialog}
-                    setSelectedEducation={setSelectedEducation}
-                    allowEditAndDelete={allowEditAndDelete}
-                  />
-                )
-            : <Typography color='text.primary'>No education credentials to show.</Typography>
+            education.length
+              ? [...education]
+                  .sort(sortISODates)
+                  .map((educationItem) =>
+                    <EducationItem
+                      key={educationItem._id}
+                      education={educationItem}
+                      setOpenEditDialog={setOpenEditDialog}
+                      setOpenDeleteDialog={setOpenDeleteDialog}
+                      setSelectedEducation={setSelectedEducation}
+                      allowEditAndDelete={allowEditAndDelete}
+                    />
+                  )
+              : <Typography color='text.primary'>No education credentials to show.</Typography>
           }
         </EducationGridItem>
       </Grid>

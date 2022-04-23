@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import CustomAlert from './CustomAlert';
+import { Box, Button } from '@mui/material';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { UIElementBox } from '@helpers/StoriesStyledComponents.styled';
-import { Button, Box } from '@mui/material';
+import CustomAlert from './CustomAlert';
+import React, { useState } from 'react';
 
 export default {
   title: 'UI-Elements/CustomAlert',

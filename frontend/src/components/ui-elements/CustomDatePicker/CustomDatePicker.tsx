@@ -1,8 +1,8 @@
-import React, { FC, Dispatch, SetStateAction, useState, useEffect, ChangeEvent } from 'react';
+import { Box, InputAdornment, TextField } from '@mui/material';
 import { DatePicker } from '@mui/lab';
-import { TextField, InputAdornment, Box } from '@mui/material';
-import { formatISO, isValid, subYears, parse, isBefore, isAfter } from 'date-fns';
+import { formatISO, isAfter, isBefore, isValid, parse, subYears } from 'date-fns';
 import CheckIcon from '@mui/icons-material/Check';
+import React, { ChangeEvent, Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 
 interface FormFieldState {
   value: string | null;

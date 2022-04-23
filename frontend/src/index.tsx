@@ -1,9 +1,9 @@
+import { Provider } from 'react-redux';
+import { store } from './store/store';
+import App from './App';
+import CssBaseline from '@mui/material/CssBaseline';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import { store } from './store/store';
-import { Provider } from 'react-redux';
-import CssBaseline from '@mui/material/CssBaseline';
 
 ReactDOM.render(
   <React.StrictMode>

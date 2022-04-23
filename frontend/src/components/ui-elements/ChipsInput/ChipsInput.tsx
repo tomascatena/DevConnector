@@ -1,7 +1,7 @@
-import React, { FC, ChangeEvent, useState, Dispatch, SetStateAction, useEffect } from 'react';
-import { InputLabel, FormHelperText, FormControl, Chip, Typography, InputAdornment, Box } from '@mui/material';
-import { StyledOutlinedInput, StyledInput, StyledFilledInput } from './ChipsInput.styled';
+import { Box, Chip, FormControl, FormHelperText, InputAdornment, InputLabel, Typography } from '@mui/material';
+import { StyledFilledInput, StyledInput, StyledOutlinedInput } from './ChipsInput.styled';
 import CheckIcon from '@mui/icons-material/Check';
+import React, { ChangeEvent, Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 
 interface FormFieldState {
   value: string[];

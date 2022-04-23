@@ -1,16 +1,16 @@
-import { useState, FC, FormEvent, Dispatch, SetStateAction } from 'react';
-import { StyledForm, ButtonsBox } from './ExperienceForm.styled';
-import { validate } from '../../utils/validator/validator';
-import CustomInput from '@ui-elements/CustomInput/CustomInput';
-import LoadingButton from '@ui-elements/LoadingButton/LoadingButton';
+import { Button } from '@mui/material';
+import { ButtonsBox, StyledForm } from './ExperienceForm.styled';
+import { Dispatch, FC, FormEvent, SetStateAction, useState } from 'react';
 import { IExperience, Nullable } from '../../typings/types';
 import { ROUTES } from '@constants/routes';
-import TwoElementsGrid from '@ui-elements/TwoElementsGrid/TwoElementsGrid';
-import LinkButton from '@ui-elements/LinkButton/LinkButton';
-import SaveIcon from '@mui/icons-material/Save';
-import CustomDatePicker from '@ui-elements/CustomDatePicker/CustomDatePicker';
+import { validate } from '../../utils/validator/validator';
 import CustomCheckbox from '@ui-elements/CustomCheckbox/CustomCheckbox';
-import { Button } from '@mui/material';
+import CustomDatePicker from '@ui-elements/CustomDatePicker/CustomDatePicker';
+import CustomInput from '@ui-elements/CustomInput/CustomInput';
+import LinkButton from '@ui-elements/LinkButton/LinkButton';
+import LoadingButton from '@ui-elements/LoadingButton/LoadingButton';
+import SaveIcon from '@mui/icons-material/Save';
+import TwoElementsGrid from '@ui-elements/TwoElementsGrid/TwoElementsGrid';
 
 type Props = {
   dispatchCreateOrUpdateExperience: (profileForm: Partial<IExperience>) => void;

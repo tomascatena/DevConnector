@@ -1,9 +1,9 @@
-import { FC, Dispatch, SetStateAction } from 'react';
-import MaterialUISwitch from '@ui-elements/MUISwitch/MUISwitch';
 import { Button } from '@mui/material';
+import { Dispatch, FC, SetStateAction } from 'react';
+import { GuestMenuBox } from './GuestMenu.styled';
 import { Link } from 'react-router-dom';
 import { pages } from './Header';
-import { GuestMenuBox } from './GuestMenu.styled';
+import MaterialUISwitch from '@ui-elements/MUISwitch/MUISwitch';
 
 interface Props {
   isDarkTheme: boolean;

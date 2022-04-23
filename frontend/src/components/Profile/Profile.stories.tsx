@@ -1,9 +1,9 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Profile from './Profile';
-import { PageContainer } from '@helpers/StoriesStyledComponents.styled';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { MOCK_GITHUB_REPOS } from '@helpers/mocks/githubRepos.mock';
+import { PageContainer } from '@helpers/StoriesStyledComponents.styled';
 import { createRandomUserProfile } from '@helpers/mocks/randomMockCreators';
+import Profile from './Profile';
+import React from 'react';
 
 export default {
   title: 'Components/Profile',
@@ -11,7 +11,7 @@ export default {
   decorators: [
     (Story, context) => (
       <PageContainer>
-          {Story(context)}
+        {Story(context)}
       </PageContainer>
     ),
   ]

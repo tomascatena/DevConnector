@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import { Chip, Divider, Typography } from '@mui/material';
+import { ContentBox, ProfilesListItemBox, ProfilesListItemCard, SkillsBox, StyledAvatar, StyledCardContent, TypographyLink } from './ProfilesListItem.styled';
 import { IProfile } from '../../typings/types';
-import { Typography, Divider, Chip } from '@mui/material';
 import { ROUTES } from '@constants/routes';
 import { useNavigate } from 'react-router';
-import { ContentBox, ProfilesListItemBox, ProfilesListItemCard, SkillsBox, StyledAvatar, StyledCardContent, TypographyLink } from './ProfilesListItem.styled';
+import React, { FC } from 'react';
 
 type Props = {
   profile: IProfile

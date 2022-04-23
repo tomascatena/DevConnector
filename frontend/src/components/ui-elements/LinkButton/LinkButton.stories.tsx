@@ -1,20 +1,20 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import LinkButton from './LinkButton';
-import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
-import PersonIcon from '@mui/icons-material/Person';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { InputContainer, UIElementBox } from '@helpers/StoriesStyledComponents.styled';
 import { ROUTES } from '@constants/routes';
+import LinkButton from './LinkButton';
+import PersonIcon from '@mui/icons-material/Person';
+import React from 'react';
 
 export default {
   title: 'UI-Elements/LinkButton',
   component: LinkButton,
   decorators: [
     (Story, context) => (
-    <UIElementBox>
-      <InputContainer sx={{ display: 'flex', justifyContent: 'center' }}>
-        {Story(context)}
-      </InputContainer>
-    </UIElementBox>
+      <UIElementBox>
+        <InputContainer sx={{ display: 'flex', justifyContent: 'center' }}>
+          {Story(context)}
+        </InputContainer>
+      </UIElementBox>
     ),
   ]
 } as ComponentMeta<typeof LinkButton>;

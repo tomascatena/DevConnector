@@ -1,7 +1,7 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import ProfilesList from './ProfilesList';
 import { ComponentBox } from '@helpers/StoriesStyledComponents.styled';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import ProfilesList from './ProfilesList';
+import React from 'react';
 
 export default {
   title: 'Components/ProfilesList',
@@ -9,7 +9,7 @@ export default {
   decorators: [
     (Story, context) => (
       <ComponentBox sx={{ px: 3 }}>
-          {Story(context)}
+        {Story(context)}
       </ComponentBox>
     ),
   ]

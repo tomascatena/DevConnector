@@ -1,17 +1,17 @@
-import { FC, useState, lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import lightTheme from './themes/lightTheme';
-import darkTheme from './themes/darkTheme';
-import { ThemeProvider } from '@mui/material/styles';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import { MainLayout, MainBox } from './App.styled';
+import { FC, Suspense, lazy, useState } from 'react';
+import { MainBox, MainLayout } from './App.styled';
 import { ROUTES } from '@constants/routes';
-import ProtectedRoute from '@components/routing/ProtectedRoute/ProtectedRoute';
-import CustomBackdrop from '@ui-elements/CustomBackdrop/CustomBackdrop';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { ThemeProvider } from '@mui/material/styles';
 import { useTypedSelector } from './hooks';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import CustomBackdrop from '@ui-elements/CustomBackdrop/CustomBackdrop';
+import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import ProtectedRoute from '@components/routing/ProtectedRoute/ProtectedRoute';
+import darkTheme from './themes/darkTheme';
+import lightTheme from './themes/lightTheme';
 // import { InputsVariant } from './typings/types';
 
 const LandingPage = lazy(() => import('@pages/LandingPage/LandingPage'));
@@ -80,7 +80,7 @@ const App: FC = () => {
                       path=':userId'
                       element={<ProfilePage />}
                     />
-                    </Route>
+                  </Route>
 
                   <Route
                     path={ROUTES.DASHBOARD}

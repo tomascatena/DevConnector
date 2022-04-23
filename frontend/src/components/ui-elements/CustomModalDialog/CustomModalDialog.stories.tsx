@@ -1,8 +1,8 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import CustomModalDialog from './CustomModalDialog';
-import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { InputContainer, UIElementBox } from '@helpers/StoriesStyledComponents.styled';
 import { Typography } from '@mui/material';
+import CustomModalDialog from './CustomModalDialog';
+import React from 'react';
 import WarningIcon from '@mui/icons-material/Warning';
 
 export default {
@@ -10,11 +10,11 @@ export default {
   component: CustomModalDialog,
   decorators: [
     (Story, context) => (
-    <UIElementBox>
-      <InputContainer>
-        {Story(context)}
-      </InputContainer>
-    </UIElementBox>
+      <UIElementBox>
+        <InputContainer>
+          {Story(context)}
+        </InputContainer>
+      </UIElementBox>
     ),
   ]
 } as ComponentMeta<typeof CustomModalDialog>;

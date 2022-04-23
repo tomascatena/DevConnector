@@ -1,11 +1,11 @@
-import React, { FC, Dispatch, SetStateAction } from 'react';
+import { Box, Tooltip, Typography } from '@mui/material';
+import { EditAndDeleteBox, EducationItemBox, HeadingBox } from './EducationItem.styled';
 import { IEducation, Nullable } from '../../typings/types';
-import { Typography, Box, Tooltip } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
+import { duration, formatDate } from '@utils/dateTime/dateTime';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { duration, formatDate } from '@utils/dateTime/dateTime';
-import { EditAndDeleteBox, EducationItemBox, HeadingBox } from './EducationItem.styled';
+import IconButton from '@mui/material/IconButton';
+import React, { Dispatch, FC, SetStateAction } from 'react';
 
 type Props = {
   education: IEducation;

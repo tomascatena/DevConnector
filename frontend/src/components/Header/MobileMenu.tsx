@@ -1,17 +1,17 @@
+import { Box, Button, IconButton, Menu, MenuItem } from '@mui/material';
 import {
-  FC,
   Dispatch,
-  SetStateAction,
-  MouseEvent,
+  FC,
   Fragment,
+  MouseEvent,
+  SetStateAction,
 } from 'react';
-import { IconButton, Menu, Box, Button, MenuItem } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { Link } from 'react-router-dom';
 import { pages, settings } from './Header';
+import { useActions } from '@hooks/index';
 import HeaderBrand from './HeaderBrand';
 import MaterialUISwitch from '@ui-elements/MUISwitch/MUISwitch';
-import { Link } from 'react-router-dom';
-import { useActions } from '@hooks/index';
+import MenuIcon from '@mui/icons-material/Menu';
 
 type Props = {
   isAuthenticated: boolean;

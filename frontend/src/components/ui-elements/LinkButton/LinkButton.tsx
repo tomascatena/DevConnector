@@ -1,8 +1,8 @@
-import React, { FC, ReactNode } from 'react';
-import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
-import CircularProgress from '@mui/material/CircularProgress';
+import { Link } from 'react-router-dom';
 import { SxProps } from '@mui/system';
+import CircularProgress from '@mui/material/CircularProgress';
+import React, { FC, ReactNode } from 'react';
 
 type Props = {
   to:string;

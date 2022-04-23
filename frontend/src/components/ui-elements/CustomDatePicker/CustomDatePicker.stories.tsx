@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { InputContainer, UIElementBox } from '@helpers/StoriesStyledComponents.styled';
 import CustomDatePicker from './CustomDatePicker';
-import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
+import React, { useState } from 'react';
 
 export default {
   title: 'UI-Elements/CustomDatePicker',
   component: CustomDatePicker,
   decorators: [
     (Story, context) => (
-    <UIElementBox sx={{ alignItems: 'flex-start', pt: '4rem' }}>
-      <InputContainer>
-        {Story(context)}
-      </InputContainer>
-    </UIElementBox>
+      <UIElementBox sx={{ alignItems: 'flex-start', pt: '4rem' }}>
+        <InputContainer>
+          {Story(context)}
+        </InputContainer>
+      </UIElementBox>
     ),
   ]
 } as ComponentMeta<typeof CustomDatePicker>;

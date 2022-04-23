@@ -1,7 +1,7 @@
 import { FC } from 'react';
+import { styled } from '@mui/system';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/system';
 
 const FooterContainer = styled(Box)(({ theme }) => ({
   display: 'flex',

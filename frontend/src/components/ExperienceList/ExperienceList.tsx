@@ -1,15 +1,15 @@
+import { ExperienceGridItem } from './ExperienceList.styled';
+import { Grid, Typography } from '@mui/material';
+import { IExperience, Nullable } from '../../typings/types';
+import { deleteProfileEducation, updateProfileExperience } from '@store/features/profile/profile.thunk';
+import { sortISODates } from '@utils/dateTime/dateTime';
+import { useActions, useAppDispatch, useTypedSelector } from '@hooks/index';
+import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
+import CustomDialog from '@ui-elements/CustomDialog/CustomDialog';
+import CustomModalDialog from '@ui-elements/CustomModalDialog/CustomModalDialog';
+import ExperienceForm from '@components/ExperienceForm/ExperienceForm';
 import ExperienceItem from '@components/ExperienceItem/ExperienceItem';
 import React, { FC, useState } from 'react';
-import { IExperience, Nullable } from '../../typings/types';
-import { Typography, Grid } from '@mui/material';
-import { deleteProfileEducation, updateProfileExperience } from '@store/features/profile/profile.thunk';
-import { useTypedSelector, useAppDispatch, useActions } from '@hooks/index';
-import CustomDialog from '@ui-elements/CustomDialog/CustomDialog';
-import ExperienceForm from '@components/ExperienceForm/ExperienceForm';
-import CustomModalDialog from '@ui-elements/CustomModalDialog/CustomModalDialog';
-import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
-import { sortISODates } from '@utils/dateTime/dateTime';
-import { ExperienceGridItem } from './ExperienceList.styled';
 
 type Props = {
   experience: IExperience[]
@@ -62,20 +62,20 @@ const EducationList:FC<Props> = ({ experience, allowEditAndDelete = true }) => {
           allowEditAndDelete={allowEditAndDelete}
         >
           {
-          experience.length
-            ? [...experience]
-                .sort(sortISODates)
-                .map((experienceItem) =>
-                  <ExperienceItem
-                    key={experienceItem._id}
-                    experience={experienceItem}
-                    setOpenEditDialog={setOpenEditDialog}
-                    setOpenDeleteDialog={setOpenDeleteDialog}
-                    setSelectedExperience={setSelectedExperience}
-                    allowEditAndDelete={allowEditAndDelete}
-                  />
-                )
-            : <Typography color='text.primary'>No experience credentials to show.</Typography>
+            experience.length
+              ? [...experience]
+                  .sort(sortISODates)
+                  .map((experienceItem) =>
+                    <ExperienceItem
+                      key={experienceItem._id}
+                      experience={experienceItem}
+                      setOpenEditDialog={setOpenEditDialog}
+                      setOpenDeleteDialog={setOpenDeleteDialog}
+                      setSelectedExperience={setSelectedExperience}
+                      allowEditAndDelete={allowEditAndDelete}
+                    />
+                  )
+              : <Typography color='text.primary'>No experience credentials to show.</Typography>
           }
         </ExperienceGridItem>
       </Grid>

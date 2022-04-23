@@ -1,9 +1,9 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import EducationItem from './EducationItem';
 import { ComponentBox } from '@helpers/StoriesStyledComponents.styled';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { Grid } from '@mui/material';
 import { createRandomEducation } from '@helpers/mocks/randomMockCreators';
+import EducationItem from './EducationItem';
+import React from 'react';
 
 export default {
   title: 'Components/EducationItem',

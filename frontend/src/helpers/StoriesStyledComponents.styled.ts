@@ -1,6 +1,6 @@
-import Box from '@mui/material/Box';
 import { Container } from '@mui/material';
 import { styled } from '@mui/system';
+import Box from '@mui/material/Box';
 
 export const UIElementBox = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -24,9 +24,9 @@ export const ComponentBox = styled(Box)(({ theme }) => ({
   minHeight: '100vh'
 }));
 
-export const InputContainer = styled(Container)(({ theme }) => ({
+export const InputContainer = styled(Container)({
   maxWidth: '45rem'
-}));
+});
 
 export const PageContainer = styled(Container)(({ theme }) => ({
   color: theme.palette.primary.main,

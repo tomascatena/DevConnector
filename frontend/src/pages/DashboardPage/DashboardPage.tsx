@@ -1,20 +1,20 @@
-import React, { useEffect, FC, useState } from 'react';
-import { Typography, Box, Button } from '@mui/material';
-import { useTypedSelector, useActions, useAppDispatch } from '@hooks/index';
-import { getCurrentUserProfile, deleteAccount } from '@store/features/profile/profile.thunk';
-import { ROUTES } from '@constants/routes';
-import TextWithIcon from '@ui-elements/TextWithIcon/TextWithIcon';
-import PersonIcon from '@mui/icons-material/Person';
-import DashboardActions from '@components/DashboardActions/DashboardActions';
-import LinkButton from '@ui-elements/LinkButton/LinkButton';
-import CustomBackdrop from '@ui-elements/CustomBackdrop/CustomBackdrop';
-import ExperienceTimeline from '@components/ExperienceTimeline/ExperienceTimeline';
-import EducationList from '@components/EducationList/EducationList';
-import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
-import CustomModalDialog from '@ui-elements/CustomModalDialog/CustomModalDialog';
-import WarningIcon from '@mui/icons-material/Warning';
-import { useNavigate } from 'react-router';
+import { Box, Button, Typography } from '@mui/material';
 import { DashboardContainer } from './DashboardPage.styled';
+import { ROUTES } from '@constants/routes';
+import { deleteAccount, getCurrentUserProfile } from '@store/features/profile/profile.thunk';
+import { useActions, useAppDispatch, useTypedSelector } from '@hooks/index';
+import { useNavigate } from 'react-router';
+import CustomBackdrop from '@ui-elements/CustomBackdrop/CustomBackdrop';
+import CustomModalDialog from '@ui-elements/CustomModalDialog/CustomModalDialog';
+import DashboardActions from '@components/DashboardActions/DashboardActions';
+import EducationList from '@components/EducationList/EducationList';
+import ExperienceTimeline from '@components/ExperienceTimeline/ExperienceTimeline';
+import LinkButton from '@ui-elements/LinkButton/LinkButton';
+import PersonIcon from '@mui/icons-material/Person';
+import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
+import React, { FC, useEffect, useState } from 'react';
+import TextWithIcon from '@ui-elements/TextWithIcon/TextWithIcon';
+import WarningIcon from '@mui/icons-material/Warning';
 
 type Props = {};
 

@@ -1,8 +1,8 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
+import { getAccessToken } from './getInitialState';
+import alertReducer from './features/alert/alertSlice';
 import authReducer from './features/auth/authSlice';
 import profileReducer from './features/profile/profileSlice';
-import alertReducer from './features/alert/alertSlice';
-import { getAccessToken } from './getInitialState';
 
 export const storeConfig = {
   reducer: {
@@ -21,8 +21,8 @@ export type Store = typeof store;
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<
-  ReturnType,
-  RootState,
-  unknown,
-  Action<string>
+ReturnType,
+RootState,
+unknown,
+Action<string>
 >;

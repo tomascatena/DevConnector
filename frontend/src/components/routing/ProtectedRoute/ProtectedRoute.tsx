@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { useTypedSelector } from '@hooks/useTypedSelector';
-import { ROUTES } from '@constants/routes';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { ROUTES } from '@constants/routes';
+import { useTypedSelector } from '@hooks/useTypedSelector';
 import CustomBackdrop from '@ui-elements/CustomBackdrop/CustomBackdrop';
 
 export type LocationState = {

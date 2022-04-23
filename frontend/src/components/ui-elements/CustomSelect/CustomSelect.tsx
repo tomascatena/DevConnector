@@ -1,22 +1,22 @@
-import React,
-{
-  FC,
-  useState,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-} from 'react';
 import {
-  InputLabel,
-  InputAdornment,
   FormControl,
   FormHelperText,
-  Select,
+  InputAdornment,
+  InputLabel,
   MenuItem,
+  Select,
 } from '@mui/material';
+import { SelectChangeEvent } from '@mui/material/Select';
 import { ValidatorResult } from '@utils/validator/validator';
 import CheckIcon from '@mui/icons-material/Check';
-import { SelectChangeEvent } from '@mui/material/Select';
+import React,
+{
+  Dispatch,
+  FC,
+  SetStateAction,
+  useEffect,
+  useState,
+} from 'react';
 
 type FormFieldState = {
   value: string;
@@ -134,12 +134,12 @@ const CustomSelect:FC<Props> = ({
 
   const OptionsList = (
     options.map(({ value, label }) => (
-     <MenuItem
-       key={value}
-       value={value}
-     >
-       {label}
-     </MenuItem>
+      <MenuItem
+        key={value}
+        value={value}
+      >
+        {label}
+      </MenuItem>
     ))
   );
 

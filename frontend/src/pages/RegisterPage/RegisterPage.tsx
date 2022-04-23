@@ -1,4 +1,5 @@
-import { FC, useState, FormEvent, useEffect } from 'react';
+import { FC, FormEvent, useEffect, useState } from 'react';
+import { ROUTES } from '@constants/routes';
 import {
   RegisterContainer,
   RegisterPaper,
@@ -6,14 +7,13 @@ import {
   StyledLink,
 } from './RegisterPage.styled';
 import { Typography } from '@mui/material';
-import { ROUTES } from '@constants/routes';
-import { validate } from '@utils/validator/validator';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import CustomInput from '@ui-elements/CustomInput/CustomInput';
-import { useAppDispatch, useTypedSelector } from '@hooks/index';
 import { register } from '@store/features/auth/auth.thunk';
+import { useAppDispatch, useTypedSelector } from '@hooks/index';
 import { useNavigate } from 'react-router';
+import { validate } from '@utils/validator/validator';
+import CustomInput from '@ui-elements/CustomInput/CustomInput';
 import LoadingButton from '@components/ui-elements/LoadingButton/LoadingButton';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import TextWithIcon from '@ui-elements/TextWithIcon/TextWithIcon';
 import TwoElementsGrid from '@components/ui-elements/TwoElementsGrid/TwoElementsGrid';
 

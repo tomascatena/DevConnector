@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
-import { Typography, Box, Link } from '@mui/material';
-import { IGithubRepo, Nullable } from '../../../typings/types';
+import { Box, Link, Typography } from '@mui/material';
 import { CustomBadge } from '@ui-elements/CustomBadge/CustomBadge';
 import { GithubRepoCard, GithubReposBox, GithubReposCard, SectionBox, StatsBox } from './GithubRepos.styled';
+import { IGithubRepo, Nullable } from '../../../typings/types';
+import React, { FC } from 'react';
 
 type Props = {
   githubUsername: string;

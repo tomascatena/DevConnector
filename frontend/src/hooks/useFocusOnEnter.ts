@@ -1,5 +1,5 @@
 
-import { RefObject, KeyboardEvent } from 'react';
+import { KeyboardEvent, RefObject } from 'react';
 
 const useFocusOnEnter = (formRef: RefObject<HTMLFormElement>) => {
   const onEnterKey = (event: KeyboardEvent<HTMLFormElement>) => {

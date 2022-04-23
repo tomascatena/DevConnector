@@ -1,7 +1,7 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { InputContainer, UIElementBox } from '@helpers/StoriesStyledComponents.styled';
 import LoadingButton from './LoadingButton';
-import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
+import React from 'react';
 import SaveIcon from '@mui/icons-material/Save';
 
 export default {
@@ -9,11 +9,11 @@ export default {
   component: LoadingButton,
   decorators: [
     (Story, context) => (
-    <UIElementBox>
-      <InputContainer sx={{ display: 'flex', justifyContent: 'center' }}>
-        {Story(context)}
-      </InputContainer>
-    </UIElementBox>
+      <UIElementBox>
+        <InputContainer sx={{ display: 'flex', justifyContent: 'center' }}>
+          {Story(context)}
+        </InputContainer>
+      </UIElementBox>
     ),
   ]
 } as ComponentMeta<typeof LoadingButton>;

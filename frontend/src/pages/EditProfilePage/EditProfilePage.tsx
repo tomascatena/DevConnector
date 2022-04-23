@@ -1,13 +1,13 @@
-import React, { FC, useEffect } from 'react';
-import { Typography } from '@mui/material';
 import { EditProfileContainer, EditProfilePaper } from './EditProfilePage.styled';
-import { useAppDispatch, useTypedSelector } from '@hooks/index';
-import { createOrUpdateProfile, getCurrentUserProfile } from '@store/features/profile/profile.thunk';
-import { ROUTES } from '@constants/routes';
-import { useNavigate } from 'react-router';
 import { IProfile } from '../../typings/types';
-import ProfileForm from '@components/ProfileForm/ProfileForm';
+import { ROUTES } from '@constants/routes';
+import { Typography } from '@mui/material';
+import { createOrUpdateProfile, getCurrentUserProfile } from '@store/features/profile/profile.thunk';
+import { useAppDispatch, useTypedSelector } from '@hooks/index';
+import { useNavigate } from 'react-router';
 import CustomBackdrop from '@ui-elements/CustomBackdrop/CustomBackdrop';
+import ProfileForm from '@components/ProfileForm/ProfileForm';
+import React, { FC, useEffect } from 'react';
 
 const EditProfilePage: FC = () => {
   const dispatch = useAppDispatch();

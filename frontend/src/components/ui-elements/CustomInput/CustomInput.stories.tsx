@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { InputContainer, UIElementBox } from '@helpers/StoriesStyledComponents.styled';
 import { validate } from '../../../utils/validator/validator';
 import CustomInput from './CustomInput';
-import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
+import React, { useState } from 'react';
 
 export default {
   title: 'UI-Elements/CustomInput',
   component: CustomInput,
   decorators: [
     (Story, context) => (
-    <UIElementBox>
-      <InputContainer>
-        {Story(context)}
-      </InputContainer>
-    </UIElementBox>
+      <UIElementBox>
+        <InputContainer>
+          {Story(context)}
+        </InputContainer>
+      </UIElementBox>
     ),
   ]
 } as ComponentMeta<typeof CustomInput>;

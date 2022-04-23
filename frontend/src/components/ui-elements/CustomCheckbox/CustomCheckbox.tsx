@@ -1,5 +1,5 @@
-import React, { FC, Dispatch, SetStateAction, ChangeEvent } from 'react';
-import { FormControlLabel, Checkbox, Typography } from '@mui/material';
+import { Checkbox, FormControlLabel, Typography } from '@mui/material';
+import React, { ChangeEvent, Dispatch, FC, SetStateAction } from 'react';
 
 type Props = {
   inputState: boolean;
@@ -14,21 +14,21 @@ const CustomCheckbox:FC<Props> = ({ inputState, setInputState, label, isDisabled
   };
 
   return (
-      <FormControlLabel
-        sx={{ width: 'fit-content' }}
-        label={
-          <Typography color='text.primary'>
-            {label}
-          </Typography>
-        }
-        control={
-          <Checkbox
-            onChange={handleChange}
-            checked={inputState}
-            disabled={isDisabled}
-          />
-        }
-      />
+    <FormControlLabel
+      sx={{ width: 'fit-content' }}
+      label={
+        <Typography color='text.primary'>
+          {label}
+        </Typography>
+      }
+      control={
+        <Checkbox
+          onChange={handleChange}
+          checked={inputState}
+          disabled={isDisabled}
+        />
+      }
+    />
   );
 };
 

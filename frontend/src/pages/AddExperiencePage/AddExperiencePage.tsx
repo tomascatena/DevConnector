@@ -1,19 +1,19 @@
-import React, { FC, useEffect } from 'react';
-import { useAppDispatch, useTypedSelector, useActions } from '@hooks/index';
-import { ROUTES } from '@constants/routes';
-import { useNavigate } from 'react-router';
+import { AddExperienceContainer, AddExperiencePaper } from './AddExperiencePage.styled';
 import { IExperience } from '../../typings/types';
+import { ROUTES } from '@constants/routes';
+import { Typography } from '@mui/material';
 import {
   addProfileExperience,
   getCurrentUserProfile
 } from '@store/features/profile/profile.thunk';
-import { AddExperienceContainer, AddExperiencePaper } from './AddExperiencePage.styled';
-import { Typography } from '@mui/material';
+import { useActions, useAppDispatch, useTypedSelector } from '@hooks/index';
+import { useNavigate } from 'react-router';
+import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
 import CustomBackdrop from '@ui-elements/CustomBackdrop/CustomBackdrop';
+import ExperienceForm from '@components/ExperienceForm/ExperienceForm';
+import React, { FC, useEffect } from 'react';
 import TextWithIcon from '@ui-elements/TextWithIcon/TextWithIcon';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
-import ExperienceForm from '@components/ExperienceForm/ExperienceForm';
-import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
 
 const AddExperiencePage:FC = () => {
   const { setAlert } = useActions();

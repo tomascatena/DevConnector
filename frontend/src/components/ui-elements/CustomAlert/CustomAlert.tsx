@@ -1,9 +1,9 @@
-import { FC, useState, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { styled } from '@mui/system';
+import { useActions } from '../../../hooks/index';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Fade from '@mui/material/Fade';
-import { styled } from '@mui/system';
-import { useActions } from '../../../hooks/index';
 
 export const StyledAlert = styled(Alert)(({ theme }) => ({
   position: 'absolute',

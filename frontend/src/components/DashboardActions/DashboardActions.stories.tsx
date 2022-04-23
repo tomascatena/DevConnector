@@ -1,7 +1,7 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { InputContainer, UIElementBox } from '@helpers/StoriesStyledComponents.styled';
 import DashboardActions from './DashboardActions';
-import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
+import React from 'react';
 
 export default {
   title: 'Components/DashboardActions',

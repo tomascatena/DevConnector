@@ -1,8 +1,8 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Box } from '@mui/material';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { CustomBadge } from './CustomBadge';
 import { UIElementBox } from '@helpers/StoriesStyledComponents.styled';
-import { Box } from '@mui/material';
+import React from 'react';
 
 export default {
   title: 'UI-Elements/CustomBadge',

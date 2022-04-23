@@ -1,10 +1,10 @@
-import { FC } from 'react';
 import { Button, Typography } from '@mui/material';
+import { ButtonsContainer, LandingBox } from './LandingPage.styled';
+import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@constants/routes';
-import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
 import { useTypedSelector } from '@hooks/index';
-import { LandingBox, ButtonsContainer } from './LandingPage.styled';
+import CustomAlert from '@ui-elements/CustomAlert/CustomAlert';
 
 interface Props {}
 

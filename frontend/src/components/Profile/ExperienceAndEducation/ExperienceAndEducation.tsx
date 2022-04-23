@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import { ExperienceOrEducationGrid, StyledBox, StyledCard } from './ExperienceAndEducation.styled';
 import { Grid } from '@mui/material';
 import { IProfile } from '../../../typings/types';
-import ExperienceList from '@components/ExperienceList/ExperienceList';
 import EducationList from '@components/EducationList/EducationList';
-import { StyledBox, StyledCard, ExperienceOrEducationGrid } from './ExperienceAndEducation.styled';
+import ExperienceList from '@components/ExperienceList/ExperienceList';
+import React, { FC } from 'react';
 
 type Props = {
   selectedUserProfile: IProfile;

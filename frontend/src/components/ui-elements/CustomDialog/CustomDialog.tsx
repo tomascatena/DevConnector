@@ -1,5 +1,5 @@
-import React, { FC, Dispatch, SetStateAction, ReactNode } from 'react';
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
+import React, { Dispatch, FC, ReactNode, SetStateAction } from 'react';
 
 type Props = {
   isDialogOpen: boolean;
@@ -24,12 +24,12 @@ const CustomDialog:FC<Props> = ({ isDialogOpen, setOpenDialog, children, title }
         },
       }}
     >
-    <DialogTitle id="scroll-dialog-title">{title}</DialogTitle>
+      <DialogTitle id="scroll-dialog-title">{title}</DialogTitle>
 
-    <DialogContent>
-      {children}
-    </DialogContent>
-  </Dialog>
+      <DialogContent>
+        {children}
+      </DialogContent>
+    </Dialog>
   );
 };
 

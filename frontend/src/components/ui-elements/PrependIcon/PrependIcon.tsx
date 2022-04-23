@@ -1,5 +1,5 @@
 import { FC, ReactNode } from 'react';
-import { PrependIconBox, IconBox } from './PrependIcon.styled';
+import { IconBox, PrependIconBox } from './PrependIcon.styled';
 
 type Props = {
   icon: JSX.Element;

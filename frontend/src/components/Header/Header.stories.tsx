@@ -1,8 +1,8 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Header from './Header';
 import { ComponentBox } from '@helpers/StoriesStyledComponents.styled';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { createRandomUser } from '@helpers/mocks/randomMockCreators';
+import Header from './Header';
+import React from 'react';
 
 export default {
   title: 'Components/Header',
@@ -10,7 +10,7 @@ export default {
   decorators: [
     (Story, context) => (
       <ComponentBox>
-          {Story(context)}
+        {Story(context)}
       </ComponentBox>
     ),
   ]

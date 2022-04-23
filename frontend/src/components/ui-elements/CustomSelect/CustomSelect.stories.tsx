@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { InputContainer, UIElementBox } from '@helpers/StoriesStyledComponents.styled';
+import { PROFESSIONAL_STATUS_OPTIONS } from '@constants/constants';
 import { validate } from '../../../utils/validator/validator';
 import CustomSelect from './CustomSelect';
-import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
-import { PROFESSIONAL_STATUS_OPTIONS } from '@constants/constants';
+import React, { useState } from 'react';
 
 export default {
   title: 'UI-Elements/CustomSelect',
   component: CustomSelect,
   decorators: [
     (Story, context) => (
-    <UIElementBox>
-      <InputContainer>
-        {Story(context)}
-      </InputContainer>
-    </UIElementBox>
+      <UIElementBox>
+        <InputContainer>
+          {Story(context)}
+        </InputContainer>
+      </UIElementBox>
     ),
   ]
 } as ComponentMeta<typeof CustomSelect>;

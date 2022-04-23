@@ -1,8 +1,8 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import ProfileForm from './ProfileForm';
 import { ComponentBox } from '@helpers/StoriesStyledComponents.styled';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { MOCK_USER_PROFILE } from '@helpers/mocks/mocks';
+import ProfileForm from './ProfileForm';
+import React from 'react';
 
 export default {
   title: 'Components/ProfileForm',
@@ -10,7 +10,7 @@ export default {
   decorators: [
     (Story, context) => (
       <ComponentBox>
-          {Story(context)}
+        {Story(context)}
       </ComponentBox>
     ),
   ]

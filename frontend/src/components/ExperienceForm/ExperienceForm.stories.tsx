@@ -1,8 +1,8 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import ExperienceForm from './ExperienceForm';
 import { ComponentBox } from '@helpers/StoriesStyledComponents.styled';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { createRandomExperience } from '@helpers/mocks/randomMockCreators';
+import ExperienceForm from './ExperienceForm';
+import React from 'react';
 
 export default {
   title: 'Components/ExperienceForm',
@@ -10,7 +10,7 @@ export default {
   decorators: [
     (Story, context) => (
       <ComponentBox>
-          {Story(context)}
+        {Story(context)}
       </ComponentBox>
     ),
   ]

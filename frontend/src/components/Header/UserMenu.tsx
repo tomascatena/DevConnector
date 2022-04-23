@@ -1,20 +1,20 @@
-import { FC, Dispatch, SetStateAction, MouseEvent } from 'react';
-import MaterialUISwitch from '@ui-elements/MUISwitch/MUISwitch';
 import {
   Avatar,
-  Tooltip,
-  Menu,
   Box,
-  Typography,
   Button,
   IconButton,
+  Menu,
+  Tooltip,
+  Typography,
 } from '@mui/material';
-import LogoutIcon from '@mui/icons-material/Logout';
-import { settings } from './Header';
-import { Link } from 'react-router-dom';
-import { useActions } from '@hooks/index';
-import { UserMenuBox } from './UserMenu.styled';
+import { Dispatch, FC, MouseEvent, SetStateAction } from 'react';
 import { IUser, Nullable } from '../../typings/types';
+import { Link } from 'react-router-dom';
+import { UserMenuBox } from './UserMenu.styled';
+import { settings } from './Header';
+import { useActions } from '@hooks/index';
+import LogoutIcon from '@mui/icons-material/Logout';
+import MaterialUISwitch from '@ui-elements/MUISwitch/MUISwitch';
 
 interface Props {
   isDarkTheme: boolean;

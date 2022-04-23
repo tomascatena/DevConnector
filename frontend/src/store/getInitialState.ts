@@ -1,9 +1,9 @@
 import { authActions } from './features/auth/authSlice';
+import { getUser } from './features/auth/auth.thunk';
 import { profileActions } from './features/profile/profileSlice';
+import { setAuthToken } from '../utils/setAuthToken/setAuthToken';
 import { store } from './store';
 import validator from 'validator';
-import { getUser } from './features/auth/auth.thunk';
-import { setAuthToken } from '../utils/setAuthToken/setAuthToken';
 
 export const getAccessToken = () => {
   try {

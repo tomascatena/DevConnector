@@ -1,14 +1,14 @@
-import { FC, useState, Dispatch, SetStateAction, MouseEvent } from 'react';
-import { AppBar, Toolbar, Container } from '@mui/material';
+import { AppBar, Container, Toolbar } from '@mui/material';
+import { Dispatch, FC, MouseEvent, SetStateAction, useState } from 'react';
+import { IUser, Nullable } from '../../typings/types';
 import { ROUTES } from '@constants/routes';
-import UserMenu from './UserMenu';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import GroupIcon from '@mui/icons-material/Group';
 import GuestMenu from './GuestMenu';
 import HeaderBrand from './HeaderBrand';
 import MobileMenu from './MobileMenu';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import GroupIcon from '@mui/icons-material/Group';
-import { IUser, Nullable } from '../../typings/types';
+import UserMenu from './UserMenu';
 
 export const pages = [
   {

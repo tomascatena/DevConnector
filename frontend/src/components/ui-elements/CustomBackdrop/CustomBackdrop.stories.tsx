@@ -1,7 +1,7 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import CustomBackdrop from './CustomBackdrop';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { UIElementBox } from '@helpers/StoriesStyledComponents.styled';
+import CustomBackdrop from './CustomBackdrop';
+import React from 'react';
 
 export default {
   title: 'UI-Elements/CustomBackdrop',

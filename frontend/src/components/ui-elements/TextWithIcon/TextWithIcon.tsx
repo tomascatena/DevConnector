@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Typography } from '@mui/material';
 import { TextWithIconBox } from './TextWithIcon.styled';
+import { Typography } from '@mui/material';
 
 type Props = {
   icon: JSX.Element;

@@ -1,9 +1,9 @@
+import { ProfilesContainer } from './ProfilesPage.styled';
+import { Typography } from '@mui/material';
+import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import ProfilesList from '@components/ProfilesList/ProfilesList';
 import React, { FC } from 'react';
-import { Typography } from '@mui/material';
 import TextWithIcon from '@ui-elements/TextWithIcon/TextWithIcon';
-import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
-import { ProfilesContainer } from './ProfilesPage.styled';
 
 type Props = {}
 

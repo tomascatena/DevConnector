@@ -1,19 +1,19 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { InputContainer, UIElementBox } from '@helpers/StoriesStyledComponents.styled';
 import IconWithLink from './IconWithLink';
-import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
 import LanguageIcon from '@mui/icons-material/Language';
+import React from 'react';
 
 export default {
   title: 'UI-Elements/IconWithLink',
   component: IconWithLink,
   decorators: [
     (Story, context) => (
-    <UIElementBox >
-      <InputContainer sx={{ display: 'flex', justifyContent: 'center' }}>
-        {Story(context)}
-      </InputContainer>
-    </UIElementBox>
+      <UIElementBox >
+        <InputContainer sx={{ display: 'flex', justifyContent: 'center' }}>
+          {Story(context)}
+        </InputContainer>
+      </UIElementBox>
     ),
   ]
 } as ComponentMeta<typeof IconWithLink>;

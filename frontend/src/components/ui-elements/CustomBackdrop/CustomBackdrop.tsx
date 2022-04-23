@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
-import CircularLoader from '@ui-elements/CircularLoader/CircularLoader';
-import { Typography } from '@mui/material';
 import { StyledBackdrop } from './CustomBackdrop.styled';
+import { Typography } from '@mui/material';
+import CircularLoader from '@ui-elements/CircularLoader/CircularLoader';
+import React, { FC } from 'react';
 
 type Props = {
   isOpen: boolean;

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import PrependIcon from './PrependIcon';
-import { UIElementBox, InputContainer } from '@helpers/StoriesStyledComponents.styled';
-import CustomInput from '@ui-elements/CustomInput/CustomInput';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { InputContainer, UIElementBox } from '@helpers/StoriesStyledComponents.styled';
 import { validate } from '../../../utils/validator/validator';
+import CustomInput from '@ui-elements/CustomInput/CustomInput';
+import PrependIcon from './PrependIcon';
+import React, { useState } from 'react';
 import TwitterIcon from '@mui/icons-material/Twitter';
 
 export default {
@@ -11,11 +11,11 @@ export default {
   component: PrependIcon,
   decorators: [
     (Story, context) => (
-    <UIElementBox>
-      <InputContainer>
-        {Story(context)}
-      </InputContainer>
-    </UIElementBox>
+      <UIElementBox>
+        <InputContainer>
+          {Story(context)}
+        </InputContainer>
+      </UIElementBox>
     ),
   ]
 } as ComponentMeta<typeof PrependIcon>;

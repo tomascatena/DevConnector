@@ -1,11 +1,11 @@
-import { FC } from 'react';
-import { Typography } from '@mui/material';
 import { CreateProfileContainer, CreateProfilePaper } from './CreateProfilePage.styled';
-import { useAppDispatch, useTypedSelector } from '@hooks/index';
-import { createOrUpdateProfile } from '@store/features/profile/profile.thunk';
-import { ROUTES } from '@constants/routes';
-import { useNavigate } from 'react-router';
+import { FC } from 'react';
 import { IProfile } from '../../typings/types';
+import { ROUTES } from '@constants/routes';
+import { Typography } from '@mui/material';
+import { createOrUpdateProfile } from '@store/features/profile/profile.thunk';
+import { useAppDispatch, useTypedSelector } from '@hooks/index';
+import { useNavigate } from 'react-router';
 import ProfileForm from '@components/ProfileForm/ProfileForm';
 
 const CreateProfilePage: FC = () => {
@@ -36,7 +36,7 @@ const CreateProfilePage: FC = () => {
           dispatchCreateOrUpdateProfile={dispatchCreateOrUpdateProfile}
           loading={loading}
         />
-        </CreateProfilePaper>
+      </CreateProfilePaper>
     </CreateProfileContainer>
   );
 };
