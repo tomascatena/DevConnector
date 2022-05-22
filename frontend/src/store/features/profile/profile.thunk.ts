@@ -1,16 +1,16 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { API_ENDPOINTS } from '@constants/APIEndpoints';
 import {
-  IProfile,
-  IExperience,
   IEducation,
+  IExperience,
+  IGithubRepo,
+  IProfile,
   Nullable,
   ServerValidationError,
-  IGithubRepo,
 } from '../../../typings/types';
 import { RootState } from '@store/store';
-import { API_ENDPOINTS } from '@constants/APIEndpoints';
 import { authActions } from '@store/features/auth/authSlice';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 type RejectValue = {
   message?: string;
@@ -18,9 +18,9 @@ type RejectValue = {
 };
 
 export const getCurrentUserProfile = createAsyncThunk<
-  IProfile,
-  void,
-  { state: RootState; rejectValue: RejectValue }
+IProfile,
+void,
+{ state: RootState; rejectValue: RejectValue }
 >(
   'profile/getCurrentUserProfile',
   async (_, { getState, requestId, rejectWithValue }) => {
@@ -43,9 +43,9 @@ export const getCurrentUserProfile = createAsyncThunk<
 );
 
 export const getProfileById = createAsyncThunk<
-  IProfile,
-  string,
-  { state: RootState; rejectValue: RejectValue }
+IProfile,
+string,
+{ state: RootState; rejectValue: RejectValue }
 >(
   'profile/getProfileById',
   async (userId, { getState, requestId, rejectWithValue }) => {
@@ -69,9 +69,9 @@ export const getProfileById = createAsyncThunk<
 );
 
 export const getAllProfiles = createAsyncThunk<
-  IProfile[],
-  void,
-  { state: RootState; rejectValue: RejectValue }
+IProfile[],
+void,
+{ state: RootState; rejectValue: RejectValue }
 >(
   'profile/getAllProfiles',
   async (_, { getState, requestId, rejectWithValue }) => {
@@ -94,9 +94,9 @@ export const getAllProfiles = createAsyncThunk<
 );
 
 export const getGithubRepos = createAsyncThunk<
-  IGithubRepo[],
-  string,
-  { state: RootState; rejectValue: RejectValue }
+IGithubRepo[],
+string,
+{ state: RootState; rejectValue: RejectValue }
 >(
   'profile/getGithubRepos',
   async (githubUsername, { getState, requestId, rejectWithValue }) => {
@@ -120,9 +120,9 @@ export const getGithubRepos = createAsyncThunk<
 );
 
 export const createOrUpdateProfile = createAsyncThunk<
-  IProfile,
-  Partial<IProfile>,
-  { state: RootState; rejectValue: RejectValue }
+IProfile,
+Partial<IProfile>,
+{ state: RootState; rejectValue: RejectValue }
 >(
   'profile/createOrUpdateProfile',
   async (userProfile, { getState, requestId, rejectWithValue }) => {
@@ -148,9 +148,9 @@ export const createOrUpdateProfile = createAsyncThunk<
 );
 
 export const addProfileExperience = createAsyncThunk<
-  IProfile,
-  Partial<IExperience>,
-  { state: RootState; rejectValue: RejectValue }
+IProfile,
+Partial<IExperience>,
+{ state: RootState; rejectValue: RejectValue }
 >(
   'profile/addProfileExperience',
   async (userProfileExperience, { getState, requestId, rejectWithValue }) => {
@@ -176,9 +176,9 @@ export const addProfileExperience = createAsyncThunk<
 );
 
 export const updateProfileExperience = createAsyncThunk<
-  IProfile,
-  Partial<IExperience>,
-  { state: RootState; rejectValue: RejectValue }
+IProfile,
+Partial<IExperience>,
+{ state: RootState; rejectValue: RejectValue }
 >(
   'profile/updateProfileExperience',
   async (userProfileExperience, { getState, requestId, rejectWithValue }) => {
@@ -204,9 +204,9 @@ export const updateProfileExperience = createAsyncThunk<
 );
 
 export const addProfileEducation = createAsyncThunk<
-  IProfile,
-  Partial<IEducation>,
-  { state: RootState; rejectValue: RejectValue }
+IProfile,
+Partial<IEducation>,
+{ state: RootState; rejectValue: RejectValue }
 >(
   'profile/addProfileEducation',
   async (userProfileEducation, { getState, requestId, rejectWithValue }) => {
@@ -232,9 +232,9 @@ export const addProfileEducation = createAsyncThunk<
 );
 
 export const updateProfileEducation = createAsyncThunk<
-  IProfile,
-  Partial<IEducation>,
-  { state: RootState; rejectValue: RejectValue }
+IProfile,
+Partial<IEducation>,
+{ state: RootState; rejectValue: RejectValue }
 >(
   'profile/updateProfileEducation',
   async (userProfileEducation, { getState, requestId, rejectWithValue }) => {
@@ -260,9 +260,9 @@ export const updateProfileEducation = createAsyncThunk<
 );
 
 export const deleteProfileExperience = createAsyncThunk<
-  IProfile,
-  string,
-  { state: RootState; rejectValue: RejectValue }
+IProfile,
+string,
+{ state: RootState; rejectValue: RejectValue }
 >(
   'profile/deleteProfileExperience',
   async (experienceId, { getState, requestId, rejectWithValue }) => {
@@ -286,9 +286,9 @@ export const deleteProfileExperience = createAsyncThunk<
 );
 
 export const deleteProfileEducation = createAsyncThunk<
-  IProfile,
-  string,
-  { state: RootState; rejectValue: RejectValue }
+IProfile,
+string,
+{ state: RootState; rejectValue: RejectValue }
 >(
   'profile/deleteProfileEducation',
   async (educationId, { getState, requestId, rejectWithValue }) => {
@@ -312,9 +312,9 @@ export const deleteProfileEducation = createAsyncThunk<
 );
 
 export const deleteAccount = createAsyncThunk<
-  IProfile,
-  void,
-  { state: RootState; rejectValue: RejectValue }
+IProfile,
+void,
+{ state: RootState; rejectValue: RejectValue }
 >(
   'profile/deleteAccount',
   async (_, { getState, requestId, rejectWithValue, dispatch }) => {

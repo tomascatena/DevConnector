@@ -1,23 +1,23 @@
-import { createSlice, isAnyOf, SerializedError } from '@reduxjs/toolkit';
 import {
   IGithubRepo,
   IProfile,
   Nullable,
   ServerValidationError,
 } from '../../../typings/types';
+import { SerializedError, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
-  getCurrentUserProfile,
-  getProfileById,
-  getAllProfiles,
-  getGithubRepos,
-  createOrUpdateProfile,
   addProfileEducation,
-  updateProfileEducation,
   addProfileExperience,
-  updateProfileExperience,
+  createOrUpdateProfile,
+  deleteAccount,
   deleteProfileEducation,
   deleteProfileExperience,
-  deleteAccount
+  getAllProfiles,
+  getCurrentUserProfile,
+  getGithubRepos,
+  getProfileById,
+  updateProfileEducation,
+  updateProfileExperience
 } from './profile.thunk';
 
 export interface ProfileState {
