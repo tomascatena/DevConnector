@@ -1,5 +1,5 @@
-import { styled } from '@mui/system';
 import { Container, Paper } from '@mui/material';
+import { styled } from '@mui/system';
 
 export const CreateProfileContainer = styled(Container)(({ theme }) => ({
   marginTop: theme.spacing(7),

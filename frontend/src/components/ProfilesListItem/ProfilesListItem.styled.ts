@@ -1,5 +1,5 @@
+import { Avatar, Box, Card, CardContent, Typography } from '@mui/material';
 import { styled } from '@mui/system';
-import { Box, Card, Avatar, CardContent, Typography } from '@mui/material';
 
 export const ProfilesListItemBox = styled(Box)(() => ({
   display: 'inline-block',
@@ -32,15 +32,15 @@ export const SkillsBox = styled(Box)(({ theme }) => ({
   flexWrap: 'wrap'
 }));
 
-export const StyledCardContent = styled(CardContent)(({ theme }) => ({
+export const StyledCardContent = styled(CardContent)({
   flex: '1 0 auto'
-}));
+});
 
-export const TypographyLink = styled(Typography)(({ theme }) => ({
+export const TypographyLink = styled(Typography)({
   display: 'inline-block',
 
   '&:hover': {
     textDecoration: 'underline',
     cursor: 'pointer'
   }
-}));
+});

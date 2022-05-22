@@ -1,5 +1,4 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { API_ENDPOINTS } from '@constants/APIEndpoints';
 import {
   AuthData,
   IUserLoginForm,
@@ -8,7 +7,8 @@ import {
   ServerValidationError,
 } from '../../../typings/types';
 import { RootState } from '@store/store';
-import { API_ENDPOINTS } from '@constants/APIEndpoints';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 type RejectValue = {
   message?: string;
@@ -16,9 +16,9 @@ type RejectValue = {
 };
 
 export const login = createAsyncThunk<
-  AuthData,
-  IUserLoginForm,
-  { state: RootState; rejectValue: RejectValue }
+AuthData,
+IUserLoginForm,
+{ state: RootState; rejectValue: RejectValue }
 >(
   'auth/login',
   async (registerForm, { getState, requestId, rejectWithValue }) => {
@@ -41,9 +41,9 @@ export const login = createAsyncThunk<
 );
 
 export const register = createAsyncThunk<
-  AuthData,
-  IUserRegisterForm,
-  { state: RootState; rejectValue: RejectValue }
+AuthData,
+IUserRegisterForm,
+{ state: RootState; rejectValue: RejectValue }
 >(
   'auth/register',
   async (registerForm, { getState, requestId, rejectWithValue }) => {
@@ -66,9 +66,9 @@ export const register = createAsyncThunk<
 );
 
 export const getUser = createAsyncThunk<
-  AuthData,
-  void,
-  { rejectValue: RejectValue }
+AuthData,
+void,
+{ rejectValue: RejectValue }
 >('auth/getUser', async (_, { rejectWithValue }) => {
   try {
     const { data } = await axios.get(API_ENDPOINTS.AUTH);

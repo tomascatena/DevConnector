@@ -35,9 +35,9 @@
     "test": "craco test",
     "test:coverage": "craco test --coverage",
     "eject": "craco eject",
-    "lint": "eslint src/**/*.ts src/**/*.tsx",
-    "lint:fix": "eslint src/**/*.ts src/**/*.tsx --fix",
-    "lint:quiet": "eslint src/**/*.ts src/**/*.tsx --quiet",
+    "lint": "eslint 'src/**/*.ts' 'src/**/*.tsx'",
+    "lint:fix": "eslint 'src/**/*.ts' 'src/**/*.tsx' --fix",
+    "lint:quiet": "eslint 'src/**/*.ts' 'src/**/*.tsx' --quiet",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },

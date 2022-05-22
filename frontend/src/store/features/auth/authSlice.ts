@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction, SerializedError } from '@reduxjs/toolkit';
-import { setAuthToken } from '@utils/setAuthToken/setAuthToken';
 import { IUser, Nullable, ServerValidationError } from '../../../typings/types';
-import { login, register, getUser } from './auth.thunk';
+import { PayloadAction, SerializedError, createSlice } from '@reduxjs/toolkit';
+import { getUser, login, register } from './auth.thunk';
+import { setAuthToken } from '@utils/setAuthToken/setAuthToken';
 
 export interface AuthState {
   user: Nullable<Partial<IUser>>;

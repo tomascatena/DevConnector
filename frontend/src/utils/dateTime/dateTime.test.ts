@@ -1,5 +1,5 @@
 import { MOCK_EDUCATION } from '@helpers/mocks/mocks';
-import { formatDate, duration, sortISODates } from './dateTime';
+import { duration, formatDate, sortISODates } from './dateTime';
 
 describe('dateTime', () => {
   describe('formatDate', () => {

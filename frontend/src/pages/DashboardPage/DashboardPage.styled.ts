@@ -1,5 +1,5 @@
-import { styled } from '@mui/system';
 import { Container } from '@mui/material';
+import { styled } from '@mui/system';
 
 export const DashboardContainer = styled(Container)(({ theme }) => ({
   color: theme.palette.primary.main,

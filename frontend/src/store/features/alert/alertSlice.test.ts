@@ -1,4 +1,4 @@
-import reducer, { alertActions, initialState, AlertState } from './alertSlice';
+import reducer, { AlertState, alertActions, initialState } from './alertSlice';
 
 describe('alertSlice', () => {
   test('should return the initial state', () => {

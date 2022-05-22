@@ -1,5 +1,5 @@
-import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
+import Box from '@mui/material/Box';
 
 export const MainLayout = styled(Box)(({ theme }) => ({
   minHeight: '100vh',
@@ -9,7 +9,7 @@ export const MainLayout = styled(Box)(({ theme }) => ({
   flexDirection: 'column',
 }));
 
-export const MainBox = styled(Box)(({ theme }) => ({
+export const MainBox = styled(Box)({
   flex: 1,
   display: 'flex',
-}));
+});

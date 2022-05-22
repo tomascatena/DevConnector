@@ -1,5 +1,5 @@
-import { styled } from '@mui/system';
 import { Box } from '@mui/material';
+import { styled } from '@mui/system';
 import showCaseImage from '../../assets/showCaseImage.png';
 
 export const LandingBox = styled(Box)(({ theme }) => ({

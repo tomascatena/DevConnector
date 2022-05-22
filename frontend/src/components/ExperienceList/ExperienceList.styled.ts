@@ -1,5 +1,5 @@
-import { styled } from '@mui/system';
 import { Grid } from '@mui/material';
+import { styled } from '@mui/system';
 
 interface ExperienceGridItemProps {
   allowEditAndDelete?: boolean;

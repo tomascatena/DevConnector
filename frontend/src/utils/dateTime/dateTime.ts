@@ -1,5 +1,5 @@
-import { format, parseISO, intervalToDuration, formatDuration } from 'date-fns';
-import { IExperience, IEducation } from '../../typings/types';
+import { IEducation, IExperience } from '../../typings/types';
+import { format, formatDuration, intervalToDuration, parseISO } from 'date-fns';
 
 export const formatDate = (date: string | null) => {
   return date && format(parseISO(date), 'LLL yyyy');

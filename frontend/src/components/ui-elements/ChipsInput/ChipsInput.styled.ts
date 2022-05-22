@@ -1,5 +1,5 @@
+import { FilledInput, Input, OutlinedInput } from '@mui/material';
 import { styled } from '@mui/system';
-import { OutlinedInput, Input, FilledInput } from '@mui/material';
 
 interface StyledOutlinedInputProps {
   isValidInput: boolean;

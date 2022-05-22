@@ -1,4 +1,4 @@
-import { validate, DEFAULT_ERROR_MESSAGES } from './validator';
+import { DEFAULT_ERROR_MESSAGES, validate } from './validator';
 
 describe('validator', () => {
   describe('required', () => {

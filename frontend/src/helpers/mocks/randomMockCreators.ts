@@ -1,28 +1,28 @@
-import { PROFESSIONAL_STATUS_OPTIONS } from '@constants/constants';
 import {
-  randEmail,
-  randLastName,
-  randUuid,
-  randFirstName,
-  randCompanyName,
-  randJobTitle,
-  randCity,
-  randState,
-  randPastDate,
-  randRecentDate,
-  randJobArea,
-  randUrl,
-  randProgrammingLanguage,
-  randNumber,
-  randTextRange
-} from '@ngneat/falso';
-import {
-  IUser,
-  IProfile,
   IEducation,
   IExperience,
-  ISocial
+  IProfile,
+  ISocial,
+  IUser
 } from '../../typings/types';
+import { PROFESSIONAL_STATUS_OPTIONS } from '@constants/constants';
+import {
+  randCity,
+  randCompanyName,
+  randEmail,
+  randFirstName,
+  randJobArea,
+  randJobTitle,
+  randLastName,
+  randNumber,
+  randPastDate,
+  randProgrammingLanguage,
+  randRecentDate,
+  randState,
+  randTextRange,
+  randUrl,
+  randUuid
+} from '@ngneat/falso';
 
 // dec2hex :: Integer -> String
 // i.e. 0-255 -> '00'-'ff'
@@ -79,7 +79,7 @@ export const createRandomSocialLinks = ():ISocial => ({
 export const createRandomSkills = (): string[] => {
   const randomNumber = randNumber({ min: 2, max: 15 });
 
-  const randomArrayOfNonUniqueSkills = Array.from(Array(randomNumber).keys()).map(i => randProgrammingLanguage());
+  const randomArrayOfNonUniqueSkills = Array.from(Array(randomNumber).keys()).map(() => randProgrammingLanguage());
 
   return Array.from(new Set(randomArrayOfNonUniqueSkills));
 };

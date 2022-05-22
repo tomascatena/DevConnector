@@ -1,6 +1,6 @@
 
 import { MOCK_GITHUB_REPOS } from './githubRepos.mock';
-import { createRandomUserProfile, createRandomUser } from './randomMockCreators';
+import { createRandomUser, createRandomUserProfile } from './randomMockCreators';
 
 export const MOCK_RANDOM_INITIAL_REDUX_STATE = {
   auth: {

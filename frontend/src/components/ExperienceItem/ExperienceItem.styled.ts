@@ -1,5 +1,5 @@
-import { styled } from '@mui/system';
 import { Box } from '@mui/material';
+import { styled } from '@mui/system';
 
 export const ExperienceItemBox = styled(Box)(({ theme }) => ({
   color: theme.palette.text.primary,
@@ -7,10 +7,10 @@ export const ExperienceItemBox = styled(Box)(({ theme }) => ({
   flex: 1
 }));
 
-export const ExperienceItemHeaderBox = styled(Box)(({ theme }) => ({
+export const ExperienceItemHeaderBox = styled(Box)({
   display: 'flex',
   justifyContent: 'space-between'
-}));
+});
 
 export const EditAndDeleteBox = styled(Box)(({ theme }) => ({
   display: 'flex',

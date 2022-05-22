@@ -1,10 +1,10 @@
-import { styled } from '@mui/system';
 import { Box, Card } from '@mui/material';
+import { styled } from '@mui/system';
 
-export const GithubReposBox = styled(Box)(({ theme }) => ({
+export const GithubReposBox = styled(Box)({
   display: 'inline-block',
   width: '100%'
-}));
+});
 
 export const SectionBox = styled(Box)(({ theme }) => ({
   display: 'flex',

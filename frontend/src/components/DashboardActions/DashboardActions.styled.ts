@@ -1,5 +1,5 @@
-import { styled } from '@mui/system';
 import { Box } from '@mui/material';
+import { styled } from '@mui/system';
 
 export const DashboardActionsBox = styled(Box)(({ theme }) => ({
   display: 'flex',

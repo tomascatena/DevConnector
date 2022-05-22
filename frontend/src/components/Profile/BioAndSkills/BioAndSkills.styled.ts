@@ -1,10 +1,10 @@
-import { styled } from '@mui/system';
 import { Box, Card } from '@mui/material';
+import { styled } from '@mui/system';
 
-export const BioAndSkillsBox = styled(Box)(({ theme }) => ({
+export const BioAndSkillsBox = styled(Box)({
   display: 'inline-block',
   width: '100%'
-}));
+});
 
 export const StyledCard = styled(Card)(({ theme }) => ({
   display: 'flex',

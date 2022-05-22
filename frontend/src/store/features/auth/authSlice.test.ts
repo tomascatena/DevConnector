@@ -1,10 +1,10 @@
-import reducer, { authActions, initialState } from './authSlice';
-import { login, register, getUser } from './auth.thunk';
-import { MOCK_LOGIN_FORM, MOCK_REGISTER_FORM, MOCK_TOKENS, MOCK_USER } from '@helpers/mocks/mocks';
-import axios from 'axios';
-import { Store, storeConfig } from '@store/store';
 import { API_ENDPOINTS } from '@constants/APIEndpoints';
+import { MOCK_LOGIN_FORM, MOCK_REGISTER_FORM, MOCK_TOKENS, MOCK_USER } from '@helpers/mocks/mocks';
+import { Store, storeConfig } from '@store/store';
 import { configureStore } from '@reduxjs/toolkit';
+import { getUser, login, register } from './auth.thunk';
+import axios from 'axios';
+import reducer, { authActions, initialState } from './authSlice';
 
 const MOCK_REJECTED_VALUE = {
   isAxiosError: true,
